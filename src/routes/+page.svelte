@@ -5,7 +5,13 @@
         {icon}
     </button>
 {/snippet}
+
 <div class="w-full h-dvh bg-amber-50">
+    <div class="w-full bg-gray-300 h-20 flex flex-row justify-around">
+        {@render btn(`🏰`)}
+        {@render btn(`⚔️`)}
+        {@render btn(`🧍‍♂️`)}
+        {@render btn(`🕯️`)}
     </div>
     <div class="w-full flex flex-row h-full justify-between">
     </div>
