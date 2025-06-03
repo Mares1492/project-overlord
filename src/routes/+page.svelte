@@ -1,5 +1,3 @@
-<div>
-    
 {#snippet btn(icon)}
     <button class="text-3xl cursor-pointer saturate-75 hover:saturate-200">
         {icon}
