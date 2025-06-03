@@ -14,5 +14,11 @@
         {@render btn(`🕯️`)}
     </div>
     <div class="w-full flex flex-row h-full justify-between">
+        <div class="w-20 bg-gray-300 ">
+
+        </div>
+        <div class="w-20 bg-gray-300 ">
+
+        </div>
     </div>
 </div>
