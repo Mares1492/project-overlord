@@ -4,7 +4,7 @@
     </button>
 {/snippet}
 
-<div class="w-full h-dvh bg-amber-50">
+<div class="w-full h-dvh overflow-y-hidden bg-amber-50">
     <div class="w-full bg-gray-300 h-20 flex flex-row justify-around">
         {@render btn(`🏰`)}
         {@render btn(`⚔️`)}
