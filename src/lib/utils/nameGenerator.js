@@ -1,7 +1,7 @@
 const getRandomElement = (arr) => {
     return arr[Math.floor(Math.random() * arr.length)];
 }
-
+/** @return {string}*/
 export const generateDarkFantasyName = () => {
     const prefixes = [
         "Lord", "Dread", "Arch", "High", "Wretched", "Obsidian", "Vile", "Iron", "Dark", "Crimson"
