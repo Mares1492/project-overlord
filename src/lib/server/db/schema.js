@@ -9,7 +9,7 @@ export const users = sqliteTable('user', {
 });
 
 export const sessions = sqliteTable('sessions', {
-	token: text('token').primaryKey(),
+	refreshToken: text('refreshToken').primaryKey(),
 	userId: text('user_id').notNull().references(() => users.id),
-	createdAt: integer('created_at', { mode: 'timestamp' }).default(() => Date.now())
+	createdAt: integer('created_at', { mode: 'timestamp' })
 });
