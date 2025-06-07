@@ -26,3 +26,19 @@ export function signAccessToken(payload, options = {}) {
 export function signRefreshToken(payload, options = {}) {
     return jwt.sign(payload, env.REFRESH_SECRET, { expiresIn: '7d', ...options });
 }
+
+export function verifyAccessToken(token) {
+    try {
+        return jwt.verify(token, env.JWT_SECRET);
+    } catch {
+        return null;
+    }
+}
+
+export function verifyRefreshToken(token) {
+    try {
+        return jwt.verify(token, env.REFRESH_SECRET);
+    } catch {
+        return null;
+    }
+}
