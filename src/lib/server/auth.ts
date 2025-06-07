@@ -18,3 +18,7 @@ export async function hashPassword(password: string): Promise<string> {
 export async function verifyPassword(password: string, hash: string): Promise<boolean> {
     return await bcrypt.compare(password, hash);
 }
+
+export function signAccessToken(payload, options = {}) {
+    return jwt.sign(payload, env.JWT_SECRET, { expiresIn: '15m', ...options });
+}
