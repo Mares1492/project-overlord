@@ -42,3 +42,18 @@ export function verifyRefreshToken(token) {
         return null;
     }
 }
+
+export function createAuthCookies(accessToken, refreshToken) {
+    return [
+        serialize('accessToken', accessToken, { ...cookieOptions, maxAge: 60 * 15 }), // 15m
+        serialize('refreshToken', refreshToken, { ...cookieOptions, maxAge: 60 * 60 * 24 * 7 }) // 7d
+    ];
+}
+
+export function clearAuthCookies() {
+    return [
+        serialize('accessToken', '', { ...cookieOptions, maxAge: 0 }),
+        serialize('refreshToken', '', { ...cookieOptions, maxAge: 0 })
+    ];
+}
+
