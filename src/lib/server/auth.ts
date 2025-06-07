@@ -4,6 +4,13 @@ import { env } from '$env/dynamic/private';
 import cookie, { serialize } from 'cookie';
 import {getUserSessionByToken,getUserFromSession} from '$lib/server/router/user';
 
+const cookieOptions = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    path: '/'
+};
+
 export async function hashPassword(password: string): Promise<string> {
     return await bcrypt.hash(password, 10); // 10 salt rounds
 }
