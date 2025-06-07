@@ -22,3 +22,7 @@ export async function verifyPassword(password: string, hash: string): Promise<bo
 export function signAccessToken(payload, options = {}) {
     return jwt.sign(payload, env.JWT_SECRET, { expiresIn: '15m', ...options });
 }
+
+export function signRefreshToken(payload, options = {}) {
+    return jwt.sign(payload, env.REFRESH_SECRET, { expiresIn: '7d', ...options });
+}
