@@ -57,3 +57,35 @@ export function clearAuthCookies() {
     ];
 }
 
+export async function authUserSession({request}) {
+    const cookies = cookie.parse(request.headers.get('cookie') || '');
+    let accessToken = cookies.accessToken;
+    const refreshToken = cookies.refreshToken;
+    if (!refreshToken) {
+        return {user:null, message:"Credentials verification failed"};
+    }
+    const session = await getUserSessionByToken(refreshToken)
+    if (!session) {
+        return {user:null, message:"Session is not found"};
+    }
+    if (!accessToken) {
+        const refreshPayload = verifyRefreshToken(refreshToken);
+        if (!refreshPayload) {
+            return {user:null, message:"Credentials verification failed"};
+        }
+        accessToken = signAccessToken(refreshPayload);
+    }
+
+    const payload = verifyAccessToken(accessToken);
+    if (!payload) {
+        return {user:null, message:"Credentials verification failed"};
+    }
+
+    const user = await getUserFromSession(session);
+    if (!user) {
+        return {user:null, message:"User is not found"};
+    }
+
+    return {user:user, message:"OK"};
+}
+
