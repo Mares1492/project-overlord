@@ -42,3 +42,7 @@ export const login = async (email, password) => {
     return user;
 }
 
+export const logout = async (user) => {
+    await db.delete(sessions).where(eq(sessions.userId,user.id));
+}
+
