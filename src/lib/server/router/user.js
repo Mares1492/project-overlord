@@ -31,3 +31,14 @@ export const createUser = async (email, password) => {
     return newUser;
 }
 
+export const login = async (email, password) => {
+
+    const user = await db.select().from(users).where(eq(users.email,email)).get();
+
+    if (!user || !await verifyPassword(password, user.passwordHash)) {
+        throw error(401, 'Invalid credentials');
+    }
+
+    return user;
+}
+
