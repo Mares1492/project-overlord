@@ -10,4 +10,7 @@ export const deleteKeep = async (userId) => {
     await db.delete(keeps).where(eq(keeps.userId, userId)).returning();
 }
 
+export const getKeep = async (userId) => {
+    const keep = await db.select().from(keeps).where(eq(keeps.userId, userId)).get();
+    return keep;
 }
