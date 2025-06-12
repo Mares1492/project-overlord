@@ -62,3 +62,7 @@ export const createUserSession = async (user) => {
     return [accessToken, refreshToken];
 }
 
+export const getUserFromSession = async (session) => {
+    return db.select().from(users).where(eq(users.id, session.userId)).get();
+}
+
