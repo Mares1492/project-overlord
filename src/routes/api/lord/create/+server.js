@@ -15,5 +15,5 @@ export async function POST({ request }) {
 
     const newUser = await createUser(email, password);
 
-    return json({ success: true, user: { id: newUser.id, email: newUser.email } });
+    return json({ user:newUser.email, status:"created" });
 }
