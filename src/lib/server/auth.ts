@@ -56,10 +56,17 @@ export function createAuthCookies(accessToken, refreshToken,isSerializeResult = 
     ];
 }
 
-export function clearAuthCookies() {
+export function clearAuthCookies(isSerializeResult = true) {
+
+    if (isSerializeResult) {
+        return [
+            serialize('accessToken', '', { ...cookieOptions, maxAge: 0 }),
+            serialize('refreshToken', '', { ...cookieOptions, maxAge: 0 })
+        ];
+    }
     return [
-        serialize('accessToken', '', { ...cookieOptions, maxAge: 0 }),
-        serialize('refreshToken', '', { ...cookieOptions, maxAge: 0 })
+        {name:'accessToken',token:'',params:{ ...cookieOptions, maxAge: 0 }},
+        {name:'refreshToken',token:'',params:{ ...cookieOptions, maxAge: 0 }}
     ];
 }
 
