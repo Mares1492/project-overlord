@@ -43,10 +43,16 @@ export function verifyRefreshToken(token) {
     }
 }
 
-export function createAuthCookies(accessToken, refreshToken) {
+export function createAuthCookies(accessToken, refreshToken,isSerializeResult = true) {
+    if (isSerializeResult) {
+        return [
+            serialize('accessToken', accessToken, {...cookieOptions, maxAge: 60 * 15}), // 15m
+            serialize('refreshToken', refreshToken, {...cookieOptions, maxAge: 60 * 60 * 24 * 7}) // 7d
+        ];
+    }
     return [
-        serialize('accessToken', accessToken, { ...cookieOptions, maxAge: 60 * 15 }), // 15m
-        serialize('refreshToken', refreshToken, { ...cookieOptions, maxAge: 60 * 60 * 24 * 7 }) // 7d
+        {name:'accessToken',token:accessToken,params:{...cookieOptions, maxAge: 60 * 15}},
+        {name:'refreshToken',token:refreshToken,params:{...cookieOptions, maxAge: 60 * 60 * 24 * 7}}
     ];
 }
 
