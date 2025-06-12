@@ -46,3 +46,19 @@ export const logout = async (user) => {
     await db.delete(sessions).where(eq(sessions.userId,user.id));
 }
 
+export const createUserSession = async (user) => {
+    const accessToken = signAccessToken({ id: user.id, email: user.email });
+    const refreshToken = signRefreshToken({ id: user.id });
+    const prevSession = await db.select().from(sessions).where(eq(sessions.userId,user.id)).get();
+    if (prevSession) {
+        await db.delete(sessions).where(eq(sessions.userId,user.id));
+    }
+    await db.insert(sessions).values({
+        refreshToken: refreshToken,
+        userId: user.id,
+        createdAt: new Date(),
+    });
+
+    return [accessToken, refreshToken];
+}
+
