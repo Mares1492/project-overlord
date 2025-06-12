@@ -66,3 +66,6 @@ export const getUserFromSession = async (session) => {
     return db.select().from(users).where(eq(users.id, session.userId)).get();
 }
 
+export const getUserSessionByToken = async (refreshToken) => {
+    return db.select().from(sessions).where(eq(sessions.refreshToken, refreshToken)).get();
+}
