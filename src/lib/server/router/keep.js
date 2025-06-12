@@ -6,6 +6,8 @@ export const createKeep = async (userId) => {
     await db.insert(keeps).values({userId: userId}).returning();
 }
 
-export const getKeepLvl = async (user) => {
+export const deleteKeep = async (userId) => {
+    await db.delete(keeps).where(eq(keeps.userId, userId)).returning();
+}
 
 }
