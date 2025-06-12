@@ -35,11 +35,20 @@ export const createUser = async (email, password) => {
     return createdUser;
 }
 
+export const deleteUser = async (email, password) => {
     const user = await db.select().from(users).where(eq(users.email,email)).get();
 
     if (!user || !await verifyPassword(password, user.passwordHash)) {
         throw error(401, 'Invalid credentials');
     }
+    await logout(user)
+    await deleteKeep(user.id)
+    const deletedUser = await db.delete(users).where(eq(users.email, email));
+
+    if (!deletedUser) {
+        throw error(401, 'Could not delete user');
+    }
+}
 
     return user;
 }
