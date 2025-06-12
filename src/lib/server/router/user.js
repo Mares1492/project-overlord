@@ -5,6 +5,7 @@ import {error} from '@sveltejs/kit';
 import {randomUUID} from 'crypto';
 import {generateDarkFantasyName} from "$lib/utils/nameGenerator.js";
 import {eq} from "drizzle-orm";
+import {createKeep, deleteKeep} from "$lib/server/router/keep.js";
 
 /**
  * @param email {string}
@@ -12,7 +13,6 @@ import {eq} from "drizzle-orm";
  */
 export const createUser = async (email, password) => {
     // Check if user already exists
-
     const existing = await db.select().from(users).where(eq(users.email,email)).get();
     if (existing) {
         throw error(409, 'Email already registered');
@@ -26,12 +26,14 @@ export const createUser = async (email, password) => {
         nickname: generateDarkFantasyName(),
     };
 
-    await db.insert(users).values(newUser);
+    const result = await db.insert(users).values(newUser).returning();
 
-    return newUser;
+    const createdUser =  result[0];
+    console.log(createdUser);
+    await createKeep(createdUser.id)
+
+    return createdUser;
 }
-
-export const login = async (email, password) => {
 
     const user = await db.select().from(users).where(eq(users.email,email)).get();
 
