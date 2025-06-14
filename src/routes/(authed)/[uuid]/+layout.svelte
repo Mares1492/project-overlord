@@ -1,22 +1,23 @@
 <script>
-	import '../app.css';
+	import '../../../app.css';
     import {goto} from '$app/navigation';
-	
-	let { children } = $props();
+
+    /** @type {import('./$types').PageProps} */
+	let { children, data, form  } = $props();
 </script>
 
 {#snippet btn(icon,path='/')}
-    <button class="text-3xl cursor-pointer saturate-75 hover:saturate-200" onclick={()=>goto(path)}>
+    <button class="text-3xl cursor-pointer grayscale-50 hover:grayscale-0 hover:saturate-200" onclick={()=>goto(path)}>
         {icon}
     </button>
 {/snippet}
 
-<div class="w-full h-dvh overflow-y-hidden bg-gray-300">
+<div class="w-full h-screen overflow-y-hidden bg-gray-300">
 
     <div class="w-full flex flex-row h-full justify-between">
         <div class="min-w-16 ">
             <div class="h-1/2 flex flex-col space-y-5 mt-14 justify-around">
-                {@render btn(`🏰`)}
+                {@render btn(`🏰`,'/')}
                 {@render btn(`⚔️`,'/expeditions')}
                 {@render btn(`🧍‍♂️`,'/servants')}
                 {@render btn(`🕯️`,'/tomb')}
