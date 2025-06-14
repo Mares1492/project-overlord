@@ -1,4 +1,4 @@
-import {userSchema} from '$lib/utils/validation';
+import {userLoginSchema} from '$lib/utils/validation';
 import { json} from '@sveltejs/kit';
 import {createUserSession, login} from "$lib/server/router/user";
 import {createAuthCookies} from "$lib/server/auth";
@@ -6,7 +6,7 @@ import {createAuthCookies} from "$lib/server/auth";
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
     const body = await request.json();
-    const result = userSchema.safeParse(body);
+    const result = userLoginSchema.safeParse(body);
 
     if (!result.success) {
         return json(
