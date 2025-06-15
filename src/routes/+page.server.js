@@ -35,3 +35,23 @@ export const actions = {
         return {error: false, message: "User created successfully"};
 
     },
+    signIn: async ({ cookies, request }) => {
+        const data = await request.formData();
+        const email = data.get('email');
+        const password = data.get('password');
+        const result = userLoginSchema.safeParse({email,password});
+        if (!result.success) {
+            return fail(400, {error:true, message: 'Invalid input', issues: result.error.flatten()});
+        }
+        const { email:validEmail, password:validPassword } = result.data;
+        const user = await login(validEmail, validPassword);
+        const [accessToken,refreshToken] = await createUserSession(user);
+        for (const c of createAuthCookies(accessToken, refreshToken,false)) cookies.set(c.name,c.token,c.params);
+
+        if (user) {
+            throw redirect(301, `/${user.uuid}/keep`);
+        }
+        return {error: true, message: "Could not login"};
+
+    }
+};
