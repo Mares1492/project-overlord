@@ -12,3 +12,26 @@ export async function load({ cookies, request }) {
     throw redirect(301, `/keep`);
 }
 /** @satisfies {import('./$types').Actions} */
+export const actions = {
+    signUp: async ({ cookies, request }) => {
+        const data = await request.formData();
+        const email = data.get('email');
+        const password = data.get('password');
+        const repeatPassword = data.get('repeatPassword');
+        const result = userCreateSchema.safeParse({email,password,repeatPassword});
+        if (!result.success) {
+            return fail(400, {error:true, message: 'Invalid input', issues: result.error.flatten()});
+        }
+        const { email:validEmail, password:validPassword } = result.data;
+
+        const newUser = await createUser(validEmail, validPassword);
+        const loggedUser = await login(newUser.email, validPassword)
+        const [accessToken,refreshToken] = await createUserSession(loggedUser);
+        for (const c of createAuthCookies(accessToken, refreshToken,false)) cookies.set(c.name,c.token,c.params);
+
+        if (loggedUser) {
+            throw redirect(301, `/${loggedUser.uuid}/keep`);
+        }
+        return {error: false, message: "User created successfully"};
+
+    },
