@@ -1,10 +1,14 @@
 import {redirect} from '@sveltejs/kit';
+import {authUserSession} from "$lib/server/auth.js";
+
 
 /** @type {import('./$types').PageLoad} */
-export function load({ cookies }) {
-    if (!cookies.get('refreshToken')) {
+export async function load({cookies}) {
+    const {user, message} = await authUserSession(cookies)
 
-        redirect(301, '/');
+    if (!user) {
+        redirect(307, `/`);
     }
     console.log("loading authed session...");
+    return {pathUUID: user.uuid}
 }
