@@ -25,9 +25,17 @@
             </div>
         </div>
             <div class="min-w-64 w-full text-center text-2xl flex flex-col">
-                <div class="h-12 mt-3 flex flex-row justify-center space-x-10">
-                    <span>💰<span class="bg-gray-200 inset-ring-2 inset-ring-gray-700/70 py-1 px-2">29175</span></span>
-                    <span>💎<span class="bg-gray-200 inset-ring-2 inset-ring-gray-700/70 py-1 px-2">256</span></span>
+                <div class="h-12 my-2.5 flex flex-row space-x-10">
+                    <div class="flex items-center w-1/2 justify-end">
+                        <span>💰<span class="bg-gray-200 inset-ring-2 inset-ring-gray-700/70 py-1 px-2">29175</span></span>
+                        <span>💎<span class="bg-gray-200 inset-ring-2 inset-ring-gray-700/70 py-1 px-2">256</span></span>
+                    </div>
+                    {@html '<!--Add logout and other profile actions-->'}
+                    <div class="flex w-1/2 justify-end">
+                        <form class='flex flex-col gap-y-2 self-center' id='signUp'  method="POST" action="../../?/signOut" use:enhance>
+                            <button type='submit' class="text-3xl bg-black rounded-3xl w-12 cursor-pointer h-12 place-end">👑</button>
+                        </form>
+                    </div>
                 </div>
                 <div class="h-full w-full bg-gray-500">
                     {@render children()}
