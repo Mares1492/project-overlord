@@ -53,5 +53,14 @@ export const actions = {
         }
         return {error: true, message: "Could not login"};
 
+    },
+    signOut: async ({cookies}) => {
+        const {user,message} = await authUserSession(cookies);
+        if (!user) error(401, message);
+
+        await logout(user)
+        for (const c of clearAuthCookies(false)) cookies.set(c.name,c.token,c.params);
+
+        return redirect(307,'/')
     }
 };
