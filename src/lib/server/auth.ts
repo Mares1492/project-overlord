@@ -70,10 +70,9 @@ export function clearAuthCookies(isSerializeResult = true) {
     ];
 }
 
-export async function authUserSession({request}) {
-    const cookies = cookie.parse(request.headers.get('cookie') || '');
-    let accessToken = cookies.accessToken;
-    const refreshToken = cookies.refreshToken;
+export async function authUserSession(cookies) {
+    let accessToken = cookies.get('accessToken');
+    const refreshToken = cookies.get('refreshToken');
     if (!refreshToken) {
         return {user:null, message:"Credentials verification failed"};
     }
@@ -86,12 +85,6 @@ export async function authUserSession({request}) {
         if (!refreshPayload) {
             return {user:null, message:"Credentials verification failed"};
         }
-        accessToken = signAccessToken(refreshPayload);
-    }
-
-    const payload = verifyAccessToken(accessToken);
-    if (!payload) {
-        return {user:null, message:"Credentials verification failed"};
     }
 
     const user = await getUserFromSession(session);
@@ -99,6 +92,11 @@ export async function authUserSession({request}) {
         return {user:null, message:"User is not found"};
     }
 
+    accessToken = signAccessToken({ id: user.id, email: user.email });
+    const payload = verifyAccessToken(accessToken);
+    if (!payload) {
+        return {user:null, message:"Credentials verification failed"};
+    }
     return {user:user, message:"OK"};
 }
 
