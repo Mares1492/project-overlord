@@ -1,0 +1,13 @@
+<script>
+    import '../app.css'
+    import {goto} from "$app/navigation";
+</script>
+
+<div class="w-full h-screen flex justify-center items-center bg-[url($lib/assets/bg/pages/not_found.png)] text-white text-4xl">
+    <div class="flex justify-center items-center w-62 py-5 px-5 text-center bg-gray-500/50 flex-col">
+        Not found
+        <button class="bg-black text-2xl py-2 px-4 cursor-pointer hover:bg-gray-900 active:bg-gray-500 rounded" onclick={()=>goto('/')}>
+            Home
+        </button>
+    </div>
+</div>
