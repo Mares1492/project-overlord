@@ -3,10 +3,10 @@ import {authUserSession, clearAuthCookies} from "$lib/server/auth";
 import {error, json} from "@sveltejs/kit";
 
 /** @type {import('./$types').RequestHandler} */
-export async function POST(request) {
+export async function POST({cookies}) {
 
-    const {user,message} = await authUserSession(request);
-    if (!user) return error(401, message);
+    const {user,message} = await authUserSession(cookies);
+    if (!user) error(401, message);
 
     await logout(user)
     return json(
