@@ -1,15 +1,17 @@
 import {error, fail, json, redirect} from '@sveltejs/kit';
-import {createUser, createUserSession, login} from "$lib/server/router/user.js";
+import {createUser, createUserSession, login, logout} from "$lib/server/router/user.js";
 import {userCreateSchema,userLoginSchema} from "$lib/utils/validation.js";
-import {authUserSession, createAuthCookies} from "$lib/server/auth.js";
+import {authUserSession, clearAuthCookies, createAuthCookies} from "$lib/server/auth.js";
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ cookies, request }) {
-    if (!cookies.get('accessToken')){
-        return {user: null, status: 'not signed in'};
+export async function load({ cookies }) {
+    const {user,message} = await authUserSession(cookies)
+
+    if (!user){
+        return {error:true,message:message};
     }
-    const {user} = await authUserSession(request)
-    throw redirect(301, `/keep`);
+
+    redirect(307, `${user.uuid}/keep`);
 }
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
@@ -30,7 +32,7 @@ export const actions = {
         for (const c of createAuthCookies(accessToken, refreshToken,false)) cookies.set(c.name,c.token,c.params);
 
         if (loggedUser) {
-            throw redirect(301, `/${loggedUser.uuid}/keep`);
+            redirect(301, `/${loggedUser.uuid}/keep`);
         }
         return {error: false, message: "User created successfully"};
 
@@ -49,7 +51,7 @@ export const actions = {
         for (const c of createAuthCookies(accessToken, refreshToken,false)) cookies.set(c.name,c.token,c.params);
 
         if (user) {
-            throw redirect(301, `/${user.uuid}/keep`);
+            redirect(301, `/${user.uuid}/keep`);
         }
         return {error: true, message: "Could not login"};
 
