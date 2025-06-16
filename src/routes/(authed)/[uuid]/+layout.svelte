@@ -1,9 +1,10 @@
 <script>
 	import '../../../app.css';
     import {goto} from '$app/navigation';
+    import { enhance } from '$app/forms';
 
-    /** @type {import('./$types').PageProps} */
-	let { children, data, form  } = $props();
+    /** @type {import('./$types').LayoutProps} */
+	let { children, data} = $props();
 </script>
 
 {#snippet btn(icon,path='/')}
@@ -17,10 +18,10 @@
     <div class="w-full flex flex-row h-full justify-between">
         <div class="min-w-16 ">
             <div class="h-1/2 flex flex-col space-y-5 mt-14 justify-around">
-                {@render btn(`🏰`,'/')}
-                {@render btn(`⚔️`,'/expeditions')}
-                {@render btn(`🧍‍♂️`,'/servants')}
-                {@render btn(`🕯️`,'/tomb')}
+                {@render btn(`🏰`,`/${data.pathUUID}/keep`)}
+                {@render btn(`⚔️`,`/${data.pathUUID}/expeditions`)}
+                {@render btn(`🧍‍♂️`,`/${data.pathUUID}/servants`)}
+                {@render btn(`🕯️`,`/${data.pathUUID}/tomb`)}
             </div>
         </div>
             <div class="min-w-64 w-full text-center text-2xl flex flex-col">
