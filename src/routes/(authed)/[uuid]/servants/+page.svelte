@@ -32,3 +32,10 @@
     let isItems = $state(true)
 
 </script>
+
+{#snippet lockedSlot()}
+    <div class="relative  hover:font-bold flex flex-col w-32 h-24 xl:w-42 xl:h-28 cursor-pointer hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-800">
+        <span class="text-2xl xl:text-4xl grayscale-50 saturate-125">🔒</span>
+        <span class="text-2xl xl:text-3xl text-yellow-500">1000</span>
+    </div>
+{/snippet}
