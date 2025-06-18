@@ -1,4 +1,4 @@
-<p>
+<p class="text-white text-bold">
     <br><br>
     Welcome to <strong>Expeditions</strong>
     <br>
