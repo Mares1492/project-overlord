@@ -47,3 +47,10 @@
     </span>
 {/snippet}
 
+
+{#snippet itemSlot(item)}
+    <div class="flex flex-col w-28 h-16 xl:w-42 xl:h-28 cursor-pointer hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-800">
+        <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{item}</span>
+    </div>
+{/snippet}
+
