@@ -60,6 +60,13 @@
     </div>
 {/snippet}
 
+        <ul class="h-full w-32 flex flex-col justify-center border-4 border-amber-950 bg-orange-950 text-white">
+            {#each servants[servantIndex].stats as stat(stat.name)}
+                <li>
+                    {stat.shortName}: {stat.value}
+                </li>
+            {/each}
+        </ul>
     <div class="w-1/2 h-full">
         <div class="flex flex-col w-full h-full relative space-y-2">
             <img
