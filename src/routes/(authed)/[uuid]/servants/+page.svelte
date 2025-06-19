@@ -60,6 +60,26 @@
     </div>
 {/snippet}
 
+    <div class="w-1/2 h-full">
+        <div class="flex flex-col w-full h-full relative space-y-2">
+            <img
+                    class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${servants[servantIndex].vampire?"-hue-rotate-210":""}`}
+                    src={servants[servantIndex].bodyPath}
+                    alt={`${servants[servantIndex].name}'s body`}
+            >
+            <div class="w-full flex justify-center">
+                <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
+                    <i>
+                        {servants[servantIndex].race}
+                        {#if servants[servantIndex].vampire}
+                            Vampire
+                        {/if}
+                    </i>
+                    <span>|</span>
+                    <span>{servants[servantIndex].name}</span>
+
+                </span>
+            </div>
             <div class="w-full h-4/5 flex justify-around space-x-8  flex-row">
                 <div class="h-full flex flex-col justify-center">
                     <div class="h-1/2 self-start">
@@ -78,3 +98,5 @@
                     {@render itemSlot(`🦶`)}
                 </div>
             </div>
+        </div>
+    </div>
