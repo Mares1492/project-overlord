@@ -60,3 +60,21 @@
     </div>
 {/snippet}
 
+            <div class="w-full h-4/5 flex justify-around space-x-8  flex-row">
+                <div class="h-full flex flex-col justify-center">
+                    <div class="h-1/2 self-start">
+                        {@render itemSlot(`📿`)}
+                    </div>
+                    <div class="self-end space-y-5">
+                        {@render itemSlot(`🗡️`)}
+                        {@render itemSlot(`🛡️`)}
+                    </div>
+                </div>
+                <div class="flex justify-between h-full flex-col ">
+                    {@render itemSlot(`👤`)}
+                    {@render itemSlot(`👘`)}
+                    {@render itemSlot(`🖐`)}
+                    {@render itemSlot(`🦵`)}
+                    {@render itemSlot(`🦶`)}
+                </div>
+            </div>
