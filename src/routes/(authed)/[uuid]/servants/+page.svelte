@@ -60,6 +60,13 @@
     </div>
 {/snippet}
 
+                    <div>
+                        <div class="relative grid grid-cols-5 rounded place-items-center">
+                            {#each { length: 30 } as _item,i}
+                                {@render inventorySlot(i)}
+                            {/each}
+                        </div>
+                    </div>
         <ul class="h-full w-32 flex flex-col justify-center border-4 border-amber-950 bg-orange-950 text-white">
             {#each servants[servantIndex].stats as stat(stat.name)}
                 <li>
