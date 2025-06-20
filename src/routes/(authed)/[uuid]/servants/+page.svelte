@@ -60,6 +60,14 @@
     </div>
 {/snippet}
 
+<div class="w-full h-full flex flex-row justify-center bg-amber-900/50 p-5">
+    <div class="flex w-1/2 flex-row space-x-5 space-y-5">
+        <div class="flex w-full flex-col space-y-5">
+            <div class="flex flex-row justify-center font-bold space-x-5">
+                <button class:bg-green-400={isItems} onclick={()=>isItems = !isItems} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Chars</button>
+                <button class:bg-green-400={!isItems} onclick={()=>isItems = !isItems} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Items</button>
+            </div>
+            <div class="h-full self-center">
                 {#if isItems}
                     <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
                         {#each servants as servant,i(servant.name)}
@@ -83,6 +91,8 @@
                         </div>
                     </div>
                 {/if}
+            </div>
+        </div>
         <ul class="h-full w-32 flex flex-col justify-center border-4 border-amber-950 bg-orange-950 text-white">
             {#each servants[servantIndex].stats as stat(stat.name)}
                 <li>
@@ -90,6 +100,7 @@
                 </li>
             {/each}
         </ul>
+    </div>
     <div class="w-1/2 h-full">
         <div class="flex flex-col w-full h-full relative space-y-2">
             <img
@@ -130,3 +141,4 @@
             </div>
         </div>
     </div>
+</div>
