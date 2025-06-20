@@ -60,6 +60,21 @@
     </div>
 {/snippet}
 
+                {#if isItems}
+                    <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
+                        {#each servants as servant,i(servant.name)}
+                            <button onclick={()=>servantIndex = i} class="relative hover:bg-amber-100 cursor-pointer border flex flex-col w-32 h-24 xl:w-42 xl:h-28 items-center justify-center bg-gray-800 border-2">
+                                <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
+                            </button>
+                        {/each}
+                        {@render lockedSlot()}
+                        {@render lockedSlot()}
+                        {@render lockedSlot()}
+                        {@render premiumLockedSlot()}
+                        {@render premiumLockedSlot()}
+                        {@render premiumLockedSlot()}
+                    </div>
+                {:else}
                     <div>
                         <div class="relative grid grid-cols-5 rounded place-items-center">
                             {#each { length: 30 } as _item,i}
@@ -67,6 +82,7 @@
                             {/each}
                         </div>
                     </div>
+                {/if}
         <ul class="h-full w-32 flex flex-col justify-center border-4 border-amber-950 bg-orange-950 text-white">
             {#each servants[servantIndex].stats as stat(stat.name)}
                 <li>
