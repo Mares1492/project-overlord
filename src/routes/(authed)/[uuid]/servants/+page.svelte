@@ -29,7 +29,7 @@
     ]
 
     let servantIndex = $state(0)
-    let isItems = $state(true)
+    let isChars = $state(true)
 
 </script>
 
@@ -64,11 +64,11 @@
     <div class="flex w-1/2 flex-row space-x-5 space-y-5">
         <div class="flex w-full flex-col space-y-5">
             <div class="flex flex-row justify-center font-bold space-x-5">
-                <button class:bg-green-400={isItems} onclick={()=>isItems = !isItems} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Chars</button>
-                <button class:bg-green-400={!isItems} onclick={()=>isItems = !isItems} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Items</button>
+                <button class:bg-green-400={isChars} onclick={()=>isChars = true} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Chars</button>
+                <button class:bg-green-400={!isChars} onclick={()=>isChars = false} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Items</button>
             </div>
             <div class="h-full self-center">
-                {#if isItems}
+                {#if isChars}
                     <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
                         {#each servants as servant,i(servant.name)}
                             <button onclick={()=>servantIndex = i} class="relative hover:bg-amber-100 cursor-pointer border flex flex-col w-32 h-24 xl:w-42 xl:h-28 items-center justify-center bg-gray-800 border-2">
