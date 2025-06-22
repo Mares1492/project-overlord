@@ -117,15 +117,15 @@
                 {/if}
             </div>
         </div>
-        <ul class="h-full w-32 flex flex-col justify-center border-4 border-amber-950 bg-orange-950 text-white">
+    </div>
+    <div class="w-1/2 h-full flex flex-row">
+        <ul class="h-full flex flex-col justify-center border-4 w-26 2xl:w-36 border-amber-950 bg-orange-950 text-white px-1">
             {#each servants[servantIndex].stats as stat(stat.name)}
-                <li>
-                    {stat.shortName}: {stat.value}
+                <li class="flex flex-row space-x-2 justify-between">
+                    <span class="2xl:text-3xl">{stat.shortName}:</span><span class="font-semibold text-3xl 2xl:text-4xl">{stat.value}</span>
                 </li>
             {/each}
         </ul>
-    </div>
-    <div class="w-1/2 h-full">
         <div class="flex flex-col w-full h-full relative space-y-2">
             <img
                     class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${servants[servantIndex].vampire?"-hue-rotate-210":""}`}
@@ -145,7 +145,7 @@
 
                 </span>
             </div>
-            <div class="w-full h-4/5 flex justify-around space-x-8  flex-row">
+            <div class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
                 <div class="h-full flex flex-col justify-center">
                     <div class="h-1/2 self-start">
                         {@render itemSlot(`📿`)}
