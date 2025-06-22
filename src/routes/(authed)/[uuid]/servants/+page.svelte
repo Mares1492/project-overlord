@@ -77,18 +77,36 @@
         <div class="flex w-full flex-col space-y-5 justify-center h-full">
             <div class="flex justify-center">
                 {#if isChars}
-                    <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                        {#each servants as servant,i(servant.name)}
-                            <button onclick={()=>servantIndex = i} class="relative hover:bg-amber-100 cursor-pointer border flex flex-col w-32 h-24 xl:w-42 xl:h-28 items-center justify-center bg-gray-800 border-2">
-                                <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
+                    <div class="flex flex-col space-y-5 w-full items-center">
+                        <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
+                            {#each servants as servant,i(servant.name)}
+                                {@render charSlot(servant,i)}
+                            {/each}
+                            {@render lockedSlot()}
+                            {@render lockedSlot()}
+                            {@render lockedSlot()}
+                            {@render lockedSlot()}
+                            {@render lockedSlot()}
+                            {@render lockedSlot()}
+                        </div>
+                        <div class="flex flex-row justify-center font-bold space-x-5">
+                            <button
+                                    class="border py-1.5 px-5 w-32 2xl:w-42 flex flex-col justify-around text-yellow-500 hover:bg-amber-200 active:bg-amber-100 bg-gray-600 cursor-pointer"
+                                    onclick={()=>{}}
+                            >
+                                <span>Unlock</span>
+                                <span class="text-xl 2xl:text-3xl grayscale-50 saturate-125">🔓</span>
+                                <span class="text-xl 2xl:text-2xl ">💰1000</span>
                             </button>
-                        {/each}
-                        {@render lockedSlot()}
-                        {@render lockedSlot()}
-                        {@render lockedSlot()}
-                        {@render premiumLockedSlot()}
-                        {@render premiumLockedSlot()}
-                        {@render premiumLockedSlot()}
+                            <button
+                                    class="border py-1.5 px-2 w-32 2xl:w-42 flex flex-col text-purple-300 justify-around hover:bg-amber-200 active:bg-amber-100 bg-gray-600 cursor-pointer"
+                                    onclick={()=>{}}
+                            >
+                                <span>Unlock</span>
+                                <span class="text-xl 2xl:text-3xl hue-rotate-200">🔓</span>
+                                <span class="text-xl 2xl:text-2xl"><span class="hue-rotate-50">💎</span>100</span>
+                            </button>
+                        </div>
                     </div>
                 {:else}
                     <div>
