@@ -16,7 +16,7 @@
     ]
 </script>
 
-<div class="grid h-full p-5 grid-cols-4 gap-x-5 bg-amber-900/50 xl:mx-5 rounded xl:w-1/2 place-items-center">
+<div class="grid h-full p-5 grid-cols-4 gap-x-5 bg-amber-900/50 place-items-center">
     {#each updates as update(update.name)}
         <div class="flex flex-col items-center">
             <span class="text-white text-lg">{update.name}</span>
