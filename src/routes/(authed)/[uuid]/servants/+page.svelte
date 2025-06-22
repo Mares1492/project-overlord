@@ -59,13 +59,23 @@
 {/snippet}
 
 <div class="w-full h-full flex flex-row justify-center bg-amber-900/50 p-5">
-    <div class="flex w-1/2 flex-row space-x-5 space-y-5">
-        <div class="flex w-full flex-col space-y-5">
-            <div class="flex flex-row justify-center font-bold space-x-5">
-                <button class:bg-green-400={isChars} onclick={()=>isChars = true} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Chars</button>
-                <button class:bg-green-400={!isChars} onclick={()=>isChars = false} class="border hover:bg-amber-200 px-1 w-20 py-0.5 bg-gray-600 cursor-pointer">Items</button>
-            </div>
-            <div class="h-full self-center">
+    <div class="flex w-1/2 h-full flex-col space-x-5 space-y-5">
+        <div class="flex flex-row justify-center font-bold space-x-5 xl:text-4xl">
+            <button
+                    class:bg-green-400={isChars}
+                    onclick={()=>isChars = true}
+                    class="border hover:bg-amber-200 px-1 w-20 xl:w-32 py-0.5 bg-gray-600 cursor-pointer">
+                Chars
+            </button>
+            <button
+                    class:bg-green-400={!isChars}
+                    onclick={()=>isChars = false}
+                    class="border hover:bg-amber-200 px-1 w-20 xl:w-32 py-0.5 bg-gray-600 cursor-pointer">
+                Items
+            </button>
+        </div>
+        <div class="flex w-full flex-col space-y-5 justify-center h-full">
+            <div class="flex justify-center">
                 {#if isChars}
                     <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
                         {#each servants as servant,i(servant.name)}
