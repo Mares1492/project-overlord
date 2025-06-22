@@ -53,7 +53,7 @@
 {/snippet}
 
 {#snippet inventorySlot(i)}
-    <div class="flex flex-col cursor-pointer w-22 h-16 xl:w-36 xl:h-28 hover:text-black hover:bg-amber-100  items-center border-2 justify-center bg-gray-800">
+    <div class="flex flex-col cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center bg-gray-800">
         <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">~{i}</span>
     </div>
 {/snippet}
