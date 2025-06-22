@@ -109,12 +109,10 @@
                         </div>
                     </div>
                 {:else}
-                    <div>
-                        <div class="relative grid grid-cols-5 rounded place-items-center">
-                            {#each { length: 30 } as _item,i}
-                                {@render inventorySlot(i)}
-                            {/each}
-                        </div>
+                    <div class="relative grid grid-cols-5 grid gap-0.1 place-items-center border-r-2 border-b-2">
+                        {#each { length: 30 } as _item,i}
+                            {@render inventorySlot(i)}
+                        {/each}
                     </div>
                 {/if}
             </div>
