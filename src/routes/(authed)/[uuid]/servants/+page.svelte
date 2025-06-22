@@ -39,11 +39,6 @@
     </div>
 {/snippet}
 
-{#snippet premiumLockedSlot()}
-    <span class="relative hover:font-bold flex flex-col w-32 h-24 xl:w-42 xl:h-28 cursor-pointer hue-saturate-210 hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-900">
-        <span class="text-2xl xl:text-4xl hue-rotate-200">🔒</span>
-        <span class="text-2xl xl:text-3xl text-purple-300">100</span>
-    </span>
 {/snippet}
 
 
