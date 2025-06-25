@@ -34,7 +34,7 @@
 </script>
 
 {#snippet lockedSlot()}
-    <div class="relative flex flex-col w-32 h-24 2xl:w-42 2xl:h-28 cursor-not-allowed hover:text-black items-center border-2 justify-center bg-gray-800">
+    <div class="relative flex flex-col w-32 h-24 2xl:w-42 2xl:h-28 h cursor-not-allowed hover:text-black items-center border-2 justify-center bg-gray-800">
         <span class="text-4xl xl:text-4xl grayscale-50 saturate-125">🔒</span>
     </div>
 {/snippet}
