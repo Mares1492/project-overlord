@@ -9,7 +9,8 @@
 		importance: 5,
 		description: 'A quiet forest retreat near the old ruins.',
 		coords: { x: 1950, y: 1680 },
-		color: '#d1fae5' // emerald-100
+		color: '#d1fae5', // emerald-100
+        type: 'wilds'
 	},
 	{
 		id: '9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140',
@@ -17,7 +18,8 @@
 		importance: 7,
 		description: 'A fortified checkpoint along the trade route.',
 		coords: { x: 2375, y: 2360 },
-		color: '#a16207' // yellow-700
+		color: '#a16207', // yellow-700
+        type: 'keep'
 	},
 	{
 		id: '74f1fc80-c7c3-4a69-8f59-7b128eaee190',
@@ -25,15 +27,17 @@
 		importance: 5,
 		description: 'Floodplain with rare flora and deep marshes.',
 		coords: { x: 4400, y: 2700 },
-		color: '#0ea5e9' // sky-500
+		color: '#0ea5e9', // sky-500
+        type: 'wilds'
 	},
 	{
 		id: 'c5a191a0-11f3-4a1b-9b88-5b69d69ff7df',
 		name: 'Duskford Crossing',
 		importance: 5,
-		description: 'Historic river crossing with old stone bridge.',
+		description: 'Historic river crossing with old stone bridge and a keep guarding it.',
 		coords: { x: 3760, y: 3380 },
-		color: '#581c87' // purple-900
+		color: '#581c87', // purple-900
+        type: 'keep'
 	},
 	{
 		id: 'f4e1deaa-270b-4c5d-9b2d-43bb68c1605a',
@@ -41,7 +45,8 @@
 		importance: 5,
 		description: 'Volcanic site now dormant but still majestic.',
 		coords: { x: 4460, y: 1120 },
-		color: '#dc2626' // red-600
+		color: '#dc2626', // red-600
+        type: 'wilds'
 	},
 	// NEW LOCATIONS
 	{
@@ -50,40 +55,117 @@
 		importance: 5,
 		description: 'Ancient fortress hidden among high cliffs.',
 		coords: { x: 815, y: 1620 },
-		color: '#334155' // slate-800
+		color: '#334155', // slate-800
+        type: 'keep'
 	},
 	{
 		id: 'c33f1a7b-f12f-4df4-9cd1-34bcff8408d1',
 		name: 'Frostwillow Meadow',
 		importance: 4,
 		description: 'Chilly meadow that glows in winter dusk.',
-		coords: { x: 2800, y: 1800 },
-		color: '#a5f3fc' // cyan-200
+		coords: { x: 3030, y: 550 },
+		color: '#a5f3fc', // cyan-200
+        type: 'wilds'
 	},
 	{
 		id: '6f61a18d-3469-4a2b-ae78-8c8a8c3a1c88',
 		name: 'Stonebarrow Hollow',
-		importance: 8,
+		importance: 4,
 		description: 'Ancient burial ground with eerie carvings.',
-		coords: { x: 3900, y: 2700 },
-		color: '#7f1d1d' // rose-900
+		coords: { x: 3250, y: 2650 },
+		color: '#7f1d1d', // rose-900
+        type: 'ruins'
 	},
 	{
 		id: 'b9a5b7d2-d763-4b35-91e5-2a59f5bb75d0',
 		name: 'Glimmereach Summit',
 		importance: 6,
 		description: 'The highest peak with stunning sunrises.',
-		coords: { x: 4500, y: 3500 },
-		color: '#c084fc' // violet-400
+		coords: { x: 1330, y: 3630 },
+		color: '#c084fc', // violet-400
+        type: 'wilds'
 	},
 	{
 		id: '3e2e558f-18cf-4cc3-87e7-994d4b81240d',
 		name: 'Mirefen Deltas',
 		importance: 5,
 		description: 'Swamplands rich with life and mystery.',
-		coords: { x: 2100, y: 3300 },
-		color: '#16a34a' // green-600
-	}
+		coords: { x: 4130, y: 2010 },
+		color: '#16a34a', // green-600
+        type: 'wilds'
+	},
+    {
+        id: '22d3e93a-abc1-4e33-bd2d-31a8a4629a1a',
+        name: 'Hollowfen Marsh',
+        importance: 5,
+        description: 'A misty swamp teeming with hidden dangers.',
+        coords: { x: 1030, y: 3530 },
+        color: '#6EE7B7', // Tailwind emerald-300
+        type: 'wilds'
+    },
+    {
+        id: '383a90f1-9e0c-4ffd-950c-f68e4242042d',
+        name: 'Hollowfen',
+        importance: 7,
+        description: 'A major town in southwest and the only one to survive "The Great Scourge"',
+        coords: { x: 790, y: 3470 },
+        color: '#5EB7B7', // Tailwind emerald-300
+        type: 'major settlement'
+    },
+    {
+        id: 'c38fa1f4-e156-47d3-a14c-d3142b1ed17b',
+        name: 'Stoneheart Bastion',
+        importance: 5,
+        description: 'Ancient fortress guarding the northern cliffs.',
+        coords: { x: 1250, y: 655 },
+        color: '#1E293B', // Tailwind slate-900
+        type: 'keep'
+    },
+    {
+        id: 'e211dfe1-6ea6-4a2e-91cf-6e8b1019947f',
+        name: 'Elarin`s Hollow',
+        importance: 5,
+        description: 'Small village surrounded by enchanted woods.',
+        coords: { x: 1580, y: 2450 },
+        color: '#60A5FA', // Tailwind blue-400
+        type: 'minor settlement'
+    },
+    {
+        id: '7a121ea7-f321-4a56-bac8-bcdd888fb7a5',
+        name: 'Redwatch Keep',
+        importance: 7,
+        description: 'Crimson-walled stronghold with storied past.',
+        coords: { x: 2670, y: 4100 },
+        color: '#DC2626', // Tailwind red-600
+        type: 'keep'
+    },
+    {
+        id: 'c06f3be6-9984-4c1b-b0f4-d1bfb73dd4b2',
+        name: 'Moonspire',
+        importance: 6,
+        description: 'Shimmering city with towering moonlit spires.',
+        coords: { x: 3450, y: 850 },
+        color: '#A78BFA', // Tailwind violet-400
+        type: 'major settlement'
+    },
+    {
+        id: 'd8c5c1a9-f765-4dc6-a313-f5d99c3a5a94',
+        name: 'Ashworn Cradle',
+        importance: 5,
+        description: 'A ruined crater village lost to flame.',
+        coords: { x: 4200, y: 2700 },
+        color: '#78716C', // Tailwind stone-500
+        type: 'ruins'
+    },
+    {
+        id: '86ae1c65-3bb1-4a32-a438-6769ff7719c3',
+        name: 'Thornreach',
+        importance: 6,
+        description: 'Dense woodland, rumored to be haunted.',
+        coords: { x: 2650, y: 1520 },
+        color: '#16A34A', // Tailwind green-600
+        type: 'wilds'
+    }
 ]
 
     let hoveredId = $state('')
