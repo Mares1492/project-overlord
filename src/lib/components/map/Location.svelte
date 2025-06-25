@@ -137,4 +137,17 @@
 
         <circle class="-hue-rotate-20" cx="17.5" cy="13" r="10" stroke="black" fill={color}></circle>
 
+        {#if location.type === "keep"}
+                {@render fortressIcon()}
+        {:else if location.type === "minor settlement"}
+                {@render village()}
+        {:else if location.type === "major settlement"}
+                {@render town()}
+        {:else if location.type === "ruins"}
+                {@render ruins()}
+        {:else if location.type === "wilds"}
+                {@render wilds()}
+        {:else if location.type === "merc_camp"}
+                {@render mercCamp()}
+        {/if}
 </g>
