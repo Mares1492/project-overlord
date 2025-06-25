@@ -1,6 +1,5 @@
 <script>
-
-    const {color,hovered=false} = $props()
+    const {color,hovered=false,location} = $props()
 </script>
 <g
         transform="{hovered?'translate(-5,-8) scale(1.3)':''}"
