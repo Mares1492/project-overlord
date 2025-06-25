@@ -3,7 +3,7 @@
 </script>
 
 {#snippet fortressIcon()}
-        <g transform="translate(10.7, 4) scale(0.45)" stroke="black">
+        <g transform="translate(10.7, 4.5) scale(0.45)" stroke="black">
                 <path d="M20 5H10V30H20V5Z" fill="#A08679"/>
                 <path d="M10 5H20L15 0L10 5Z" fill="#C0B2A5"/>
                 <path d="M10 10H0V30H10V10Z" fill="#A08679"/>
@@ -48,7 +48,7 @@
 {/snippet}
 
 {#snippet ruins()}
-        <g transform="translate(9.5, 7) scale(0.44)" stroke="black">
+        <g transform="translate(9, 8) scale(0.45)" stroke="black">
                 <path d="M0 17L1.5 11.5L1 4.5L10 2V7L15 12V17" fill="#8B8B83"/>
                 <path d="M20 17L21.5 11.5L20 5H25L23.5 3.5L30 0V5L33 8L35 17" fill="#8B8B83"/>
                 <path d="M11.0422 1.81265L15.6787 8.53353L8.95778 13.17L4.32135 6.44908L11.0422 1.81265ZM21.4559 11.3426L22.4525 11.2601L22.6175 13.2533L21.6209 13.3358L21.4559 11.3426ZM10 7.4913L10.9836 7.67182C10.6514 9.48184 10.9297 10.4478 11.3359 10.98C11.7461 11.5174 12.4711 11.856 13.5908 11.986C14.7042 12.1152 16.0341 12.0175 17.4362 11.8471C18.7785 11.684 20.2656 11.4411 21.4559 11.3426L21.5384 12.3392L21.6209 13.3358C20.4671 13.4312 19.1614 13.6522 17.6775 13.8325C16.2535 14.0056 14.724 14.131 13.3602 13.9727C12.0027 13.8151 10.6329 13.3554 9.7461 12.1935C8.85529 11.0265 8.63441 9.39226 9.01643 7.31078L10 7.4913Z" fill="#8B8B83"/>
@@ -66,7 +66,7 @@
 
 
 {#snippet town()}
-        <g transform="translate(9, 4) scale(0.44)" stroke="black">
+        <g transform="translate(9, 5) scale(0.42)" stroke="black">
                 <path d="M24 5H16V19H24V5Z" fill="#E6CCB3"/>
                 <path d="M12 12H4V24H12V12Z" fill="#D9B38C"/>
                 <path d="M35 8H27V20H35V8Z" fill="#D9B38C"/>
