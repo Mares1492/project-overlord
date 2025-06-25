@@ -360,5 +360,15 @@
                 {@render wilds()}
         {:else if location.type === "merc_camp"}
                 {@render mercCamp()}
+        {:else if location.type === "river"}
+                {@render river()}
+        {:else if location.type === "neg_energy"}
+                {@render negativeEnergy()}
+        {:else if location.type === "pos_energy"}
+                {@render positiveEnergy()}
+        {:else if location.type === "meadows"}
+                {@render meadows()}
+        {:else if location.type === "swamp"}
+                {@render swamp()}
         {/if}
 </g>
