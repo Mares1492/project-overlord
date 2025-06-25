@@ -2922,6 +2922,8 @@
                 onfocusout={()=>hoveredId=''}
                 onmouseover={()=>hoveredId=location.id}
                 onmouseout={()=>hoveredId=''}
+                onkeypress={handleLocationClick}
+                onmousedown={()=>handleLocationClick({charCode:undefined})}
                 focusable="true"
                 class="cursor-pointer"
                 pointer-events="all"
