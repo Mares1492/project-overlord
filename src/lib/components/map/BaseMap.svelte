@@ -10,7 +10,7 @@
 		description: 'A quiet forest retreat near the old ruins.',
 		coords: { x: 1950, y: 1680 },
 		color: '#d1fae5', // emerald-100
-        type: 'wilds'
+        type: 'ruins'
 	},
 	{
 		id: '9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140',
@@ -28,7 +28,7 @@
 		description: 'Floodplain with rare flora and deep marshes.',
 		coords: { x: 4400, y: 2700 },
 		color: '#0ea5e9', // sky-500
-        type: 'wilds'
+        type: 'river'
 	},
 	{
 		id: 'c5a191a0-11f3-4a1b-9b88-5b69d69ff7df',
@@ -46,7 +46,7 @@
 		description: 'Volcanic site now dormant but still majestic.',
 		coords: { x: 4460, y: 1120 },
 		color: '#dc2626', // red-600
-        type: 'wilds'
+        type: 'neg_energy'
 	},
 	// NEW LOCATIONS
 	{
@@ -65,16 +65,16 @@
 		description: 'Chilly meadow that glows in winter dusk.',
 		coords: { x: 3030, y: 550 },
 		color: '#a5f3fc', // cyan-200
-        type: 'wilds'
+        type: 'meadows'
 	},
 	{
 		id: '6f61a18d-3469-4a2b-ae78-8c8a8c3a1c88',
 		name: 'Stonebarrow Hollow',
 		importance: 4,
 		description: 'Ancient burial ground with eerie carvings.',
-		coords: { x: 3250, y: 2650 },
+		coords: { x: 3250, y: 2665 },
 		color: '#7f1d1d', // rose-900
-        type: 'ruins'
+        type: 'neg_energy'
 	},
 	{
 		id: 'b9a5b7d2-d763-4b35-91e5-2a59f5bb75d0',
@@ -92,7 +92,7 @@
 		description: 'Swamplands rich with life and mystery.',
 		coords: { x: 4130, y: 2010 },
 		color: '#16a34a', // green-600
-        type: 'wilds'
+        type: 'swamp'
 	},
     {
         id: '22d3e93a-abc1-4e33-bd2d-31a8a4629a1a',
@@ -101,7 +101,7 @@
         description: 'A misty swamp teeming with hidden dangers.',
         coords: { x: 1030, y: 3530 },
         color: '#6EE7B7', // Tailwind emerald-300
-        type: 'wilds'
+        type: 'swamp'
     },
     {
         id: '383a90f1-9e0c-4ffd-950c-f68e4242042d',
@@ -133,9 +133,9 @@
     {
         id: '7a121ea7-f321-4a56-bac8-bcdd888fb7a5',
         name: 'Redwatch Keep',
-        importance: 7,
+        importance: 5,
         description: 'Crimson-walled stronghold with storied past.',
-        coords: { x: 2670, y: 4100 },
+        coords: { x: 3020, y: 950 },
         color: '#DC2626', // Tailwind red-600
         type: 'keep'
     },
@@ -144,28 +144,27 @@
         name: 'Moonspire',
         importance: 6,
         description: 'Shimmering city with towering moonlit spires.',
-        coords: { x: 3450, y: 850 },
+        coords: { x: 2130, y: 1820 },
         color: '#A78BFA', // Tailwind violet-400
         type: 'major settlement'
     },
     {
         id: 'd8c5c1a9-f765-4dc6-a313-f5d99c3a5a94',
         name: 'Ashworn Cradle',
-        importance: 5,
+        importance: 4,
         description: 'A ruined crater village lost to flame.',
-        coords: { x: 4200, y: 2700 },
+        coords: { x: 4345, y: 1260 },
         color: '#78716C', // Tailwind stone-500
         type: 'ruins'
     },
     {
         id: '86ae1c65-3bb1-4a32-a438-6769ff7719c3',
         name: 'Thornreach',
-        importance: 6,
+        importance: 5,
         description: 'Dense woodland, rumored to be haunted.',
-        coords: { x: 2650, y: 1520 },
+        coords: { x: 4000, y: 1450 },
         color: '#16A34A', // Tailwind green-600
         type: 'wilds'
-    }
 ]
 
     let hoveredId = $state('')
