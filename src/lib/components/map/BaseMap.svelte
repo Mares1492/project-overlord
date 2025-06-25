@@ -165,6 +165,25 @@
         coords: { x: 4000, y: 1450 },
         color: '#16A34A', // Tailwind green-600
         type: 'wilds'
+    },
+    {
+        id: 'a7c9940e-8b45-4e2d-ab5f-af81f93acb82',
+        name: 'Plains of old',
+        importance: 5,
+        description: 'Territories completely destroyed in ancient war are now taken by wildlife.',
+        coords: { x: 2900, y: 1500 },
+        color: '#16A34A', // Tailwind green-600
+        type: 'wilds'
+    },
+    {
+        id: '645c58c0-9ba7-492a-b985-2ca78613f48e',
+        name: 'Moonspire',
+        importance: 6,
+        description: 'Shimmering city with towering moonlit spires.',
+        coords: { x: 2130, y: 1820 },
+        color: '#A78BFA', // Tailwind violet-400
+        type: 'major settlement'
+    },
 ]
 
     let hoveredId = $state('')
