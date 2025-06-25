@@ -88,6 +88,16 @@
 
     let hoveredId = $state('')
 
+    /**
+     * 
+     * @param {{charCode:number|undefined}} event
+     */
+    const handleLocationClick = ({charCode}) => {
+        if (charCode && charCode !== 13) {
+           return
+        }
+    }
+
 </script>
 
 <svg class="border-4 border-amber-800/50"  viewBox="0 0 5329 4731" fill="none" xmlns="http://www.w3.org/2000/svg">
