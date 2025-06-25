@@ -3010,7 +3010,7 @@
                 class="cursor-pointer"
                 pointer-events="all"
                 transform="translate({location.coords.x}, {location.coords.y}) scale({location.importance})">
-            <Location color={location.color} hovered={hoveredId===location.id}/>
+            <Location color={location.color} hovered={hoveredId===location.id} location={location}/>
         </g>
     {/each}
 </svg>
