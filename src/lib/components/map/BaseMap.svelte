@@ -3,47 +3,88 @@
 
     //const {locations} = $props()
     const locations = [
-        {
-            id: 'a6f4b0a8-3e24-4c10-85e1-f5aeb602c25e',
-            name: 'Silverpine Grove',
-            importance: 6,
-            description: 'A quiet forest retreat near the old ruins.',
-            coords: { x: 1884, y: 1620 },
-            color: 'emerald-100'
-        },
-        {
-            id: '9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140',
-            name: 'Cragstone Outpost',
-            importance: 9,
-            description: 'A fortified checkpoint along the trade route.',
-            coords: { x: 2420, y: 2450 },
-            color: 'yellow-700'
-        },
-        {
-            id: '74f1fc80-c7c3-4a69-8f59-7b128eaee190',
-            name: 'Whitemoor Basin',
-            importance: 5,
-            description: 'Floodplain with rare flora and deep marshes.',
-            coords: { x: 3050, y: 3100 },
-            color: 'sky-500'
-        },
-        {
-            id: 'c5a191a0-11f3-4a1b-9b88-5b69d69ff7df',
-            name: 'Duskford Crossing',
-            importance: 5,
-            description: 'Historic river crossing with old stone bridge.',
-            coords: { x: 3760, y: 3360 },
-            color: 'purple-900'
-        },
-        {
-            id: 'f4e1deaa-270b-4c5d-9b2d-43bb68c1605a',
-            name: 'Emberfall Crater',
-            importance: 5,
-            description: 'Volcanic site now dormant but still majestic.',
-            coords: { x: 4350, y: 1200 },
-            color: 'red-600'
-        }
-    ]
+	{
+		id: 'a6f4b0a8-3e24-4c10-85e1-f5aeb602c25e',
+		name: 'Silverpine Grove',
+		importance: 5,
+		description: 'A quiet forest retreat near the old ruins.',
+		coords: { x: 1950, y: 1680 },
+		color: '#d1fae5' // emerald-100
+	},
+	{
+		id: '9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140',
+		name: 'Cragstone Outpost',
+		importance: 7,
+		description: 'A fortified checkpoint along the trade route.',
+		coords: { x: 2375, y: 2360 },
+		color: '#a16207' // yellow-700
+	},
+	{
+		id: '74f1fc80-c7c3-4a69-8f59-7b128eaee190',
+		name: 'Whitemoor Basin',
+		importance: 5,
+		description: 'Floodplain with rare flora and deep marshes.',
+		coords: { x: 4400, y: 2700 },
+		color: '#0ea5e9' // sky-500
+	},
+	{
+		id: 'c5a191a0-11f3-4a1b-9b88-5b69d69ff7df',
+		name: 'Duskford Crossing',
+		importance: 5,
+		description: 'Historic river crossing with old stone bridge.',
+		coords: { x: 3760, y: 3380 },
+		color: '#581c87' // purple-900
+	},
+	{
+		id: 'f4e1deaa-270b-4c5d-9b2d-43bb68c1605a',
+		name: 'Emberfall Crater',
+		importance: 5,
+		description: 'Volcanic site now dormant but still majestic.',
+		coords: { x: 4460, y: 1120 },
+		color: '#dc2626' // red-600
+	},
+	// NEW LOCATIONS
+	{
+		id: 'a117c3d7-2f92-472e-8b29-8496e6c59df3',
+		name: 'Thornwatch Keep',
+		importance: 5,
+		description: 'Ancient fortress hidden among high cliffs.',
+		coords: { x: 815, y: 1620 },
+		color: '#334155' // slate-800
+	},
+	{
+		id: 'c33f1a7b-f12f-4df4-9cd1-34bcff8408d1',
+		name: 'Frostwillow Meadow',
+		importance: 4,
+		description: 'Chilly meadow that glows in winter dusk.',
+		coords: { x: 2800, y: 1800 },
+		color: '#a5f3fc' // cyan-200
+	},
+	{
+		id: '6f61a18d-3469-4a2b-ae78-8c8a8c3a1c88',
+		name: 'Stonebarrow Hollow',
+		importance: 8,
+		description: 'Ancient burial ground with eerie carvings.',
+		coords: { x: 3900, y: 2700 },
+		color: '#7f1d1d' // rose-900
+	},
+	{
+		id: 'b9a5b7d2-d763-4b35-91e5-2a59f5bb75d0',
+		name: 'Glimmereach Summit',
+		importance: 6,
+		description: 'The highest peak with stunning sunrises.',
+		coords: { x: 4500, y: 3500 },
+		color: '#c084fc' // violet-400
+	},
+	{
+		id: '3e2e558f-18cf-4cc3-87e7-994d4b81240d',
+		name: 'Mirefen Deltas',
+		importance: 5,
+		description: 'Swamplands rich with life and mystery.',
+		coords: { x: 2100, y: 3300 },
+		color: '#16a34a' // green-600
+	}
+]
 
     let hoveredId = $state('')
 
