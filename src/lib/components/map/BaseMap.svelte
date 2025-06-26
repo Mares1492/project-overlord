@@ -3021,22 +3021,22 @@
     <rect width="125" height="67" fill="white" transform="translate(2155 2503)"/>
     </clipPath>
     </defs>
-    {#each locations as location(location.id)}
+    {#each locations as location,i(location.id)}
         <!-- svelte-ignore a11y_mouse_events_have_key_events -->
         <g
                 tabindex="0"
                 role="button"
-                onfocusin={()=>hoveredId=location.id}
-                onfocusout={()=>hoveredId=''}
-                onmouseover={()=>hoveredId=location.id}
-                onmouseout={()=>hoveredId=''}
-                onkeypress={handleLocationClick}
-                onmousedown={()=>handleLocationClick({charCode:undefined})}
+                onfocusin={()=>hoveredId=i}
+                onfocusout={()=>hoveredId=null}
+                onmouseover={()=>hoveredId=i}
+                onmouseout={()=>hoveredId=null}
+                onkeypress={handleLocationPress}
+                onmousedown={handleLocationClick}
                 focusable="true"
                 class="cursor-pointer"
                 pointer-events="all"
                 transform="translate({location.coords.x}, {location.coords.y}) scale({location.importance})">
-            <Location color={location.color} hovered={hoveredId===location.id} location={location}/>
+            <Location color={location.color} hovered={hoveredId===i} location={location}/>
         </g>
     {/each}
 </svg>
