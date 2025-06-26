@@ -178,7 +178,11 @@
     }
 ]
 
-    let hoveredId = $state('')
+    /**@type {null|number} */
+    let hoveredId = $state(null)
+    /**@type {null|Object} */
+    let chosenLocation = $state(null)
+    let mousePosition = $state({x:0,y:0})
 
     /**
      * 
