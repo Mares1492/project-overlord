@@ -1,5 +1,6 @@
 <script>
     import Location from "$lib/components/map/Location.svelte";
+    import LocationInfoWindow from "./LocationInfoWindow.svelte";
 
     //const {locations} = $props()
     const locations = [
@@ -174,16 +175,7 @@
         coords: { x: 2900, y: 1500 },
         color: '#16A34A', // Tailwind green-600
         type: 'wilds'
-    },
-    {
-        id: '645c58c0-9ba7-492a-b985-2ca78613f48e',
-        name: 'Moonspire',
-        importance: 6,
-        description: 'Shimmering city with towering moonlit spires.',
-        coords: { x: 2130, y: 1820 },
-        color: '#A78BFA', // Tailwind violet-400
-        type: 'major settlement'
-    },
+    }
 ]
 
     let hoveredId = $state('')
