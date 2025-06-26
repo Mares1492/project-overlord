@@ -184,14 +184,22 @@
     let chosenLocation = $state(null)
     let mousePosition = $state({x:0,y:0})
 
-    /**
-     * 
-     * @param {{charCode:number|undefined}} event
-     */
-    const handleLocationClick = ({charCode}) => {
-        if (charCode && charCode !== 13) {
+    /**@param {{clientX:number,clientY:number}} event*/
+    const handleLocationClick = ({offsetX,offsetY}) => {
+        if (hoveredId === null) {
            return
         }
+        mousePosition = {x:offsetX+50,y:offsetY}
+        chosenLocation = locations[hoveredId]
+    }
+
+    /**@param {{charCode:number}} event*/
+    const handleLocationPress = ({charCode}) => {
+        console.log(charCode)
+        if (charCode && charCode !== 13 || hoveredId === null) {
+           return
+        }
+        chosenLocation = locations[hoveredId]
     }
 
 </script>
