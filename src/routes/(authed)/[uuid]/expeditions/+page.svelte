@@ -3,7 +3,7 @@
 </script>
 
 <div class="w-full overflow-auto bg-amber-900/50 h-full">
-    <div class="">
+    <div class="relative">
         <BaseMap/>
     </div>
 </div>
