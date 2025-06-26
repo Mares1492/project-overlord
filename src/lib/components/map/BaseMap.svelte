@@ -204,6 +204,10 @@
 
 </script>
 
+{#if location}
+    <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
+{/if}
+
 <svg class="border-2 border-amber-200/20"  viewBox="0 0 5329 4731" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="5328.06" height="4730.27" fill="#B7D8FF"/>
     <path d="M2531.2 2503.75H2404.8L2468 2397.98L2531.2 2503.75Z" fill="#5B5235" stroke="black"/>
