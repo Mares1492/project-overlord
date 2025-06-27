@@ -3033,7 +3033,7 @@
                 onkeypress={handleLocationPress}
                 onmousedown={handleLocationClick}
                 focusable="true"
-                class="cursor-pointer"
+                class="cursor-pointer focus:outline-none focus-visible:outline"
                 pointer-events="all"
                 transform="translate({location.coords.x}, {location.coords.y}) scale({location.importance})">
             <Location color={location.color} hovered={hoveredId===i} location={location}/>
