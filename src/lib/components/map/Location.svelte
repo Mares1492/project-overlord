@@ -23,7 +23,7 @@
 {/snippet}
 
 {#snippet mercCamp()}
-        <g transform="translate(10.7, 4) scale(0.45)" stroke="black">
+        <g transform="translate(9.8, 6.25) scale(0.38)" stroke="black">
                 <path d="M33 0H32V5H33V0Z" fill="#5D4C41"/>
                 <path d="M33 0L37 2L33 4V0Z" fill="#8B0000"/>
                 <path d="M40 9H25V29H40V9Z" fill="#A08679"/>
