@@ -196,7 +196,7 @@
     let chosenLocation = $state(null)
     let mousePosition = $state({x:0,y:0})
 
-    /**@param {{clientX:number,clientY:number}} event*/
+    /**@param {{offsetX:number,offsetY:number}} event*/
     const handleLocationClick = ({offsetX,offsetY}) => {
         if (hoveredId === null) {
            return
