@@ -175,7 +175,17 @@
         coords: { x: 2900, y: 1500 },
         color: '#16A34A', // Tailwind green-600
         type: 'wilds'
-    }
+    },
+    {
+        id: 'c4ecfde2-14f7-42b8-b51f-46e28ff4694d',
+        name: 'Blood Gold Camp',
+        importance: 5,
+        description: 'An old fortress and its surroundings now occupied by the mercenary lord',
+        coords: { x: 2110, y: 2370 },
+        color: '#16A34A', // Tailwind green-600
+        type: 'merc_camp'
+    },
+
 ]
 
     /**@type {null|number} */
