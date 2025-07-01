@@ -278,7 +278,7 @@
 {/snippet}
 
 {#snippet positiveEnergy()}
-        <g transform="translate(8.5, 7) scale(0.4)" stroke="black">
+        <g transform="translate(7.9, 4.2) scale(0.44)" stroke="black">
                 <path d="M22 35C30.2843 35 37 28.2843 37 20C37 11.7157 30.2843 5 22 5C13.7157 5 7 11.7157 7 20C7 28.2843 13.7157 35 22 35Z" stroke="#E9D5FF" stroke-width="2"/>
                 <path d="M24 0H20V10H24V0Z" fill="#E9D5FF"/>
                 <path d="M44 24V20H34V24H44Z" fill="#E9D5FF"/>
