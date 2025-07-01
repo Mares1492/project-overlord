@@ -195,9 +195,8 @@
         type: 'pos_energy'
     }
 
-]
-
-    const {scale=0} = $props()
+]  
+    let {zoom, mapContainer=$bindable()} = $props()
 
     /**@type {null|number} */
     let hoveredId = $state(null)
@@ -222,6 +221,7 @@
         }
         chosenLocation = locations[hoveredId]
     }
+
 
 </script>
 
