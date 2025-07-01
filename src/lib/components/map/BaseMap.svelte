@@ -3034,5 +3034,31 @@
         <path d="M2176.35 2554.9V2550.18Z" fill="black"/>
         <path d="M2176.35 2554.9V2550.18" stroke="#5D4C41"/>
         </g>
-    {/each}
-</svg>
+        <defs>
+        <clipPath id="clip0_54_10">
+        <rect width="122" height="90" fill="white" transform="translate(2000 1636)"/>
+        </clipPath>
+        <clipPath id="clip1_54_10">
+        <rect width="125" height="67" fill="white" transform="translate(2155 2503)"/>
+        </clipPath>
+        </defs>
+        {#each locations as location,i(location.id)}
+            <!-- svelte-ignore a11y_mouse_events_have_key_events -->
+            <g
+                    tabindex="0"
+                    role="button"
+                    onfocusin={()=>hoveredId=i}
+                    onfocusout={()=>hoveredId=null}
+                    onmouseover={()=>hoveredId=i}
+                    onmouseout={()=>hoveredId=null}
+                    onkeypress={handleLocationPress}
+                    onmousedown={handleLocationClick}
+                    focusable="true"
+                    class="cursor-pointer focus:outline-none focus-visible:outline"
+                    pointer-events="all"
+                    transform="translate({location.coords.x}, {location.coords.y}) scale({location.importance})">
+                <Location color={location.color} hovered={hoveredId===i} location={location}/>
+            </g>
+        {/each}
+    </svg>
+</div>
