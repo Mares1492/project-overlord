@@ -185,6 +185,15 @@
         color: '#16A34A', // Tailwind green-600
         type: 'merc_camp'
     },
+    {
+        id: '68700073-e3e1-422d-949f-949df921de41',
+        name: 'Gem of the South',
+        importance: 5,
+        description: 'A city of light. The cities sacred army and holy people have stopped the spread of "The Great Scourge"',
+        coords: { x: 2680, y: 3200 },
+        color: '#16A54A', // Tailwind green-600
+        type: 'pos_energy'
+    }
 
 ]
 
