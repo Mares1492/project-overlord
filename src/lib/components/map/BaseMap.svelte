@@ -226,7 +226,7 @@
 </script>
 
 {#if location}
-    <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
+        <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
 {/if}
 
 <svg class=" border-2 border-amber-200/20 z-10 overflow-scroll" transform="scale({scale})"  viewBox="0 0 5329 4731" fill="none" xmlns="http://www.w3.org/2000/svg">
