@@ -17,6 +17,10 @@
         if(zoom > 1){
             zoom-=0.2
             console.log(zoom)
+    const saveMapCenter = () => {
+        if (mapContainer) {
+            oldCameraData.x = (mapContainer.scrollLeft + mapContainer.clientWidth * 0.5) / zoom;
+            oldCameraData.y = (mapContainer.scrollTop + mapContainer.clientHeight * 0.5) / zoom;
         }
         zoom = 1
     }
