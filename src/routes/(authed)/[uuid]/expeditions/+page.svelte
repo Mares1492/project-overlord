@@ -4,13 +4,14 @@
     let zoom = $state(1)
 
     const handleZoomIn = () => {
-        if(zoom < 5){
-            zoom+=0.2
-            console.log(zoom)
-            return
+        saveMapCenter()
+        if(zoom + 0.1 < 1){
+            zoom+=0.1
         }
-        zoom = 5
-
+        else{
+            zoom = 1
+        }
+        loadMapCenter()
     }
 
     const handleZoomOut = () => {
