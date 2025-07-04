@@ -20,6 +20,14 @@
         }
         zoom = 1
     }
+
+    const loadMapCenter = () => {
+        if (mapContainer) {
+            mapContainer.scrollLeft = (oldCameraData.x * zoom) - mapContainer.clientWidth * 0.5;
+            mapContainer.scrollTop = (oldCameraData.y * zoom) - mapContainer.clientHeight * 0.5;
+        }
+    }
+
 </script>
 <div class="absolute z-1000 select-none top-25 right-35">
         <span class="bg-gray-500 border">{(zoom*100).toFixed(0)}%</span>
