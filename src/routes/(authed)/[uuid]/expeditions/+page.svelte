@@ -14,9 +14,16 @@
     }
 
     const handleZoomOut = () => {
-        if(zoom > 1){
-            zoom-=0.2
-            console.log(zoom)
+        saveMapCenter()
+        if(zoom - 0.1 > 0.25){
+            zoom-=0.1
+        }
+        else{
+            zoom = 0.25
+        }
+        loadMapCenter()
+    }
+
     const saveMapCenter = () => {
         if (mapContainer) {
             oldCameraData.x = (mapContainer.scrollLeft + mapContainer.clientWidth * 0.5) / zoom;
