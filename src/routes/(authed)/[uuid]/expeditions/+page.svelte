@@ -34,8 +34,8 @@
         <button onclick={handleZoomIn} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">+</button>
         <button onclick={handleZoomOut} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">-</button>
 </div>
-<div class="w-full overflow-auto bg-amber-900/50 h-full">
-    <div class="relative w-full h-9/12">
-        <BaseMap zoom={zoom}/>
+<div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
+    <div class="relative w-full">
+        <BaseMap zoom={zoom} mapContainer={mapContainer}/>
     </div>
 </div>
