@@ -1,7 +1,9 @@
 <script>
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     
-    let zoom = $state(1)
+    let zoom = $state(0.25);
+    let mapContainer;
+    const oldCameraData = {x:0,y:0,scale:0.25}
 
     const handleZoomIn = () => {
         saveMapCenter()
@@ -30,7 +32,6 @@
             oldCameraData.x = (mapContainer.scrollLeft + mapContainer.clientWidth * 0.5) / zoom;
             oldCameraData.y = (mapContainer.scrollTop + mapContainer.clientHeight * 0.5) / zoom;
         }
-        zoom = 1
     }
 
     const loadMapCenter = () => {
