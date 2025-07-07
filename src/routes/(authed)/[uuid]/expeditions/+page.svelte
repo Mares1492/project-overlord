@@ -1,9 +1,15 @@
 <script>
     import BaseMap from "$lib/components/map/BaseMap.svelte";
+    import { setContext } from 'svelte';
     
     let zoom = $state(0.25);
     let mapContainer;
     const oldCameraData = {x:0,y:0,scale:0.25}
+
+    const chooseLocation = (location) => {
+        mode=modes[1]
+    }
+    setContext('chooseLocation', chooseLocation);
 
     const handleZoomIn = () => {
         saveMapCenter()
