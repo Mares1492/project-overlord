@@ -1,8 +1,11 @@
 <script>
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { setContext } from 'svelte';
+
+    const modes = ["MAP","EXPEDITION"]
     
     let zoom = $state(0.25);
+    let mode = $state(modes[0])
     let mapContainer;
     const oldCameraData = {x:0,y:0,scale:0.25}
 
