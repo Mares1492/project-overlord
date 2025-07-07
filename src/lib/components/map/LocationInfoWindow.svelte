@@ -1,4 +1,7 @@
 <script>
+	import { getContext } from 'svelte';
+
+  	const chooseLocation = getContext('chooseLocation');
 	let {position, location = $bindable()} = $props()
 	//TODO: handle location click
 </script>
