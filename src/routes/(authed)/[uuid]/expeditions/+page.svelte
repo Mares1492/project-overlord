@@ -51,13 +51,18 @@
     }
 
 </script>
-<div class="absolute z-1000 select-none top-25 right-35">
+{#if mode === modes[0]}
+    <div class="absolute z-1000 select-none top-25 right-35">
         <span class="bg-gray-500 border">{(zoom*100).toFixed(0)}%</span>
         <button onclick={handleZoomIn} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">+</button>
         <button onclick={handleZoomOut} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">-</button>
-</div>
-<div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
-    <div class="relative w-full">
-        <BaseMap zoom={zoom} mapContainer={mapContainer}/>
     </div>
-</div>
+    <div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
+        <div class="relative w-full">
+            <BaseMap zoom={zoom} mapContainer={mapContainer} />
+        </div>
+    </div>
+{:else if mode === modes[1]}
+    EXPEDITION
+{/if}
+
