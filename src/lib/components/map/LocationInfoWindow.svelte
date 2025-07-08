@@ -8,7 +8,7 @@
 
 {#if location !== null}
 	<div
-		class="absolute z-50 p-4 rounded-sm bg-white border border-gray-300 text-sm max-w-sm"
+		class="absolute z-50 w-64 p-4 rounded-sm bg-white border border-gray-300 text-sm max-w-sm"
 		style={`left: ${position.x}px; top: ${position.y}px`}
 	>
 		<button
