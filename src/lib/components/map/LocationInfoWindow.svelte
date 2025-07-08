@@ -17,8 +17,11 @@
 		>
 			X
 		</button>
-		<h3 class="font-bold text-lg mb-1">{location.name}</h3>
-		<p class="text-gray-600 mb-2">{location.description}</p>
-		<p class="text-xs text-gray-400">Importance: {location.importance}</p>
+		<div class="flex flex-col mb-3.5">
+			<h3 class="font-bold text-lg mb-1">{location.name}</h3>
+			<p class="text-gray-600 mb-2">{location.description}</p>
+			<p class="text-xs text-gray-400">Difficulty: {location.importance}</p>
+		</div>
+		<button onclick={()=>chooseLocation(location)} class="text-base border-gray-400 font-semibold cursor-pointer bg-gray-100 hover:bg-gray-200 active:bg-gray-50 border px-1 py-0.5">Choose</button>
 	</div>
 {/if}
