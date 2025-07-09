@@ -78,7 +78,13 @@
             <BaseMap zoom={zoom} mapContainer={mapContainer} />
         </div>
     </div>
-{:else if mode === modes[1]}
-    EXPEDITION
+{:else if mode === modes[1] && location}
+    <div class="w-full h-full flex justify-center">
+        <div class="relative min-w-2xl h-full bg-amber-50 py-2.5 max-w-3/4 flex flex-col space-y-2.5 text-lg">
+            <button onclick={closeLocation} class="absolute top-1.5 right-5 px-2 pt-0.5 text-center text-2xl cursor-pointer hover:bg-gray-500">X</button>
+            <span class="font-bold">{chosenLocation.name}</span>
+            <span>{chosenLocation.description}</span>
+        </div>
+    </div>
 {/if}
 
