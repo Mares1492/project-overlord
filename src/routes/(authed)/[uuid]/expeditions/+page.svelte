@@ -20,9 +20,15 @@
      * @param location {App.Location}
      */
     const chooseLocation = (location) => {
+        chosenLocation = location
         mode=modes[1]
     }
     setContext('chooseLocation', chooseLocation);
+
+    const closeLocation = () => {
+        mode = modes[0]
+
+    }
 
     const handleZoomIn = () => {
         saveMapCenter()
