@@ -82,10 +82,14 @@
     <div class="w-full h-full flex justify-center bg-amber-900/50">
         <div class="relative min-w-2xl h-full font-medium bg-amber-50 py-2.5 max-w-3/4 flex flex-col space-y-5 text-lg">
             <button onclick={closeLocation} class="absolute top-1.5 right-5 px-2 pt-0.5 text-center text-2xl cursor-pointer hover:bg-gray-500">X</button>
-            <div class="text-2xl mt-5">
-                <i class="font-thin">Expedition to:</i>
-                <span class="font-black">{chosenLocation.name}</span>
-               <!-- This section is for location icon--> 
+            <div class="flex flex-col mt-5 space-y-5">
+                <div class="text-2xl px-5">
+                    <i class="font-thin">Expedition to:</i>
+                    <span class="font-black">{chosenLocation.name}</span>
+                    <!-- This section is for location icon--> 
+                </div>
+                <p class="px-5">{chosenLocation.description}</p>
+            </div>
             </div>
         </div>
     </div>
