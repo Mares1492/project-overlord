@@ -94,6 +94,9 @@
                 <span class="text-xl">Bidding</span>
                 <!-- TODO: Bidding options (Scout, Loot, Foster Ties)--> 
             </div>
+            <div class="border-t-2 py-3.5 flex flex-col">
+                <span class="text-xl">Approach</span>
+                <!-- TODO: Approach  options (Stealth, Action, Situational)--> 
             </div>
         </div>
     </div>
