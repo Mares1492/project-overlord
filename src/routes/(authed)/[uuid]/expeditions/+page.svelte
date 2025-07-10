@@ -90,6 +90,10 @@
                 </div>
                 <p class="px-5">{chosenLocation.description}</p>
             </div>
+            <div class="border-t-2 py-3.5 flex flex-col">
+                <span class="text-xl">Bidding</span>
+                <!-- TODO: Bidding options (Scout, Loot, Foster Ties)--> 
+            </div>
             </div>
         </div>
     </div>
