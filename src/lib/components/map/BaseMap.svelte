@@ -197,7 +197,7 @@
     ]
 
     
-    let {zoom, mapContainer=$bindable(), chooseLocation} = $props()
+    let {zoom, mapContainer=$bindable()} = $props()
 
     /**@type {null|number} */
     let hoveredId = $state(null)
