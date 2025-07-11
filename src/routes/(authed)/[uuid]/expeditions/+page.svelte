@@ -123,9 +123,13 @@
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl">Approach</span>
                 <span class="text-xl mb-3.5">Approach</span>
                 <!-- TODO: Approach  options (Stealth, Action, Situational)--> 
+                 <div class="flex flex-row justify-around w-5/6 self-center">
+                    {@render expeditionSettingBtn("Stealth",()=>{})}
+                    {@render expeditionSettingBtn("Action",()=>{})}
+                    {@render expeditionSettingBtn("Situational",()=>{})}
+                </div>
             </div>
         </div>
     </div>
