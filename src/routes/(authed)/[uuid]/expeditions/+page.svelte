@@ -114,8 +114,8 @@
                 <p class="px-5">{chosenLocation.description}</p>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl mb-3.5">Bidding</span>
-                <!-- TODO: Bidding options (Scout, Loot, Foster Ties)--> 
+                <span class="text-xl mb-3.5">Task</span>
+                <!-- TODO: Task options (Scout, Loot, Foster Ties)--> 
                 <div class="flex flex-row justify-around w-5/6 self-center">
                     {@render expeditionSettingBtn("Scout",()=>{})}
                     {@render expeditionSettingBtn("Loot",()=>{})}
