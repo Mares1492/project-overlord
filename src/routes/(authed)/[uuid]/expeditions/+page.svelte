@@ -37,13 +37,15 @@
      */
     const chooseLocation = (location) => {
         chosenLocation = location
+        localStorage.setItem("chosen_location",JSON.stringify(chosenLocation));
         mode=modes[1]
+        localStorage.setItem("expedition_mode",mode);
     }
     setContext('chooseLocation', chooseLocation);
 
     const closeLocation = () => {
         mode = modes[0]
-
+        localStorage.setItem("expedition_mode",mode);
     }
 
     const handleZoomIn = () => {
