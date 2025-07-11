@@ -116,10 +116,10 @@
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5">Bidding</span>
                 <!-- TODO: Bidding options (Scout, Loot, Foster Ties)--> 
-                <div class="flex flex-row ">
-                    <button class="w-36">Scout</button>
-                    <button>Loot</button>
-                    <button>Foster Ties</button>
+                <div class="flex flex-row justify-around w-5/6 self-center">
+                    {@render expeditionSettingBtn("Scout",()=>{})}
+                    {@render expeditionSettingBtn("Loot",()=>{})}
+                    {@render expeditionSettingBtn("Foster Ties",()=>{})}
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
