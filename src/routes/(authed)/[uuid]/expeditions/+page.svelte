@@ -111,6 +111,11 @@
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl">Bidding</span>
                 <!-- TODO: Bidding options (Scout, Loot, Foster Ties)--> 
+                <div class="flex flex-row ">
+                    <button class="w-36">Scout</button>
+                    <button>Loot</button>
+                    <button>Foster Ties</button>
+                </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl">Approach</span>
