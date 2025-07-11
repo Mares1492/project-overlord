@@ -85,6 +85,11 @@
     }
 
 </script>
+
+{#snippet expeditionSettingBtn (title,handleClick)}
+    <button onclick={handleClick} class="w-26 h-26 hover:bg-yellow-300 bg-slate-200 cursor-pointer">{title}</button>
+{/snippet}
+
 {#if mode === modes[0]}
     <div class="absolute z-1000 select-none top-25 right-35">
         <span class="bg-gray-500 border">{(zoom*100).toFixed(0)}%</span>
