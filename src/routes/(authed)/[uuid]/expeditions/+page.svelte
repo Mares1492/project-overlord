@@ -14,6 +14,15 @@
      * @type App.Location | undefined
      */
     let chosenLocation;
+
+    const handleLocalStorageLoad = (storeRef, toParsed = false) => {
+        const stored = localStorage.getItem(storeRef);
+        if (toParsed) {
+            return stored ? JSON.parse(stored) : null;
+        }
+        return stored;
+    }
+
     onMount(()=>{
         chosenLocation = handleLocalStorageLoad("chosen_location",true)
         mode = handleLocalStorageLoad("expedition_mode")
