@@ -4,16 +4,16 @@
 
     
     const modes = ["MAP","EXPEDITION"]
+    const oldCameraData = {x:0,y:0,scale:0.25}
     
     let zoom = $state(0.25);
     let mode = $state(modes[0])
     let mapContainer;
     
     /**
-     * @type App.Location
+     * @type App.Location | undefined
      */
     let chosenLocation;
-    const oldCameraData = {x:0,y:0,scale:0.25}
     onMount(()=>{
         chosenLocation = handleLocalStorageLoad("chosen_location",true)
         mode = handleLocalStorageLoad("expedition_mode")
