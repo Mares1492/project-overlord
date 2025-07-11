@@ -1,6 +1,6 @@
 <script>
     import BaseMap from "$lib/components/map/BaseMap.svelte";
-    import { setContext } from 'svelte';
+    import { onMount, setContext } from 'svelte';
 
     
     const modes = ["MAP","EXPEDITION"]
@@ -14,6 +14,13 @@
      */
     let chosenLocation;
     const oldCameraData = {x:0,y:0,scale:0.25}
+    onMount(()=>{
+        chosenLocation = handleLocalStorageLoad("chosen_location",true)
+        mode = handleLocalStorageLoad("expedition_mode")
+        if (!mode) {
+            mode = modes[0]
+        }
+    })
 
     /**
      * 
