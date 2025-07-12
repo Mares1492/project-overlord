@@ -5,16 +5,11 @@
     
     const modes = ["MAP","EXPEDITION"]
     const oldCameraData = {x:0,y:0,scale:0.25}
-    
-    let zoom = $state(0.25);
-    let mode = $state(modes[0])
-    let mapContainer;
-    
     /**
-     * @type App.Location | undefined
+     * 
+     * @param storeRef {string}
+     * @param toParsed {boolean}
      */
-    let chosenLocation;
-
     const handleLocalStorageLoad = (storeRef, toParsed = false) => {
         const stored = localStorage.getItem(storeRef);
         if (toParsed) {
@@ -23,13 +18,16 @@
         return stored;
     }
 
-    onMount(()=>{
-        chosenLocation = handleLocalStorageLoad("chosen_location",true)
-        mode = handleLocalStorageLoad("expedition_mode")
-        if (!mode) {
-            mode = modes[0]
-        }
-    })
+    let zoom = $state(0.25);
+
+    /**@type {HTMLElement}*/
+    // svelte-ignore non_reactive_update
+    let mapContainer;
+
+    /** @type App.Location | undefined*/
+    // svelte-ignore non_reactive_update
+    let chosenLocation = handleLocalStorageLoad("chosen_location",true)
+    let mode = $state(handleLocalStorageLoad("expedition_mode"))
 
     /**
      * 
