@@ -13,6 +13,44 @@
     const setApproachSettingsValue = (valueToSet) => {
         expeditionSettings.approach.value = valueToSet
     }
+
+    const expeditionSettings = $state({
+        task:{
+            options:[
+                {
+                    name:"Scout",
+                    handleClick:setTaskSettingsValue
+                },
+                {
+                    name:"Loot",
+                    handleClick:setTaskSettingsValue
+                },
+                {
+                    name:"Foster Ties",
+                    handleClick:setTaskSettingsValue
+                }
+            ],
+            value:0
+        },
+        approach:{
+            options:[
+                {
+                    name:"Stealth",
+                    handleClick:setApproachSettingsValue
+                },
+                {
+                    name:"Action",
+                    handleClick:setApproachSettingsValue
+                },
+                {
+                    name:"Situational",
+                    handleClick:setApproachSettingsValue
+                }
+            ],
+            value:0
+        }
+    })
+
     /**
      * 
      * @param storeRef {string}
