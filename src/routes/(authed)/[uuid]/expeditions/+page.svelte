@@ -159,20 +159,18 @@
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5">Task</span>
-                <!-- TODO: Task options (Scout, Loot, Foster Ties)--> 
                 <div class="flex flex-row justify-around w-5/6 self-center">
-                    {@render expeditionSettingBtn("Scout",()=>{})}
-                    {@render expeditionSettingBtn("Loot",()=>{})}
-                    {@render expeditionSettingBtn("Foster Ties",()=>{})}
+                    {#each expeditionSettings.task.options as task,i(task.name)}
+                        {@render expeditionSettingBtn(task.name,()=>task.handleClick(i),expeditionSettings.task.value === i)}
+                    {/each}
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5">Approach</span>
-                <!-- TODO: Approach  options (Stealth, Action, Situational)--> 
                  <div class="flex flex-row justify-around w-5/6 self-center">
-                    {@render expeditionSettingBtn("Stealth",()=>{})}
-                    {@render expeditionSettingBtn("Action",()=>{})}
-                    {@render expeditionSettingBtn("Situational",()=>{})}
+                    {#each expeditionSettings.approach.options as approach,i(approach.name)}
+                        {@render expeditionSettingBtn(approach.name,()=>approach.handleClick(i),expeditionSettings.approach.value === i)}
+                    {/each}
                 </div>
             </div>
         </div>
