@@ -130,8 +130,8 @@
 
 </script>
 
-{#snippet expeditionSettingBtn (title,handleClick)}
-    <button onclick={handleClick} class="w-26 h-26 hover:bg-yellow-300 bg-slate-200 cursor-pointer">{title}</button>
+{#snippet expeditionSettingBtn (title,handleClick,isChosen)}
+    <button onclick={handleClick} class:bg-yellow-200={isChosen} class="w-26 h-26 hover:bg-yellow-300 bg-slate-200 cursor-pointer">{title}</button>
 {/snippet}
 
 {#if mode === modes[0]}
