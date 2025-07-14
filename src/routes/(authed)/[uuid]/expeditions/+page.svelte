@@ -110,7 +110,7 @@
     </div>
     <div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
         <div class="relative w-full">
-            <BaseMap zoom={zoom} mapContainer={mapContainer} />
+            <BaseMap zoom={zoom} mapContainer={mapContainer} locations={data.locations} />
         </div>
     </div>
 {:else if mode === modes[1] && location}
