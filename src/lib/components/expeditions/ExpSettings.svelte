@@ -1,0 +1,47 @@
+<script>
+    import {expeditionSettings} from '$lib/state/state.svelte';
+    const {closeLocation, chosenLocation} = $props();
+
+</script>
+
+{#snippet expeditionSettingBtn (/** @type {string} */ title, handleClick, /** @type {boolean} */isChosen)}
+    <button onclick={handleClick} class:bg-yellow-200={isChosen} class="w-26 h-26 hover:bg-yellow-300 bg-slate-200 cursor-pointer">{title}</button>
+{/snippet}
+
+<div class="w-full h-full flex justify-center bg-amber-900/50">
+    <div class="relative min-w-2xl h-full font-medium overflow-y-auto bg-amber-50 py-2.5 max-w-3/4 flex flex-col space-y-5 text-lg">
+        <button onclick={closeLocation} class="absolute top-1.5 right-5 px-2 pt-0.5 text-center text-2xl cursor-pointer hover:bg-gray-500">X</button>
+        <div class="flex flex-col mt-5 space-y-5">
+            <div class="text-2xl px-5">
+                <i class="font-thin">Expedition to:</i>
+                <span class="font-black">{chosenLocation.name}</span>
+                <!-- This section is for location icon--> 
+            </div>
+            <p class="px-5">{chosenLocation.description}</p>
+        </div>
+        <div class="border-t-2 py-3.5 flex flex-col">
+            <span class="text-xl mb-3.5">Task</span>
+            <div class="flex flex-row justify-around w-5/6 self-center">
+                {#each expeditionSettings.task.options as task,i(task.name)}
+                    {@render expeditionSettingBtn(task.name,task.handleClick,expeditionSettings.task.value === i)}
+                {/each}
+            </div>
+        </div>
+        <div class="border-t-2 py-3.5 flex flex-col">
+            <span class="text-xl mb-3.5">Approach</span>
+                <div class="flex flex-row justify-around w-5/6 self-center">
+                {#each expeditionSettings.approach.options as approach,i(approach.name)}
+                    {@render expeditionSettingBtn(approach.name,approach.handleClick,expeditionSettings.approach.value === i)}
+                {/each}
+            </div>
+        </div>
+        <div class="border-t-2 py-3.5 flex flex-col">
+            <span class="text-xl mb-3.5">Scale</span>
+                <div class="flex flex-row justify-around w-5/6 self-center">
+                {#each expeditionSettings.scale.options as scale,i(scale.name)}
+                    {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
+                {/each}
+            </div>
+        </div>
+    </div>
+</div>
