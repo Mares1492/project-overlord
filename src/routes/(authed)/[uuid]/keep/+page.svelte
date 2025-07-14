@@ -27,7 +27,7 @@
                 <button onclick={()=>goto(`/${data.pathUUID}/${building.pathTo}`)} class="h-1/2 rounded-t-xl cursor-pointer hover:bg-amber-100 hover:text-gray-800 hover:font-extrabold flex items-center justify-center flex-col space-y-1.5">
                     {building.name}
                 </button>
-                <button onclick={()=>console.log(building.name)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black flex items-center justify-center">
+                <button onclick={()=>console.log(building.name)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black items-center justify-center">
                     <span>lvl: {building.lvl}</span>
                     Upgrade: {building.basePrice * (building.lvl+1)}
                 </button>
