@@ -1,7 +1,9 @@
 <script>
+    import ExpSettings from "$lib/components/expeditions/ExpSettings.svelte";
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { onMount, setContext } from 'svelte';
 
+    const {data} = $props(); 
     
     const modes = ["MAP","EXPEDITION"]
     const oldCameraData = {x:0,y:0,scale:0.25}
@@ -13,43 +15,12 @@
     const setApproachSettingsValue = (valueToSet) => {
         expeditionSettings.approach.value = valueToSet
     }
+    
+    const setScaleSettingsValue = (valueToSet) => {
+        expeditionSettings.scale.value = valueToSet
+    }
 
-    const expeditionSettings = $state({
-        task:{
-            options:[
-                {
-                    name:"Scout",
-                    handleClick:setTaskSettingsValue
-                },
-                {
-                    name:"Loot",
-                    handleClick:setTaskSettingsValue
-                },
-                {
-                    name:"Foster Ties",
-                    handleClick:setTaskSettingsValue
-                }
-            ],
-            value:0
-        },
-        approach:{
-            options:[
-                {
-                    name:"Stealth",
-                    handleClick:setApproachSettingsValue
-                },
-                {
-                    name:"Action",
-                    handleClick:setApproachSettingsValue
-                },
-                {
-                    name:"Situational",
-                    handleClick:setApproachSettingsValue
-                }
-            ],
-            value:0
-        }
-    })
+    const expeditionSettings = $state(data.expeditionSettings)
 
     /**
      * 
