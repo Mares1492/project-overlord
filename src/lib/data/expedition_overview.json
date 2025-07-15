@@ -1,0 +1,120 @@
+{
+    "task": [
+    {
+      "name": "Exploration",
+      "locations": {
+        "ruins": ["Mapping hidden vaults beneath crumbling towers.", "Charting safe passages through unstable stone."],
+        "keep": ["Surveying old battlements for weak points.", "Cataloging relics of long-dead lords."],
+        "river": ["Tracking currents that reveal sunken secrets.", "Recording wildlife patterns near rare fords."],
+        "neg_energy": ["Studying unnatural growths that thrive on decay.", "Tracing ley lines twisted by dark forces."],
+        "meadows": ["Documenting rare blooms under shifting skies.", "Following migratory herds across gentle slopes."],
+        "wilds": ["Marking dens of predators to avoid.", "Noting mineral deposits deep in forested hills."],
+        "swamp": ["Identifying safe paths through choking mire.", "Collecting samples of curious fungi."],
+        "major_settlement": ["Recording trade flows through bustling avenues.", "Listening to local lore spun in tavern corners."],
+        "minor_settlement": ["Surveying defenses of humble walls.", "Counting granaries and stores for future needs."],
+        "merc_camp": ["Inspecting training drills and morale.", "Assessing weapon stockpiles for coming wars."],
+        "pos_energy": ["Measuring the blessings over consecrated land.", "Cataloging relics housed in gilded halls."]
+      }
+    },
+    {
+      "name": "Resource Gathering",
+      "locations": {
+        "ruins": ["Recovering old masonry to rebuild.", "Extracting metals left from ancient wars."],
+        "keep": ["Confiscating heirlooms under writ of claim.", "Requisitioning stores hidden in castle vaults."],
+        "river": ["Fishing to feed marching ranks.", "Panning silt for glints of wealth."],
+        "neg_energy": ["Harvesting cursed soil for alchemists.", "Capturing spectral essences in glass flasks."],
+        "meadows": ["Gathering herbs with healing promise.", "Reaping early harvests under wary eyes."],
+        "wilds": ["Hunting game to fill lean larders.", "Felling rare timber for master carpenters."],
+        "swamp": ["Collecting peat to fuel long fires.", "Trapping exotic beasts for coin or study."],
+        "major_settlement": ["Levies exact tribute under local watch.", "Securing patronage from wealthy guilds."],
+        "minor_settlement": ["Taking surplus grain to feed distant garrisons.", "Drafting youth under promise of pay."],
+        "merc_camp": ["Stocking arms and rations by local contracts.", "Hiring fresh blades eager for coin."],
+        "pos_energy": ["Gathering sacred oils and wines by clergy sanction.", "Petitioning blessings over newly forged banners."]
+      }
+    },
+    {
+      "name": "Diplomacy",
+      "locations": {
+        "ruins": ["Negotiating terms over disputed ancestral sites.", "Offering gold to quiet old feuds haunting broken halls."],
+        "keep": ["Forging alliances sealed by feast and oath.", "Bartering hostages for fragile peace."],
+        "river": ["Settling fishing rights where waters run close.", "Hosting parleys on neutral sandbanks."],
+        "neg_energy": ["Appeasing dark powers with careful tributes.", "Striking grim bargains none dare break."],
+        "meadows": ["Marrying heirs under open skies to unite claims.", "Holding festivals that bind rival hearts."],
+        "wilds": ["Gifting pelts and gems to placate wary tribes.", "Dancing under moons to honor shared spirits."],
+        "swamp": ["Promising roads and bridges through mire.", "Trading swamp cures for broader trust."],
+        "major_settlement": ["Sponsoring tournaments that draw distant banners.", "Hosting councils where many interests meet."],
+        "minor_settlement": ["Settling border tithes without bloodshed.", "Inviting elders to courts of higher justice."],
+        "merc_camp": ["Bribing rival captains to stand aside.", "Offering shares of loot to bind oaths tighter."],
+        "pos_energy": ["Endorsing pilgrimages that swell both coffers and faith.", "Funding restorations of hallowed sites to earn goodwill."]
+      }
+    }
+  ],
+  "approach": [
+    {
+      "name": "Stealth",
+      "locations": {
+        "ruins": ["Your scouts slip through shattered archways, wary of echoing footfalls.", "Old stones hide many secrets best uncovered unseen.", "Silent steps over rubble avoid rousing restless spirits.", "Lanterns doused, your company moves like ghosts.", "Eyes in the dark might watch, so blades stay sheathed."],
+        "keep": ["Cloaked figures creep along battlements, evading torchlight.", "Servants whisper of shadows slipping past tapestries.", "A silent breach of ancient walls leaves guards none the wiser.", "Daggers ready, but violence remains a last resort."],
+        "river": ["Crossing by night, currents mask your passage.", "Marsh reeds rustle with unseen motion.", "Footprints vanish in wet banks, leaving no tale behind."],
+        "neg_energy": ["The very air muffles your presence as if the land itself conspires in silence.", "Dark mists curl around, hiding you from prying sight."],
+        "meadows": ["Knee-high blooms obscure your careful advance.", "Your passage startles only nesting birds."],
+        "wilds": ["The beasts seem to pause, recognizing silent kin.", "Twisting paths through brambles conceal every trace."],
+        "swamp": ["Bog gases swirl, masking scent and form.", "Each footfall is a breath held, then released."],
+        "major_settlement": ["Market stalls empty at dusk, your agents blend with drunks and stray dogs.", "Rumors trade faster than coin, your whispers lost among many."],
+        "minor_settlement": ["Only candlelit windows mark life as your silhouettes slip by.", "Low fences prove no barrier to silent aims."],
+        "merc_camp": ["Even among your own, quiet hands finish subtle tasks.", "Orders whispered under breath stir no alarm."],
+        "pos_energy": ["Holy wards hum, but shadows still offer cover.", "Sanctified avenues harbor dark corners if one dares look." ]
+      }
+    },
+    {
+      "name": "Action",
+      "locations": {
+        "ruins": ["Your warriors crash through fallen gates, eager for conquest.", "Echoes of battle ring off broken columns."],
+        "keep": ["Steel clashes with steel atop ramparts.", "Blood stains the heraldry of old houses."],
+        "river": ["Boats overturn as your blades find purchase.", "Ripples grow red, then fade downstream."],
+        "neg_energy": ["Dark forces answer your violence with equal fury.", "Curses ride every hacked limb and dying breath."],
+        "meadows": ["The grass is trampled under charge and counter-charge.", "Petals swirl like blood-flecked snow."],
+        "wilds": ["Predators flee from your thunderous advance.", "Trees bear scars of desperate struggle."],
+        "swamp": ["Swords rise dripping with mud and gore alike.", "Water explodes as foes fall, unseen beneath."],
+        "major_settlement": ["Civilians scatter as your mercenaries claim the square.", "Shutters slam, but few escape your reach."],
+        "minor_settlement": ["Smallfolk have little defense against hardened killers.", "Screams echo between low roofs."],
+        "merc_camp": ["Even home ground can taste iron if rivals press you.", "Old grudges settle quick with blood."],
+        "pos_energy": ["Radiant knights rally, forcing you to carve your prize.", "Sacred banners fall, trampled beneath mailed boots."]
+      }
+    },
+    {
+      "name": "Situational",
+      "locations": {
+        "ruins": ["One scout negotiates while others prepare ambush.", "Talk turns to treachery as the sun sets."],
+        "keep": ["Gold buys doors unlocked; steel waits if gold fails.", "A feast is offered, yet poison simmers beneath smiles."],
+        "river": ["Fishermen carry your messages, oars hiding sharp blades.", "A friendly crossing may shift to ransom by dusk."],
+        "neg_energy": ["Parleys with grave things yield both profit and peril.", "Unnatural bargains forged in whispers."],
+        "meadows": ["A tournament disguised as peace talks masks rival aims.", "Drums of war wait just beyond the flowered fields."],
+        "wilds": ["A local shaman mediates, but hungry beasts circle.", "Tributes offered at forest altars may fail."],
+        "swamp": ["Barter with swamp lords is as murky as the water.", "Pacts signed in moss may rot by dawn."],
+        "major_settlement": ["Nobles weigh offers with measured greed.", "Mercenaries parade through streets, half promise, half threat."],
+        "minor_settlement": ["Village elders debate while young men watch your swords.", "A gift of grain may seal the day, or knives may decide."],
+        "merc_camp": ["Factions within your own ranks bargain over spoils.", "Old comrades test each other's loyalties anew."],
+        "pos_energy": ["Clerics pray for guidance on whether to trust your silver.", "Sanctuaries open their gates with wary hearts."]
+      }
+    }
+  ],
+  "scale": [
+    {
+      "name": "Sprint",
+      "text": ["A swift foray, hoping to strike before alarm is raised.", "Scouts will barely rest, returning with breathless news.", "A quick march there and back, minimizing risk.", "Time favors you if the enemy fails to react."]
+    },
+    {
+      "name": "Run",
+      "text": ["A measured pace allows for solid gains.", "Expect days abroad, with moderate strain on your ranks.", "Still fast, but supplies must be carefully watched.", "The road back is clear—if slightly longer than hoped."]
+    },
+    {
+      "name": "Marathon",
+      "text": ["A prolonged endeavor that tests resolve and rations.", "Weather and chance may reshape your course.", "Scouts will range wide, bringing slow but thorough reports.", "Victories here forge lasting marks on your campaign."]
+    },
+    {
+      "name": "Odyssey",
+      "text": ["A venture bordering on legend, with fortunes made or broken.", "Weeks might pass before banners return—or burn.", "Legends birth from such trials, for good or ill.", "Few embark on these, fewer still return unchanged."]
+    }
+  ]
+}
