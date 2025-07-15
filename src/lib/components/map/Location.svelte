@@ -350,9 +350,9 @@
 
         {#if location.type === "keep"}
                 {@render fortressIcon()}
-        {:else if location.type === "minor settlement"}
+        {:else if location.type === "minor_settlement"}
                 {@render village()}
-        {:else if location.type === "major settlement"}
+        {:else if location.type === "major_settlement"}
                 {@render town()}
         {:else if location.type === "ruins"}
                 {@render ruins()}
