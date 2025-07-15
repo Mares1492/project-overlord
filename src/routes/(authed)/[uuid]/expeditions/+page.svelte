@@ -8,8 +8,6 @@
     const modes = ["MAP","EXPEDITION"]
     const oldCameraData = {x:0,y:0,scale:0.25}
 
-    const expeditionSettings = $state(data.expeditionSettings)
-
     /**
      * 
      * @param storeRef {string}
@@ -31,9 +29,6 @@
 
     /** @type App.Location | undefined*/
     // svelte-ignore non_reactive_update
-    let chosenLocation = handleLocalStorageLoad("chosen_location",true)
-    let mode = $state(handleLocalStorageLoad("expedition_mode"))
-
     /**
      * 
      * @param location {App.Location}
