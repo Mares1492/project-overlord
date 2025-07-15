@@ -30,13 +30,28 @@
                     {/each}
                 </div>
             </div>
-        </div>
-        <div class="border-t-2 py-3.5 flex flex-col">
-            <span class="text-xl mb-3.5">Scale</span>
-                <div class="flex flex-row justify-around w-5/6 self-center">
-                {#each expeditionSettings.scale.options as scale,i(scale.name)}
-                    {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
-                {/each}
+            <div class="border-t-2 py-3.5 flex flex-col">
+                <span class="text-xl mb-3.5">Approach</span>
+                    <div class="flex flex-row justify-around w-5/6 self-center">
+                    {#each expeditionSettings.approach.options as approach,i(approach.name)}
+                        {@render expeditionSettingBtn(approach.name,approach.handleClick,expeditionSettings.approach.value === i)}
+                    {/each}
+                </div>
+            </div>
+            <div class="border-t-2 py-3.5 flex flex-col">
+                <span class="text-xl mb-3.5">Scale</span>
+                    <div class="flex flex-row justify-around w-5/6 self-center">
+                    {#each expeditionSettings.scale.options as scale,i(scale.name)}
+                        {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
+                    {/each}
+                </div>
+            </div>
+            <div class="border-t-2 py-3.5 flex flex-col">
+                <span class="text-xl mb-3.5">Overview</span>
+                <div class="flex flex-row justify-around w-5/6 self-center rounded text-gray-900 py-2.5 px-5 border-2 border-gray-500 bg-gray-200">
+                    <!-- This section is for overview text -->
+                   <p>{getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type)}</p> 
+                </div>
             </div>
         </div>
     </div>
