@@ -1,6 +1,6 @@
 import {redirect} from '@sveltejs/kit';
 import {authUserSession} from "$lib/server/auth.js";
-import locations from "$lib/testData/locations.json";
+import locations from "$lib/test_data/locations.json";
 
 /** @type {import('./$types').PageLoad} */
 export async function load({cookies}) {
