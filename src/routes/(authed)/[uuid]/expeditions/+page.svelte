@@ -8,18 +8,6 @@
     const modes = ["MAP","EXPEDITION"]
     const oldCameraData = {x:0,y:0,scale:0.25}
 
-    const setTaskSettingsValue = (valueToSet) => {
-        expeditionSettings.task.value = valueToSet
-    }
-
-    const setApproachSettingsValue = (valueToSet) => {
-        expeditionSettings.approach.value = valueToSet
-    }
-    
-    const setScaleSettingsValue = (valueToSet) => {
-        expeditionSettings.scale.value = valueToSet
-    }
-
     const expeditionSettings = $state(data.expeditionSettings)
 
     /**
