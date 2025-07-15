@@ -29,6 +29,14 @@
 
     /** @type App.Location | undefined*/
     // svelte-ignore non_reactive_update
+    let chosenLocation
+    let mode = $state()
+
+    // check in case handleLocalStorageLoad returns null
+    onMount(() => {
+        mode = handleLocalStorageLoad("expedition_mode")
+        chosenLocation = handleLocalStorageLoad("chosen_location",true);
+    });
     /**
      * 
      * @param location {App.Location}
@@ -97,6 +105,6 @@
         </div>
     </div>
 {:else if mode === modes[1] && location}
-    <ExpSettings closeLocation={closeLocation} expeditionSettings={expeditionSettings} chosenLocation={chooseLocation}/>
+    <ExpSettings closeLocation={closeLocation} chosenLocation={chosenLocation}/>
 {/if}
 
