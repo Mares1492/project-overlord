@@ -54,5 +54,8 @@
                 </div>
             </div>
         </div>
+        <button class="w-5/6 self-center cursor-pointer hover:text-gray-700 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 text-white font-bold py-2 px-4 rounded mt-5" onclick={expeditionSettings.launchExpedition}>
+            Launch Expedition
+        </button>
     </div>
 </div>
