@@ -1,33 +1,4 @@
 <script>
-    import humanFace from '$lib/assets/characters/human/face.webp'
-    import humanBody from '$lib/assets/characters/human/body.webp'
-    const servants = [
-        {
-            race: "Human",
-            iconPath: humanFace,
-            bodyPath: humanBody,
-            name: "Servantus Vantus",
-            vampire: false,
-            stats:[{name:"agility",shortName:"Agi",value:2},{name:"strength",shortName:"Str",value:2},{name:"dexterity",shortName:"Dex",value:1},{name:"intellect",shortName:"Int",value:1}]
-        },
-        {
-            race: "Human",
-            iconPath: humanFace,
-            bodyPath: humanBody,
-            name: "Sirrus Sirius",
-            vampire: false,
-            stats:[{name:"agility",shortName:"Agi",value:1},{name:"strength",shortName:"Str",value:5},{name:"dexterity",shortName:"Dex",value:1},{name:"intellect",shortName:"Int",value:5}]
-        },
-        {
-            race: "Human",
-            iconPath: humanFace,
-            bodyPath: humanBody,
-            name: "Servantus Dominus",
-            vampire: true,
-            stats:[{name:"agility",shortName:"Agi",value:3},{name:"strength",shortName:"Str",value:5},{name:"dexterity",shortName:"Dex",value:3},{name:"intellect",shortName:"Int",value:1}]
-        }
-    ]
-
     let servantIndex = $state(0)
     let isChars = $state(true)
 

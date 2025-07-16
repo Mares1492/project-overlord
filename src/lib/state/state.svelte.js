@@ -11,6 +11,7 @@ const setScaleSettingsValue = (valueToSet) => {
     expeditionSettings.scale.value = valueToSet
 }
 
+
 export const expeditionSettings = $state({
     task: {
         options: [
