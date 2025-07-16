@@ -1,8 +1,22 @@
 <script>
     import {expeditionSettings} from '$lib/state/state.svelte';
     import {getExpeditionOverviewText} from '$lib/handlers/expeditions.js';
+    import ServantsList from '../servants/ServantsList.svelte';
+    import servantsTemplate from '$lib/test_data/servants.json';
+    import {getRaceAssets} from '$lib/state/race.svelte.js';
+    import { onMount } from 'svelte';
 
     const {closeLocation, chosenLocation} = $props();
+    let servantIndex = $state(0);
+    let servants = $state(servantsTemplate);
+
+    onMount(async () => {
+        for (let servant of servants) {
+            const {face,body} = await getRaceAssets(servant.race);
+            servant.iconPath = face;
+            servant.bodyPath = body;
+        }
+    })
 
 </script>
 
