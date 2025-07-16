@@ -1,7 +1,19 @@
 <script>
+    import servantsTemplate from '$lib/test_data/servants.json';
+    import ServantsList from '$lib/components/servants/ServantsList.svelte';
+    import {getRaceAssets} from '$lib/state/race.svelte.js';
+    import { onMount } from 'svelte'; 
     let servantIndex = $state(0)
     let isChars = $state(true)
+    let servants = $state(servantsTemplate);
 
+    onMount(async () => {
+        for (let servant of servants) {
+            const {face,body} = await getRaceAssets(servant.race);
+            servant.iconPath = face;
+            servant.bodyPath = body;
+        }
+    });
 </script>
 
 {#snippet lockedSlot()}
