@@ -22,13 +22,6 @@
     </div>
 {/snippet}
 
-{#snippet charSlot(servant,i)}
-    <button onclick={()=>servantIndex = i} class="relative hover:bg-amber-200 active:bg-amber-100 cursor-pointer border flex flex-col w-32 h-24 2xl:w-42 2xl:h-28 items-center justify-center bg-gray-800 border-4">
-        <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
-    </button>
-{/snippet}
-
-
 {#snippet itemSlot(item)}
     <div class="flex flex-col w-28 h-16 xl:w-42 xl:h-28 cursor-pointer hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-800">
         <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{item}</span>
@@ -69,9 +62,7 @@
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
                         <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                            {#each servants as servant,i(servant.name)}
-                                {@render charSlot(servant,i)}
-                            {/each}
+                            <ServantsList {servants} bind:servantIndex={servantIndex}/>
                             {@render lockedSlot()}
                             {@render lockedSlot()}
                             {@render lockedSlot()}
@@ -99,7 +90,7 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="relative grid grid-cols-5 grid gap-0.1 place-items-center border-r-2 border-b-2">
+                    <div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
                         {#each { length: 30 } as _item,i}
                             {@render inventorySlot(i)}
                         {/each}
