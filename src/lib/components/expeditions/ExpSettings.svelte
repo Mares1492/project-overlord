@@ -37,7 +37,7 @@
             <p class="px-5">{chosenLocation.description}</p>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl mb-3.5">Task</span>
+                <span class="text-xl mb-3.5 font-black">Task</span>
                 <div class="flex flex-row justify-around w-5/6 self-center">
                     {#each expeditionSettings.task.options as task,i(task.name)}
                         {@render expeditionSettingBtn(task.name,task.handleClick,expeditionSettings.task.value === i)}
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl mb-3.5">Approach</span>
+                <span class="text-xl mb-3.5 font-black">Approach</span>
                     <div class="flex flex-row justify-around  w-5/6 self-center">
                     {#each expeditionSettings.approach.options as approach,i(approach.name)}
                         {@render expeditionSettingBtn(approach.name,approach.handleClick,expeditionSettings.approach.value === i)}
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl mb-3.5">Scale</span>
+                <span class="text-xl mb-3.5 font-black">Scale</span>
                     <div class="flex flex-row justify-around  w-5/6 self-center">
                     {#each expeditionSettings.scale.options as scale,i(scale.name)}
                         {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
@@ -61,10 +61,10 @@
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
-                <span class="text-xl mb-3.5 font-black">Edict</span>
-                <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded text-gray-900 py-2.5 px-5 border-2 border-gray-500 bg-gray-200">
+                <span class="text-xl mb-3.5 font-black">Servant</span>
+                <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
                     <!-- This section is for overview text -->
-                   <p>{getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type)}</p> 
+                   <ServantsList bind:servantIndex={servantIndex} {servants}/>
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
@@ -75,7 +75,7 @@
                 </div>
             </div>
         </div>
-        <button class="w-5/6 self-center cursor-pointer hover:text-gray-700 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 text-white font-bold py-2 px-4 rounded mt-5" onclick={expeditionSettings.launchExpedition}>
+        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={expeditionSettings.launchExpedition}>
             Launch Expedition
         </button>
     </div>
