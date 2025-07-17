@@ -64,7 +64,7 @@
                 <span class="text-xl mb-3.5 font-black">Servant</span>
                 <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
                     <!-- This section is for overview text -->
-                   <ServantsList bind:servantIndex={servantIndex} {servants}/>
+                   <ServantsList bind:servantIndex={servantIndex} {servants} hasNames={true}/>
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
