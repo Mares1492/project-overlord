@@ -63,8 +63,7 @@
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Servant</span>
                 <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
-                    <!-- This section is for overview text -->
-                   <ServantsList bind:servantIndex={servantIndex} {servants} hasNames={true}/>
+                   <ServantsList bind:servantIndex={servantIndex} {servants} isExpedition={true}/>
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
@@ -75,7 +74,7 @@
                 </div>
             </div>
         </div>
-        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={expeditionSettings.launchExpedition}>
+        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={() => {}}>
             Launch Expedition
         </button>
     </div>
