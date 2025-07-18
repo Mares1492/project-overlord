@@ -1,88 +1,115 @@
-import {db} from '$lib/server/db/db';
-import {sessions, users} from '$lib/server/db/schema';
-import {hashPassword, signAccessToken, signRefreshToken, verifyPassword} from '$lib/server/auth';
-import {error} from '@sveltejs/kit';
-import {randomUUID} from 'crypto';
-import {generateDarkFantasyName} from "$lib/utils/nameGenerator.js";
-import {eq} from "drizzle-orm";
-import {createKeep, deleteKeep} from "$lib/server/router/keep.js";
+import { db } from '$lib/server/db/db';
+import { sessions, users } from '$lib/server/db/schema';
+import {
+	hashPassword,
+	signAccessToken,
+	signRefreshToken,
+	verifyPassword
+} from '$lib/server/auth';
+import { error } from '@sveltejs/kit';
+import { randomUUID } from 'crypto';
+import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
+import { eq } from 'drizzle-orm';
+import { createKeep, deleteKeep } from '$lib/server/router/keep.js';
 
 /**
  * @param email {string}
  * @param password {string}
  */
 export const createUser = async (email, password) => {
-    // Check if user already exists
-    const existing = await db.select().from(users).where(eq(users.email,email)).get();
-    if (existing) {
-        throw error(409, 'Email already registered');
-    }
+	// Check if user already exists
+	const existing = await db
+		.select()
+		.from(users)
+		.where(eq(users.email, email));
 
-    const passwordHash = await hashPassword(password);
-    const newUser = {
-        uuid: randomUUID(),
-        email,
-        passwordHash,
-        nickname: generateDarkFantasyName(),
-    };
+	if (existing.length) {
+		throw error(409, 'Email already registered');
+	}
 
-    const result = await db.insert(users).values(newUser).returning();
+	const passwordHash = await hashPassword(password);
+	const newUser = {
+		uuid: randomUUID(),
+		email,
+		passwordHash,
+		nickname: generateDarkFantasyName()
+	};
 
-    const createdUser =  result[0];
-    console.log(createdUser);
-    await createKeep(createdUser.id)
+	const [createdUser] = await db.insert(users).values(newUser).returning();
 
-    return createdUser;
-}
+	console.log(createdUser);
+	await createKeep(createdUser.id);
+
+	return createdUser;
+};
 
 export const deleteUser = async (email, password) => {
-    const user = await db.select().from(users).where(eq(users.email,email)).get();
+	const [user] = await db
+		.select()
+		.from(users)
+		.where(eq(users.email, email));
 
-    if (!user || !await verifyPassword(password, user.passwordHash)) {
-        throw error(401, 'Invalid credentials');
-    }
-    await logout(user)
-    await deleteKeep(user.id)
-    const deletedUser = await db.delete(users).where(eq(users.email, email));
+	if (!user || !(await verifyPassword(password, user.passwordHash))) {
+		throw error(401, 'Invalid credentials');
+	}
 
-    if (!deletedUser) {
-        throw error(401, 'Could not delete user');
-    }
-}
+	await logout(user);
+	await deleteKeep(user.id);
+
+	const deleted = await db.delete(users).where(eq(users.email, email)).returning();
+
+	if (!deleted.length) {
+		throw error(401, 'Could not delete user');
+	}
+};
 
 export const login = async (email, password) => {
-    const user = await db.select().from(users).where(eq(users.email,email)).get();
+	const [user] = await db
+		.select()
+		.from(users)
+		.where(eq(users.email, email));
 
-    if (!user || !await verifyPassword(password, user.passwordHash)) {
-        throw error(401, 'Invalid credentials');
-    }
-    return user;
-}
+	if (!user || !(await verifyPassword(password, user.passwordHash))) {
+		throw error(401, 'Invalid credentials');
+	}
+
+	return user;
+};
 
 export const logout = async (user) => {
-    await db.delete(sessions).where(eq(sessions.userId,user.id));
-}
+	await db.delete(sessions).where(eq(sessions.userId, user.id));
+};
 
 export const createUserSession = async (user) => {
-    const accessToken = signAccessToken({ id: user.id, email: user.email });
-    const refreshToken = signRefreshToken({ id: user.id });
-    const prevSession = await db.select().from(sessions).where(eq(sessions.userId,user.id)).get();
-    if (prevSession) {
-        await db.delete(sessions).where(eq(sessions.userId,user.id));
-    }
-    await db.insert(sessions).values({
-        refreshToken: refreshToken,
-        userId: user.id,
-        createdAt: new Date(),
-    });
+	const accessToken = signAccessToken({ id: user.id, email: user.email });
+	const refreshToken = signRefreshToken({ id: user.id });
 
-    return [accessToken, refreshToken];
-}
+	// Remove any existing session
+	await db.delete(sessions).where(eq(sessions.userId, user.id));
+
+	await db.insert(sessions).values({
+		refreshToken,
+		userId: user.id,
+		createdAt: new Date()
+	});
+
+	return [accessToken, refreshToken];
+};
 
 export const getUserFromSession = async (session) => {
-    return db.select().from(users).where(eq(users.id, session.userId)).get();
-}
+	const [user] = await db
+		.select()
+		.from(users)
+		.where(eq(users.id, session.userId));
+
+	return user;
+};
 
 export const getUserSessionByToken = async (refreshToken) => {
-    return db.select().from(sessions).where(eq(sessions.refreshToken, refreshToken)).get();
-}
+	const [session] = await db
+		.select()
+		.from(sessions)
+		.where(eq(sessions.refreshToken, refreshToken));
+
+	return session;
+};
