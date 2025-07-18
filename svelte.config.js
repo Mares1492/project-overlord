@@ -1,5 +1,5 @@
-//import adapter from '@sveltejs/adapter-netlify';
-import adapter from '@sveltejs/adapter-vercel';
+import adapter from '@sveltejs/adapter-netlify';
+//mport adapter from '@sveltejs/adapter-vercel';
 
 const config = { kit: { adapter: adapter() } };
 
