@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import { keeps } from "$lib/server/db/schema.js";
+import { keeps } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
 // Create a new keep record for a user
