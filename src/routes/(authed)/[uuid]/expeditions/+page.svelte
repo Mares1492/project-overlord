@@ -30,7 +30,7 @@
     /** @type App.Location | undefined*/
     // svelte-ignore non_reactive_update
     let chosenLocation
-    let mode = $state()
+    let mode = $state(modes[0]);
 
     // check in case handleLocalStorageLoad returns null
     onMount(() => {
