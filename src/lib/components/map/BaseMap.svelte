@@ -32,7 +32,7 @@
 </script>
 
 <div class="w-full relative">
-    {#if chosenLocation}
+    {#if hoveredId}
         <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
     {/if}
     <svg class="absolute origin-top-left z-10 min-w-full" width={5329*zoom} height={4900*zoom} viewBox="0 0 5329 4900" fill="none" xmlns="http://www.w3.org/2000/svg">
