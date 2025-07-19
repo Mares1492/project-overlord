@@ -6,9 +6,9 @@ import {getUserSessionByToken,getUserFromSession} from '$lib/server/router/user'
 
 const cookieOptions = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: env.NODE_ENV === 'production',
     sameSite: 'lax',
-    path: '/'
+    path: '/',
 };
 
 export async function hashPassword(password: string): Promise<string> {
