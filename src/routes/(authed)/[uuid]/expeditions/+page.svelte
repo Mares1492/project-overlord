@@ -34,9 +34,16 @@
 
     // check in case handleLocalStorageLoad returns null
     onMount(() => {
-        mode = handleLocalStorageLoad("expedition_mode")
-        chosenLocation = handleLocalStorageLoad("chosen_location",true);
+        let savedMode = handleLocalStorageLoad("expedition_mode")
+        if (savedMode) {
+            mode = savedMode;
+        }
+        let savedChosenLocation = handleLocalStorageLoad("chosen_location",true);
+        if (savedChosenLocation) {
+            chosenLocation = savedChosenLocation;
+        }  
     });
+    
     /**
      * 
      * @param location {App.Location}
