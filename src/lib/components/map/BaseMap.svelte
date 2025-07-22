@@ -7,7 +7,7 @@
     /**@type {null|number} */
     let hoveredId = $state(null)
     /**@type {null|Object} */
-    let chosenLocation = $state(null)
+    let chosenLocation = $state()
     let mousePosition = $state({x:0,y:0})
 
     /**@param {{offsetX:number,offsetY:number}} event*/
@@ -32,7 +32,7 @@
 </script>
 
 <div class="w-full relative">
-    {#if hoveredId}
+    {#if chosenLocation}
         <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
     {/if}
     <svg class="absolute origin-top-left z-10 min-w-full" width={5329*zoom} height={4900*zoom} viewBox="0 0 5329 4900" fill="none" xmlns="http://www.w3.org/2000/svg">
