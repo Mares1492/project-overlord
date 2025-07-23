@@ -13,7 +13,6 @@
             console.error(`Failed to launch expedition: Servant is not found.`);
             return;
         }
-        console.log("Expedition added:", );
         closeLocation();
     }
 
