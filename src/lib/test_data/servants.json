@@ -6,6 +6,7 @@
         "bodyPath": null,
         "name": "Servantus Vantus",
         "vampire": false,
+        "available": true,
         "stats": [
             {"name": "agility", "shortName": "Agi", "value": 2},
             {"name": "strength", "shortName": "Str", "value": 2},
@@ -20,6 +21,7 @@
         "bodyPath": null,
         "name": "Sirrus Sirius",
         "vampire": false,
+        "available": true,
         "stats": [
             {"name": "agility", "shortName": "Agi", "value": 1},
             {"name": "strength", "shortName": "Str", "value": 5},
@@ -34,6 +36,7 @@
         "bodyPath": null,
         "name": "Servantus Dominus",
         "vampire": true,
+        "available": true,
         "stats": [
             {"name": "agility", "shortName": "Agi", "value": 3},
             {"name": "strength", "shortName": "Str", "value": 5},
