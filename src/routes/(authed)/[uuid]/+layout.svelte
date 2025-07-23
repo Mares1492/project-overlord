@@ -9,12 +9,13 @@
 	let { children, data} = $props();
 </script>
 
-{#snippet btn(icon,path='/',hasNotifications = false)}
+{#snippet btn(icon,path='/',hasNotifications = false,notificationCount = 0)}
+
     <button class="relative text-3xl xl:text-5xl cursor-pointer grayscale-50 hover:grayscale-0 hover:saturate-200" onclick={()=>goto(path)}>
         {icon}
         {@html '<!--Add working notification system-->'}
         {#if hasNotifications}
-            <span class="absolute bg-red-500 border border-black text-white right-1 -top-3 rounded-full w-5 h-5 text-sm">3</span>
+            <span class="absolute bg-red-500 border border-black text-white right-1 -top-3 rounded-full w-5 h-5 text-sm">{notificationCount}</span>
         {/if}
     </button>
 {/snippet}
