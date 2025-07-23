@@ -11,7 +11,6 @@ const importAssets = async race => {
 }
 /**@param {string} race */
 export const getRaceAssets = async race => {
-    console.log(raceAssets[race]);
     if (!raceAssets[race]) {
         await importAssets(race)
     }
