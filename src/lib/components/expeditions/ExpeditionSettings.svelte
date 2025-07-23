@@ -2,22 +2,11 @@
     import {expeditionSettings} from '$lib/state/expeditionSettings.svelte';
     import {getExpeditionOverviewText} from '$lib/handlers/expeditions.js';
     import ServantsList from '../servants/ServantsList.svelte';
-    import servantsTemplate from '$lib/test_data/servants.json';
-    import {getRaceAssets} from '$lib/state/race.svelte.js';
-    import { onMount } from 'svelte';
     import {addExpedition} from '$lib/state/expeditionState.svelte.js';
+    import { getServants } from '$lib/state/servants.svelte';
 
     const {closeLocation, chosenLocation} = $props();
-    let servantIndex = $state(0);
-    let servants = $state(servantsTemplate);
-
-    onMount(async () => {
-        for (let servant of servants) {
-            const {face,body} = await getRaceAssets(servant.race);
-            servant.iconPath = face;
-            servant.bodyPath = body;
-        }
-    })
+    let chosenServant = $state(getServants()[0]);
 
     const launchExpedition = () => {
         console.log("Expedition added:", addExpedition(expeditionSettings, servants[servantIndex].id));
@@ -69,7 +58,7 @@
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Servant</span>
                 <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
-                   <ServantsList bind:servantIndex={servantIndex} {servants} isExpedition={true}/>
+                   <ServantsList bind:chosenServant={chosenServant} isExpedition={true}/>
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
