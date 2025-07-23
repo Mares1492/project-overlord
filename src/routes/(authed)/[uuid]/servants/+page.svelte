@@ -2,8 +2,7 @@
     import {getServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     let chosenServant = $state(getServants()[0]);
-    let isChars = $state(true)
-
+    let isChars = $state(true);
 </script>
 
 {#snippet lockedSlot()}
