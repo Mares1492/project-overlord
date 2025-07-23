@@ -1,5 +1,5 @@
 <script>
-    import {expeditionSettings} from '$lib/state/expSettings.svelte';
+    import {expeditionSettings} from '$lib/state/expeditionSettings.svelte';
     import {getExpeditionOverviewText} from '$lib/handlers/expeditions.js';
     import ServantsList from '../servants/ServantsList.svelte';
     import servantsTemplate from '$lib/test_data/servants.json';
