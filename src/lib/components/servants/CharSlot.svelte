@@ -19,7 +19,7 @@
                 <span class:ring-2={chosenServant.id === servant.id} class="absolute text-xs w-full -top-5 font-semibold border ring-black bg-gray-700  text-slate-200">{servant.name}</span>
             {/if}
             {#if !servant.available}
-                <span class="absolute text-xs border-y-2 w-full z-10 top-8 font-semibold  selection:none bg-white">Expedition</span>
+                <span class="absolute text-xs border-y-2 w-full z-10 top-9 font-semibold  selection:none bg-white">Expedition</span>
             {/if}
             <img class:brightness-30={!servant.available} class:grayscale-200={!servant.available} class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
         </button>
