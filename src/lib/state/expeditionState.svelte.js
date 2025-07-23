@@ -1,3 +1,5 @@
+import { setServantAvailability } from '$lib/state/servants.svelte.js';
+
 export const expeditionsList = $state([]);
 let avalableExpeditionsNumber = $state(3);
 
@@ -23,10 +25,12 @@ export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumbe
 
 export const increaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber += 1;
 
-
-
 export const addExpedition = (expeditionSettings,servantId) => {
-    const newExpedition = {...expeditionTemplate};
+    if(!setServantAvailability(servantId, false)){
+        console.log(`Servant with provided ID is not found.`);
+        return null;
+    }
+    const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
     newExpedition.location = expeditionSettings.chosenLocation;
     newExpedition.startTime = new Date();
     let duration = expeditionSettings.scale.value * 60; // Convert minutes to second
