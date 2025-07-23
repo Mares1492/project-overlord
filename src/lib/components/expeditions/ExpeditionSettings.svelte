@@ -9,7 +9,11 @@
     let chosenServant = $state(getServants()[0]);
 
     const launchExpedition = () => {
-        console.log("Expedition added:", addExpedition(expeditionSettings, servants[servantIndex].id));
+        if (addExpedition(expeditionSettings, chosenServant.id) === null) {
+            console.error(`Failed to launch expedition: Servant is not found.`);
+            return;
+        }
+        console.log("Expedition added:", );
         closeLocation();
     }
 
