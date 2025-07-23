@@ -3,6 +3,7 @@
     import {goto} from '$app/navigation';
     import { enhance } from '$app/forms';
     import castle from "$lib/assets/bg/keep/castle.png";
+    import {getAvailableExpeditionsNumber} from '$lib/state/expeditionState.svelte.js';
 
     /** @type {import('./$types').LayoutProps} */
 	let { children, data} = $props();
@@ -25,7 +26,7 @@
         </div>
         <div class="flex flex-col h-full pt-1 justify-around">
             {@render btn(`🏰`,`/${data.pathUUID}/keep`)}
-            {@render btn(`⚔️`,`/${data.pathUUID}/expeditions`,true)}
+            {@render btn(`⚔️`,`/${data.pathUUID}/expeditions`,true,getAvailableExpeditionsNumber())}
             {@render btn(`🧍‍♂️`,`/${data.pathUUID}/servants`)}
             {@render btn(`💰`,`/${data.pathUUID}/treasury`)}
             {@render btn(`📖`,`/${data.pathUUID}/academy`)}
