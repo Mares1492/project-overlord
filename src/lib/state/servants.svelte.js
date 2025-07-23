@@ -13,15 +13,37 @@ for (let servant of servants) {
 export const setServants = (newServants) => servants = newServants;
 export const getServants = () => servants;
 
-/** 
- * @param {string} servantId 
- * @param {boolean} available
-*/
-export const setServantAvailability = (servantId, available) => {
+const getServantById = (servantId) => {
     const servant = servants.find(s => s.id === servantId);
+    if (!servant) {
+        console.error(`Servant with provided ID not found.`);
+        return null;
+    }
+    return servant;
+}
+
+/** @param {string} servantId */
+export const setServantAsAvailable = (servantId) => {
+    let servant = getServantById(servantId);
     if (servant) {
-        servant.available = available;  
+        servant.available = true;
         return true;
     }
+    console.error(`Servant with provided ID is not found.`);
     return false;
+}
+
+/** @param {string} servantId */
+export const setServantAsNotAvailable = (servantId) => {
+    let servant = getServantById(servantId);
+    if (!servant) {
+        console.error(`Servant with provided ID is not found.`);
+        return false;
+    }
+    if (!servant.available) {
+        console.error(`Servant with provided ID is already not available.`);
+        return false;
+    }
+    servant.available = false;
+    return true;
 }

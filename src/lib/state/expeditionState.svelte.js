@@ -1,4 +1,4 @@
-import { setServantAvailability } from '$lib/state/servants.svelte.js';
+import { setServantAsNotAvailable } from '$lib/state/servants.svelte.js';
 
 export const expeditionsList = $state([]);
 let avalableExpeditionsNumber = $state(3);
@@ -26,7 +26,7 @@ export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumbe
 export const increaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber += 1;
 
 export const addExpedition = (expeditionSettings,servantId) => {
-    if(!setServantAvailability(servantId, false)){
+    if(!setServantAsNotAvailable(servantId)) {
         console.log(`Servant with provided ID is not found.`);
         return null;
     }
