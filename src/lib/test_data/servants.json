@@ -1,5 +1,6 @@
 [
     {
+        "id": "345a2bab-f985-45da-af2a-91913c31e96b",
         "race": "Human",
         "iconPath": null,
         "bodyPath": null,
@@ -13,6 +14,7 @@
         ]
     },
     {
+        "id":"f3ebad07-3dcd-4ac0-b42b-5fe4e22ca0ae",
         "race": "Human",
         "iconPath": null,
         "bodyPath": null,
@@ -26,6 +28,7 @@
         ]
     },
     {
+        "id": "2820c745-6b19-464e-afae-d4311af9f6c6",
         "race": "Human",
         "iconPath": null,
         "bodyPath": null,
