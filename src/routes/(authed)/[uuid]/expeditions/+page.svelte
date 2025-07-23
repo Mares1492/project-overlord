@@ -1,5 +1,5 @@
 <script>
-    import ExpSettings from "$lib/components/expeditions/ExpSettings.svelte";
+    import ExpeditionSettings from "$lib/components/expeditions/ExpeditionSettings.svelte";
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { onMount, setContext } from 'svelte';
 
@@ -112,6 +112,6 @@
         </div>
     </div>
 {:else if mode === modes[1] && location}
-    <ExpSettings closeLocation={closeLocation} chosenLocation={chosenLocation}/>
+    <ExpeditionSettings closeLocation={closeLocation} chosenLocation={chosenLocation}/>
 {/if}
 
