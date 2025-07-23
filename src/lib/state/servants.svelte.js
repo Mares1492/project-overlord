@@ -4,10 +4,20 @@ import {getRaceAssets} from '$lib/state/race.svelte.js';
 //let servants = $state([]);
 let servants = $state(JSON.parse(JSON.stringify(servantsTemplate)));
 
-for (let servant of servants) {
-    const {face,body} = await getRaceAssets(servant.race);
-    servant.iconPath = face;
-    servant.bodyPath = body;
+export const initAssets = async () => {
+    if (servants.length === 0) {
+        console.warn("No servants found to initialize assets for.");
+        return;
+    }
+    if (servants[0].iconPath && servants[0].bodyPath) {
+        console.warn("Servants assets already initialized, skipping.");
+        return;
+    }
+    for (let servant of servants) {
+        const {face,body} = await getRaceAssets(servant.race);
+        servant.iconPath = face;
+        servant.bodyPath = body;
+    }
 }
 
 export const setServants = (newServants) => servants = newServants;
