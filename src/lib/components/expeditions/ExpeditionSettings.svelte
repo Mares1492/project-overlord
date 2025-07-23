@@ -5,6 +5,7 @@
     import servantsTemplate from '$lib/test_data/servants.json';
     import {getRaceAssets} from '$lib/state/race.svelte.js';
     import { onMount } from 'svelte';
+    import {addExpedition} from '$lib/state/expeditionState.svelte.js';
 
     const {closeLocation, chosenLocation} = $props();
     let servantIndex = $state(0);
@@ -17,6 +18,11 @@
             servant.bodyPath = body;
         }
     })
+
+    const launchExpedition = () => {
+        console.log("Expedition added:", addExpedition(expeditionSettings, servants[servantIndex].id));
+        closeLocation();
+    }
 
 </script>
 
@@ -74,7 +80,7 @@
                 </div>
             </div>
         </div>
-        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={() => {}}>
+        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={launchExpedition}>
             Launch Expedition
         </button>
     </div>
