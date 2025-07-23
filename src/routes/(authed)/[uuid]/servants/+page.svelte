@@ -1,19 +1,9 @@
 <script>
-    import servantsTemplate from '$lib/test_data/servants.json';
+    import {getServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
-    import {getRaceAssets} from '$lib/state/race.svelte.js';
-    import { onMount } from 'svelte'; 
-    let servantIndex = $state(0)
+    let chosenServant = $state(getServants()[0]);
     let isChars = $state(true)
-    let servants = $state(servantsTemplate);
 
-    onMount(async () => {
-        for (let servant of servants) {
-            const {face,body} = await getRaceAssets(servant.race);
-            servant.iconPath = face;
-            servant.bodyPath = body;
-        }
-    });
 </script>
 
 {#snippet lockedSlot()}
@@ -62,7 +52,7 @@
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
                         <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                            <ServantsList {servants} bind:servantIndex={servantIndex}/>
+                            <ServantsList bind:chosenServant={chosenServant}/>
                             {@render lockedSlot()}
                             {@render lockedSlot()}
                             {@render lockedSlot()}
@@ -101,7 +91,7 @@
     </div>
     <div class="w-1/2 h-full flex flex-row">
         <ul class="h-full flex flex-col justify-center border-4 w-26 2xl:w-36 border-amber-950 bg-orange-950 text-white px-1">
-            {#each servants[servantIndex].stats as stat(stat.name)}
+            {#each chosenServant.stats as stat(stat.name)}
                 <li class="flex flex-row space-x-2 justify-between">
                     <span class="2xl:text-3xl">{stat.shortName}:</span><span class="font-semibold text-3xl 2xl:text-4xl">{stat.value}</span>
                 </li>
@@ -109,20 +99,20 @@
         </ul>
         <div class="flex flex-col w-full h-full relative space-y-2">
             <img
-                    class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${servants[servantIndex].vampire?"-hue-rotate-210":""}`}
-                    src={servants[servantIndex].bodyPath}
-                    alt={`${servants[servantIndex].name}'s body`}
+                    class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
+                    src={chosenServant.bodyPath}
+                    alt={`${chosenServant.name}'s body`}
             >
             <div class="w-full flex justify-center">
                 <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
                     <i>
-                        {servants[servantIndex].race}
-                        {#if servants[servantIndex].vampire}
+                        {chosenServant.race}
+                        {#if chosenServant.vampire}
                             Vampire
                         {/if}
                     </i>
                     <span>|</span>
-                    <span>{servants[servantIndex].name}</span>
+                    <span>{chosenServant.name}</span>
 
                 </span>
             </div>
