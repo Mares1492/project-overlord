@@ -23,7 +23,7 @@ export const initAssets = async () => {
 export const setServants = (newServants) => servants = newServants;
 export const getServants = () => servants;
 
-const getServantById = (servantId) => {
+export const getServantById = (servantId) => {
     const servant = servants.find(s => s.id === servantId);
     if (!servant) {
         console.error(`Servant with provided ID not found.`);
