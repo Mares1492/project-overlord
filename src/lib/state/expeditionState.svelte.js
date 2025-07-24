@@ -46,3 +46,6 @@ export const getOngoingExpeditions = () => {
     return expeditionsList.filter(exp => exp.status === expeditionStatus.IN_PROGRESS);
 }
 
+export const getCompletedExpeditions = () => {
+    return expeditionsList.filter(exp => exp.status === expeditionStatus.COMPLETED);
+}
