@@ -42,4 +42,7 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     return newExpedition;
 }
 
+export const getOngoingExpeditions = () => {
+    return expeditionsList.filter(exp => exp.status === expeditionStatus.IN_PROGRESS);
+}
 
