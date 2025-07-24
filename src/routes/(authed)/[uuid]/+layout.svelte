@@ -20,7 +20,7 @@
     <button class="relative text-3xl xl:text-5xl cursor-pointer grayscale-50 hover:grayscale-0 hover:saturate-200" onclick={()=>goto(path)}>
         {icon}
         {@html '<!--Add working notification system-->'}
-        {#if hasNotifications}
+        {#if hasNotifications && notificationCount > 0}
             <span class="absolute bg-red-500 border border-black text-white right-1 -top-3 rounded-full w-5 h-5 text-sm">{notificationCount}</span>
         {/if}
     </button>
