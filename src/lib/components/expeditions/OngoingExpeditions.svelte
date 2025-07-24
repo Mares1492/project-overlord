@@ -37,9 +37,9 @@
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
         <span class="text-gray-700">{expedition.servant}</span>  
         <div class="flex flex-row items-center justify-center font-semibold">
-            <span class="border w-10 px-2">{expedition.hours}</span>:
-            <span class="border  w-10 px-2">{expedition.minutes}</span>:
-            <span class="border  w-10 px-2">{expedition.seconds}</span>
+            <span class="border w-12 px-2">{expedition.hours}h</span>:
+            <span class="border  w-12 px-2">{expedition.minutes}m</span>:
+            <span class="border  w-12 px-2">{expedition.seconds}s</span>
         </div>
     </button>
 {/snippet}
