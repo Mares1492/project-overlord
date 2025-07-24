@@ -1,6 +1,34 @@
 <script>
     import {getOngoingExpeditions} from '$lib/state/expeditionState.svelte.js';
-    console.log(getOngoingExpeditions());
+    import {onMount} from 'svelte';
+    import {getServantById} from '$lib/state/servants.svelte.js';
+    let expeditions = $state([]);
+
+    onMount(() => {
+
+        const interval = setInterval(() => {
+            
+            expeditions = getOngoingExpeditions().map( exp => {
+                let msLeft = exp.endTime - Date.now();
+                let totalSeconds = Math.floor(msLeft / 1000);
+
+                let hours = Math.floor(totalSeconds / 3600);
+                let minutes = Math.floor((totalSeconds % 3600) / 60);
+                let seconds = totalSeconds % 60;
+
+                return {
+                    name: exp.location.name,
+                    servant: getServantById(exp.servantId).name,
+                    hours,
+                    minutes,
+                    seconds,
+                };
+                
+            });
+        }, 1000);
+        return () => clearInterval(interval);
+    });
+
 </script>
 
 {#snippet expeditionSlot(expedition)}
