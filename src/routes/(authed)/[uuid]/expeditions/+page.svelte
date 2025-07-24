@@ -1,11 +1,12 @@
 <script>
     import ExpeditionSettings from "$lib/components/expeditions/ExpeditionSettings.svelte";
+    import OngoingExpeditions from "$lib/components/expeditions/OngoingExpeditions.svelte";
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { onMount, setContext } from 'svelte';
 
     const {data} = $props(); 
     
-    const modes = ["MAP","EXPEDITION"]
+    const modes = ["MAP","EXPEDITION","EXPEDITION_OVERVIEW"];
     const oldCameraData = {x:0,y:0,scale:0.25}
 
     /**
@@ -22,6 +23,7 @@
     }
 
     let zoom = $state(0.25);
+    let expeditionsListToggle = $state(false);
 
     /**@type {HTMLElement}*/
     // svelte-ignore non_reactive_update
@@ -101,7 +103,13 @@
 </script>
 
 {#if mode === modes[0]}
-    <div class="absolute z-1000 select-none top-25 right-35">
+    <div class="absolute z-1000 top-25 left-35 flex flex-col space-y-1 items-left">
+        <button onclick={()=>expeditionsListToggle = !expeditionsListToggle} class="border-2 text-xl select-none h-10 border-black bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-300 cursor-pointer px-3 py-1.5">Ongoing Expeditions</button>
+        {#if expeditionsListToggle}
+            <OngoingExpeditions/>
+        {/if}
+    </div>
+    <div class="absolute z-1000 select-none top-25 right-35 flex space-x-1 items-center h-10">
         <span class="bg-gray-500 border">{(zoom*100).toFixed(0)}%</span>
         <button onclick={handleZoomIn} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">+</button>
         <button onclick={handleZoomOut} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">-</button>
