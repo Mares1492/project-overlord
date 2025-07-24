@@ -5,9 +5,14 @@
 
 {#snippet expeditionSlot(expedition)}
     <button class="flex flex-col text-sm  text-gray-800 space-y-1 w-32 min-h-24 2xl:w-42 2xl:h-28 cursor-pointer hover:text-black items-center justify-center">
-        <span class="font-bold">{expedition.location.name}</span>
+        <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
-        <span class="">{expedition.endTime}</span>
+        <span class="text-gray-700">{expedition.servant}</span>  
+        <div class="flex flex-row items-center justify-center font-semibold">
+            <span class="border px-2">{expedition.hours}</span>:
+            <span class="border px-2">{expedition.minutes}</span>:
+            <span class="border px-2">{expedition.seconds}</span>
+        </div>
     </button>
 {/snippet}
 
