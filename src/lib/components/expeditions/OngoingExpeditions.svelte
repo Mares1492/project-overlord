@@ -16,3 +16,9 @@
         {@render expeditionSlot(expedition)}
     {/each}
 </div>
+{#if expeditions.length === 0}
+    <div class="flex flex-col items-center justify-center w-full h-full">
+        <span class="text-2xl font-bold">No ongoing expeditions</span>
+        <span class="text-lg">Start one in the Expeditions tab!</span>
+    </div>
+{/if}
