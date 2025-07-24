@@ -25,13 +25,13 @@ export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumbe
 
 export const increaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber += 1;
 
-export const addExpedition = (expeditionSettings,servantId) => {
+export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     if(!setServantAsNotAvailable(servantId)) {
         console.log(`Servant with provided ID is not found.`);
         return null;
     }
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
-    newExpedition.location = expeditionSettings.chosenLocation;
+    newExpedition.location = chosenLocation;
     newExpedition.startTime = new Date();
     let duration = expeditionSettings.scale.value * 60; // Convert minutes to second
     newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration>0?duration:1) * 60 * 1000);
