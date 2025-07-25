@@ -33,10 +33,13 @@
                 let hours = Math.floor(totalSeconds / 3600);
                 let minutes = Math.floor((totalSeconds % 3600) / 60);
                 let seconds = totalSeconds % 60;
-
+                
+            
                 return {
+                    id: exp.id,
                     name: exp.location.name,
                     servant: getServantById(exp.servantId).name,
+                    status: exp.status,
                     hours,
                     minutes,
                     seconds,
