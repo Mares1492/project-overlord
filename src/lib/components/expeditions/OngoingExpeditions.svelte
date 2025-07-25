@@ -16,6 +16,18 @@
             pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
                 let msLeft = exp.endTime - Date.now();
+                if (msLeft <= 0) {
+                    completeExpedition(exp.id);
+                    return {
+                        id: exp.id,
+                        name: exp.location.name,
+                        servant: getServantById(exp.servantId).name,
+                        status: exp.status,
+                        hours:0,
+                        minutes:0,
+                        seconds:0,
+                    };
+                }
                 let totalSeconds = Math.floor(msLeft / 1000);
 
                 let hours = Math.floor(totalSeconds / 3600);
