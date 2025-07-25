@@ -1,4 +1,4 @@
-import { setServantAsNotAvailable } from '$lib/state/servants.svelte.js';
+import { setServantAsNotAvailable, setServantAsAvailable } from '$lib/state/servants.svelte.js';
 
 export const expeditionsList = $state([]);
 let avalableExpeditionsNumber = $state(3);
