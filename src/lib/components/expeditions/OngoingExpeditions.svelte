@@ -50,19 +50,24 @@
         return () => clearInterval(interval);
     });
 
+
 </script>
 
 {#snippet expeditionSlot(expedition)}
-    <button class="flex flex-col text-sm  text-gray-800 space-y-1 w-32 min-h-24 2xl:w-42 2xl:h-28 cursor-pointer hover:text-black items-center justify-center">
+    <div class="flex flex-col text-sm  text-gray-800 space-y-1 w-32 min-h-24 2xl:w-42 2xl:h-28  hover:text-black items-center justify-center">
         <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
-        <span class="text-gray-700">{expedition.servant}</span>  
-        <div class="flex flex-row items-center justify-center font-semibold">
-            <span class="border w-12 px-2">{expedition.hours}h</span>:
-            <span class="border  w-12 px-2">{expedition.minutes}m</span>:
-            <span class="border  w-12 px-2">{expedition.seconds}s</span>
-        </div>
-    </button>
+        <span class="text-gray-700">{expedition.servant}</span>
+        {#if expedition.status === 2/*COMPLETED*/}
+            <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded text-white font-semibold">Complete</button>
+        {:else}
+            <div class="flex flex-row items-center justify-center font-semibold">
+                <span class="border w-12 px-2">{expedition.hours}h</span>:
+                <span class="border  w-12 px-2">{expedition.minutes}m</span>:
+                <span class="border  w-12 px-2">{expedition.seconds}s</span>
+            </div>
+        {/if}
+    </div>
 {/snippet}
 
 {#if expeditions.length === 0}
