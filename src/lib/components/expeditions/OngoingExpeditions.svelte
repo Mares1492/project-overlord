@@ -47,7 +47,7 @@
 {#if expeditions.length === 0}
     <div class="flex flex-col items-center justify-center w-full h-full">
         <span class="text-2xl font-bold">No ongoing expeditions</span>
-        <span class="text-lg">Start one in the Expeditions tab!</span>
+        <span class="text-lg">Start one by choosing a location first!</span>
     </div>
 {:else}
     <div class="flex flex-col bg-amber-400/50 border-2 p-5 justify-center space-y-7 items-center w-full h-full">
