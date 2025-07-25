@@ -42,6 +42,11 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     return newExpedition;
 }
 
+export const completeExpedition = (expeditionId) => {
+    const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    expedition.status = expeditionStatus.COMPLETED;
+}
+
 export const getOngoingExpeditions = () => {
     return expeditionsList.filter(exp => exp.status === expeditionStatus.IN_PROGRESS);
 }
