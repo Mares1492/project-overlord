@@ -5,6 +5,10 @@
    	import { slide } from 'svelte/transition';
 
     let expeditions = $state([]);
+    let pageState = $state({
+        loading: true,
+        error: null
+    });
 
     onMount(() => {
 
