@@ -1,7 +1,9 @@
 <script>
-    import {getOngoingExpeditions} from '$lib/state/expeditionState.svelte.js';
+    import {getOngoingExpeditions,completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
     import {onMount} from 'svelte';
     import {getServantById} from '$lib/state/servants.svelte.js';
+   	import { slide } from 'svelte/transition';
+
     let expeditions = $state([]);
 
     onMount(() => {
