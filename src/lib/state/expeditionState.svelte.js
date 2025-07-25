@@ -32,6 +32,10 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
         console.log(`Servant with provided ID is not found.`);
         return null;
     }
+    if (avalableExpeditionsNumber <= 0) {
+        console.log(`No available expeditions left.`);
+        return null;
+    }
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
     newExpedition.location = chosenLocation;
     newExpedition.startTime = new Date();
