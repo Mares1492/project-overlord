@@ -66,10 +66,20 @@
 {/snippet}
 
 {#if expeditions.length === 0}
+    {#if pageState.loading}
+        <div class="flex w-full flex-col items-center justify-center h-full">
+            <span class="text-2xl w-full font-bold">Loading ongoing expeditions...</span>
+        </div>
+    {:else if pageState.error}
+        <div class="flex w-full flex-col items-center justify-center h-full">
+            <span class="text-2xl w-full font-bold">Error loading expeditions</span>
+        </div>
+    {:else}
         <div transition:slide|global class="flex  w-full flex-col items-center justify-center h-full">
             <span class="text-2xl w-full font-bold">No ongoing expeditions</span>
             <span class="text-lg w-full">Start one by choosing a location first!</span>
         </div>
+    {/if}
 {:else}
     <div class="flex flex-col bg-amber-400/50 border-2 p-5 justify-center space-y-7 items-center w-full h-full">
         {#each expeditions as expedition}
