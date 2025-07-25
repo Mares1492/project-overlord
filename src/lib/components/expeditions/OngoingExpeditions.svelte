@@ -13,7 +13,7 @@
     onMount(() => {
 
         const interval = setInterval(() => {
-            
+            pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
                 let msLeft = exp.endTime - Date.now();
                 let totalSeconds = Math.floor(msLeft / 1000);
