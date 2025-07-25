@@ -13,6 +13,7 @@ const expeditionStatus = {
 
 //exp -> expedition
 const expeditionTemplate = {
+    id: crypto.randomUUID(),
     location: undefined,
     endTime: undefined,
     startTime: undefined,
