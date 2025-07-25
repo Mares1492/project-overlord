@@ -55,7 +55,7 @@ export const archiveExpedition = (expeditionId) => {
 }
 
 export const getOngoingExpeditions = () => {
-    return expeditionsList.filter(exp => exp.status === expeditionStatus.IN_PROGRESS);
+    return expeditionsList.filter(exp => (exp.status === expeditionStatus.IN_PROGRESS || exp.status === expeditionStatus.COMPLETED));
 }
 
 export const getCompletedExpeditions = () => {
