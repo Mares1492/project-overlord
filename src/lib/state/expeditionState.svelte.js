@@ -47,6 +47,13 @@ export const completeExpedition = (expeditionId) => {
     expedition.status = expeditionStatus.COMPLETED;
 }
 
+export const archiveExpedition = (expeditionId) => {
+    const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    increaseAvailableExpeditionsNumber();
+    setServantAsAvailable(expedition.servantId);
+    expedition.status = expeditionStatus.ARCHIVED;
+}
+
 export const getOngoingExpeditions = () => {
     return expeditionsList.filter(exp => exp.status === expeditionStatus.IN_PROGRESS);
 }
