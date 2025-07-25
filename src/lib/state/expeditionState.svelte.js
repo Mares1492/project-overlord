@@ -7,7 +7,8 @@ const expeditionStatus = {
     IDLE: 0,
     IN_PROGRESS: 1,
     COMPLETED: 2,
-    FAILED: 3,
+    ARCHIVED: 3,
+    FAILED: 4,
 }
 
 //exp -> expedition
