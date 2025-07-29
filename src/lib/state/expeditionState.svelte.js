@@ -18,6 +18,9 @@ const expeditionTemplate = {
     endTime: undefined,
     startTime: undefined,
     servantId: undefined,
+    task: undefined,
+    scale: undefined,
+    approach: undefined,
     status: expeditionStatus.IDLE,
 }
 
@@ -38,11 +41,14 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     }
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
     newExpedition.location = chosenLocation;
-    newExpedition.startTime = new Date();
+    newExpedition.startTime = new Date(); 
     let duration = expeditionSettings.scale.value * 60; // Convert minutes to second
     newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration>0?duration:1) * 60 * 1000);
     newExpedition.servantId = servantId;
     newExpedition.status = expeditionStatus.IN_PROGRESS;
+    newExpedition.task = expeditionSettings.task.options[expeditionSettings.task.value].name;
+    newExpedition.approach = expeditionSettings.approach.options[expeditionSettings.approach.value].name;
+    newExpedition.scale = expeditionSettings.scale.options[expeditionSettings.scale.value].name;
     expeditionsList.push(newExpedition);
     decreaseAvailableExpeditionsNumber();
     return newExpedition;
