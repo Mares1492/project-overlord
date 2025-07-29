@@ -1,17 +1,4 @@
 
-const setTaskSettingsValue = (valueToSet) => {
-    expeditionSettings.task.value = valueToSet
-}
-
-const setApproachSettingsValue = (valueToSet) => {
-    expeditionSettings.approach.value = valueToSet
-}
-
-const setScaleSettingsValue = (valueToSet) => {
-    expeditionSettings.scale.value = valueToSet
-}
-
-
 export const expeditionSettings = $state({
     task: {
         options: [
@@ -79,3 +66,25 @@ export const expeditionSettings = $state({
         value: 0
     }
 });
+
+const setTaskSettingsValue = (valueToSet) => {
+    expeditionSettings.task.value = valueToSet
+}
+
+const setApproachSettingsValue = (valueToSet) => {
+    expeditionSettings.approach.value = valueToSet
+}
+
+const setScaleSettingsValue = (valueToSet) => {
+    expeditionSettings.scale.value = valueToSet
+}
+
+/**
+ * 
+ * @param {string} key 
+ * @param {number} value 
+ * @returns {string}
+ */
+export const getSettingsOptionName = (key,value) => {
+    return expeditionSettings[key].options[value].name;
+}
