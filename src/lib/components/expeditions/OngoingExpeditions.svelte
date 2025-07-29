@@ -43,6 +43,9 @@
                     hours,
                     minutes,
                     seconds,
+                    task: exp.task,
+                    approach: exp.approach,
+                    scale: exp.scale,
                 };
                 
             });
@@ -57,7 +60,10 @@
     <div class="flex flex-col text-sm  text-gray-800 space-y-1 w-32 min-h-24 2xl:w-42 2xl:h-28  hover:text-black items-center justify-center">
         <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
-        <span class="text-gray-700">{expedition.servant}</span>
+        <span class="text-gray-800">{expedition.servant}</span>
+        <span class="text-gray-600">Task: <i>{expedition.task}</i></span>
+        <span class="text-gray-600">Approach: <i>{expedition.approach}</i></span>
+        <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
         {#if expedition.status === 2/*COMPLETED*/}
             <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
         {:else}
