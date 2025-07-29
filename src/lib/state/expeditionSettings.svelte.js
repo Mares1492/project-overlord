@@ -78,13 +78,3 @@ const setApproachSettingsValue = (valueToSet) => {
 const setScaleSettingsValue = (valueToSet) => {
     expeditionSettings.scale.value = valueToSet
 }
-
-/**
- * 
- * @param {string} key 
- * @param {number} value 
- * @returns {string}
- */
-export const getSettingsOptionName = (key,value) => {
-    return expeditionSettings[key].options[value].name;
-}
