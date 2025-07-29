@@ -59,7 +59,7 @@
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
         <span class="text-gray-700">{expedition.servant}</span>
         {#if expedition.status === 2/*COMPLETED*/}
-            <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded text-white font-semibold">Complete</button>
+            <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
         {:else}
             <div class="flex flex-row items-center justify-center font-semibold">
                 <span class="border w-12 px-2">{expedition.hours}h</span>:
