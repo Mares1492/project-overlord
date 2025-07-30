@@ -18,7 +18,7 @@
 			X
 		</button>
 		<div class="flex flex-col mb-3.5">
-			<h3 class="font-bold text-lg mb-1">{location.name}</h3>
+			<h3 class="font-bold text-lg mb-1">{location.name}<br><span>{location.is_base?" (your base)":""}</span></h3>
 			<p class="text-gray-600 mb-2">{location.description}</p>
 			<p class="text-xs text-gray-400">Difficulty: {location.importance}</p>
 		</div>

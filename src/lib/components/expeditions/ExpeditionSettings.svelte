@@ -32,6 +32,8 @@
                 <div class="text-2xl px-5">
                     <i class="font-thin">Expedition to:</i>
                     <span class="font-black">{chosenLocation.name}</span>
+                    <br>
+                    <span class="text-xl">{chosenLocation.is_base?"Your Base & Surroundings":""}</span>
                     <!-- This section is for location icon--> 
                 </div>
             <p class="px-5">{chosenLocation.description}</p>
