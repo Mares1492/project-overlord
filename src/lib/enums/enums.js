@@ -1,10 +1,15 @@
-export const ItemType = {
-    weapon: 0,
-    armor: 1,
-    trinket: 2,
-    consumable: 3,
-    trophy: 4
+export const EquipmentSlot = {
+  helmet: 0,
+  armor: 1,
+  legs: 2,
+  feet: 3,
+  hands: 4,
+  weapon: 5,
+  twoHandedWeapon: 6,
+  offHand: 7,
+  neck: 8,
 };
+
 
 export const ItemRarity = {
     common: 0,
