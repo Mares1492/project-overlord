@@ -11,7 +11,6 @@
     });
 
     onMount(() => {
-
         const interval = setInterval(() => {
             pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
@@ -22,10 +21,7 @@
                         id: exp.id,
                         name: exp.location.name,
                         servant: getServantById(exp.servantId).name,
-                        status: exp.status,
-                        hours:0,
-                        minutes:0,
-                        seconds:0,
+                        status: exp.status
                     };
                 }
                 let totalSeconds = Math.floor(msLeft / 1000);
@@ -93,7 +89,7 @@
         </div>
     {/if}
 {:else}
-    <div class="flex flex-col bg-amber-400/50 border-2 p-5 justify-center space-y-7 items-center w-full h-full">
+    <div class="flex flex-col bg-amber-400/70 border-2 p-5 justify-center space-y-7 items-center w-full h-full">
         {#each expeditions as expedition}
             {@render expeditionSlot(expedition)}
         {/each}
