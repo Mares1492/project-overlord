@@ -1,6 +1,8 @@
 <script>
     import {getServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
+    import Inventory from '$lib/components/inventory/Inventory.svelte';
+    
     let chosenServant = $state(getServants()[0]);
     let isChars = $state(true);
 </script>
@@ -14,19 +16,6 @@
 {#snippet itemSlot(item)}
     <div class="flex flex-col w-28 h-16 xl:w-42 xl:h-28 cursor-pointer hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-800">
         <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{item}</span>
-    </div>
-{/snippet}
-
-{#snippet inventorySlot(i)}
-    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center`}>
-        <span class="flex flex-col text-xl">
-            {#if i===10}
-                <span class="text-lg">🔓</span>
-                <span class="text-yellow-500">250</span>
-            {:else if  i>10}
-                <span class="text-xl text-gray-500 grayscale-90 contrast-10">🔒</span>
-            {/if}
-        </span>
     </div>
 {/snippet}
 
@@ -79,11 +68,7 @@
                         </div>
                     </div>
                 {:else}
-                    <div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
-                        {#each { length: 30 } as _item,i}
-                            {@render inventorySlot(i)}
-                        {/each}
-                    </div>
+                    <Inventory/>
                 {/if}
             </div>
         </div>
