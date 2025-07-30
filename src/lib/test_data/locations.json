@@ -1,212 +1,212 @@
 [
-    {
-        "id": "a6f4b0a8-3e24-4c10-85e1-f5aeb602c25e",
-        "name": "Silverpine Grove",
-        "importance": 5,
-        "description": "A quiet forest retreat near the old ruins.",
-        "coords": { "x": 1950, "y": 1680 },
-        "color": "#d1fae5",
-        "type": "ruins",
-        "is_base": false
-    },
-    {
-        "id": "9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140",
-        "name": "Cragstone Outpost",
-        "importance": 7,
-        "description": "A fortified checkpoint along the trade route.",
-        "coords": { "x": 2375, "y": 2360 },
-        "color": "#a16207",
-        "type": "keep",
-        "is_base": false
-    },
-    {
-        "id": "74f1fc80-c7c3-4a69-8f59-7b128eaee190",
-        "name": "Whitemoor Basin",
-        "importance": 5,
-        "description": "Floodplain with rare flora and deep marshes.",
-        "coords": { "x": 4400, "y": 2700 },
-        "color": "#0ea5e9",
-        "type": "river",
-        "is_base": false
-    },
-    {
-        "id": "c5a191a0-11f3-4a1b-9b88-5b69d69ff7df",
-        "name": "Duskford Crossing",
-        "importance": 5,
-        "description": "Historic river crossing with old stone bridge and a keep guarding it.",
-        "coords": { "x": 3760, "y": 3380 },
-        "color": "#581c87",
-        "type": "keep",
-        "is_base": false
-    },
-    {
-        "id": "f4e1deaa-270b-4c5d-9b2d-43bb68c1605a",
-        "name": "Emberfall Crater",
-        "importance": 5,
-        "description": "Volcanic site now dormant but still majestic.",
-        "coords": { "x": 4460, "y": 1120 },
-        "color": "#dc2626",
-        "type": "neg_energy",
-        "is_base": false
-    },
-    {
-        "id": "a117c3d7-2f92-472e-8b29-8496e6c59df3",
-        "name": "Thornwatch Keep",
-        "importance": 5,
-        "description": "Ancient fortress hidden among high cliffs.",
-        "coords": { "x": 815, "y": 1620 },
-        "color": "#334155",
-        "type": "keep",
-        "is_base": false
-    },
-    {
-        "id": "c33f1a7b-f12f-4df4-9cd1-34bcff8408d1",
-        "name": "Frostwillow Meadow",
-        "importance": 4,
-        "description": "Chilly meadow that glows in winter dusk.",
-        "coords": { "x": 3030, "y": 550 },
-        "color": "#a5f3fc",
-        "type": "meadows",
-        "is_base": false
-    },
-    {
-        "id": "6f61a18d-3469-4a2b-ae78-8c8a8c3a1c88",
-        "name": "Stonebarrow Hollow",
-        "importance": 4,
-        "description": "Ancient burial ground with eerie carvings.",
-        "coords": { "x": 3250, "y": 2665 },
-        "color": "#7f1d1d",
-        "type": "neg_energy",
-        "is_base": false
-    },
-    {
-        "id": "b9a5b7d2-d763-4b35-91e5-2a59f5bb75d0",
-        "name": "Glimmereach Summit",
-        "importance": 6,
-        "description": "The highest peak with stunning sunrises.",
-        "coords": { "x": 1330, "y": 3630 },
-        "color": "#c084fc",
-        "type": "wilds",
-        "is_base": false
-    },
-    {
-        "id": "3e2e558f-18cf-4cc3-87e7-994d4b81240d",
-        "name": "Mirefen Deltas",
-        "importance": 5,
-        "description": "Swamplands rich with life and mystery.",
-        "coords": { "x": 4130, "y": 2010 },
-        "color": "#16a34a",
-        "type": "swamp",
-        "is_base": false
-    },
-    {
-        "id": "22d3e93a-abc1-4e33-bd2d-31a8a4629a1a",
-        "name": "Hollowfen Marsh",
-        "importance": 5,
-        "description": "A misty swamp teeming with hidden dangers.",
-        "coords": { "x": 1030, "y": 3530 },
-        "color": "#6EE7B7",
-        "type": "swamp",
-        "is_base": false
-    },
-    {
-        "id": "383a90f1-9e0c-4ffd-950c-f68e4242042d",
-        "name": "Hollowfen",
-        "importance": 7,
-        "description": "A major town in southwest and the only one to survive 'The Great Scourge'",
-        "coords": { "x": 790, "y": 3470 },
-        "color": "#5EB7B7",
-        "type": "major_settlement",
-        "is_base": false
-    },
-    {
-        "id": "c38fa1f4-e156-47d3-a14c-d3142b1ed17b",
-        "name": "Stoneheart Bastion",
-        "importance": 5,
-        "description": "Ancient fortress guarding the northern cliffs.",
-        "coords": { "x": 1250, "y": 655 },
-        "color": "#1E293B",
-        "type": "keep",
-        "is_base": false
-    },
-    {
-        "id": "e211dfe1-6ea6-4a2e-91cf-6e8b1019947f",
-        "name": "Elarin`s Hollow",
-        "importance": 5,
-        "description": "Small village surrounded by enchanted woods.",
-        "coords": { "x": 1580, "y": 2450 },
-        "color": "#60A5FA",
-        "type": "minor_settlement",
-        "is_base": false
-    },
-    {
-        "id": "7a121ea7-f321-4a56-bac8-bcdd888fb7a5",
-        "name": "Redwatch Keep",
-        "importance": 5,
-        "description": "Crimson-walled stronghold with storied past.",
-        "coords": { "x": 3020, "y": 950 },
-        "color": "#DC2626",
-        "type": "keep",
-        "is_base": false
-    },
-    {
-        "id": "c06f3be6-9984-4c1b-b0f4-d1bfb73dd4b2",
-        "name": "Moonspire",
-        "importance": 6,
-        "description": "Shimmering city with towering moonlit spires.",
-        "coords": { "x": 2130, "y": 1820 },
-        "color": "#A78BFA",
-        "type": "major_settlement",
-        "is_base": false
-    },
-    {
-        "id": "d8c5c1a9-f765-4dc6-a313-f5d99c3a5a94",
-        "name": "Ashworn Cradle",
-        "importance": 4,
-        "description": "A ruined crater village lost to flame.",
-        "coords": { "x": 4345, "y": 1260 },
-        "color": "#78716C",
-        "type": "ruins",
-        "is_base": false
-    },
-    {
-        "id": "86ae1c65-3bb1-4a32-a438-6769ff7719c3",
-        "name": "Thornreach",
-        "importance": 5,
-        "description": "Dense woodland, rumored to be haunted.",
-        "coords": { "x": 4000, "y": 1450 },
-        "color": "#16A34A",
-        "type": "wilds",
-        "is_base": false
-    },
-    {
-        "id": "a7c9940e-8b45-4e2d-ab5f-af81f93acb82",
-        "name": "Plains of old",
-        "importance": 5,
-        "description": "Territories completely destroyed in ancient war are now taken by wildlife.",
-        "coords": { "x": 2900, "y": 1500 },
-        "color": "#16A34A",
-        "type": "wilds",
-        "is_base": false
-    },
-    {
-        "id": "c4ecfde2-14f7-42b8-b51f-46e28ff4694d",
-        "name": "Blood Gold Camp",
-        "importance": 5,
-        "description": "An old fortress and its surroundings now occupied by the mercenary lord",
-        "coords": { "x": 2110, "y": 2370 },
-        "color": "#16A34A",
-        "type": "merc_camp",
-        "is_base": true
-    },
-    {
-        "id": "68700073-e3e1-422d-949f-949df921de41",
-        "name": "Gem of the South",
-        "importance": 5,
-        "description": "A city of light. The cities sacred army and holy people have stopped the spread of 'The Great Scourge'",
-        "coords": { "x": 2680, "y": 3200 },
-        "color": "#16A54A",
-        "type": "pos_energy",
-        "is_base": false
-    }
+  {
+    "id": "a6f4b0a8-3e24-4c10-85e1-f5aeb602c25e",
+    "name": "Silverpine Grove",
+    "importance": 5,
+    "description": "A quiet forest retreat near the old ruins.",
+    "coords": { "x": 1950, "y": 1680 },
+    "color": "#d1fae5",
+    "type": 0,
+    "is_base": false
+  },
+  {
+    "id": "9f9b3c5c-2c51-4b30-a9e4-d97d0a81d140",
+    "name": "Cragstone Outpost",
+    "importance": 7,
+    "description": "A fortified checkpoint along the trade route.",
+    "coords": { "x": 2375, "y": 2360 },
+    "color": "#a16207",
+    "type": 1,
+    "is_base": false
+  },
+  {
+    "id": "74f1fc80-c7c3-4a69-8f59-7b128eaee190",
+    "name": "Whitemoor Basin",
+    "importance": 5,
+    "description": "Floodplain with rare flora and deep marshes.",
+    "coords": { "x": 4400, "y": 2700 },
+    "color": "#0ea5e9",
+    "type": 2,
+    "is_base": false
+  },
+  {
+    "id": "c5a191a0-11f3-4a1b-9b88-5b69d69ff7df",
+    "name": "Duskford Crossing",
+    "importance": 5,
+    "description": "Historic river crossing with old stone bridge and a keep guarding it.",
+    "coords": { "x": 3760, "y": 3380 },
+    "color": "#581c87",
+    "type": 1,
+    "is_base": false
+  },
+  {
+    "id": "f4e1deaa-270b-4c5d-9b2d-43bb68c1605a",
+    "name": "Emberfall Crater",
+    "importance": 5,
+    "description": "Volcanic site now dormant but still majestic.",
+    "coords": { "x": 4460, "y": 1120 },
+    "color": "#dc2626",
+    "type": 3,
+    "is_base": false
+  },
+  {
+    "id": "a117c3d7-2f92-472e-8b29-8496e6c59df3",
+    "name": "Thornwatch Keep",
+    "importance": 5,
+    "description": "Ancient fortress hidden among high cliffs.",
+    "coords": { "x": 815, "y": 1620 },
+    "color": "#334155",
+    "type": 1,
+    "is_base": false
+  },
+  {
+    "id": "c33f1a7b-f12f-4df4-9cd1-34bcff8408d1",
+    "name": "Frostwillow Meadow",
+    "importance": 4,
+    "description": "Chilly meadow that glows in winter dusk.",
+    "coords": { "x": 3030, "y": 550 },
+    "color": "#a5f3fc",
+    "type": 4,
+    "is_base": false
+  },
+  {
+    "id": "6f61a18d-3469-4a2b-ae78-8c8a8c3a1c88",
+    "name": "Stonebarrow Hollow",
+    "importance": 4,
+    "description": "Ancient burial ground with eerie carvings.",
+    "coords": { "x": 3250, "y": 2665 },
+    "color": "#7f1d1d",
+    "type": 3,
+    "is_base": false
+  },
+  {
+    "id": "b9a5b7d2-d763-4b35-91e5-2a59f5bb75d0",
+    "name": "Glimmereach Summit",
+    "importance": 6,
+    "description": "The highest peak with stunning sunrises.",
+    "coords": { "x": 1330, "y": 3630 },
+    "color": "#c084fc",
+    "type": 5,
+    "is_base": false
+  },
+  {
+    "id": "3e2e558f-18cf-4cc3-87e7-994d4b81240d",
+    "name": "Mirefen Deltas",
+    "importance": 5,
+    "description": "Swamplands rich with life and mystery.",
+    "coords": { "x": 4130, "y": 2010 },
+    "color": "#16a34a",
+    "type": 6,
+    "is_base": false
+  },
+  {
+    "id": "22d3e93a-abc1-4e33-bd2d-31a8a4629a1a",
+    "name": "Hollowfen Marsh",
+    "importance": 5,
+    "description": "A misty swamp teeming with hidden dangers.",
+    "coords": { "x": 1030, "y": 3530 },
+    "color": "#6EE7B7",
+    "type": 6,
+    "is_base": false
+  },
+  {
+    "id": "383a90f1-9e0c-4ffd-950c-f68e4242042d",
+    "name": "Hollowfen",
+    "importance": 7,
+    "description": "A major town in southwest and the only one to survive 'The Great Scourge'",
+    "coords": { "x": 790, "y": 3470 },
+    "color": "#5EB7B7",
+    "type": 7,
+    "is_base": false
+  },
+  {
+    "id": "c38fa1f4-e156-47d3-a14c-d3142b1ed17b",
+    "name": "Stoneheart Bastion",
+    "importance": 5,
+    "description": "Ancient fortress guarding the northern cliffs.",
+    "coords": { "x": 1250, "y": 655 },
+    "color": "#1E293B",
+    "type": 1,
+    "is_base": false
+  },
+  {
+    "id": "e211dfe1-6ea6-4a2e-91cf-6e8b1019947f",
+    "name": "Elarin`s Hollow",
+    "importance": 5,
+    "description": "Small village surrounded by enchanted woods.",
+    "coords": { "x": 1580, "y": 2450 },
+    "color": "#60A5FA",
+    "type": 8,
+    "is_base": false
+  },
+  {
+    "id": "7a121ea7-f321-4a56-bac8-bcdd888fb7a5",
+    "name": "Redwatch Keep",
+    "importance": 5,
+    "description": "Crimson-walled stronghold with storied past.",
+    "coords": { "x": 3020, "y": 950 },
+    "color": "#DC2626",
+    "type": 1,
+    "is_base": false
+  },
+  {
+    "id": "c06f3be6-9984-4c1b-b0f4-d1bfb73dd4b2",
+    "name": "Moonspire",
+    "importance": 6,
+    "description": "Shimmering city with towering moonlit spires.",
+    "coords": { "x": 2130, "y": 1820 },
+    "color": "#A78BFA",
+    "type": 7,
+    "is_base": false
+  },
+  {
+    "id": "d8c5c1a9-f765-4dc6-a313-f5d99c3a5a94",
+    "name": "Ashworn Cradle",
+    "importance": 4,
+    "description": "A ruined crater village lost to flame.",
+    "coords": { "x": 4345, "y": 1260 },
+    "color": "#78716C",
+    "type": 0,
+    "is_base": false
+  },
+  {
+    "id": "86ae1c65-3bb1-4a32-a438-6769ff7719c3",
+    "name": "Thornreach",
+    "importance": 5,
+    "description": "Dense woodland, rumored to be haunted.",
+    "coords": { "x": 4000, "y": 1450 },
+    "color": "#16A34A",
+    "type": 5,
+    "is_base": false
+  },
+  {
+    "id": "a7c9940e-8b45-4e2d-ab5f-af81f93acb82",
+    "name": "Plains of old",
+    "importance": 5,
+    "description": "Territories completely destroyed in ancient war are now taken by wildlife.",
+    "coords": { "x": 2900, "y": 1500 },
+    "color": "#16A34A",
+    "type": 5,
+    "is_base": false
+  },
+  {
+    "id": "c4ecfde2-14f7-42b8-b51f-46e28ff4694d",
+    "name": "Blood Gold Camp",
+    "importance": 5,
+    "description": "An old fortress and its surroundings now occupied by the mercenary lord",
+    "coords": { "x": 2110, "y": 2370 },
+    "color": "#16A34A",
+    "type": 9,
+    "is_base": true
+  },
+  {
+    "id": "68700073-e3e1-422d-949f-949df921de41",
+    "name": "Gem of the South",
+    "importance": 5,
+    "description": "A city of light. The cities sacred army and holy people have stopped the spread of 'The Great Scourge'",
+    "coords": { "x": 2680, "y": 3200 },
+    "color": "#16A54A",
+    "type": 10,
+    "is_base": false
+  }
 ]
