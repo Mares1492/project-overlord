@@ -1,8 +1,7 @@
 <script>
     import inventoryData  from '$lib/test_data/inventory.json';
 
-    let itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/off_hand/*.png"], {query: '?url' });
-     
+    let itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/feet/*.png","$lib/assets/items/hands/*.png","$lib/assets/items/head/*.png","$lib/assets/items/legs/*.png","$lib/assets/items/magic_off_hand/*.png","$lib/assets/items/neck/*.png","$lib/assets/items/off_hand/*.png","$lib/assets/items/two_handed_weapon/*.png","$lib/assets/items/weapon/*.png"], {query: '?url' });
 
 </script>
 
@@ -10,7 +9,7 @@
         <div class="relative flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center bg-gray-800">
             {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
                 <img class="absolute -top-3" src={module.default} alt={item.name} />
-            {:catch error}
+            {:catch _error}
                 <p>Error loading image</p>
             {/await}
         </div>
