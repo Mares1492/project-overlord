@@ -1,5 +1,5 @@
 export const EquipmentSlot = {
-  helmet: 0,
+  head: 0,
   armor: 1,
   legs: 2,
   feet: 3,
