@@ -1,4 +1,22 @@
-{#snippet inventorySlot(i)}
+<script>
+    import inventoryData  from '$lib/test_data/inventory.json';
+
+    let itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/off_hand/*.png"], {query: '?url' });
+     
+
+</script>
+
+{#snippet itemSlot(item)}
+        <div class="relative flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center bg-gray-800">
+            {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
+                <img class="absolute -top-3" src={module.default} alt={item.name} />
+            {:catch error}
+                <p>Error loading image</p>
+            {/await}
+        </div>
+{/snippet}
+
+{#snippet emptySlot(i)}
     <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center`}>
         <span class="flex flex-col text-xl">
             {#if i===10}
@@ -11,8 +29,19 @@
     </div>
 {/snippet}
 
+{#snippet inventorySlot(i,item=null)}
+    {#if item}
+        {@render itemSlot(item)}
+    {:else}
+        {@render emptySlot(i)}
+    {/if}
+{/snippet}
+
 <div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
-    {#each { length: 30 } as _item,i}
+    {#each inventoryData as item,i}
+        {@render inventorySlot(i,item)}
+    {/each}
+    {#each { length: 30-inventoryData.length } as _item,i}
         {@render inventorySlot(i)}
     {/each}
 </div>
