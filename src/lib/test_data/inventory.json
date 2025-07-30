@@ -2,7 +2,8 @@
   {
     "id": "b1a79fd3-073f-4f9d-9f5e-3f91b6e4d540",
     "name": "Shadowfang Aegis",
-    "type": 1,
+    "iconPath": "off_hand/Ornate Shield(rare).png",
+    "type": 7,
     "rarity": 3,
     "stats": {
       "armor": 9,
@@ -16,7 +17,8 @@
   {
     "id": "d73c0ea3-30f0-4d96-a5d2-3a5242d8fd02",
     "name": "Whisperblade of the Pale Queen",
-    "type": 0,
+    "iconPath": "off_hand/Iron off hand dagger.png",
+    "type": 7,
     "rarity": 4,
     "stats": {
       "armor": 0,
@@ -30,7 +32,8 @@
   {
     "id": "af8e2cc6-36c8-4210-93b9-6c5dd961f508",
     "name": "Cowl of Eternal Dread",
-    "type": 1,
+    "iconPath": "head/Stealth hood.png",
+    "type": 0,
     "rarity": 2,
     "stats": {
       "armor": 2,
@@ -43,22 +46,24 @@
   },
   {
     "id": "a382df6e-e0d6-44fd-9b49-4cc75d7dc917",
-    "name": "Heart of the Withered God",
+    "name": "Skull of the Withered God",
+    "iconPath": "magic_off_hand/Horned skull(rare).png",
     "type": 2,
     "rarity": 4,
     "stats": {
-      "armor": 0,
+      "armor": -2,
       "str": 2,
       "agi": 2,
       "dex": 2,
       "int": 10
     },
-    "description": "Still pulsing, this artifact grants forbidden knowledge but draws the gaze of unspeakable horrors."
+    "description": "This artifact grants forbidden knowledge but draws the gaze of unspeakable horrors."
   },
   {
     "id": "4d1a4319-3f91-44db-93e3-4290e3bb0539",
     "name": "Graveforged Gauntlets",
-    "type": 1,
+    "iconPath": "hands/Iron gauntlets.png",
+    "type": 4,
     "rarity": 0,
     "stats": {
       "armor": 4,
@@ -71,41 +76,44 @@
   },
   {
     "id": "1c67dcd6-741c-431e-9fa4-e4e1aa0278c7",
-    "name": "Elixir of the Drowned Prophet",
-    "type": 3,
+    "name": "Chromium light cuirass",
+    "iconPath": "armor/Chromium light cuirass(uncommon).png",
+    "type": 1,
     "rarity": 2,
     "stats": {
-      "armor": 0,
-      "str": 0,
-      "agi": 3,
+      "armor": 25,
+      "str": 5,
+      "agi": -5,
       "dex": 0,
-      "int": 7
+      "int": 0
     },
-    "description": "A viscous fluid whispered into bottles by those who’ve drowned and returned."
+    "description": "Assault cuirass made from chromium alloy, light yet durable. It shines with a faint blue hue."
   },
   {
     "id": "21ab07be-29d2-4aef-975f-9378ed6c67fa",
-    "name": "Vilebranch Talisman",
+    "name": "Mystic scroll",
+    "iconPath": "magic_off_hand/Mystic scroll(rare).png",
     "type": 2,
-    "rarity": 1,
+    "rarity": 4,
     "stats": {
       "armor": 0,
       "str": 1,
-      "agi": 4,
-      "dex": 4,
-      "int": 3
+      "agi": 2,
+      "dex": 2,
+      "int": 8
     },
-    "description": "Twisted root carved with banshee runes, pulsing with necrotic energy."
+    "description": "Mystic scroll carved with banshee runes, pulsing with necrotic energy."
   },
   {
     "id": "faa0650d-48ea-42eb-890b-08ec12d22f9d",
     "name": "Ashborne Skullplate",
+    "iconPath": "head/Demon horns(artifactum).png",
     "type": 1,
-    "rarity": 1,
+    "rarity": 5,
     "stats": {
-      "armor": 7,
+      "armor": 40,
       "str": 2,
-      "agi": 0,
+      "agi": -10,
       "dex": 0,
       "int": 1
     },
@@ -113,8 +121,9 @@
   },
   {
     "id": "a8a4fc67-e35d-4f45-8b3d-8cf0875c82b1",
-    "name": "Bloodbane Scythe",
-    "type": 0,
+    "name": "Bloodbane Scimitar",
+    "iconPath": "weapon/Mage blade(uncommon).png",
+    "type": 5,
     "rarity": 3,
     "stats": {
       "armor": 0,
@@ -127,16 +136,17 @@
   },
   {
     "id": "f1bdbdd3-ffdc-4b2e-b2cd-c29460b2c65f",
-    "name": "Fleshbound Trophy",
-    "type": 4,
-    "rarity": 2,
+    "name": "Hearth of the Dragon",
+    "iconPath": "neck/Ruby necklace(uncommon).png",
+    "type": 8,
+    "rarity": 5,
     "stats": {
-      "armor": 0,
-      "str": 2,
-      "agi": 1,
-      "dex": 0,
+      "armor": 5,
+      "str": 10,
+      "agi": 5,
+      "dex": 5,
       "int": 5
     },
-    "description": "A shriveled ear strung on sinew—carried by champions who embrace their inner beasts."
+    "description": "A necklace with a ruby that glows faintly, said to contain the heart of a dragon. It grants warmth and protection against cold."
   }
 ]
