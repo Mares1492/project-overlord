@@ -36,11 +36,15 @@
     {/if}
 {/snippet}
 
-<div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
-    {#each inventoryData as item,i}
-        {@render inventorySlot(i,item)}
-    {/each}
-    {#each { length: 30-inventoryData.length } as _item,i}
-        {@render inventorySlot(i)}
-    {/each}
+<div class="flex flex-col w-full h-full items-center justify-center space-y-5">
+    <span class="bg-black/70 p-3 text-white font-bold text-4xl">{inventoryData.length}/30</span>
+    <div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
+        {#each inventoryData as item,i}
+            {@render inventorySlot(i,item)}
+        {/each}
+        {#each { length: 30-inventoryData.length } as _item,i}
+            {@render inventorySlot(i)}
+        {/each}
+    </div>
 </div>
+
