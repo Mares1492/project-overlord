@@ -1,0 +1,142 @@
+[
+  {
+    "id": "b1a79fd3-073f-4f9d-9f5e-3f91b6e4d540",
+    "name": "Shadowfang Aegis",
+    "type": 1,
+    "rarity": 3,
+    "stats": {
+      "armor": 9,
+      "str": 4,
+      "agi": 2,
+      "dex": 1,
+      "int": 0
+    },
+    "description": "Forged in the black fires beneath Hollowreach, this shield deflects not just blades, but hope itself."
+  },
+  {
+    "id": "d73c0ea3-30f0-4d96-a5d2-3a5242d8fd02",
+    "name": "Whisperblade of the Pale Queen",
+    "type": 0,
+    "rarity": 4,
+    "stats": {
+      "armor": 0,
+      "str": 3,
+      "agi": 7,
+      "dex": 6,
+      "int": 2
+    },
+    "description": "A blade so thin it hums in silence, said to have slain kings in their sleep."
+  },
+  {
+    "id": "af8e2cc6-36c8-4210-93b9-6c5dd961f508",
+    "name": "Cowl of Eternal Dread",
+    "type": 1,
+    "rarity": 2,
+    "stats": {
+      "armor": 2,
+      "str": 0,
+      "agi": 5,
+      "dex": 3,
+      "int": 6
+    },
+    "description": "This hood whispers secrets of the grave into the wearer’s ear, heightening arcane senses at the cost of sanity."
+  },
+  {
+    "id": "a382df6e-e0d6-44fd-9b49-4cc75d7dc917",
+    "name": "Heart of the Withered God",
+    "type": 2,
+    "rarity": 4,
+    "stats": {
+      "armor": 0,
+      "str": 2,
+      "agi": 2,
+      "dex": 2,
+      "int": 10
+    },
+    "description": "Still pulsing, this artifact grants forbidden knowledge but draws the gaze of unspeakable horrors."
+  },
+  {
+    "id": "4d1a4319-3f91-44db-93e3-4290e3bb0539",
+    "name": "Graveforged Gauntlets",
+    "type": 1,
+    "rarity": 0,
+    "stats": {
+      "armor": 4,
+      "str": 6,
+      "agi": 1,
+      "dex": 1,
+      "int": 0
+    },
+    "description": "Heavy iron gloves etched with runes from the Dead Tongue, worn by gravediggers and warriors alike."
+  },
+  {
+    "id": "1c67dcd6-741c-431e-9fa4-e4e1aa0278c7",
+    "name": "Elixir of the Drowned Prophet",
+    "type": 3,
+    "rarity": 2,
+    "stats": {
+      "armor": 0,
+      "str": 0,
+      "agi": 3,
+      "dex": 0,
+      "int": 7
+    },
+    "description": "A viscous fluid whispered into bottles by those who’ve drowned and returned."
+  },
+  {
+    "id": "21ab07be-29d2-4aef-975f-9378ed6c67fa",
+    "name": "Vilebranch Talisman",
+    "type": 2,
+    "rarity": 1,
+    "stats": {
+      "armor": 0,
+      "str": 1,
+      "agi": 4,
+      "dex": 4,
+      "int": 3
+    },
+    "description": "Twisted root carved with banshee runes, pulsing with necrotic energy."
+  },
+  {
+    "id": "faa0650d-48ea-42eb-890b-08ec12d22f9d",
+    "name": "Ashborne Skullplate",
+    "type": 1,
+    "rarity": 1,
+    "stats": {
+      "armor": 7,
+      "str": 2,
+      "agi": 0,
+      "dex": 0,
+      "int": 1
+    },
+    "description": "Helm of a fallen ash knight, eternally warm to the touch and whispering vengeance."
+  },
+  {
+    "id": "a8a4fc67-e35d-4f45-8b3d-8cf0875c82b1",
+    "name": "Bloodbane Scythe",
+    "type": 0,
+    "rarity": 3,
+    "stats": {
+      "armor": 0,
+      "str": 8,
+      "agi": 2,
+      "dex": 2,
+      "int": 1
+    },
+    "description": "Reaps both soul and sinew. The blade rusts unless fed monthly."
+  },
+  {
+    "id": "f1bdbdd3-ffdc-4b2e-b2cd-c29460b2c65f",
+    "name": "Fleshbound Trophy",
+    "type": 4,
+    "rarity": 2,
+    "stats": {
+      "armor": 0,
+      "str": 2,
+      "agi": 1,
+      "dex": 0,
+      "int": 5
+    },
+    "description": "A shriveled ear strung on sinew—carried by champions who embrace their inner beasts."
+  }
+]
