@@ -3,6 +3,7 @@
     import {onMount} from 'svelte';
     import {getServantById} from '$lib/state/servants.svelte.js';
    	import { slide } from 'svelte/transition';
+    import {expeditionStatus} from '$lib/state/expeditionState.svelte';
 
     let expeditions = $state([]);
     let pageState = $state({
@@ -11,7 +12,7 @@
     });
 
     onMount(() => {
-        const interval = setInterval(() => {
+        const interval = setInterval( () => {
             pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
                 let msLeft = exp.endTime - Date.now();
@@ -21,7 +22,10 @@
                         id: exp.id,
                         name: exp.location.name,
                         servant: getServantById(exp.servantId).name,
-                        status: exp.status
+                        status: exp.status,
+                        task: exp.task,
+                        approach: exp.approach,
+                        scale: exp.scale,
                     };
                 }
                 let totalSeconds = Math.floor(msLeft / 1000);
@@ -61,7 +65,7 @@
         <span class="text-gray-600">Task: <i>{expedition.task}</i></span>
         <span class="text-gray-600">Approach: <i>{expedition.approach}</i></span>
         <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
-        {#if expedition.status === 2/*COMPLETED*/}
+        {#if expedition.status === expeditionStatus.COMPLETED}
             <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
         {:else}
             <div class="flex flex-row items-center justify-center font-semibold">
