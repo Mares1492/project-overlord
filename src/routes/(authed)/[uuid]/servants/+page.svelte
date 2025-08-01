@@ -38,7 +38,7 @@
             </button>
         </div>
         <div class="flex w-full flex-col space-y-5 justify-center h-full">
-            <div class="flex justify-center">
+            <div class="flex justify-center h-full items-center">
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
                         <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">

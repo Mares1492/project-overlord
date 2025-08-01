@@ -7,7 +7,22 @@ export const EquipmentSlot = {
   weapon: 5,
   twoHandedWeapon: 6,
   offHand: 7,
-  neck: 8,
+  neck: 8
+};
+
+export const ItemType = {
+  helmet: 1,
+  hat:2,
+  armor: 3,
+  legs: 4,
+  feet: 5,
+  hands: 6,
+  weapon: 7,
+  twoHandedWeapon: 8,
+  offHand: 9,
+  magicOffHand:10,
+  medalion: 11,
+  trinket: 12
 };
 
 
