@@ -53,7 +53,7 @@
 </script>
 
 {#snippet expeditionSlot(expedition)}
-    <div class="relative flex flex-col text-sm w-full text-gray-800 space-y-1 min-h-24 2xl:w-42 2xl:h-28  hover:text-black items-center justify-center">
+    <div transition:slide|global class="relative flex flex-col text-sm w-full text-gray-800 space-y-1 hover:text-black items-center justify-center">
         <span class="absolute -top-1.5 right-3 text-gray-800 cursor-pointer text-2xl hover:text-3xl transition-all hover:translate-x-0.5 hover:-translate-y-0.5 active:cursor-not-allowed">⛶</span>
         <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
@@ -75,21 +75,21 @@
 
 {#if expeditions.length === 0}
     {#if pageState.loading}
-        <div class="flex w-full flex-col items-center justify-center h-full">
+        <div class="flex w-full flex-col items-center justify-center ">
             <span class="text-2xl w-full font-bold">Loading ongoing expeditions...</span>
         </div>
     {:else if pageState.error}
-        <div class="flex w-full flex-col items-center justify-center h-full">
+        <div class="flex w-full flex-col items-center justify-center ">
             <span class="text-2xl w-full font-bold">Error loading expeditions</span>
         </div>
     {:else}
-        <div transition:slide|global class="flex  w-full flex-col items-center justify-center h-full">
+        <div transition:slide|global class="flex  w-full flex-col items-center justify-center">
             <span class="text-2xl w-full font-bold">No ongoing expeditions</span>
             <span class="text-lg w-full">Start one by choosing a location first!</span>
         </div>
     {/if}
 {:else}
-    <div class="flex flex-col bg-amber-400/70 border-2 p-5 justify-center space-y-7 items-center w-full h-full">
+    <div class="flex flex-col bg-amber-400/70 border-2 p-5 justify-center space-y-7 items-center w-full">
         {#each expeditions as expedition}
             {@render expeditionSlot(expedition)}
         {/each}
