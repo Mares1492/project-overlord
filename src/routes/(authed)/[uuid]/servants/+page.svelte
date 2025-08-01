@@ -3,6 +3,8 @@
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     import Inventory from '$lib/components/inventory/Inventory.svelte';
     
+    const {data} = $props();
+
     let chosenServant = $state(getServants()[0]);
     let isChars = $state(true);
 </script>
@@ -68,7 +70,7 @@
                         </div>
                     </div>
                 {:else}
-                    <Inventory/>
+                    <Inventory inventoryData={data.inventory}/>
                 {/if}
             </div>
         </div>
