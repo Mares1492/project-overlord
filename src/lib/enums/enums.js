@@ -4,10 +4,9 @@ export const EquipmentSlot = {
   legs: 2,
   feet: 3,
   hands: 4,
-  weapon: 5,
-  twoHandedWeapon: 6,
-  offHand: 7,
-  neck: 8
+  firstHand: 5,
+  offHand: 6,
+  neck: 7
 };
 
 export const ItemType = {
