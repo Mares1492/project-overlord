@@ -3,7 +3,7 @@ import { setServantAsNotAvailable, setServantAsAvailable } from '$lib/state/serv
 export const expeditionsList = $state([]);
 let avalableExpeditionsNumber = $state(3);
 
-const expeditionStatus = {
+export const expeditionStatus = {
     IDLE: 0,
     IN_PROGRESS: 1,
     COMPLETED: 2,
@@ -61,9 +61,9 @@ export const completeExpedition = (expeditionId) => {
 
 export const archiveExpedition = (expeditionId) => {
     const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    expedition.status = expeditionStatus.ARCHIVED;
     increaseAvailableExpeditionsNumber();
     setServantAsAvailable(expedition.servantId);
-    expedition.status = expeditionStatus.ARCHIVED;
 }
 
 export const getOngoingExpeditions = () => {
