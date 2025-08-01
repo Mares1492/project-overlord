@@ -6,18 +6,23 @@
 
 </script>
 
+{#snippet itemImage(src,name,className)}
+    <img class={`absolute select-none pointer-events-none z-5 ${className}`} {src} alt={name} />
+{/snippet}
+
+
 {#snippet itemSlot(item)}
-        <div class="relative flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center bg-gray-800">
+        <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-amber-100   border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
             {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
-                <img class="absolute -top-3" src={module.default} alt={item.name} />
+                {@render itemImage(module.default,item.name,itemTypeDisplayClasses[item.type])}
             {:catch _error}
                 <p>Error loading image</p>
             {/await}
-        </div>
+        </button>
 {/snippet}
 
 {#snippet emptySlot(i)}
-    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-20 h-16 2xl:w-36 2xl:h-28 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center`}>
+    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center`}>
         <span class="flex flex-col text-xl">
             {#if i===10}
                 <span class="text-lg">🔓</span>
@@ -37,11 +42,11 @@
     {/if}
 {/snippet}
 
-<div class="flex flex-col w-full h-full items-center justify-center space-y-5">
+<div class="flex flex-col h-full w-full items-center justify-center space-y-5">
     <span class="bg-black/70 p-3 text-white font-bold text-4xl">
         {inventoryData.items.length}/{inventoryData.unlockedSlots}
     </span>
-    <div class="relative grid grid-cols-5 gap-0.1 place-items-center border-r-2 border-b-2">
+    <div class="relative grid grid-cols-3 xl:grid-cols-5 max-h-4/5  place-items-center border-r-2 border-b-2 overflow-y-auto overflow-x-hidden ">
         {#each inventoryData.items as item,i}
             {@render inventorySlot(i,item)}
         {/each}
