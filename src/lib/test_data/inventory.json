@@ -108,7 +108,7 @@
     "id": "faa0650d-48ea-42eb-890b-08ec12d22f9d",
     "name": "Ashborne Skullplate",
     "iconPath": "head/Demon horns(artifactum).png",
-    "type": 1,
+    "type": 0,
     "rarity": 5,
     "stats": {
       "armor": 40,
