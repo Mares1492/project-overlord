@@ -8,7 +8,7 @@
     let expeditions = $state([]);
     let pageState = $state({
         loading: true,
-        isBlocking: false;
+        isBlocking: false,
         error: false
     });
 
