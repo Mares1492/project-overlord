@@ -20,11 +20,11 @@
 		"@tailwindcss/vite": "^4.1.10",
 		"@types/better-sqlite3": "^7.6.12",
 		"@types/node": "^22",
-		"drizzle-kit": "^0.30.6",
-		"svelte": "^5.0.0",
-		"svelte-check": "^4.0.0",
-		"tailwindcss": "^4.1.10",
-		"typescript": "^5.0.0",
+		"drizzle-kit": "^0.31.4",
+		"svelte": "^5.37.2",
+		"svelte-check": "^4.3.0",
+		"tailwindcss": "^4.1.11",
+		"typescript": "^5.9.2",
 		"vite": "^7.0.6"
 	},
 	"dependencies": {
