@@ -29,7 +29,9 @@
                 }
                 let msLeft = exp.endTime - Date.now();
                 if (msLeft <= 0) {
-                    completeExpedition(exp.id);
+                    if (exp.status === expeditionStatus.IN_PROGRESS) {
+                        completeExpedition(exp.id);
+                    }
                     return {
                         id: exp.id,
                         name: exp.location.name,
