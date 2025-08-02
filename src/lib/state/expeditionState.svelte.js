@@ -56,14 +56,22 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
 
 export const completeExpedition = (expeditionId) => {
     const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    if (!expedition) {
+        return false
+    }
     expedition.status = expeditionStatus.COMPLETED;
+    return true
 }
 
 export const archiveExpedition = (expeditionId) => {
     const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    if (!expedition) {
+        return false
+    }
     expedition.status = expeditionStatus.ARCHIVED;
     increaseAvailableExpeditionsNumber();
     setServantAsAvailable(expedition.servantId);
+    return true
 }
 
 export const getOngoingExpeditions = () => {
