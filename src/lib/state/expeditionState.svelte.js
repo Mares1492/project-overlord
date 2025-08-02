@@ -60,7 +60,9 @@ export const completeExpedition = (expeditionId) => {
     if (!expedition) {
         return false
     }
-    expedition.status = expeditionStatus.COMPLETED;
+    if (expedition.status === expeditionStatus.IN_PROGRESS) {
+        expedition.status = expeditionStatus.COMPLETED;
+    }
     return true
 }
 
