@@ -8,13 +8,25 @@
     let expeditions = $state([]);
     let pageState = $state({
         loading: true,
-        error: null
+        isBlocking: false;
+        error: false
     });
 
     onMount(() => {
         const interval = setInterval( () => {
             pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
+                if (exp.status === expeditionStatus.COMPLETED) {
+                    return {
+                        id: exp.id,
+                        name: exp.location.name,
+                        servant: getServantById(exp.servantId).name,
+                        status: exp.status,
+                        task: exp.task,
+                        approach: exp.approach,
+                        scale: exp.scale,
+                    }
+                }
                 let msLeft = exp.endTime - Date.now();
                 if (msLeft <= 0) {
                     completeExpedition(exp.id);
@@ -22,7 +34,7 @@
                         id: exp.id,
                         name: exp.location.name,
                         servant: getServantById(exp.servantId).name,
-                        status: exp.status,
+                        status: expeditionStatus.COMPLETED,
                         task: exp.task,
                         approach: exp.approach,
                         scale: exp.scale,
@@ -53,6 +65,12 @@
         return () => clearInterval(interval);
     });
 
+    const handleCompleteClick = (expId) => {
+        if(!archiveExpedition(expId)){
+            pageState.error = true
+        }
+    }
+
 
 </script>
 
@@ -66,7 +84,7 @@
         <span class="text-gray-600">Approach: <i>{expedition.approach}</i></span>
         <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
         {#if expedition.status === expeditionStatus.COMPLETED}
-            <button onclick={()=>archiveExpedition(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
+            <button onclick={()=>handleCompleteClick(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
         {:else}
             <div class="flex flex-row items-center justify-center font-semibold">
                 <span class="border w-12 px-2">{expedition.hours}h</span>:
@@ -82,10 +100,6 @@
         <div class="flex w-full flex-col items-center justify-center ">
             <span class="text-2xl w-full font-bold">Loading ongoing expeditions...</span>
         </div>
-    {:else if pageState.error}
-        <div class="flex w-full flex-col items-center justify-center ">
-            <span class="text-2xl w-full font-bold">Error loading expeditions</span>
-        </div>
     {:else}
         <div transition:slide|global class="flex  w-full flex-col items-center justify-center">
             <span class="text-2xl w-full font-bold">No ongoing expeditions</span>
@@ -97,6 +111,11 @@
         {#each expeditions as expedition}
             {@render expeditionSlot(expedition)}
         {/each}
+    </div>
+{/if}
+{#if pageState.error}
+    <div class="flex w-full flex-col items-center justify-center ">
+        <span class="text-2xl w-full font-bold">Error loading expeditions</span>
     </div>
 {/if}
 
