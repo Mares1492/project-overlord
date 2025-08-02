@@ -13,7 +13,7 @@ export const expeditionStatus = {
 
 //exp -> expedition
 const expeditionTemplate = {
-    id: crypto.randomUUID(),
+    id: undefined,
     location: undefined,
     endTime: undefined,
     startTime: undefined,
@@ -40,6 +40,7 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
         return null;
     }
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
+    newExpedition.id = crypto.randomUUID();
     newExpedition.location = chosenLocation;
     newExpedition.startTime = new Date(); 
     let duration = expeditionSettings.scale.value * 60; // Convert minutes to second
@@ -68,9 +69,12 @@ export const archiveExpedition = (expeditionId) => {
     if (!expedition) {
         return false
     }
-    expedition.status = expeditionStatus.ARCHIVED;
-    increaseAvailableExpeditionsNumber();
-    setServantAsAvailable(expedition.servantId);
+    if (expedition.status === expeditionStatus.COMPLETED) {
+        expedition.status = expeditionStatus.ARCHIVED;
+        increaseAvailableExpeditionsNumber();
+        setServantAsAvailable(expedition.servantId);
+    }
+    
     return true
 }
 
