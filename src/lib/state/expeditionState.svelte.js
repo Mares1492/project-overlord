@@ -24,6 +24,19 @@ const expeditionTemplate = {
     status: expeditionStatus.IDLE,
 }
 
+const getDuration = (expScaleValue) => {
+    switch (expScaleValue) {
+        case 0:
+            return 15;
+        case 1:
+            return 30;
+        case 2:
+            return 45;
+        default:
+            return 60;
+    }
+}
+
 export const getAvailableExpeditionsNumber = () => avalableExpeditionsNumber;
 
 export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber = Math.max(0, avalableExpeditionsNumber - 1);
@@ -43,8 +56,10 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     newExpedition.id = crypto.randomUUID();
     newExpedition.location = chosenLocation;
     newExpedition.startTime = new Date(); 
-    let duration = expeditionSettings.scale.value * 60; // Convert minutes to second
-    newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration>0?duration:1) * 60 * 1000);
+
+    let duration = getDuration(expeditionSettings.scale.value);
+    
+    newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration * 1000));
     newExpedition.servantId = servantId;
     newExpedition.status = expeditionStatus.IN_PROGRESS;
     newExpedition.task = expeditionSettings.task.options[expeditionSettings.task.value].name;
