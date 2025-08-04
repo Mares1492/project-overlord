@@ -4,6 +4,9 @@
     import {getServantById} from '$lib/state/servants.svelte.js';
    	import { slide } from 'svelte/transition';
     import {expeditionStatus} from '$lib/state/expeditionState.svelte';
+    import { goto } from '$app/navigation';
+
+    const {pathUUID} = $props()
 
     let expeditions = $state([]);
     let pageState = $state({
@@ -73,12 +76,22 @@
         }
     }
 
+    const handleExpeditionExpandBtnClick = (expeditionId) => {
+        //TODO: use action with server check instead
+        goto(`/${pathUUID}/expeditions/${expeditionId}`)
+    }
+
 
 </script>
 
 {#snippet expeditionSlot(expedition)}
     <div transition:slide|global class="relative flex flex-col text-sm w-full text-gray-800 space-y-1 hover:text-black items-center justify-center">
-        <span class="absolute -top-1.5 right-3 text-gray-800 cursor-pointer text-2xl hover:text-3xl transition-all hover:translate-x-0.5 hover:-translate-y-0.5 active:cursor-not-allowed">⛶</span>
+        <button 
+            class="absolute -top-1.5 right-1 text-gray-800 cursor-pointer text-shadow-2xs hover:text-shadow-md text-shadow-yellow-600 text-xl hover:text-2xl transition-all hover:translate-x-0.5 hover:-translate-y-0.5 active:cursor-not-allowed"
+            onclick={()=>handleExpeditionExpandBtnClick(expedition.id)}
+        > 
+            📜
+        </button>
         <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
         <span class="text-gray-800">{expedition.servant}</span>

@@ -106,7 +106,7 @@
     <div class="absolute z-1000 w-64 top-25 left-35 h-full flex flex-col space-y-1 items-left">
         <button onclick={()=>expeditionsListToggle = !expeditionsListToggle} class="border-2 text-xl select-none h-10 border-black bg-yellow-500 hover:bg-yellow-400 active:bg-yellow-300 cursor-pointer px-3 py-1.5">Ongoing Expeditions</button>
         {#if expeditionsListToggle}
-            <OngoingExpeditions/>
+            <OngoingExpeditions pathUUID={data.pathUUID}/>
         {/if}
     </div>
     <div class="absolute z-1000 select-none top-25 right-35 flex space-x-1 items-center h-10">
