@@ -54,7 +54,6 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId,expedi
         return null;
     }
 
-    console.log(expeditionOverviewText)
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
     newExpedition.id = crypto.randomUUID();
     newExpedition.location = chosenLocation;
