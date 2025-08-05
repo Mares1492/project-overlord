@@ -70,6 +70,11 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
     return newExpedition;
 }
 
+
+export const getExpeditionById = (expeditionId) => {
+    return expeditionsList.find(exp=>exp.id===expeditionId)
+}
+
 export const completeExpedition = (expeditionId) => {
     const expedition = expeditionsList.find(exp => exp.id === expeditionId);
     if (!expedition) {
