@@ -118,7 +118,7 @@
             <span class="text-2xl w-full font-bold">Loading ongoing expeditions...</span>
         </div>
     {:else}
-        <div transition:slide|global class="flex  w-full flex-col items-center justify-center">
+        <div transition:slide|global class="flex w-full flex-col items-center justify-center">
             <span class="text-2xl w-full font-bold">No ongoing expeditions</span>
             <span class="text-lg w-full">Start one by choosing a location first!</span>
         </div>

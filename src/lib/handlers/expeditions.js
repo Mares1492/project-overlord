@@ -1,4 +1,7 @@
 import expeditionTexts from "$lib/data/expedition_overview.json";
+import {invertedLocationType} from "$lib/enums/enums.js"
+
+const getLocationType = (targetValue) => invertedLocationType[targetValue]
 
 /** * Returns a random item from an array.
  * @param {Array<string>} arr - The array to pick from.
@@ -15,14 +18,10 @@ const randomItem = arr => arr?arr[Math.floor(Math.random() * arr.length)]:"";
 export const getExpeditionOverviewText = (taskIndex,approachIndex,scaleIndex,locationType) => {
     let overviewText = "";
 
-    // Assuming you have imported or defined `expeditionTexts` as your full JSON
-    console.log(randomItem(expeditionTexts.task[taskIndex].locations[locationType]));
-    // Grab matching sets
-    const taskText = randomItem(expeditionTexts.task[taskIndex].locations[locationType]) || [];
-    const approachText = randomItem(expeditionTexts.approach[approachIndex].locations[locationType]) || [];
-    const scaleText = randomItem(expeditionTexts.scale[scaleIndex].text) || [];
+    const taskText = randomItem(expeditionTexts.task[taskIndex].locations[getLocationType(locationType)]);
+    const approachText = randomItem(expeditionTexts.approach[approachIndex].locations[getLocationType(locationType)]);
+    const scaleText = randomItem(expeditionTexts.scale[scaleIndex].text);
 
-    // Merge together into overview
     overviewText = `${taskText} ${approachText} ${scaleText}`;
 
     return overviewText;
