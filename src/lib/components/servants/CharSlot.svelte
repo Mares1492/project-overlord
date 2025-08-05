@@ -1,7 +1,5 @@
 <script>
-    import { is } from "drizzle-orm";
-
-    let {servant,chosenServant=$bindable(),isExpedition=false} = $props();
+    let {servant,chosenServant=$bindable(servant),isExpedition=false} = $props();
 
     const handleInfoClick = () => {
         // Placeholder for future functionality
