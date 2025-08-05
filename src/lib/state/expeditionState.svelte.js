@@ -15,6 +15,7 @@ export const expeditionStatus = {
 const expeditionTemplate = {
     id: undefined,
     location: undefined,
+    overviewText: undefined,
     endTime: undefined,
     startTime: undefined,
     servantId: undefined,
@@ -43,7 +44,7 @@ export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumbe
 
 export const increaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber += 1;
 
-export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
+export const addExpedition = (expeditionSettings,chosenLocation,servantId,expeditionOverviewText) => {
     if(!setServantAsNotAvailable(servantId)) {
         console.log(`Servant with provided ID is not found.`);
         return null;
@@ -52,10 +53,13 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId) => {
         console.log(`No available expeditions left.`);
         return null;
     }
+
+    console.log(expeditionOverviewText)
     const newExpedition = JSON.parse(JSON.stringify(expeditionTemplate));
     newExpedition.id = crypto.randomUUID();
     newExpedition.location = chosenLocation;
     newExpedition.startTime = new Date(); 
+    newExpedition.overviewText = expeditionOverviewText
 
     let duration = getDuration(expeditionSettings.scale.value);
     
