@@ -1,36 +1,55 @@
 <script>
+    import CharSlot from "$lib/components/servants/CharSlot.svelte";
+    import { getServantById } from "$lib/state/servants.svelte";
+    import { onMount } from "svelte";
+
     const {data} = $props()
+    let servant = $state()
+
+    onMount(()=>{
+        if (data.expedition) {
+            servant = getServantById(data.expedition.servantId)
+        }
+    })
 </script>
 
-<div class="w-full h-screen bg-amber-100">
-    <div class="pt-5 px-10 flex flex-col space-y-8">
-        <span class="text-3xl">{data.expedition.location.name}</span>
-        <div class="flex flex-row justify-center space-x-20">
-            <span class="flex flex-row text-xl space-x-2">
-                <span class="font-semibold">Task:</span>
-                <span class="text-left">
-                    {data.expedition.task}
+<div class="flex flex-col w-full h-screen">
+    {#if servant}
+        <span class="text-3xl py-2 px-10 text-slate-200 w-full bg-gray-900">{data.expedition.location.name}</span>
+        <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
+            <div class="flex flex-row text-2xl space-x-5">
+                <CharSlot {servant} />
+                <span class="place-self-center">{servant.name}</span>
+            </div>
+            <div class="flex flex-row justify-start space-x-20">
+                <span class="flex flex-row text-xl space-x-2">
+                    <span class="font-semibold">Task:</span>
+                    <span class="text-left">
+                        {data.expedition.task}
+                    </span>
                 </span>
-            </span>
-            <span class="flex flex-row text-xl space-x-2">
-                <span class="font-semibold">Approach:</span>
-                <span class="text-left">
-                    {data.expedition.approach}
+                <span class="flex flex-row text-xl space-x-2">
+                    <span class="font-semibold">Approach:</span>
+                    <span class="text-left">
+                        {data.expedition.approach}
+                    </span>
                 </span>
-            </span>
-            <span class="flex flex-row text-xl space-x-2">
-                <span class="font-semibold">Scale:</span>
+                <span class="flex flex-row text-xl space-x-2">
+                    <span class="font-semibold">Scale:</span>
+                    <span class="text-left">
+                        {data.expedition.scale}
+                    </span>
+                </span>
+            </div>
+            <span class="w-full h-1 bg-black"></span>
+            <span class="flex flex-col text-xl space-y-3">
+                <span class="font-semibold self-start">Edict</span>
                 <span class="text-left">
-                    {data.expedition.scale}
+                    {data.expedition.overviewText}
                 </span>
             </span>
         </div>
-        <span class="w-full h-1 bg-black"></span>
-        <span class="flex flex-col text-xl space-y-3">
-            <span class="font-semibold">Edict</span>
-            <span class="text-left">
-                {data.expedition.overviewText}
-            </span>
-        </span>
-    </div>
+    {:else}
+        <span class="py-5 text-slate-200 w-full bg-gray-900">Servant not found</span>
+    {/if}
 </div>
