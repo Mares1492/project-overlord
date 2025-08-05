@@ -17,6 +17,8 @@ export const EquipmentSlot = {
   neck: 7
 };
 
+export const invertedEquipmentSlot = invertObject(EquipmentSlot)
+
 export const ItemType = {
   helmet: 1,
   hat:2,
@@ -32,6 +34,7 @@ export const ItemType = {
   trinket: 12
 };
 
+export const invertedItemType = invertObject(ItemType)
 
 export const ItemRarity = {
     common: 0,
@@ -40,6 +43,8 @@ export const ItemRarity = {
     epic: 3,
     legendary: 4
 };
+
+export const invertedItemRarity = invertObject(ItemRarity)
 
 export const LocationType = {
   ruins: 0,
@@ -55,3 +60,4 @@ export const LocationType = {
   pos_energy: 10
 };
 
+export const invertedLocationType = invertObject(LocationType)
