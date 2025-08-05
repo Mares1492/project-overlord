@@ -7,9 +7,10 @@
 
     const {closeLocation, chosenLocation} = $props();
     let chosenServant = $state(getServants()[0]);
+    let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
 
     const launchExpedition = () => {
-        let newExpedition = addExpedition(expeditionSettings,chosenLocation, chosenServant.id)
+        let newExpedition = addExpedition(expeditionSettings,chosenLocation, chosenServant.id, expeditionOverviewText)
 
         if (newExpedition === null) {
             console.error(`Failed to launch expedition: Servant is not found.`);
@@ -72,7 +73,7 @@
                 <span class="text-xl mb-3.5 font-black">Edict</span>
                 <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded text-gray-900 py-2.5 px-5 border-2 border-gray-500 bg-gray-200">
                     <!-- This section is for overview text -->
-                   <p>{getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type)}</p> 
+                   <p>{expeditionOverviewText}</p> 
                 </div>
             </div>
         </div>
