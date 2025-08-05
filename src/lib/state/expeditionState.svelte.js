@@ -76,7 +76,7 @@ export const getExpeditionById = (expeditionId) => {
 }
 
 export const completeExpedition = (expeditionId) => {
-    const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    const expedition = getExpeditionById(expeditionId)
     if (!expedition) {
         return false
     }
@@ -87,7 +87,7 @@ export const completeExpedition = (expeditionId) => {
 }
 
 export const archiveExpedition = (expeditionId) => {
-    const expedition = expeditionsList.find(exp => exp.id === expeditionId);
+    const expedition = getExpeditionById(expeditionId)
     if (!expedition) {
         return false
     }
