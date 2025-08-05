@@ -102,3 +102,7 @@ export const getOngoingExpeditions = () => {
 export const getCompletedExpeditions = () => {
     return expeditionsList.filter(exp => exp.status === expeditionStatus.COMPLETED);
 }
+
+export const getAllExpeditions = () => {
+    return expeditionsList
+}
