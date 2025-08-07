@@ -3,7 +3,7 @@
     import {onMount} from 'svelte';
     import {getServantById} from '$lib/state/servants.svelte.js';
    	import { slide,scale } from 'svelte/transition';
-    import {expeditionStatus} from '$lib/state/expeditionState.svelte';
+    import {ExpeditionStatus} from '$lib/enums/enums.js';
     import { goto } from '$app/navigation';
 
     const {pathUUID} = $props()
@@ -19,7 +19,7 @@
         const interval = setInterval( () => {
             pageState.loading = false;
             expeditions = getOngoingExpeditions().map( exp => {
-                if (exp.status === expeditionStatus.COMPLETED) {
+                if (exp.status === ExpeditionStatus.COMPLETED) {
                     return {
                         id: exp.id,
                         name: exp.location.name,
@@ -32,14 +32,14 @@
                 }
                 let msLeft = exp.endTime - Date.now();
                 if (msLeft <= 0) {
-                    if (exp.status === expeditionStatus.IN_PROGRESS) {
+                    if (exp.status === ExpeditionStatus.IN_PROGRESS) {
                         completeExpedition(exp.id);
                     }
                     return {
                         id: exp.id,
                         name: exp.location.name,
                         servant: getServantById(exp.servantId).name,
-                        status: expeditionStatus.COMPLETED,
+                        status: ExpeditionStatus.COMPLETED,
                         task: exp.task,
                         approach: exp.approach,
                         scale: exp.scale,
@@ -100,7 +100,7 @@
         <span class="text-gray-600">Task: <i>{expedition.task}</i></span>
         <span class="text-gray-600">Approach: <i>{expedition.approach}</i></span>
         <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
-        {#if expedition.status === expeditionStatus.COMPLETED}
+        {#if expedition.status === ExpeditionStatus.COMPLETED}
             <button onclick={()=>handleCompleteClick(expedition.id)} class="bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-white font-semibold">Complete</button>
         {:else}
             <div class="flex flex-row items-center justify-center font-semibold">
