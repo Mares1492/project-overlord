@@ -1,5 +1,5 @@
 <script>
-    const {inventoryData} = $props();
+    const {inventoryData,showCounter=true} = $props();
     //TODO: move from equip type to weapon types
     const itemTypeDisplayClasses = ["top-5","-top-5","","","","left-5 -bottom-9","","right-8 -bottom-10","-top-1"]
 
@@ -44,9 +44,11 @@
 {/snippet}
 
 <div class="flex flex-col h-full w-full items-center justify-center space-y-5">
-    <span class="bg-black/70 p-3 text-white font-bold text-4xl">
-        {inventoryData.items.length}/{inventoryData.unlockedSlots}
-    </span>
+    {#if showCounter}
+        <span class="bg-black/70 p-3 text-white font-bold text-4xl">
+            {inventoryData.items.length}/{inventoryData.unlockedSlots}
+        </span>
+    {/if}
     <div class="relative grid grid-cols-3 xl:grid-cols-5 max-h-4/5  place-items-center border-r-2 border-b-2 overflow-y-auto overflow-x-hidden ">
         {#each inventoryData.items as item,i}
             {@render inventorySlot(i,item)}
