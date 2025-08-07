@@ -3,6 +3,7 @@
     import { getServantById } from "$lib/state/servants.svelte";
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
+    import Inventory from "$lib/components/inventory/Inventory.svelte";
 
     const {data} = $props()
     let servant = $state()
@@ -53,18 +54,23 @@
                     </span>
                 </span>
                     <span class="w-full h-1 bg-black"></span>
-                    <span class="flex flex-col text-xl space-y-3 self-start items-start">
-                        <span class="font-semibold">Report</span>
-                        {#if data.expedition.status > ExpeditionStatus.IN_PROGRESS}
-                            {#each data.expedition.events as event} 
-                                <div>
-                                    {event}
-                                </div>
-                            {/each}
-                        {:else}
-                                <span>Will be available after the expeditions end.</span>
-                        {/if}
-                    </span>
+                    {#if data.expedition.status > ExpeditionStatus.IN_PROGRESS}
+                        <div class="flex flex-col text-xl space-y-3 self-start items-start">
+                            <span class="font-semibold">Report</span>
+                                {#each data.expedition.events as event} 
+                                    <div>
+                                        {event}
+                                    </div>
+                                {/each}
+                        </div>
+                        <span class="w-full h-1 bg-black"></span>
+                        <div class="flex flex-col self-start items-start h-64">
+                            <span class="font-semibold ">Loot</span>
+                            <Inventory inventoryData={{maxSlots:5,items:[]}} showCounter={false}/>
+                        </div>
+                    {:else}
+                        <span>Results will be available after the expedition's end.</span>
+                    {/if}
             </div>
         {:else}
             <span class="py-5 text-slate-200 w-full bg-gray-900">Servant not found</span>
