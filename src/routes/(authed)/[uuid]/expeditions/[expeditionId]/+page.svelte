@@ -2,6 +2,7 @@
     import CharSlot from "$lib/components/servants/CharSlot.svelte";
     import { getServantById } from "$lib/state/servants.svelte";
     import { onMount } from "svelte";
+    import {ExpeditionStatus} from '$lib/enums/enums.js'
 
     const {data} = $props()
     let servant = $state()
@@ -21,7 +22,7 @@
                 <div class="flex flex-col md:flex-row space-y-7 space-x-20">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
                         {servant.name}
-                        <CharSlot {servant}/>
+                        <CharSlot {servant} status={data.expedition.status}/>
                     </div>
                     <div class="md:place-self-center space-y-2">
                         <span class="flex flex-row text-xl space-x-2">
@@ -51,15 +52,19 @@
                         {data.expedition.overviewText}
                     </span>
                 </span>
-                <span class="w-full h-1 bg-black"></span>
-                <span class="flex flex-col text-xl space-y-3 self-start items-start">
-                    <span class="font-semibold">Report</span>
-                    {#each data.expedition.events as event} 
-                        <div>
-                            {event}
-                        </div>
-                    {/each}
-                </span>
+                    <span class="w-full h-1 bg-black"></span>
+                    <span class="flex flex-col text-xl space-y-3 self-start items-start">
+                        <span class="font-semibold">Report</span>
+                        {#if data.expedition.status > ExpeditionStatus.IN_PROGRESS}
+                            {#each data.expedition.events as event} 
+                                <div>
+                                    {event}
+                                </div>
+                            {/each}
+                        {:else}
+                                <span>Will be available after the expeditions end.</span>
+                        {/if}
+                    </span>
             </div>
         {:else}
             <span class="py-5 text-slate-200 w-full bg-gray-900">Servant not found</span>
