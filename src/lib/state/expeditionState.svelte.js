@@ -1,15 +1,8 @@
 import { setServantAsNotAvailable, setServantAsAvailable } from '$lib/state/servants.svelte.js';
+import {ExpeditionStatus} from '$lib/enums/enums.js'
 
 export const expeditionsList = $state([]);
 let avalableExpeditionsNumber = $state(3);
-
-export const expeditionStatus = {
-    IDLE: 0,
-    IN_PROGRESS: 1,
-    COMPLETED: 2,
-    ARCHIVED: 3,
-    FAILED: 4,
-}
 
 //exp -> expedition
 const expeditionTemplate = {
@@ -22,7 +15,7 @@ const expeditionTemplate = {
     task: undefined,
     scale: undefined,
     approach: undefined,
-    status: expeditionStatus.IDLE,
+    status: ExpeditionStatus.IDLE,
 }
 
 const getDuration = (expScaleValue) => {
@@ -64,7 +57,7 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId,expedi
     
     newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration * 1000));
     newExpedition.servantId = servantId;
-    newExpedition.status = expeditionStatus.IN_PROGRESS;
+    newExpedition.status = ExpeditionStatus.IN_PROGRESS;
     newExpedition.task = expeditionSettings.task.options[expeditionSettings.task.value].name;
     newExpedition.approach = expeditionSettings.approach.options[expeditionSettings.approach.value].name;
     newExpedition.scale = expeditionSettings.scale.options[expeditionSettings.scale.value].name;
@@ -83,8 +76,8 @@ export const completeExpedition = (expeditionId) => {
     if (!expedition) {
         return false
     }
-    if (expedition.status === expeditionStatus.IN_PROGRESS) {
-        expedition.status = expeditionStatus.COMPLETED;
+    if (expedition.status === ExpeditionStatus.IN_PROGRESS) {
+        expedition.status = ExpeditionStatus.COMPLETED;
     }
     return true
 }
@@ -94,8 +87,8 @@ export const archiveExpedition = (expeditionId) => {
     if (!expedition) {
         return false
     }
-    if (expedition.status === expeditionStatus.COMPLETED) {
-        expedition.status = expeditionStatus.ARCHIVED;
+    if (expedition.status === ExpeditionStatus.COMPLETED) {
+        expedition.status = ExpeditionStatus.ARCHIVED;
         increaseAvailableExpeditionsNumber();
         setServantAsAvailable(expedition.servantId);
     }
@@ -104,11 +97,11 @@ export const archiveExpedition = (expeditionId) => {
 }
 
 export const getOngoingExpeditions = () => {
-    return expeditionsList.filter(exp => (exp.status === expeditionStatus.IN_PROGRESS || exp.status === expeditionStatus.COMPLETED));
+    return expeditionsList.filter(exp => (exp.status === ExpeditionStatus.IN_PROGRESS || exp.status === ExpeditionStatus.COMPLETED));
 }
 
 export const getCompletedExpeditions = () => {
-    return expeditionsList.filter(exp => exp.status === expeditionStatus.COMPLETED);
+    return expeditionsList.filter(exp => exp.status === ExpeditionStatus.COMPLETED);
 }
 
 export const getAllExpeditions = () => {
