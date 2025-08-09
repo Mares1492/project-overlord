@@ -36,6 +36,8 @@
         })
         return () => clearTimeout(inverval)
     })
+
+    const handleCompleteClick = (expId) => archiveExpedition(expId);
 </script>
 
 <div class="flex flex-col w-full h-screen">
