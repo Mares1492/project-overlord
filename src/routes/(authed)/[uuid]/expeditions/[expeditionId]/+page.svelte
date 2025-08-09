@@ -4,14 +4,37 @@
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
     import Inventory from "$lib/components/inventory/Inventory.svelte";
+    import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
 
     const {data} = $props()
     let servant = $state()
+    let timeData = $state()
 
     onMount(()=>{
         if (data.expedition) {
             servant = getServantById(data.expedition.servantId)
         }
+        const inverval = setInterval(()=>{
+            let msLeft = data.expedition.endTime - Date.now();
+            if (msLeft <= 0) {
+                if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
+                    completeExpedition(data.expedition.id);
+                }
+                return undefined
+            }
+            let totalSeconds = Math.floor(msLeft / 1000);
+
+            let hours = Math.floor(totalSeconds / 3600);
+            let minutes = Math.floor((totalSeconds % 3600) / 60);
+            let seconds = totalSeconds % 60;
+            
+            timeData = { 
+                hours,
+                minutes,
+                seconds
+            };
+        })
+        return () => clearTimeout(inverval)
     })
 </script>
 
