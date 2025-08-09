@@ -49,12 +49,12 @@
         {#if servant}
             <span class="text-3xl py-2 px-10 text-slate-200 w-full bg-gray-900">{data.expedition.location.name}</span>
             <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
-                <div class="flex flex-col md:flex-row space-y-7 space-x-20">
+                <div class="flex flex-col md:flex-row space-x-20 w-full">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
                         {servant.name}
                         <CharSlot {servant} status={data.expedition.status}/>
                     </div>
-                    <div class="md:place-self-center space-y-2">
+                    <div class="flex flex-col justify-around ">
                         <span class="flex flex-row text-xl space-x-2">
                             <span class="font-semibold">Task:</span>
                             <span class="text-left">
