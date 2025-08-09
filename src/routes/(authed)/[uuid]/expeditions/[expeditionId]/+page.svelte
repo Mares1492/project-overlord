@@ -40,6 +40,10 @@
     const handleCompleteClick = (expId) => archiveExpedition(expId);
 </script>
 
+{#snippet timeContainer(time)}
+    <span class="w-12 h-12 px-1 py-0.5 bg-gray-500 text-amber-200 content-center">{time}</span>
+{/snippet}
+
 <div class="flex flex-col w-full h-screen">
     {#if data.expedition}
         {#if servant}
