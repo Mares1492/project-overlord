@@ -41,13 +41,16 @@
 </script>
 
 {#snippet timeContainer(time)}
-    <span class="w-12 h-12 px-1 py-0.5 bg-gray-500 text-amber-200 content-center">{time}</span>
+    <span 
+        class="w-12 h-12 px-1 py-0.5 bg-gray-900 border border-gray-500 text-amber-100 content-center">
+        {time}
+    </span>
 {/snippet}
 
 <div class="flex flex-col w-full h-screen">
     {#if data.expedition}
         {#if servant}
-            <span class="text-3xl py-2 px-10 text-slate-200 w-full bg-gray-900">{data.expedition.location.name}</span>
+            <span class="text-3xl py-2 px-10 text-amber-100 w-full bg-gray-900">{data.expedition.location.name}</span>
             <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
                 <div class="flex flex-col md:flex-row space-x-20 w-full">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
