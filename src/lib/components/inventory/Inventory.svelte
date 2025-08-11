@@ -18,6 +18,7 @@
     /**@param {string} type*/
     const getItemDisplayClass = (type) => itemTypeDisplayClasses[invertedItemType[type]] ?? "";
 
+    let chosenItemId = $state()
 </script>
 
 {#snippet itemImage(src,name,className)}
@@ -27,8 +28,7 @@
 {/snippet}
 
 {#snippet itemSlot(item)}
-    <input type="hidden" name="itemId" value={item.id}>
-    <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
+    <button onclick={()=>chosenItemId=item.id} class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
         {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
             {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
         {:catch _error}
@@ -59,6 +59,7 @@
 {/snippet}
 
 <div class="flex flex-col h-full w-full items-center justify-center space-y-5">
+    <input type="hidden" name="itemId" value={chosenItemId}>
     {#if showCounter}
         <span class="bg-black/70 p-3 text-white font-bold text-4xl">
             {inventoryData.items.length}/{inventoryData.unlockedSlots}
