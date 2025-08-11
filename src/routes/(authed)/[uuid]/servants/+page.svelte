@@ -76,10 +76,10 @@
         </div>
     </div>
     <div class="w-1/2 h-full flex flex-row">
-        <ul class="h-full flex flex-col justify-center border-4 w-26 2xl:w-36 border-amber-950 bg-orange-950 text-white px-1">
+        <ul class="h-full flex flex-col justify-center border-4  border-amber-950 bg-orange-950 text-white w-32 px-5">
             {#each chosenServant.stats as stat(stat.name)}
                 <li class="flex flex-row space-x-2 justify-between">
-                    <span class="2xl:text-3xl">{stat.shortName}:</span><span class="font-semibold text-3xl 2xl:text-4xl">{stat.value}</span>
+                    <span class="text-xl 2xl:text-2xl">{stat.shortName}:</span><span class="font-semibold text-2xl 2xl:text-3xl">{stat.value}</span>
                 </li>
             {/each}
         </ul>
