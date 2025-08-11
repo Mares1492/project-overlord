@@ -12,9 +12,11 @@
 
     const {inventoryData,showCounter=true} = $props();
     //TODO: move from equip type to weapon types
-    const itemTypeDisplayClasses = ["top-5","-top-5","","","","left-5 -bottom-9","","right-8 -bottom-10","-top-1"]
 
     const itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/feet/*.png","$lib/assets/items/hands/*.png","$lib/assets/items/head/*.png","$lib/assets/items/legs/*.png","$lib/assets/items/magic_off_hand/*.png","$lib/assets/items/neck/*.png","$lib/assets/items/off_hand/*.png","$lib/assets/items/two_handed_weapon/*.png","$lib/assets/items/weapon/*.png"], {query: '?url' });
+
+    /**@param {string} type*/
+    const getItemDisplayClass = (type) => itemTypeDisplayClasses[invertedItemType[type]] ?? "";
 
 </script>
 
@@ -26,7 +28,7 @@
 {#snippet itemSlot(item)}
         <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-amber-100   border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
             {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
-                {@render itemImage(module.default,item.name,itemTypeDisplayClasses[item.type])}
+                {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
             {:catch _error}
                 <p>Error loading image</p>
             {/await}
