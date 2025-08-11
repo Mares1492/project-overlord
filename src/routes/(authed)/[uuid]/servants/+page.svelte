@@ -2,11 +2,13 @@
     import {getServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     import Inventory from '$lib/components/inventory/Inventory.svelte';
+    import { enhance } from '$app/forms';
     
     const {data} = $props();
 
     let chosenServant = $state(getServants()[0]);
     let isChars = $state(true);
+
 </script>
 
 {#snippet lockedSlot()}
@@ -70,7 +72,9 @@
                         </div>
                     </div>
                 {:else}
-                    <Inventory inventoryData={data.inventory}/>
+                    <form use:enhance method="POST" action="?/equipItem">
+                        <Inventory inventoryData={data.inventory}/>
+                    </form>
                 {/if}
             </div>
         </div>
