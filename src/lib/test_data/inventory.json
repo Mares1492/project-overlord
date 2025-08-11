@@ -1,6 +1,7 @@
 [
   {
     "id": "b1a79fd3-073f-4f9d-9f5e-3f91b6e4d540",
+    "equipped": false,
     "name": "Shadowfang Aegis",
     "iconPath": "off_hand/Ornate Shield(rare).png",
     "type": 9,
@@ -16,6 +17,7 @@
   },
   {
     "id": "d73c0ea3-30f0-4d96-a5d2-3a5242d8fd02",
+    "equipped": false,
     "name": "Whisperblade of the Pale Queen",
     "iconPath": "off_hand/Iron off hand dagger.png",
     "type": 9,
@@ -31,6 +33,7 @@
   },
   {
     "id": "af8e2cc6-36c8-4210-93b9-6c5dd961f508",
+    "equipped": false,
     "name": "Cowl of Eternal Dread",
     "iconPath": "head/Stealth hood.png",
     "type": 1,
@@ -46,6 +49,7 @@
   },
   {
     "id": "a382df6e-e0d6-44fd-9b49-4cc75d7dc917",
+    "equipped": false,
     "name": "Skull of the Withered God",
     "iconPath": "magic_off_hand/Horned skull(rare).png",
     "type": 10,
@@ -61,6 +65,7 @@
   },
   {
     "id": "4d1a4319-3f91-44db-93e3-4290e3bb0539",
+    "equipped": false,
     "name": "Graveforged Gauntlets",
     "iconPath": "hands/Iron gauntlets.png",
     "type": 6,
@@ -76,6 +81,7 @@
   },
   {
     "id": "1c67dcd6-741c-431e-9fa4-e4e1aa0278c7",
+    "equipped": false,
     "name": "Chromium light cuirass",
     "iconPath": "armor/Chromium light cuirass(uncommon).png",
     "type": 3,
@@ -91,6 +97,7 @@
   },
   {
     "id": "21ab07be-29d2-4aef-975f-9378ed6c67fa",
+    "equipped": false,
     "name": "Mystic scroll",
     "iconPath": "magic_off_hand/Mystic scroll(rare).png",
     "type": 10,
@@ -106,6 +113,7 @@
   },
   {
     "id": "faa0650d-48ea-42eb-890b-08ec12d22f9d",
+    "equipped": false,
     "name": "Ashborne Skullplate",
     "iconPath": "head/Demon horns(artifactum).png",
     "type": 1,
@@ -121,6 +129,7 @@
   },
   {
     "id": "a8a4fc67-e35d-4f45-8b3d-8cf0875c82b1",
+    "equipped": false,
     "name": "Bloodbane Scimitar",
     "iconPath": "weapon/Mage blade(uncommon).png",
     "type": 7,
@@ -136,6 +145,7 @@
   },
   {
     "id": "f1bdbdd3-ffdc-4b2e-b2cd-c29460b2c65f",
+    "equipped": false,
     "name": "Hearth of the Dragon",
     "iconPath": "neck/Ruby necklace(uncommon).png",
     "type": 11,
