@@ -1,4 +1,15 @@
 <script>
+    import {invertedItemType} from "$lib/enums/enums.js"
+    
+    const itemTypeDisplayClasses = {
+        helmet: "top-5",
+        armor: "-top-5",
+        offHand: "-left-8 -top-14",
+        weapon: "-top-15 left-4",
+        magicOffHand: "-top-18 -left-9",
+        hands:"-top-12"
+    }
+
     const {inventoryData,showCounter=true} = $props();
     //TODO: move from equip type to weapon types
     const itemTypeDisplayClasses = ["top-5","-top-5","","","","left-5 -bottom-9","","right-8 -bottom-10","-top-1"]
