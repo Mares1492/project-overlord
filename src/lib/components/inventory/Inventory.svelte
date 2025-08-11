@@ -20,13 +20,14 @@
 
 </script>
 
-{#snippet itemImage(src,name,className)}
-    <img class={`absolute select-none pointer-events-none z-5 ${className}`} {src} alt={name} />
+{#snippet  itemImage(src,name,className)}
+    <button class="pointer-events-none z-5">
+        <img class={`absolute select-none inset-0 ${className}`} {src} alt={name} />
+    </button>
 {/snippet}
 
-
 {#snippet itemSlot(item)}
-        <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-amber-100   border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
+        <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
             {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
                 {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
             {:catch _error}
@@ -36,7 +37,7 @@
 {/snippet}
 
 {#snippet emptySlot(i)}
-    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black hover:bg-amber-100  items-center border-l-2 border-t-2  justify-center`}>
+    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center`}>
         <span class="flex flex-col text-xl">
             {#if i===10}
                 <span class="text-lg">🔓</span>
