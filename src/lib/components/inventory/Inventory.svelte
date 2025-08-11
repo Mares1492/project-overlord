@@ -1,6 +1,6 @@
 <script>
     import {invertedItemType} from "$lib/enums/enums.js"
-    
+
     const itemTypeDisplayClasses = {
         helmet: "top-5",
         armor: "-top-5",
@@ -20,20 +20,21 @@
 
 </script>
 
-{#snippet  itemImage(src,name,className)}
-    <button class="pointer-events-none z-5">
+{#snippet itemImage(src,name,className)}
+    <span class="pointer-events-none">
         <img class={`absolute select-none inset-0 ${className}`} {src} alt={name} />
-    </button>
+    </span>
 {/snippet}
 
 {#snippet itemSlot(item)}
-        <button class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
-            {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
-                {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
-            {:catch _error}
-                <p>Error loading image</p>
-            {/await}
-        </button>
+    <input type="hidden" name="itemId" value={item.id}>
+    <button onclick={()=>handleSlotClick(item.id)} class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
+        {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
+            {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
+        {:catch _error}
+            <p>Error loading image</p>
+        {/await}
+    </button>
 {/snippet}
 
 {#snippet emptySlot(i)}
