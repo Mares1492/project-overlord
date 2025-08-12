@@ -56,3 +56,9 @@ export const itemTypes = pgTable('item_types', {
 	name: text('email').notNull() 
 })
 
+export const slotTypes = pgTable('slot_types', {
+	id: serial('id').primaryKey(),
+	name: text('email').notNull() 
+})
+
+
