@@ -37,3 +37,8 @@ export const keeps = pgTable('keeps', {
 	gold: integer('gold').notNull().default(500),
 	gems: integer('gems').notNull().default(0)
 });
+
+export const races = pgTable('races',{
+	id: serial('id').primaryKey(),
+	name: text('race').notNull()
+})
