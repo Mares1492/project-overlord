@@ -73,6 +73,7 @@
                     </div>
                 {:else}
                     <form use:enhance method="POST" action="?/equipItem">
+                        <input type="hidden" name="servantId" value={chosenServant.id}>
                         <Inventory inventoryData={data.inventory}/>
                     </form>
                 {/if}
