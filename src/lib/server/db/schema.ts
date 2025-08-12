@@ -62,3 +62,13 @@ export const slotTypes = pgTable('slot_types', {
 })
 
 
+export const items = pgTable('items', {
+	id: serial('id').primaryKey(),
+	name: text("name").notNull(),
+	itemTypeId: integer('item_type_id')
+		.notNull()
+		.references(() => itemTypes.id),
+	slotTypeId: integer('slot_type_id')
+	.notNull()
+	.references(() => slotTypes.id),
+})
