@@ -50,3 +50,9 @@ export const servants = pgTable('servants', {
 		.notNull()
 		.references(() => users.id),
 })
+
+export const itemTypes = pgTable('item_types', {
+	id: serial('id').primaryKey(),
+	name: text('email').notNull() 
+})
+
