@@ -54,6 +54,14 @@ export const servants = pgTable('servants', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
+	raceId: integer('race_id')
+		.notNull()
+		.references(()=>races.id),
+	name: text('name').notNull(),
+	uuid: uuid('uuid').notNull(),
+	status: integer('status')
+		.notNull()
+		.references(() => servantStatuses.id)
 })
 
 export const attributes = pgTable('attributes', {
