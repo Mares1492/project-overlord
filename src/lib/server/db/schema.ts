@@ -4,7 +4,8 @@ import {
 	text,
 	integer,
 	timestamp,
-	uuid
+	uuid,
+	varchar
 } from 'drizzle-orm/pg-core';
 
 export const users = pgTable('users', {
@@ -49,6 +50,12 @@ export const servants = pgTable('servants', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
+})
+
+export const attributes = pgTable('attributes', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+	shortName: varchar('short_name', { length: 12 }).notNull()
 })
 
 export const itemTypes = pgTable('item_types', {
