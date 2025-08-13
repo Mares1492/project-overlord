@@ -106,3 +106,15 @@ export const itemAttributes = pgTable('item_attributes',{
 	
 })
 
+export const servant_items = pgTable('servant_items', {
+	id: serial('id').primaryKey(),
+	servantId: integer('servant_id')
+		.notNull()
+		.references(() => servants.id),
+	itemId: integer('item_id')
+		.notNull()
+		.references(() => items.id),
+	slotTypeId: integer('slot_type_id')
+		.notNull()
+		.references(() => slotTypes.id)
+});
