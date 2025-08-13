@@ -44,6 +44,10 @@ export const races = pgTable('races',{
 	name: text('race').notNull()
 })
 
+export const servantStatuses = pgTable('servant_statuses', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+}); 
 
 export const servants = pgTable('servants', {
 	id: serial('id').primaryKey(),
