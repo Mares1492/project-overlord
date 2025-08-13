@@ -70,6 +70,17 @@ export const attributes = pgTable('attributes', {
 	shortName: varchar('short_name', { length: 12 }).notNull()
 })
 
+export const servantAttribute = pgTable('servant_attribute', {
+	id: serial('id').primaryKey(),
+	servantId: integer('servant_id')
+		.notNull()
+		.references(() => servants.id),
+	attributeId: integer('attribute_id')
+		.notNull()
+		.references(() => attributes.id),
+	value: integer('value').notNull()
+});0
+
 export const itemTypes = pgTable('item_types', {
 	id: serial('id').primaryKey(),
 	name: text('email').notNull() 
@@ -79,7 +90,6 @@ export const slotTypes = pgTable('slot_types', {
 	id: serial('id').primaryKey(),
 	name: text('email').notNull() 
 })
-
 
 export const items = pgTable('items', {
 	id: serial('id').primaryKey(),
@@ -115,10 +125,9 @@ export const itemAttributes = pgTable('item_attributes',{
 	itemRarityId: integer('item_rarity_id')
 		.notNull()
 		.references(() => itemRarities.id),
-	
 })
 
-export const servant_items = pgTable('servant_items', {
+export const servantItems = pgTable('servant_items', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
 		.notNull()
