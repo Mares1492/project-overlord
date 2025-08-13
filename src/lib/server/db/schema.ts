@@ -79,3 +79,9 @@ export const items = pgTable('items', {
 	.notNull()
 	.references(() => slotTypes.id),
 })
+
+export const itemRarityTypes = pgTable('item_rarity_types', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+})
+
