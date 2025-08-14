@@ -43,47 +43,6 @@ export const keeps = pgTable('keeps', {
 	gems: integer('gems').notNull().default(0)
 });
 
-export const races = pgTable('races',{
-	id: serial('id').primaryKey(),
-	name: text('race').notNull()
-})
-
-export const servantStatuses = pgTable('servant_statuses', {
-	id: serial('id').primaryKey(),
-	name: text('name').notNull(),
-}); 
-
-export const servants = pgTable('servants', {
-	id: serial('id').primaryKey(),
-	userId: integer('user_id')
-		.notNull()
-		.references(() => users.id),
-	raceId: integer('race_id')
-		.notNull()
-		.references(()=>races.id),
-	name: text('name').notNull(),
-	uuid: uuid('uuid').notNull(),
-	status: integer('status')
-		.notNull()
-		.references(() => servantStatuses.id)
-})
-
-export const attributes = pgTable('attributes', {
-	id: serial('id').primaryKey(),
-	name: text('name').notNull(),
-	shortName: varchar('short_name', { length: 12 }).notNull()
-})
-
-export const servantAttribute = pgTable('servant_attribute', {
-	id: serial('id').primaryKey(),
-	servantId: integer('servant_id')
-		.notNull()
-		.references(() => servants.id),
-	attributeId: integer('attribute_id')
-		.notNull()
-		.references(() => attributes.id),
-	value: integer('value').notNull()
-});0
 // Items
 
 export const itemTypes = pgTable('item_types', {
@@ -133,6 +92,49 @@ export const itemAttributes = pgTable('item_attributes',{
 })
 
 // Servants
+
+export const races = pgTable('races',{
+	id: serial('id').primaryKey(),
+	name: text('race').notNull()
+})
+
+export const servantStatuses = pgTable('servant_statuses', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+}); 
+
+export const servants = pgTable('servants', {
+	id: serial('id').primaryKey(),
+	userId: integer('user_id')
+		.notNull()
+		.references(() => users.id),
+	raceId: integer('race_id')
+		.notNull()
+		.references(()=>races.id),
+	name: text('name').notNull(),
+	uuid: uuid('uuid').notNull(),
+	status: integer('status')
+		.notNull()
+		.references(() => servantStatuses.id)
+})
+
+export const attributes = pgTable('attributes', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+	shortName: varchar('short_name', { length: 12 }).notNull()
+})
+
+export const servantAttribute = pgTable('servant_attribute', {
+	id: serial('id').primaryKey(),
+	servantId: integer('servant_id')
+		.notNull()
+		.references(() => servants.id),
+	attributeId: integer('attribute_id')
+		.notNull()
+		.references(() => attributes.id),
+	value: integer('value').notNull()
+});
+
 export const servantItems = pgTable('servant_items', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
