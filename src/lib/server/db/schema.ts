@@ -27,6 +27,7 @@ export const sessions = pgTable('sessions', {
 });
 
 // Keep
+// TODO: Add tables from model
 
 export const keeps = pgTable('keeps', {
 	id: serial('id').primaryKey(),
