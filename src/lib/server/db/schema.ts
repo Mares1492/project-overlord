@@ -8,6 +8,8 @@ import {
 	varchar
 } from 'drizzle-orm/pg-core';
 
+// User Session
+
 export const users = pgTable('users', {
 	id: serial('id').primaryKey(), // auto-incrementing integer
 	email: text('email').notNull().unique(),
@@ -23,6 +25,8 @@ export const sessions = pgTable('sessions', {
 		.references(() => users.id),
 	createdAt: timestamp('created_at', { withTimezone: false }).defaultNow()
 });
+
+// Keep
 
 export const keeps = pgTable('keeps', {
 	id: serial('id').primaryKey(),
@@ -80,6 +84,7 @@ export const servantAttribute = pgTable('servant_attribute', {
 		.references(() => attributes.id),
 	value: integer('value').notNull()
 });0
+// Items
 
 export const itemTypes = pgTable('item_types', {
 	id: serial('id').primaryKey(),
@@ -127,6 +132,7 @@ export const itemAttributes = pgTable('item_attributes',{
 		.references(() => itemRarities.id),
 })
 
+// Servants
 export const servantItems = pgTable('servant_items', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
