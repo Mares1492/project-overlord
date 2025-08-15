@@ -47,12 +47,12 @@ export const keeps = pgTable('keeps', {
 // Items
 
 export const itemTypes = pgTable('item_types', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	name: text('email').notNull() 
 })
 
 export const slotTypes = pgTable('slot_types', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	name: text('email').notNull() 
 })
 
@@ -65,15 +65,16 @@ export const items = pgTable('items', {
 	slotTypeId: integer('slot_type_id')
 	.notNull()
 	.references(() => slotTypes.id),
+	uuid: uuid('uuid').notNull()
 })
 
 export const itemRarityTypes = pgTable('item_rarity_types', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	name: text('name').notNull(),
 })
 
 export const itemRarities = pgTable('item_rarities', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	itemId: integer('item_id')
 		.notNull()
 		.references(() => items.id),
@@ -148,3 +149,5 @@ export const servantItems = pgTable('servant_items', {
 		.notNull()
 		.references(() => slotTypes.id)
 });
+
+// Events
