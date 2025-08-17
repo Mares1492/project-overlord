@@ -51,6 +51,15 @@ export const extensionBuilding = pgTable('extension_building', {
 	name: varchar('name', { length: 100 }).notNull()
 });
 
+export const extensionUpgradeCosts = pgTable('extension_upgrade_costs', {
+	id: serial('id').primaryKey(),
+	extensionBuildingId: integer('extension_building_id')
+		.notNull()
+		.references(() => extensionBuilding.id),
+	cost: integer('cost').notNull(),
+	lvl: integer('lvl').notNull().default(1),
+});
+
 });
 
 // Items
