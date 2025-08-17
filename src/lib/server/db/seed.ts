@@ -1,7 +1,7 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, itemRarityTypes } from './schema';
+import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuilding } from './schema';
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -41,6 +41,22 @@ const buildingBuffTypeValues = [
   { id:1, name: "barracks capacity", description: "Increases the maximum number of servants you can have." },
 
 ]
+
+const extensionBuildingValues = [
+  { id:1, name: "beds", description: "Increases the number of servants you can have in your barracks." },
+  { id:2, name: "training yard", description: "Increases strength of your servants" },
+  { id:3, name: "archery range", description: "Increases dexterity of your servants." },
+  { id:4, name: "meditation room", description: "Increases focus of your servants." },
+  { id:5, name: "dining hall", description: "Increases morale of your servants." },
+  { id:6, name: "sparring hall", description: "Increases endurance of your servants." },
+  { id:7, name: "infirmary nook", description: "Increases healing rate of your servants." },
+  { id:8, name: "war room", description: "Increases tactics of your servants." },
+  { id:9, name: "night training ground", description: "Increases stealth ability of your servants." },
+  { id:10, name: "library", description: "Increases intelligence of your servants." },
+  { id:11, name: "blacksmith's annex", description: "Increases the quality of weapons and armor your servants can use." },
+  { id:12, name: "warcasters's tower", description: "Increases the power of spells your servants can cast." },
+]
+
 async function seed() {
   await db
     .insert(itemTypes)
@@ -61,6 +77,12 @@ async function seed() {
     .insert(buildingBuffTypes)
     .values(buildingBuffTypeValues)
     .onConflictDoNothing();
+  
+  await db
+    .insert(extensionBuilding)
+    .values(extensionBuildingValues)
+    .onConflictDoNothing();
+
   console.log("✅ Constants seeded successfully.");
 }
 
