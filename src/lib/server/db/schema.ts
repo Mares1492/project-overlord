@@ -78,6 +78,15 @@ export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
 	requiredLvl: integer('required_lvl').notNull().default(1),
 });
 
+export const barracksExtensionBuilding = pgTable('barracks_extension_building', {
+	id: serial('id').primaryKey(),
+	barracksId: integer('barracks_id')
+		.notNull()
+		.references(() => barracks.id),
+	extensionBuildingId: integer('extension_building_id')
+		.notNull()
+		.references(() => extensionBuilding.id),
+	lvl: integer('lvl').notNull().default(1),
 });
 
 // Items
