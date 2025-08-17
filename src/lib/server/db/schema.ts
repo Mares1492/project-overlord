@@ -66,6 +66,18 @@ export const buildingBuffTypes = pgTable('building_buff_types', {
 	description: text('description').notNull(),
 });
 
+export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
+	id: serial('id').primaryKey(),
+	extensionBuildingId: integer('extension_building_id')
+		.notNull()
+		.references(() => extensionBuilding.id),
+	buffTypeId: integer('buff_type_id')
+		.notNull()
+		.references(() => buildingBuffTypes.id),
+	value: integer('value').notNull(),
+	requiredLvl: integer('required_lvl').notNull().default(1),
+});
+
 });
 
 // Items
