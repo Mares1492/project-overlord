@@ -45,6 +45,12 @@ export const barracks = pgTable('barracks', {
 	lvl: integer('barrack_lvl').notNull().default(1),
 	name: text('name').notNull(),
 });
+
+export const extensionBuilding = pgTable('extension_building', {
+	id: serial('id').primaryKey(),
+	name: varchar('name', { length: 100 }).notNull()
+});
+
 });
 
 // Items
