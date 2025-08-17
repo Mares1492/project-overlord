@@ -37,6 +37,10 @@ const itemRarityTypeValues = [
   { id:5, name: "legendary" },
 ]
 
+const buildingBuffTypeValues = [
+  { id:1, name: "barracks capacity", description: "Increases the maximum number of servants you can have." },
+
+]
 async function seed() {
   await db
     .insert(itemTypes)
@@ -53,6 +57,10 @@ async function seed() {
     .values(itemRarityTypeValues)
     .onConflictDoNothing();
 
+  await db
+    .insert(buildingBuffTypes)
+    .values(buildingBuffTypeValues)
+    .onConflictDoNothing();
   console.log("✅ Constants seeded successfully.");
 }
 
