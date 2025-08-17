@@ -60,6 +60,12 @@ export const extensionUpgradeCosts = pgTable('extension_upgrade_costs', {
 	lvl: integer('lvl').notNull().default(1),
 });
 
+export const buildingBuffTypes = pgTable('building_buff_types', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+	description: text('description').notNull(),
+});
+
 });
 
 // Items
