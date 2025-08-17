@@ -1,3 +1,4 @@
+import { desc } from 'drizzle-orm';
 import {
 	pgTable,
 	serial,
@@ -34,7 +35,7 @@ export const keeps = pgTable('keeps', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
-	lvl: integer('keep_lvl').notNull().default(1),
+	lvl: integer('keep_lvl').notNull().default(1)
 });
 
 export const barracks = pgTable('barracks', {
@@ -43,27 +44,28 @@ export const barracks = pgTable('barracks', {
 		.notNull()
 		.references(() => keeps.id),
 	lvl: integer('barrack_lvl').notNull().default(1),
-	name: text('name').notNull(),
+	name: text('name').notNull()
 });
 
 export const extensionBuilding = pgTable('extension_building', {
-	id: serial('id').primaryKey(),
-	name: varchar('name', { length: 100 }).notNull()
+	id: integer('id').primaryKey(),
+	name: varchar('name', { length: 100 }).notNull(),
+	description: text('description').notNull()
 });
 
 export const extensionUpgradeCosts = pgTable('extension_upgrade_costs', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
 		.references(() => extensionBuilding.id),
 	cost: integer('cost').notNull(),
-	lvl: integer('lvl').notNull().default(1),
+	lvl: integer('lvl').notNull().default(1)
 });
 
 export const buildingBuffTypes = pgTable('building_buff_types', {
-	id: serial('id').primaryKey(),
-	name: text('name').notNull(),
-	description: text('description').notNull(),
+	id: integer('id').primaryKey(),
+	name: varchar('name', { length: 100 }).notNull(),
+	description: text('description').notNull()
 });
 
 export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
@@ -75,7 +77,7 @@ export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
 		.notNull()
 		.references(() => buildingBuffTypes.id),
 	value: integer('value').notNull(),
-	requiredLvl: integer('required_lvl').notNull().default(1),
+	requiredLvl: integer('required_lvl').notNull().default(1)
 });
 
 export const barracksExtensionBuilding = pgTable('barracks_extension_building', {
@@ -86,7 +88,7 @@ export const barracksExtensionBuilding = pgTable('barracks_extension_building', 
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
 		.references(() => extensionBuilding.id),
-	lvl: integer('lvl').notNull().default(1),
+	lvl: integer('lvl').notNull().default(1)
 });
 
 // Items
