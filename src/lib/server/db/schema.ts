@@ -105,6 +105,17 @@ export const treasury = pgTable('treasury', {
 	lvl: integer('lvl').notNull().default(1)
 });
 
+// Keep - academy
+
+export const academy = pgTable('academy', {
+	id: serial('id').primaryKey(),
+	keepId: integer('keep_id')
+		.notNull()
+		.references(() => keeps.id),
+	name: text('name').notNull(),
+	lvl: integer('lvl').notNull().default(1)
+});
+
 // Items
 
 export const itemTypes = pgTable('item_types', {
