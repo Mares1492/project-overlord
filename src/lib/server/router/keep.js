@@ -27,9 +27,9 @@ export const createAcademy = async (tx,keepId) => {
 export const createBarracks = async (tx,keepId) => {
 	const [newBarracks] = await tx.insert(barracks).values({ keepId, name: "barracks" }).returning();
 		
-	const [countResult] = await tx.select({ count: count() }).from(extensionBuildings);
+	const [extentions] = await tx.select({ count: count() }).from(extensionBuildings);
 
-	const junctionRows = Array.from({ length: Number(countResult) }, (_, i) => ({
+	const junctionRows = Array.from({ length: extentions.count }, (_, i) => ({
 		barracksId: newBarracks.id,
 		extensionBuildingId: i + 1
 	}));
