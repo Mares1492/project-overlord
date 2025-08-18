@@ -1,4 +1,3 @@
-import { desc } from 'drizzle-orm';
 import {
 	pgTable,
 	serial,
@@ -48,7 +47,7 @@ export const barracks = pgTable('barracks', {
 	name: text('name').notNull()
 });
 
-export const extensionBuildings = pgTable('extension_building', {
+export const extensionBuildings = pgTable('extension_buildings', {
 	id: integer('id').primaryKey(),
 	name: varchar('name', { length: 100 }).notNull(),
 	description: text('description').notNull()
@@ -81,7 +80,7 @@ export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
 	requiredLvl: integer('required_lvl').notNull().default(1)
 });
 
-export const barracksExtensionBuildings = pgTable('barracks_extension_building', {
+export const barracksExtensionBuildings = pgTable('barracks_extension_buildings', {
 	id: serial('id').primaryKey(),
 	barracksId: integer('barracks_id')
 		.notNull()
@@ -94,7 +93,7 @@ export const barracksExtensionBuildings = pgTable('barracks_extension_building',
 
 // Keep - treasury
 
-export const treasuries = pgTable('treasury', {
+export const treasuries = pgTable('treasuries', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -107,7 +106,7 @@ export const treasuries = pgTable('treasury', {
 
 // Keep - academy
 
-export const academies = pgTable('academy', {
+export const academies = pgTable('academies', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -118,7 +117,7 @@ export const academies = pgTable('academy', {
 
 // Keep - tomb
 
-export const tombs = pgTable('tomb', {
+export const tombs = pgTable('tombs', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -129,7 +128,7 @@ export const tombs = pgTable('tomb', {
 
 // Keep - arsenal
 
-export const arsenals = pgTable('arsenal', {
+export const arsenals = pgTable('arsenals', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
