@@ -7,6 +7,10 @@ export const createTreasury = async (tx,keepId) => {
 	return tx.insert(treasuries).values({ keepId, name:"treasury" }).returning();
 }
 
+export const createArsenal = async (tx,keepId) => {
+	return tx.insert(arsenals).values({ keepId, name:"arsenal" }).returning();
+}
+
 export const createKeep = async (tx,userId) => {
 	console.log("Creating keep for user:", userId);
 	const [newKeep] = await tx.insert(keeps).values({ userId }).returning();
