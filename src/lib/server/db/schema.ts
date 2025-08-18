@@ -35,15 +35,16 @@ export const keeps = pgTable('keeps', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
-	lvl: integer('keep_lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().default(1)
 });
 
+// Keep - barracks
 export const barracks = pgTable('barracks', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
 		.references(() => keeps.id),
-	lvl: integer('barrack_lvl').notNull().default(1),
+	lvl: integer('lvl').notNull().default(1),
 	name: text('name').notNull()
 });
 
