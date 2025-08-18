@@ -3,6 +3,10 @@ import { count} from 'drizzle-orm';
 import { keeps,barracks, extensionBuildings, barracksExtensionBuildings, treasuries, arsenals,academies,tombs } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
+export const createTreasury = async (tx,keepId) => {
+	return tx.insert(treasuries).values({ keepId, name:"treasury" }).returning();
+}
+
 export const createKeep = async (tx,userId) => {
 	console.log("Creating keep for user:", userId);
 	const [newKeep] = await tx.insert(keeps).values({ userId }).returning();
