@@ -1,7 +1,7 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuilding } from './schema';
+import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs } from './schema';
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -39,7 +39,6 @@ const itemRarityTypeValues = [
 
 const buildingBuffTypeValues = [
   { id:1, name: "barracks capacity", description: "Increases the maximum number of servants you can have." },
-
 ]
 
 const extensionBuildingValues = [
@@ -56,6 +55,14 @@ const extensionBuildingValues = [
   { id:11, name: "blacksmith's annex", description: "Increases the quality of weapons and armor your servants can use." },
   { id:12, name: "warcasters's tower", description: "Increases the power of spells your servants can cast." },
 ]
+
+const extentionBuildingBuffValues = [
+  {id:1, extensionBuildingId: 1, buffTypeId: 1, value: 3, requiredLvl: 1},
+  {id:2, extensionBuildingId: 1, buffTypeId: 1, value: 6, requiredLvl: 2},
+  {id:3, extensionBuildingId: 1, buffTypeId: 1, value: 12, requiredLvl: 3},
+  {id:4, extensionBuildingId: 1, buffTypeId: 1, value: 20, requiredLvl: 4},
+  {id:5, extensionBuildingId: 1, buffTypeId: 1, value: 30, requiredLvl: 5},
+];
 
 async function seed() {
   await db
@@ -79,8 +86,13 @@ async function seed() {
     .onConflictDoNothing();
   
   await db
-    .insert(extensionBuilding)
+    .insert(extensionBuildings)
     .values(extensionBuildingValues)
+    .onConflictDoNothing();
+ 
+  await db
+    .insert(extensionBuildingBuffs)
+    .values(extentionBuildingBuffValues)
     .onConflictDoNothing();
 
   console.log("✅ Constants seeded successfully.");
