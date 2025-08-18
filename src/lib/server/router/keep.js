@@ -1,10 +1,13 @@
 import { db } from "$lib/server/db/db.js";
-import { keeps } from "$lib/server/db/schema";
+import { count} from 'drizzle-orm';
+import { keeps,barracks, extensionBuildings, barracksExtensionBuildings, treasuries, arsenals,academies,tombs } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
-// Create a new keep record for a user
-export const createKeep = async (userId) => {
-	return db.insert(keeps).values({ userId }).returning();
+export const createKeep = async (tx,userId) => {
+	console.log("Creating keep for user:", userId);
+	const [newKeep] = await tx.insert(keeps).values({ userId }).returning();
+	console.log("New keep created:", newKeep);
+	await createBuildings(tx, newKeep.id);
 };
 
 export const deleteKeep = async (tx,userId) => {
