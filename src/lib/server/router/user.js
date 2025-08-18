@@ -28,19 +28,21 @@ export const createUser = async (email, password) => {
 	}
 
 	const passwordHash = await hashPassword(password);
-	const newUser = {
+	const newUserData = {
 		uuid: randomUUID(),
 		email,
 		passwordHash,
 		nickname: generateDarkFantasyName()
 	};
+	const newUser = await db.transaction(async (tx) => {
 
-	const [createdUser] = await db.insert(users).values(newUser).returning();
+		const [createdUser] = await tx.insert(users).values(newUserData).returning();
+		console.log(createdUser);
 
-	console.log(createdUser);
-	await createKeep(createdUser.id);
-
-	return createdUser;
+		await createKeep(tx,createdUser.id);
+		return createdUser;
+	});
+	return newUser;
 };
 
 export const deleteUser = async (email, password) => {
