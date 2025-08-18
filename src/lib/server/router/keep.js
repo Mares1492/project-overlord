@@ -38,6 +38,18 @@ export const createBarracks = async (tx,keepId) => {
 		await tx.insert(barracksExtensionBuildings).values(junctionRows);
 	}
 }
+
+/**
+ * @param {number} keepId
+*/
+export const createBuildings = async (tx,keepId) => {
+	await createBarracks(tx, keepId);
+	await createTreasury(tx, keepId);
+	await createArsenal(tx, keepId);
+	await createTomb(tx, keepId);
+	await createAcademy(tx, keepId);
+}
+
 export const createKeep = async (tx,userId) => {
 	console.log("Creating keep for user:", userId);
 	const [newKeep] = await tx.insert(keeps).values({ userId }).returning();
