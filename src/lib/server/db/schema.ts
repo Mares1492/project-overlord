@@ -48,7 +48,7 @@ export const barracks = pgTable('barracks', {
 	name: text('name').notNull()
 });
 
-export const extensionBuilding = pgTable('extension_building', {
+export const extensionBuildings = pgTable('extension_building', {
 	id: integer('id').primaryKey(),
 	name: varchar('name', { length: 100 }).notNull(),
 	description: text('description').notNull()
@@ -58,7 +58,7 @@ export const extensionUpgradeCosts = pgTable('extension_upgrade_costs', {
 	id: integer('id').primaryKey(),
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
-		.references(() => extensionBuilding.id),
+		.references(() => extensionBuildings.id),
 	cost: integer('cost').notNull(),
 	lvl: integer('lvl').notNull().default(1)
 });
@@ -73,7 +73,7 @@ export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
 	id: serial('id').primaryKey(),
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
-		.references(() => extensionBuilding.id),
+		.references(() => extensionBuildings.id),
 	buffTypeId: integer('buff_type_id')
 		.notNull()
 		.references(() => buildingBuffTypes.id),
@@ -81,20 +81,20 @@ export const extensionBuildingBuffs = pgTable('extension_building_buffs', {
 	requiredLvl: integer('required_lvl').notNull().default(1)
 });
 
-export const barracksExtensionBuilding = pgTable('barracks_extension_building', {
+export const barracksExtensionBuildings = pgTable('barracks_extension_building', {
 	id: serial('id').primaryKey(),
 	barracksId: integer('barracks_id')
 		.notNull()
 		.references(() => barracks.id),
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
-		.references(() => extensionBuilding.id),
+		.references(() => extensionBuildings.id),
 	lvl: integer('lvl').notNull().default(1)
 });
 
 // Keep - treasury
 
-export const treasury = pgTable('treasury', {
+export const treasuries = pgTable('treasury', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -107,7 +107,7 @@ export const treasury = pgTable('treasury', {
 
 // Keep - academy
 
-export const academy = pgTable('academy', {
+export const academies = pgTable('academy', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -118,7 +118,7 @@ export const academy = pgTable('academy', {
 
 // Keep - tomb
 
-export const tomb = pgTable('tomb', {
+export const tombs = pgTable('tomb', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
@@ -129,7 +129,7 @@ export const tomb = pgTable('tomb', {
 
 // Keep - arsenal
 
-export const arsenal = pgTable('arsenal', {
+export const arsenals = pgTable('arsenal', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
