@@ -126,6 +126,18 @@ export const tomb = pgTable('tomb', {
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().default(1)
 });
+
+// Keep - arsenal
+
+export const arsenal = pgTable('arsenal', {
+	id: serial('id').primaryKey(),
+	keepId: integer('keep_id')
+		.notNull()
+		.references(() => keeps.id),
+	name: text('name').notNull(),
+	lvl: integer('lvl').notNull().default(1)
+});
+
 // Items
 
 export const itemTypes = pgTable('item_types', {
