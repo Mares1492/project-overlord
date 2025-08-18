@@ -92,6 +92,19 @@ export const barracksExtensionBuilding = pgTable('barracks_extension_building', 
 	lvl: integer('lvl').notNull().default(1)
 });
 
+// Keep - treasury
+
+export const treasury = pgTable('treasury', {
+	id: serial('id').primaryKey(),
+	keepId: integer('keep_id')
+		.notNull()
+		.references(() => keeps.id),
+	name: text('name').notNull(),
+	gold: integer('gold').notNull().default(0),
+	gems: integer('gems').notNull().default(0),
+	lvl: integer('lvl').notNull().default(1)
+});
+
 // Items
 
 export const itemTypes = pgTable('item_types', {
