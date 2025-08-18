@@ -21,6 +21,23 @@ export const createTomb = async (tx,keepId) => {
 export const createAcademy = async (tx,keepId) => {
 	return tx.insert(academies).values({ keepId, name:"academy" }).returning();
 }
+/**
+ * @param {number} keepId
+*/
+export const createBarracks = async (tx,keepId) => {
+	const [newBarracks] = await tx.insert(barracks).values({ keepId, name: "barracks" }).returning();
+		
+	const [countResult] = await tx.select({ count: count() }).from(extensionBuildings);
+
+	const junctionRows = Array.from({ length: Number(countResult) }, (_, i) => ({
+		barracksId: newBarracks.id,
+		extensionBuildingId: i + 1
+	}));
+
+	if (junctionRows.length > 0) {
+		await tx.insert(barracksExtensionBuildings).values(junctionRows);
+	}
+}
 export const createKeep = async (tx,userId) => {
 	console.log("Creating keep for user:", userId);
 	const [newKeep] = await tx.insert(keeps).values({ userId }).returning();
