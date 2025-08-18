@@ -56,13 +56,14 @@ export const deleteUser = async (email, password) => {
 	}
 
 	await logout(user);
-	await deleteKeep(user.id);
 
-	const deleted = await db.delete(users).where(eq(users.email, email)).returning();
-
-	if (!deleted.length) {
-		throw error(401, 'Could not delete user');
-	}
+	await db.transaction(async (tx) => {
+		await deleteKeep(tx,user.id);
+		const deleted = await tx.delete(users).where(eq(users.email, email)).returning();
+		if (!deleted.length) {
+			throw error(401, 'Could not delete user');
+		}
+	});
 };
 
 export const login = async (email, password) => {
