@@ -1,7 +1,7 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
+import { itemTypes, slotTypes, races, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -64,6 +64,14 @@ const extentionBuildingBuffValues = [
   {id:5, extensionBuildingId: 1, buffTypeId: 1, value: 30, requiredLvl: 5},
 ];
 
+const raceValues = [
+  { id: 1, name: "human" },
+  { id: 2, name: "elf" },
+  { id: 3, name: "dark elf" }, 
+  { id: 4, name: "orc" },
+  { id: 5, name: "goblin" },
+]
+
 const servantStatusValues = [
   { id: 1, name: "alive"},
   { id: 2, name: "injured"},
@@ -119,6 +127,11 @@ async function seed() {
   await db
     .insert(servantStatuses)
     .values(servantStatusValues)
+    .onConflictDoNothing();
+    
+  await db
+    .insert(races)
+    .values(raceValues)
     .onConflictDoNothing();
 
   await db
