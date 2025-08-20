@@ -1,7 +1,7 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs } from './schema';
+import { itemTypes, slotTypes, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -71,6 +71,20 @@ const servantStatusValues = [
   { id: 4, name: "retired"},
   { id:5, name: "missing"}
 ];
+
+const attributeValues = [
+  { id: 1, name: "strength", shortName: "str"},
+  { id: 2, name: "dexterity", shortName: "dex"},
+  { id: 3, name: "intelligence", shortName: "int"},
+  { id: 4, name: "agility", shortName: "agi"},
+  { id: 5, name: "endurance", shortName: "end"},
+  { id: 6, name: "healing rate", shortName: "hr"},
+  { id: 7, name: "tactics", shortName: "tactics"},
+  { id: 8, name: "stealth", shortName: "stealth"},
+  { id: 9, name: "focus", shortName: "focus"},
+  { id: 10, name: "morale", shortName: "morale"},
+];
+
 async function seed() {
   await db
     .insert(itemTypes)
@@ -106,6 +120,12 @@ async function seed() {
     .insert(servantStatuses)
     .values(servantStatusValues)
     .onConflictDoNothing();
+
+  await db
+    .insert(attributes)
+    .values(attributeValues)
+    .onConflictDoNothing();
+
   console.log("✅ Constants seeded successfully.");
 }
 
