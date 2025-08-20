@@ -114,7 +114,7 @@
                         </div>
                         <span class="w-full h-1 bg-black"></span>
                         <div class="flex flex-col self-start items-start h-64">
-                            <span class="font-semibold ">Loot</span>
+                            <div class="flex flex-row space-x-5"><span class="font-semibold ">Loot</span><span>💰{Math.round(Math.random()*1000 + 10)}</span></div>
                             <Inventory inventoryData={{maxSlots:5,items:[]}} showCounter={false}/>
                         </div>
                     {:else}
