@@ -11,6 +11,7 @@ import { randomUUID } from 'crypto';
 import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
 import { eq } from 'drizzle-orm';
 import { createKeep, deleteKeep } from '$lib/server/router/keep.js';
+import { createServant, deleteServantsByUserId } from '$lib/server/router/servant.js';
 
 /**
  * @param email {string}
@@ -40,6 +41,11 @@ export const createUser = async (email, password) => {
 		console.log(createdUser);
 
 		await createKeep(tx,createdUser.id);
+		// Create initial servants for the user
+		// TODO: create one predefined servant and 2 random servants
+		await createServant(createdUser.id, {}, tx);
+		await createServant(createdUser.id, {}, tx);
+		await createServant(createdUser.id, {}, tx);
 		return createdUser;
 	});
 	return newUser;
@@ -59,6 +65,7 @@ export const deleteUser = async (email, password) => {
 
 	await db.transaction(async (tx) => {
 		await deleteKeep(tx,user.id);
+		await deleteServantsByUserId(tx, user.id);
 		const deleted = await tx.delete(users).where(eq(users.email, email)).returning();
 		if (!deleted.length) {
 			throw error(401, 'Could not delete user');
