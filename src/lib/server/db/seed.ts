@@ -64,6 +64,13 @@ const extentionBuildingBuffValues = [
   {id:5, extensionBuildingId: 1, buffTypeId: 1, value: 30, requiredLvl: 5},
 ];
 
+const servantStatusValues = [
+  { id: 1, name: "alive"},
+  { id: 2, name: "injured"},
+  { id: 3, name: "dead"},
+  { id: 4, name: "retired"},
+  { id:5, name: "missing"}
+];
 async function seed() {
   await db
     .insert(itemTypes)
@@ -95,6 +102,10 @@ async function seed() {
     .values(extentionBuildingBuffValues)
     .onConflictDoNothing();
 
+  await db
+    .insert(servantStatuses)
+    .values(servantStatusValues)
+    .onConflictDoNothing();
   console.log("✅ Constants seeded successfully.");
 }
 
