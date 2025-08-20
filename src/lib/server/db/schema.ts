@@ -207,10 +207,10 @@ export const servants = pgTable('servants', {
 		.notNull()
 		.references(()=>races.id),
 	name: text('name').notNull(),
-	uuid: uuid('uuid').notNull(),
+	uuid: uuid('uuid').notNull().default(crypto.randomUUID()),
 	status: integer('status')
 		.notNull()
-		.references(() => servantStatuses.id)
+		.references(() => servantStatuses.id).default(1),
 })
 
 export const attributes = pgTable('attributes', {
@@ -219,7 +219,7 @@ export const attributes = pgTable('attributes', {
 	shortName: varchar('short_name', { length: 12 }).notNull()
 })
 
-export const servantAttribute = pgTable('servant_attribute', {
+export const servantAttributes = pgTable('servant_attributes', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
 		.notNull()
@@ -227,7 +227,7 @@ export const servantAttribute = pgTable('servant_attribute', {
 	attributeId: integer('attribute_id')
 		.notNull()
 		.references(() => attributes.id),
-	value: integer('value').notNull()
+	value: integer('value').notNull().default(1),
 });
 
 export const servantItems = pgTable('servant_items', {
