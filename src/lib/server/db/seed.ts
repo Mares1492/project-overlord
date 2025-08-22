@@ -73,11 +73,12 @@ const raceValues = [
 ]
 
 const servantStatusValues = [
-  { id: 1, name: "alive"},
-  { id: 2, name: "injured"},
-  { id: 3, name: "dead"},
-  { id: 4, name: "retired"},
-  { id:5, name: "missing"}
+  { id: 1, name: "idle"},
+  { id: 2, name: "expedition"},
+  { id: 3, name: "injured"},
+  { id: 4, name: "dead"},
+  { id: 5, name: "retired"},
+  { id:6, name: "missing"},
 ];
 
 const attributeValues = [
