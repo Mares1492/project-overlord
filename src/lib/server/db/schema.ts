@@ -245,4 +245,10 @@ export const servantItems = pgTable('servant_items', {
 		.references(() => slotTypes.id)
 });
 
+// Locations
+export const locationTypes = pgTable('location_types', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull()
+});
+
 // Events
