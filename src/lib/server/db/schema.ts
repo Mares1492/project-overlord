@@ -284,4 +284,9 @@ export const availableLocations = pgTable('available_locations', {
 
 //Expeditions
 
+const expeditionStatuses = pgTable('expedition_statuses', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull()
+});
+
 // Events
