@@ -88,3 +88,10 @@ export const deleteServantsByUserId = async (tx, userId) => {
         await deleteServant(tx, servantId);
     }
 }
+
+export const setServantStatus = async (servantId, statusIdToSet) => {
+    return db
+        .update(servants)
+        .set({ status: statusIdToSet })
+        .where(eq(servants.id, servantId))
+}
