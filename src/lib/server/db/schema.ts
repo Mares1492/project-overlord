@@ -251,4 +251,9 @@ export const locationTypes = pgTable('location_types', {
 	name: text('name').notNull()
 });
 
+export const locationImpotanceTypes = pgTable('location_importance_types', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull()
+});
+
 // Events
