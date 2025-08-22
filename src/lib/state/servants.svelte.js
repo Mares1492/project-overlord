@@ -1,8 +1,6 @@
-import servantsTemplate from '$lib/test_data/servants.json';
 import {getRaceAssets} from '$lib/state/race.svelte.js';
 
-//let servants = $state([]);
-let servants = $state(JSON.parse(JSON.stringify(servantsTemplate)));
+let servants = $state([]);
 
 export const initAssets = async () => {
     if (servants.length === 0) {
@@ -20,40 +18,29 @@ export const initAssets = async () => {
     }
 }
 
-export const setServants = (newServants) => servants = newServants;
+export const setServants = (newServants) => {
+    servants = newServants
+    initAssets();
+};
 export const getServants = () => servants;
 
-export const getServantById = (servantId) => {
-    const servant = servants.find(s => s.id === servantId);
+export const getServantByUUID = (servantUUID) => {
+    const servant = servants.find(s => s.uuid === servantUUID);
     if (!servant) {
-        console.error(`Servant with provided ID not found.`);
+        console.error(`Servant with provided UUID not found.`);
         return null;
     }
     return servant;
 }
 
-/** @param {string} servantId */
-export const setServantAsAvailable = (servantId) => {
-    let servant = getServantById(servantId);
-    if (servant) {
-        servant.available = true;
-        return true;
-    }
-    console.error(`Servant with provided ID is not found.`);
-    return false;
+/** @param {string} servantUUID */
+export const setServantAsAvailable = (servantUUID) => {
+    // TODO: call action to update DB
+    return true;
 }
 
-/** @param {string} servantId */
-export const setServantAsNotAvailable = (servantId) => {
-    let servant = getServantById(servantId);
-    if (!servant) {
-        console.error(`Servant with provided ID is not found.`);
-        return false;
-    }
-    if (!servant.available) {
-        console.error(`Servant with provided ID is already not available.`);
-        return false;
-    }
-    servant.available = false;
+/** @param {string} servantUUID */
+export const setServantAsNotAvailable = (servantUUID) => {
+    // TODO: call action to update DB
     return true;
 }

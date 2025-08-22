@@ -3,14 +3,14 @@
     import { getServants } from "$lib/state/servants.svelte";
     import { getAvailableExpeditionsNumber } from '$lib/state/expeditionState.svelte.js';
 
-    let {chosenServant=$bindable(),isExpedition=false} = $props();
+    let {chosenServant=$bindable(),isExpeditionSettings=false} = $props();
 </script>
 
-{#if isExpedition && getAvailableExpeditionsNumber() < 1}
-    <span class="text-3xl italic font-medium text-shadow-lg text-shadow-yellow-500">No available servants</span>
+{#if isExpeditionSettings && getAvailableExpeditionsNumber() < 1 || getServants().length === 0}
+    <span class="text-3xl italic font-medium text-shadow-sm text-shadow-yellow-500">No available servants</span>
 {:else}
-    {#each getServants() as servant(servant.name)}
-        <CharSlot {servant} bind:chosenServant={chosenServant} isExpedition={isExpedition}/>
+    {#each getServants() as servant(servant.uuid)}
+        <CharSlot {servant} bind:chosenServant={chosenServant} isExpeditionSettings={isExpeditionSettings}/>
     {/each}   
 {/if}
 

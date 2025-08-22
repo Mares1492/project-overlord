@@ -11,7 +11,7 @@ const expeditionTemplate = {
     overviewText: undefined,
     endTime: undefined,
     startTime: undefined,
-    servantId: undefined,
+    servantUUID: undefined,
     task: undefined,
     scale: undefined,
     approach: undefined,
@@ -37,13 +37,13 @@ export const decreaseAvailableExpeditionsNumber = () => avalableExpeditionsNumbe
 
 export const increaseAvailableExpeditionsNumber = () => avalableExpeditionsNumber += 1;
 
-export const addExpedition = (expeditionSettings,chosenLocation,servantId,expeditionOverviewText) => {
-    if(!setServantAsNotAvailable(servantId)) {
+export const addExpedition = (expeditionSettings,chosenLocation,servantUUID,expeditionOverviewText) => {
+    if(!setServantAsNotAvailable(servantUUID)) {
         console.log(`Servant with provided ID is not found.`);
         return null;
     }
     if (avalableExpeditionsNumber <= 0) {
-        console.log(`No available expeditions left.`);
+        console.log(`No available expeditions left.`); 
         return null;
     }
 
@@ -56,7 +56,8 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantId,expedi
     let duration = getDuration(expeditionSettings.scale.value);
     
     newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration * 1000));
-    newExpedition.servantId = servantId;
+    console.log("servantUUID", servantUUID);
+    newExpedition.servantUUID = servantUUID;
     newExpedition.status = ExpeditionStatus.IN_PROGRESS;
     newExpedition.task = expeditionSettings.task.options[expeditionSettings.task.value].name;
     newExpedition.approach = expeditionSettings.approach.options[expeditionSettings.approach.value].name;

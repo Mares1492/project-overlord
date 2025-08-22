@@ -1,7 +1,7 @@
 <script>
     import {getOngoingExpeditions,completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
     import {onMount} from 'svelte';
-    import {getServantById} from '$lib/state/servants.svelte.js';
+    import {getServantByUUID} from '$lib/state/servants.svelte.js';
    	import { slide,scale } from 'svelte/transition';
     import {ExpeditionStatus} from '$lib/enums/enums.js';
     import { goto } from '$app/navigation';
@@ -23,7 +23,7 @@
                     return {
                         id: exp.id,
                         name: exp.location.name,
-                        servant: getServantById(exp.servantId).name,
+                        servant: getServantByUUID(exp.servantUUID).name,
                         status: exp.status,
                         task: exp.task,
                         approach: exp.approach,
@@ -38,7 +38,7 @@
                     return {
                         id: exp.id,
                         name: exp.location.name,
-                        servant: getServantById(exp.servantId).name,
+                        servant: getServantByUUID(exp.servantUUID).name,
                         status: ExpeditionStatus.COMPLETED,
                         task: exp.task,
                         approach: exp.approach,
@@ -55,7 +55,7 @@
                 return {
                     id: exp.id,
                     name: exp.location.name,
-                    servant: getServantById(exp.servantId).name,
+                    servant: getServantByUUID(exp.servantUUID).name,
                     status: exp.status,
                     hours,
                     minutes,

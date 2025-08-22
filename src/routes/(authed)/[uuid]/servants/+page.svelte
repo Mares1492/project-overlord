@@ -1,13 +1,25 @@
 <script>
-    import {getServants} from '$lib/state/servants.svelte.js';
+    import {getServants,setServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     import Inventory from '$lib/components/inventory/Inventory.svelte';
     import { enhance } from '$app/forms';
+    import { onMount } from 'svelte';
     
     const {data} = $props();
 
-    let chosenServant = $state(getServants()[0]);
+    let chosenServant = $state();
     let isChars = $state(true);
+    let errorState = $state({
+        error: data.error,
+        message: data.message
+    });
+
+    onMount(() => {
+        if (data.servants && data.servants.length > 0) {
+            setServants(data.servants);
+            chosenServant = getServants()[0];
+        }
+    });
 
 </script>
 
@@ -39,19 +51,26 @@
                 Items
             </button>
         </div>
+        {#if errorState.error}
+            <div class="w-full p-2 bg-red-600 text-white text-center font-bold border-2 border-black">
+                {errorState.message}
+            </div>
+        {/if}
         <div class="flex w-full flex-col space-y-5 justify-center h-full">
             <div class="flex justify-center h-full items-center">
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
-                        <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                            <ServantsList bind:chosenServant={chosenServant}/>
-                            {@render lockedSlot()}
-                            {@render lockedSlot()}
-                            {@render lockedSlot()}
-                            {@render lockedSlot()}
-                            {@render lockedSlot()}
-                            {@render lockedSlot()}
-                        </div>
+                        {#if chosenServant}
+                            <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
+                                <ServantsList bind:chosenServant={chosenServant}/>
+                                {@render lockedSlot()}
+                                {@render lockedSlot()}
+                                {@render lockedSlot()}
+                                {@render lockedSlot()}
+                                {@render lockedSlot()}
+                                {@render lockedSlot()}
+                            </div>
+                        {/if}
                         <div class="flex flex-row justify-center font-bold space-x-5">
                             <button
                                     class="border py-1.5 px-5 w-32 2xl:w-42 flex flex-col justify-around text-yellow-500 hover:bg-amber-200 active:bg-amber-100 bg-gray-600 cursor-pointer"
@@ -73,7 +92,7 @@
                     </div>
                 {:else}
                     <form use:enhance method="POST" action="?/equipItem">
-                        <input type="hidden" name="servantId" value={chosenServant.id}>
+                        <input type="hidden" name="servantId" value={chosenServant.uuid}>
                         <Inventory inventoryData={data.inventory}/>
                     </form>
                 {/if}
@@ -81,50 +100,52 @@
         </div>
     </div>
     <div class="w-1/2 h-full flex flex-row">
-        <ul class="h-full flex flex-col justify-center space-y-2 border-4 border-amber-950 bg-orange-950 text-white w-32 px-5">
-            {#each chosenServant.stats as stat(stat.name)}
-                <li class="flex flex-row space-x-2 justify-between items-end">
-                    <span class="text-xl 2xl:text-2xl">{stat.shortName}:</span><span class="font-semibold text-2xl 2xl:text-3xl">{stat.value}</span>
-                </li>
-            {/each}
-        </ul>
-        <div class="flex flex-col w-full h-full relative space-y-2">
-            <img
-                    class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
-                    src={chosenServant.bodyPath}
-                    alt={`${chosenServant.name}'s body`}
-            >
-            <div class="w-full flex justify-center">
-                <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
-                    <i>
-                        {chosenServant.race}
-                        {#if chosenServant.vampire}
-                            Vampire
-                        {/if}
-                    </i>
-                    <span>|</span>
-                    <span>{chosenServant.name}</span>
+        {#if chosenServant}
+            <ul class="h-full flex flex-col justify-center space-y-2 border-4 border-amber-950 bg-orange-950 text-white w-32 px-5">
+                {#each chosenServant.attributes as attribute(attribute.name)}
+                    <li class="flex flex-row space-x-2 justify-between items-end">
+                        <span class="text-xl 2xl:text-2xl">{attribute.shortName}:</span><span class="font-semibold text-2xl 2xl:text-3xl">{attribute.value}</span>
+                    </li>
+                {/each}
+            </ul>
+            <div class="flex flex-col w-full h-full relative space-y-2">
+                <img
+                        class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
+                        src={chosenServant.bodyPath}
+                        alt={`${chosenServant.name}'s body`}
+                >
+                <div class="w-full h-9 px-1  flex justify-center">
+                    <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
+                        <i>
+                            {chosenServant.race.charAt(0).toUpperCase() + chosenServant.race.slice(1)}
+                            {#if chosenServant.vampire}
+                                Vampire
+                            {/if}
+                        </i>
+                        <span>|</span>
+                        <span>{chosenServant.name}</span>
 
-                </span>
-            </div>
-            <div class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
-                <div class="h-full flex flex-col justify-center">
-                    <div class="h-1/2 self-start">
-                        {@render itemSlot(`📿`)}
+                    </span>
+                </div>
+                <div class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
+                    <div class="h-full flex flex-col justify-center">
+                        <div class="h-1/2 self-start">
+                            {@render itemSlot(`📿`)}
+                        </div>
+                        <div class="self-end space-y-5">
+                            {@render itemSlot(`🗡️`)}
+                            {@render itemSlot(`🛡️`)}
+                        </div>
                     </div>
-                    <div class="self-end space-y-5">
-                        {@render itemSlot(`🗡️`)}
-                        {@render itemSlot(`🛡️`)}
+                    <div class="flex justify-between h-full flex-col ">
+                        {@render itemSlot(`👤`)}
+                        {@render itemSlot(`👘`)}
+                        {@render itemSlot(`🖐`)}
+                        {@render itemSlot(`🦵`)}
+                        {@render itemSlot(`🦶`)}
                     </div>
                 </div>
-                <div class="flex justify-between h-full flex-col ">
-                    {@render itemSlot(`👤`)}
-                    {@render itemSlot(`👘`)}
-                    {@render itemSlot(`🖐`)}
-                    {@render itemSlot(`🦵`)}
-                    {@render itemSlot(`🦶`)}
-                </div>
             </div>
-        </div>
+        {/if}
     </div>
 </div>

@@ -1,18 +1,22 @@
 <script>
     import CharSlot from "$lib/components/servants/CharSlot.svelte";
-    import { getServantById } from "$lib/state/servants.svelte";
+    import { getServantByUUID } from "$lib/state/servants.svelte";
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
     import Inventory from "$lib/components/inventory/Inventory.svelte";
     import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
-
+    import { setServants } from '$lib/state/servants.svelte.js';
     const {data} = $props()
     let servant = $state()
     let timeData = $state()
 
     onMount(()=>{
+        if (data.servants && data.servants.length > 0) {
+            console.log(data.servants)
+            setServants(data.servants);
+        }
         if (data.expedition) {
-            servant = getServantById(data.expedition.servantId)
+            servant = getServantByUUID(data.expedition.servantUUID);
         }
         const inverval = setInterval(()=>{
             let msLeft = data.expedition.endTime - Date.now();
