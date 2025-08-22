@@ -104,3 +104,47 @@ export const getServantByUUID = async (servantId) => {
         .then(rows => rows[0]);
 }
 
+export const getServantsByUserUUID = async (userUUID) => {
+    const [user] = await db
+        .select({id:users.id})
+        .from(users)
+        .where(eq(users.uuid, userUUID));
+    
+    const servantList = await db
+        .select({
+            id: servants.id,
+            vampire: servants.vampire,
+            uuid: servants.uuid,
+            name: servants.name,
+            race: races.name,
+            status: servantStatuses.name
+        })
+        .from(servants)
+        .innerJoin(races, eq(servants.raceId,races.id))
+        .innerJoin(servantStatuses, eq(servantStatuses.id, servants.status))
+        .where(eq(servants.userId, user.id));
+
+    const servantData = await Promise.all(servantList.map(async servant => {
+        const servantAttributesList = await db
+            .select({
+                name: attributes.name,
+                shortName: attributes.shortName,
+                value: servantAttributes.value
+            })
+            .from(servantAttributes)
+            .innerJoin(attributes, eq(servantAttributes.attributeId, attributes.id))
+            .where(eq(servantAttributes.servantId, servant.id));
+        return {
+            uuid: servant.uuid,
+            name: servant.name,
+            race: servant.race,
+            status: servant.status,
+            vampire: servant.vampire,
+            iconPath: null,
+            bodyPath: null,
+            attributes: servantAttributesList,
+        }
+    }))
+    return servantData;
+
+}
