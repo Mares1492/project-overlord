@@ -5,14 +5,17 @@
 */
 import inventoryData  from '$lib/test_data/inventory.json';
 
-
 /** @type {import('./$types').PageLoad} */
-export async function load() {
+export async function load({parent}) {
+    const data = await parent();
     return {
+        error: data.error ?? false,
+        message: data.message ?? null,
+        servants: data.servants ?? [],
         inventory: {
             maxSlots: 30,
             unlockedSlots: 25,
-            items: inventoryData
+            items: inventoryData,
         }
     };
 }

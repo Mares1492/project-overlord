@@ -4,13 +4,14 @@
     import ServantsList from '../servants/ServantsList.svelte';
     import {addExpedition} from '$lib/state/expeditionState.svelte.js';
     import { getServants } from '$lib/state/servants.svelte';
+    import { onMount } from 'svelte';
 
     const {closeLocation, chosenLocation} = $props();
-    let chosenServant = $state(getServants()[0]);
+    let chosenServant = $state();
     let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
 
     const launchExpedition = () => {
-        let newExpedition = addExpedition(expeditionSettings,chosenLocation, chosenServant.id, expeditionOverviewText)
+        let newExpedition = addExpedition(expeditionSettings,chosenLocation, chosenServant.uuid, expeditionOverviewText)
 
         if (newExpedition === null) {
             console.error(`Failed to launch expedition: Servant is not found.`);
@@ -18,6 +19,10 @@
         }
         closeLocation();
     }
+
+    onMount(()=>{
+        chosenServant = getServants()[0];
+    })
 
 </script>
 
@@ -65,9 +70,11 @@
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Servant</span>
-                <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
-                   <ServantsList bind:chosenServant={chosenServant} isExpedition={true}/>
-                </div>
+                {#if chosenServant}
+                    <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
+                        <ServantsList bind:chosenServant={chosenServant} isExpeditionSettings={true}/>
+                    </div>
+                {/if}
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Edict</span>

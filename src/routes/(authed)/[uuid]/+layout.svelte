@@ -4,15 +4,10 @@
     import { enhance } from '$app/forms';
     import castle from "$lib/assets/bg/keep/castle.png";
     import {getAvailableExpeditionsNumber} from '$lib/state/expeditionState.svelte.js';
-    import { onMount } from 'svelte';
-    import {initAssets} from '$lib/state/servants.svelte.js';
 
     /** @type {import('./$types').LayoutProps} */
-	let { children, data} = $props();
-
-    onMount(() => {
-        initAssets();
-    });
+    let { children, data} = $props();
+    
 </script>
 
 {#snippet btn(icon,path='/',hasNotifications = false,notificationCount = 0)}

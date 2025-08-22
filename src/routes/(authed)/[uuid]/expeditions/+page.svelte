@@ -3,6 +3,7 @@
     import OngoingExpeditions from "$lib/components/expeditions/OngoingExpeditions.svelte";
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { onMount, setContext } from 'svelte';
+    import { setServants } from '$lib/state/servants.svelte.js';
 
     const {data} = $props(); 
     
@@ -36,6 +37,9 @@
 
     // check in case handleLocalStorageLoad returns null
     onMount(() => {
+        if (data.servants && data.servants.length > 0) {
+            setServants(data.servants);
+        }
         let savedMode = handleLocalStorageLoad("expedition_mode")
         if (savedMode) {
             mode = savedMode;
