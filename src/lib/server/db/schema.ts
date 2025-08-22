@@ -272,4 +272,16 @@ export const locations = pgTable('locations', {
 		.references(() => locationImpotanceTypes.id)
 });
 
+export const availableLocations = pgTable('available_locations', {
+	id: serial('id').primaryKey(),
+	locationId: integer('location_id')
+		.notNull()
+		.references(() => locations.id),
+	userId: integer('user_id')
+		.notNull()
+		.references(() => users.id)
+});
+
+//Expeditions
+
 // Events
