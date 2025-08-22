@@ -56,7 +56,6 @@ export const addExpedition = (expeditionSettings,chosenLocation,servantUUID,expe
     let duration = getDuration(expeditionSettings.scale.value);
     
     newExpedition.endTime = new Date(newExpedition.startTime.getTime() + (duration * 1000));
-    console.log("servantUUID", servantUUID);
     newExpedition.servantUUID = servantUUID;
     newExpedition.status = ExpeditionStatus.IN_PROGRESS;
     newExpedition.task = expeditionSettings.task.options[expeditionSettings.task.value].name;
