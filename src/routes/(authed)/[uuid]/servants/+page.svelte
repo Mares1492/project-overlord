@@ -137,7 +137,7 @@
                             {@render itemSlot(`🛡️`)}
                         </div>
                     </div>
-                    <div class="flex justify-between h-full flex-col ">
+                    <div class="flex justify-center space-y-8 h-full flex-col ">
                         {@render itemSlot(`👤`)}
                         {@render itemSlot(`👘`)}
                         {@render itemSlot(`🖐`)}
