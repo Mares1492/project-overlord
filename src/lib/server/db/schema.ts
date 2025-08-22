@@ -295,4 +295,8 @@ const expeditionApproaches = pgTable('expedition_approaches', {
 });
 
 const expeditionScales = pgTable('expedition_scales', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull()
+});
+
 // Events
