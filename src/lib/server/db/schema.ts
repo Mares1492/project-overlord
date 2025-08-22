@@ -5,7 +5,8 @@ import {
 	integer,
 	timestamp,
 	uuid,
-	varchar
+	varchar,
+	boolean
 } from 'drizzle-orm/pg-core';
 
 // User Session
@@ -207,10 +208,11 @@ export const servants = pgTable('servants', {
 		.notNull()
 		.references(()=>races.id),
 	name: text('name').notNull(),
-	uuid: uuid('uuid').notNull().default(crypto.randomUUID()),
+	uuid: uuid('uuid').notNull().defaultRandom(),
 	status: integer('status')
 		.notNull()
 		.references(() => servantStatuses.id).default(1),
+	vampire: boolean('vampire').notNull().default(false),
 })
 
 export const attributes = pgTable('attributes', {
