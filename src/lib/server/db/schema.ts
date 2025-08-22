@@ -289,4 +289,10 @@ const expeditionStatuses = pgTable('expedition_statuses', {
 	name: text('name').notNull()
 });
 
+const expeditionApproaches = pgTable('expedition_approaches', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull()
+});
+
+const expeditionScales = pgTable('expedition_scales', {
 // Events
