@@ -95,3 +95,12 @@ export const setServantStatus = async (servantId, statusIdToSet) => {
         .set({ status: statusIdToSet })
         .where(eq(servants.id, servantId))
 }
+
+export const getServantByUUID = async (servantId) => {
+    return db
+        .select()
+        .from(servants)
+        .where(eq(servants.id, servantId))
+        .then(rows => rows[0]);
+}
+
