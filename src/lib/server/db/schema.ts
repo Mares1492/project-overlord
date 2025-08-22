@@ -304,4 +304,29 @@ const expeditionTasks = pgTable('expedition_tasks', {
 	name: text('name').notNull()
 })
 	
+const expeditions = pgTable('expeditions', {
+	id: serial('id').primaryKey(),
+	userId: integer('user_id')
+		.notNull()
+		.references(() => users.id),
+	servantId: integer('servant_id')
+		.notNull()
+		.references(() => servants.id),
+	statusId: integer('status_id')
+		.notNull()
+		.references(() => expeditionStatuses.id),
+	startTime: timestamp('start_Time', { withTimezone: false }).defaultNow(),
+	endTime: timestamp('end_Time', { withTimezone: false }),
+	overvviewText: text('overview_text').notNull(),
+	taskId: integer('task_id')
+		.notNull()
+		.references(() => expeditionTasks.id),
+	scaleId: integer('scale_id')
+		.notNull()
+		.references(() => expeditionScales.id),
+	approachId: integer('approach_id')
+		.notNull()
+		.references(() => expeditionApproaches.id)
+});
+
 // Events
