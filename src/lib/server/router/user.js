@@ -45,7 +45,7 @@ export const createUser = async (email, password) => {
 		// TODO: create one predefined servant and 2 random servants
 		await createServant(createdUser.id, {}, tx);
 		await createServant(createdUser.id, {}, tx);
-		await createServant(createdUser.id, {}, tx);
+		await createServant(createdUser.id, {vampire:true}, tx);
 		return createdUser;
 	});
 	return newUser;

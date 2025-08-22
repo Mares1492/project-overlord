@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db/db.js";
 import { getRandomServantName } from '$lib/server/handlers/generators.js';
-import {servants,servantAttributes} from "$lib/server/db/schema";
+import {servants,servantAttributes, races, attributes,users,servantStatuses} from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 
 const getRandomAttributeValue = () => {
@@ -56,7 +56,7 @@ export const createServant = async (userId, servantData, tx=db) => {
         userId: userId,
         name: getRandomServantName(),
         raceId: servantData.raceId ?? 1, // Default
-
+        vampire: servantData.vampire ?? false,
     };
     const [newServant] = await tx
         .insert(servants)
