@@ -256,4 +256,20 @@ export const locationImpotanceTypes = pgTable('location_importance_types', {
 	name: text('name').notNull()
 });
 
+export const locations = pgTable('locations', {
+	id: serial('id').primaryKey(),
+	name: text('name').notNull(),
+	description: text('description').notNull(),
+	color_hex: varchar('color_hex', { length: 7 }).notNull().default('#FFFFFF'),
+	coordsX: integer('coords_x').notNull().default(0),
+	coordsY: integer('coords_y').notNull().default(0),
+	isBase: boolean('is_base').notNull().default(false),
+	locationTypeId: integer('location_type_id')
+		.notNull()
+		.references(() => locationTypes.id),
+	importanceTypeId: integer('importance_type_id')
+		.notNull()
+		.references(() => locationImpotanceTypes.id)
+});
+
 // Events
