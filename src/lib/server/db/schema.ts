@@ -317,10 +317,11 @@ export const expeditions = pgTable('expeditions', {
 		.references(() => servants.id),
 	statusId: integer('status_id')
 		.notNull()
-		.references(() => expeditionStatuses.id),
+		.references(() => expeditionStatuses.id)
+		.default(2),
 	startTime: timestamp('start_Time', { withTimezone: false }).defaultNow(),
 	endTime: timestamp('end_Time', { withTimezone: false }),
-	overvviewText: text('overview_text').notNull(),
+	overviewText: text('overview_text').notNull(),
 	taskId: integer('task_id')
 		.notNull()
 		.references(() => expeditionTasks.id),
