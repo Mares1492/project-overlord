@@ -240,9 +240,9 @@ export const servantItems = pgTable('servant_items', {
 	itemId: integer('item_id')
 		.notNull()
 		.references(() => items.id),
-	slotTypeId: integer('slot_type_id')
+	itemAttributeId: integer('item_attribute_id')
 		.notNull()
-		.references(() => slotTypes.id)
+		.references(() => itemAttributes.id)
 });
 
 // Locations
