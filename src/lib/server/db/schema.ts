@@ -284,27 +284,27 @@ export const availableLocations = pgTable('available_locations', {
 
 //Expeditions
 
-const expeditionStatuses = pgTable('expedition_statuses', {
+export const expeditionStatuses = pgTable('expedition_statuses', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull()
 });
 
-const expeditionApproaches = pgTable('expedition_approaches', {
+export const expeditionApproaches = pgTable('expedition_approaches', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull()
 });
 
-const expeditionScales = pgTable('expedition_scales', {
+export const expeditionScales = pgTable('expedition_scales', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull()
 });
 
-const expeditionTasks = pgTable('expedition_tasks', {
+export const expeditionTasks = pgTable('expedition_tasks', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull()
 })
 	
-const expeditions = pgTable('expeditions', {
+export const expeditions = pgTable('expeditions', {
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
 		.notNull()

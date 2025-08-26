@@ -1,7 +1,7 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, races, itemRarityTypes, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
+import { itemTypes, slotTypes, races, itemRarityTypes, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -94,6 +94,33 @@ const attributeValues = [
   { id: 10, name: "morale", shortName: "morale"},
 ];
 
+const expeditionStatusValues = [
+  { id:1, name: "idle"},
+  { id:2, name: "in_progress"},
+  { id:3, name: "completed"},
+  { id:4, name: "archived"},
+  { id:5, name: "failed"},
+]
+
+const expeditionApproachValues = [
+  { id:1, name: "Stealth",tooltip:"Shadows are your cloak. Strike unseen, or slip away."},
+  { id:2, name: "Action",tooltip:"Steel and blood decide this path. Meet foes head-on"},
+  { id:3, name: "Situational",tooltip:"Adapt to the dark tide. Cunning or carnage - as fate demands."},
+]
+
+const expeditionTaskValues = [
+  { id:1, name: "Scout",tooltip:"Chart unknown lands, uncover secrets best left buried."},
+  { id:2, name: "Loot",tooltip:"Seize wealth from ruin, heedless of curses."},
+  { id:3, name: "Foster Ties",tooltip:"Whisper dark promises, forge fragile alliances."},
+]
+
+const expeditionScaleValues = [
+  { id:1, name: "Sprint",tooltip:"A swift foray; little risk, modest spoils."},
+  { id:2, name: "Run",tooltip:"Deeper strides; danger grows, rewards beckon."},
+  { id:3, name: "Marathon",tooltip:"A grueling campaign; riches and ruin walk hand in hand."},
+  { id:3, name: "Odyssey",tooltip:"A legend in the making — triumph or doom writ large."}
+]
+
 async function seed() {
   await db
     .insert(itemTypes)
@@ -138,6 +165,26 @@ async function seed() {
   await db
     .insert(attributes)
     .values(attributeValues)
+    .onConflictDoNothing();
+  
+  await db
+    .insert(expeditionStatuses)
+    .values(expeditionStatusValues)
+    .onConflictDoNothing();
+  
+  await db
+    .insert(expeditionTasks)
+    .values(expeditionTaskValues)
+    .onConflictDoNothing();
+
+  await db
+    .insert(expeditionApproaches)
+    .values(expeditionApproachValues)
+    .onConflictDoNothing();
+
+  await db
+    .insert(expeditionScales)
+    .values(expeditionScaleValues)
     .onConflictDoNothing();
 
   console.log("✅ Constants seeded successfully.");
