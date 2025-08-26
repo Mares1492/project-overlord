@@ -18,7 +18,7 @@ const itemTypeValues = [
   { id:12, name: "trinket" }
 ]
 
-const itemSlotValues = [
+const itemSlotTypeValues = [
   { id:1, name: "head" },
   { id:2, name: "neck" },
   { id:3, name: "chest" },
@@ -102,7 +102,7 @@ async function seed() {
 
   await db
     .insert(slotTypes)
-    .values(itemSlotValues)
+    .values(itemSlotTypeValues)
     .onConflictDoNothing();
   
   await db
