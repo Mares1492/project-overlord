@@ -123,3 +123,11 @@ export const getUserSessionByToken = async (refreshToken) => {
 
 	return session;
 };
+
+export const getUserByUUID = async (userUUID) => {
+	const [user] = await db
+		.select()
+		.from(users)
+		.where(eq(users.uuid,userUUID))
+	return user;
+}
