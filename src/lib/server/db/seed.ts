@@ -118,7 +118,7 @@ const expeditionScaleValues = [
   { id:1, name: "Sprint",tooltip:"A swift foray; little risk, modest spoils."},
   { id:2, name: "Run",tooltip:"Deeper strides; danger grows, rewards beckon."},
   { id:3, name: "Marathon",tooltip:"A grueling campaign; riches and ruin walk hand in hand."},
-  { id:3, name: "Odyssey",tooltip:"A legend in the making — triumph or doom writ large."}
+  { id:4, name: "Odyssey",tooltip:"A legend in the making — triumph or doom writ large."}
 ]
 
 async function seed() {

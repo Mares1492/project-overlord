@@ -291,17 +291,20 @@ export const expeditionStatuses = pgTable('expedition_statuses', {
 
 export const expeditionApproaches = pgTable('expedition_approaches', {
 	id: serial('id').primaryKey(),
-	name: text('name').notNull()
+	name: text('name').notNull(),
+	tooltip: text('tooltip').notNull()
 });
 
 export const expeditionScales = pgTable('expedition_scales', {
 	id: serial('id').primaryKey(),
-	name: text('name').notNull()
+	name: text('name').notNull(),
+	tooltip: text('tooltip').notNull()
 });
 
 export const expeditionTasks = pgTable('expedition_tasks', {
 	id: serial('id').primaryKey(),
-	name: text('name').notNull()
+	name: text('name').notNull(),
+	tooltip: text('tooltip').notNull()
 })
 	
 export const expeditions = pgTable('expeditions', {
