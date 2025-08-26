@@ -14,10 +14,15 @@ catch (error) {
 }
 
 if (!connectionString) {
-    connectionString = process.env.DATABASE_URL;
+    if (process.env.USE_PROD) {
+        console.log("Using production DB")
+        connectionString = process.env.DATABASE_URL_MAIN;
+    }
+    else {
+        console.log("Using test DB")
+        connectionString = process.env.DATABASE_URL;
+    }
 }
-
-console.log(connectionString)
 
 neonConfig.webSocketConstructor = ws;
 const pool = new Pool({ connectionString });
