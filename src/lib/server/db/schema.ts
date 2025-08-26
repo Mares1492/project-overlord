@@ -257,7 +257,7 @@ export const locationImpotanceTypes = pgTable('location_importance_types', {
 });
 
 export const locations = pgTable('locations', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	name: text('name').notNull(),
 	description: text('description').notNull(),
 	color_hex: varchar('color_hex', { length: 7 }).notNull().default('#FFFFFF'),
@@ -312,6 +312,9 @@ export const expeditions = pgTable('expeditions', {
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
+	locationId: integer('location_id')
+		.notNull()
+		.references(()=> locations.id),
 	servantId: integer('servant_id')
 		.notNull()
 		.references(() => servants.id),
