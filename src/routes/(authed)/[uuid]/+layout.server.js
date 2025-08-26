@@ -1,7 +1,7 @@
 import {redirect} from '@sveltejs/kit';
 import {authUserSession} from "$lib/server/auth.js";
 import locations from "$lib/test_data/locations.json";
-import {getServantsByUserUUID} from '$lib/server/router/servant.js';    
+import {getServantsByUserUUID} from '$lib/server/router/servants.js';    
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({cookies}) {

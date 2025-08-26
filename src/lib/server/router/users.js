@@ -10,8 +10,8 @@ import { error } from '@sveltejs/kit';
 import { randomUUID } from 'crypto';
 import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
 import { eq } from 'drizzle-orm';
-import { createKeep, deleteKeep } from '$lib/server/router/keep.js';
-import { createServant, deleteServantsByUserId } from '$lib/server/router/servant.js';
+import { createKeep, deleteKeep } from '$lib/server/router/keeps.js';
+import { createServant, deleteServantsByUserId } from '$lib/server/router/servants.js';
 
 /**
  * @param email {string}

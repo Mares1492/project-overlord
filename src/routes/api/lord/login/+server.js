@@ -1,6 +1,6 @@
 import {userLoginSchema} from '$lib/utils/validation';
 import { json} from '@sveltejs/kit';
-import {createUserSession, login} from "$lib/server/router/user";
+import {createUserSession, login} from "$lib/server/router/users";
 import {createAuthCookies} from "$lib/server/auth";
 
 /** @type {import('./$types').RequestHandler} */

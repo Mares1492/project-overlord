@@ -1,4 +1,4 @@
-import {logout} from "$lib/server/router/user";
+import {logout} from "$lib/server/router/users";
 import {authUserSession, clearAuthCookies} from "$lib/server/auth";
 import {error, json} from "@sveltejs/kit";
 

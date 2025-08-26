@@ -1,6 +1,6 @@
 import {userLoginSchema} from '$lib/utils/validation';
 import { json } from '@sveltejs/kit';
-import {deleteUser} from "$lib/server/router/user";
+import {deleteUser} from "$lib/server/router/users";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
