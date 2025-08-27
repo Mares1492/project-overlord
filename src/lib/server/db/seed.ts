@@ -1,7 +1,9 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, races, itemRarityTypes, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes } from './schema';
+import { itemTypes, slotTypes, races, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
+import {locationValues} from './seed_data/locations'
+import {LocationType} from '../../enums/enums'
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -121,6 +123,27 @@ const expeditionScaleValues = [
   { id:4, name: "Odyssey",tooltip:"A legend in the making — triumph or doom writ large."}
 ]
 
+const locationTypeValues = [
+  { id: LocationType.ruins, name: "ruins", description: "Old place with dark energy" },
+  { id: LocationType.keep, name: "keep", description: "Fortified structure, once strong" },
+  { id: LocationType.river, name: "river", description: "Flowing water, vital to settlements" },
+  { id: LocationType.neg_energy, name: "neg_energy", description: "A cursed land, radiating malevolence" },
+  { id: LocationType.meadows, name: "meadows", description: "Open grassy fields, calm and fertile" },
+  { id: LocationType.wilds, name: "wilds", description: "Untamed wilderness, full of danger" },
+  { id: LocationType.swamp, name: "swamp", description: "Murky wetlands, difficult to traverse" },
+  { id: LocationType.major_settlement, name: "major_settlement", description: "Large hub of civilization" },
+  { id: LocationType.minor_settlement, name: "minor_settlement", description: "Small village or hamlet" },
+  { id: LocationType.merc_camp, name: "merc_camp", description: "Temporary camp of mercenaries" },
+  { id: LocationType.pos_energy, name: "pos_energy", description: "A place of light and healing" },
+];
+
+const locationImportanceTypeValues = [
+  { id: 1, value: 4, name: "minor" },
+  { id: 2, value: 5, name: "common" },
+  { id: 3, value: 6, name: "uncommon" },
+  { id: 4, value: 7, name: "major" }
+]
+
 async function seed() {
   await db
     .insert(itemTypes)
@@ -186,6 +209,21 @@ async function seed() {
     .insert(expeditionScales)
     .values(expeditionScaleValues)
     .onConflictDoNothing();
+
+  await db
+    .insert(locationTypes)
+    .values(locationTypeValues)
+    .onConflictDoNothing();
+
+  await db
+      .insert(locationImportanceTypes)
+      .values(locationImportanceTypeValues)
+      .onConflictDoNothing();
+
+  await db
+      .insert(locations)
+      .values(locationValues)
+      .onConflictDoNothing();
 
   console.log("✅ Constants seeded successfully.");
 }

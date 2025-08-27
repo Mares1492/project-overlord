@@ -14,7 +14,7 @@ catch (error) {
 }
 
 if (!connectionString) {
-    if (process.env.USE_PROD) {
+    if (process.env.USE_PROD==="true") {
         console.log("Using production DB")
         connectionString = process.env.DATABASE_URL_MAIN;
     }
