@@ -35,7 +35,14 @@
     {#if chosenLocation}
         <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
     {/if}
-    <svg onfocusout={()=>chosenLocation=null} class="absolute origin-top-left z-10 min-w-full" width={5329*zoom} height={4900*zoom} viewBox="0 0 5329 4900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg 
+        onfocusout={()=>chosenLocation=null} 
+        class="absolute origin-top-left z-10 min-w-full" 
+        width={5329*zoom} 
+        height={4900*zoom} 
+        viewBox="0 0 5329 4900" 
+        fill="none" 
+        xmlns="http://www.w3.org/2000/svg">
         <rect width="5328.06" height="4730.27" fill="#B7D8FF"/>
         <path d="M2531.2 2503.75H2404.8L2468 2397.98L2531.2 2503.75Z" fill="#5B5235" stroke="black"/>
         <path fill-rule="evenodd" clip-rule="evenodd" d="M3282 874.493C3545.5 1583.17 4747.66 652.46 4747.66 1252.64C4747.66 1852.82 3742.66 2638.82 4298.66 2506.32C4854.66 2373.82 4747.66 2823.32 5064.66 3384.82C4421.16 3634.82 5359.97 4151.99 4618.47 4039.99C4075.47 3973.49 4761.45 5225.5 3519.47 3880.99C2277.5 2536.49 1701.5 4696.32 1267.97 4039.99C834.445 3383.67 630 4201.32 630 4201.32C480 4539.82 -127.002 3965.82 347.5 3634.82C605.5 3481.32 1153.69 2805.79 1002.97 2609.49C742.162 2269.82 -140.563 1466.8 211.976 1240.99C592.473 2248.12 767.573 1260.9 1049.31 1416.73C1347.33 1581.56 1170.83 1160.92 1267.97 874.493C1367.77 580.253 2136.27 1202.45 2426.71 1252.64C2840.56 1324.15 3018.5 165.817 3282 874.493Z" fill="#4F8847"/>
