@@ -6,7 +6,7 @@
     import { onMount } from 'svelte';
     import { enhance } from '$app/forms';
 
-    const {closeLocation, chosenLocation} = $props();
+    const {closeLocation, chosenLocation, handleExpeditionStartSuccess} = $props();
     let chosenServant = $state();
     let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
 
@@ -27,8 +27,10 @@
         action="?/startExpedition" 
         use:enhance={()=> {
             return async ({ result }) => {
-                console.log(result)
-                closeLocation()
+                if (result.type === "success") {
+                    handleExpeditionStartSuccess()
+                    closeLocation()
+                }
 		    };
         }}>
         <input type="hidden" name="locationId" value={chosenLocation.id}>
