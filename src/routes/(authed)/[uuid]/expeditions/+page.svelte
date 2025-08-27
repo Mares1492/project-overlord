@@ -6,7 +6,7 @@
     import { setServants } from '$lib/state/servants.svelte.js';
 
     const {data} = $props(); 
-    
+
     const modes = ["MAP","EXPEDITION","EXPEDITION_OVERVIEW"];
     const oldCameraData = {x:0,y:0,scale:0.25}
 
@@ -35,6 +35,12 @@
     // svelte-ignore non_reactive_update
     let chosenLocation = $state()
     let mode = $state(modes[0]);
+    let successGlow = $state(false)
+
+    const handleExpeditionStartSuccess = () => {
+        successGlow = true
+        setTimeout(() => (successGlow = false), 1500);
+    }
 
     // check in case handleLocalStorageLoad returns null
     onMount(() => {
@@ -106,7 +112,6 @@
         }
     }
 
-
 </script>
 
 {#if mode === modes[0]}
@@ -121,12 +126,29 @@
         <button onclick={handleZoomIn} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">+</button>
         <button onclick={handleZoomOut} class="border w-8 h-8 bg-yellow-500 cursor-pointer hover:saturate-150 active:saturate-50">-</button>
     </div>
-    <div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
+    <div class:glow={successGlow} bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
         <div class="relative w-full">
             <BaseMap zoom={zoom} locations={data.locations} bind:allowInfoWindow={allowInfoWindow} />
         </div>
     </div>
 {:else if mode === modes[1] && location}
-    <ExpeditionSettings closeLocation={closeLocation} {chosenLocation}/>
+    <ExpeditionSettings closeLocation={closeLocation} {chosenLocation} handleExpeditionStartSuccess={handleExpeditionStartSuccess}/>
 {/if}
 
+<style>
+  .glow {
+    animation: success-glow 1.5s ease-out;
+  }
+
+  @keyframes success-glow {
+    0% {
+      box-shadow: 0 0 0px rgba(0, 255, 0, 0.8);
+    }
+    30% {
+      box-shadow: 0 0 500px rgba(0, 255, 0, 0.9);
+    }
+    100% {
+      box-shadow: 0 0 0px rgba(0, 255, 0, 0);
+    }
+  }
+</style>
