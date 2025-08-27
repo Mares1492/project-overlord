@@ -254,7 +254,8 @@ export const locationTypes = pgTable('location_types', {
 
 export const locationImportanceTypes = pgTable('location_importance_types', {
 	id: integer('id').primaryKey(),
-	name: text('name').notNull()
+	name: text('name').notNull(),
+	value: integer('value').notNull()
 });
 
 export const locations = pgTable('locations', {
