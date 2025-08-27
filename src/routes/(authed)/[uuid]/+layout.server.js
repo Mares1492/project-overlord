@@ -1,6 +1,5 @@
 import {redirect} from '@sveltejs/kit';
 import {authUserSession} from "$lib/server/auth.js";
-import locations from "$lib/test_data/locations.json";
 import {getServantsByUserUUID} from '$lib/server/router/servants.js';    
 
 /** @type {import('./$types').LayoutServerLoad} */
@@ -11,8 +10,8 @@ export async function load({cookies}) {
     }
     const servants = await getServantsByUserUUID(user.uuid)
     if (!servants) {
-        return {pathUUID: user.uuid, locations, error: true, message: "No servants found for this user"};
+        return {pathUUID: user.uuid, error: true, message: "No servants found for this user"};
     }
     console.log("loading authed session...");
-    return {pathUUID: user.uuid,locations,servants}
+    return {pathUUID: user.uuid, servants}
 }
