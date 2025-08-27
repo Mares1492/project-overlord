@@ -311,6 +311,7 @@ export const expeditionTasks = pgTable('expedition_tasks', {
 	
 export const expeditions = pgTable('expeditions', {
 	id: serial('id').primaryKey(),
+	uuid: uuid('uuid').notNull().defaultRandom(),
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id),
