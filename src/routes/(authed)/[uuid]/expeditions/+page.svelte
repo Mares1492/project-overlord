@@ -24,6 +24,7 @@
     }
 
     let zoom = $state(0.25);
+    let allowInfoWindow = $state(true)
     let expeditionsListToggle = $state(false);
 
     /**@type {HTMLElement}*/
@@ -32,7 +33,7 @@
 
     /** @type App.Location | undefined*/
     // svelte-ignore non_reactive_update
-    let chosenLocation
+    let chosenLocation = $state()
     let mode = $state(modes[0]);
 
     // check in case handleLocalStorageLoad returns null
@@ -45,7 +46,7 @@
             mode = savedMode;
         }
         let savedChosenLocation = handleLocalStorageLoad("chosen_location",true);
-        if (savedChosenLocation) {
+        if (savedChosenLocation && mode !== modes[0]) {
             chosenLocation = savedChosenLocation;
         }  
     });
@@ -68,6 +69,7 @@
     }
 
     const handleZoomIn = () => {
+        allowInfoWindow = false
         saveMapCenter()
         if(zoom + 0.1 < 1){
             zoom+=0.1
@@ -79,6 +81,7 @@
     }
 
     const handleZoomOut = () => {
+        allowInfoWindow = false
         saveMapCenter()
         if(zoom - 0.1 > 0.25){
             zoom-=0.1
@@ -120,10 +123,10 @@
     </div>
     <div bind:this={mapContainer} class="w-full overflow-scroll bg-amber-900/50 h-full">
         <div class="relative w-full">
-            <BaseMap zoom={zoom} mapContainer={mapContainer} locations={data.locations} />
+            <BaseMap zoom={zoom} locations={data.locations} bind:allowInfoWindow={allowInfoWindow} />
         </div>
     </div>
 {:else if mode === modes[1] && location}
-    <ExpeditionSettings closeLocation={closeLocation} chosenLocation={chosenLocation}/>
+    <ExpeditionSettings closeLocation={closeLocation} {chosenLocation}/>
 {/if}
 

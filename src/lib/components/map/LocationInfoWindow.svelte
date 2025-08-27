@@ -3,11 +3,10 @@
 
   	const chooseLocation = getContext('chooseLocation');
 	let {position, location = $bindable()} = $props()
-	//TODO: handle location click
 </script>
 
 {#if location !== null}
-	<div
+	<div  
 		class="absolute z-50 w-64 p-4 rounded-sm bg-white border border-gray-300 text-sm max-w-sm"
 		style={`left: ${position.x}px; top: ${position.y}px`}
 	>

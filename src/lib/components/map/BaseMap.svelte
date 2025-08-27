@@ -2,7 +2,8 @@
     import Location from "$lib/components/map/Location.svelte";
     import LocationInfoWindow from "./LocationInfoWindow.svelte";
 
-    let {zoom, mapContainer=$bindable(),locations} = $props()
+    let {zoom,locations,allowInfoWindow=$bindable()} = $props()
+
 
     /**@type {null|number} */
     let hoveredId = $state(null)
@@ -17,6 +18,7 @@
         }
         mousePosition = {x:offsetX+50,y:offsetY}
         chosenLocation = locations[hoveredId]
+        allowInfoWindow = true
     }
 
     /**@param {{charCode:number}} event*/
@@ -26,17 +28,17 @@
            return
         }
         chosenLocation = locations[hoveredId]
+        allowInfoWindow = true
     }
 
 
 </script>
 
 <div class="w-full relative">
-    {#if chosenLocation}
+    {#if chosenLocation && allowInfoWindow}
         <LocationInfoWindow position={mousePosition} location={chosenLocation}/>
     {/if}
     <svg 
-        onfocusout={()=>chosenLocation=null} 
         class="absolute origin-top-left z-10 min-w-full" 
         width={5329*zoom} 
         height={4900*zoom} 
