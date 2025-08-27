@@ -96,11 +96,11 @@ export const setServantStatus = async (servantId, statusIdToSet) => {
         .where(eq(servants.id, servantId))
 }
 
-export const getServantByUUID = async (servantId) => {
+export const getServantByUUID = async (servantUUID) => {
     return db
         .select()
         .from(servants)
-        .where(eq(servants.id, servantId))
+        .where(eq(servants.uuid, servantUUID))
         .then(rows => rows[0]);
 }
 
