@@ -247,12 +247,13 @@ export const servantItems = pgTable('servant_items', {
 
 // Locations
 export const locationTypes = pgTable('location_types', {
-	id: serial('id').primaryKey(),
-	name: text('name').notNull()
+	id: integer('id').primaryKey(),
+	name: text('name').notNull(),
+	description: text('description').notNull(),
 });
 
-export const locationImpotanceTypes = pgTable('location_importance_types', {
-	id: serial('id').primaryKey(),
+export const locationImportanceTypes = pgTable('location_importance_types', {
+	id: integer('id').primaryKey(),
 	name: text('name').notNull()
 });
 
@@ -269,7 +270,7 @@ export const locations = pgTable('locations', {
 		.references(() => locationTypes.id),
 	importanceTypeId: integer('importance_type_id')
 		.notNull()
-		.references(() => locationImpotanceTypes.id)
+		.references(() => locationImportanceTypes.id)
 });
 
 export const availableLocations = pgTable('available_locations', {
