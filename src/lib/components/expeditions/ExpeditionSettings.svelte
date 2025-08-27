@@ -2,23 +2,13 @@
     import {expeditionSettings} from '$lib/state/expeditionSettings.svelte';
     import {getExpeditionOverviewText} from '$lib/handlers/expeditions.js';
     import ServantsList from '../servants/ServantsList.svelte';
-    import {addExpedition} from '$lib/state/expeditionState.svelte.js';
     import { getServants } from '$lib/state/servants.svelte';
     import { onMount } from 'svelte';
+    import { enhance } from '$app/forms';
 
     const {closeLocation, chosenLocation} = $props();
     let chosenServant = $state();
     let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
-
-    const launchExpedition = () => {
-        let newExpedition = addExpedition(expeditionSettings,chosenLocation, chosenServant.uuid, expeditionOverviewText)
-
-        if (newExpedition === null) {
-            console.error(`Failed to launch expedition: Servant is not found.`);
-            return;
-        }
-        closeLocation();
-    }
 
     onMount(()=>{
         chosenServant = getServants()[0];
@@ -29,6 +19,26 @@
 {#snippet expeditionSettingBtn (/** @type {string} */ title, handleClick, /** @type {boolean} */isChosen)}
     <button onclick={handleClick} class:bg-yellow-200={isChosen} class:border={isChosen} class="w-26 h-14 rounded hover:bg-yellow-300 bg-slate-200 cursor-pointer">{title}</button>
 {/snippet}
+
+{#if chosenServant}
+    <form 
+        id='startExpedition'  
+        method="POST" 
+        action="?/startExpedition" 
+        use:enhance={()=> {
+            return async ({ result }) => {
+                console.log(result)
+                closeLocation()
+		    };
+        }}>
+        <input type="hidden" name="locationId" value={chosenLocation.id}>
+        <input type="hidden" name="taskId" value={expeditionSettings.task.value+1}>
+        <input type="hidden" name="approachId" value={expeditionSettings.approach.value+1}>
+        <input type="hidden" name="scaleId" value={expeditionSettings.scale.value+1}>
+        <input type="hidden" name="servantUUID" value={chosenServant.uuid}>
+        <input type="hidden" name="overviewText" value={expeditionOverviewText}>
+    </form>
+{/if}
 
 <div class="w-full h-full flex justify-center bg-amber-900/50">
     <div class="relative w-3/4 xl:min-w-xl xl:w-1/2 min-h-full font-medium overflow-y-auto space-y-5 bg-amber-50 py-2.5 flex flex-col text-lg">
@@ -54,18 +64,18 @@
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Approach</span>
-                    <div class="flex flex-row justify-around  w-5/6 self-center">
-                    {#each expeditionSettings.approach.options as approach,i(approach.name)}
-                        {@render expeditionSettingBtn(approach.name,approach.handleClick,expeditionSettings.approach.value === i)}
-                    {/each}
+                <div class="flex flex-row justify-around  w-5/6 self-center">
+                {#each expeditionSettings.approach.options as approach,i(approach.name)}
+                    {@render expeditionSettingBtn(approach.name,approach.handleClick,expeditionSettings.approach.value === i)}
+                {/each}
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Scale</span>
-                    <div class="flex flex-row justify-around  w-5/6 self-center">
-                    {#each expeditionSettings.scale.options as scale,i(scale.name)}
-                        {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
-                    {/each}
+                <div class="flex flex-row justify-around  w-5/6 self-center">
+                {#each expeditionSettings.scale.options as scale,i(scale.name)}
+                    {@render expeditionSettingBtn(scale.name,scale.handleClick,expeditionSettings.scale.value === i)}
+                {/each}
                 </div>
             </div>
             <div class="border-t-2 py-3.5 flex flex-col">
@@ -79,13 +89,14 @@
             <div class="border-t-2 py-3.5 flex flex-col">
                 <span class="text-xl mb-3.5 font-black">Edict</span>
                 <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded text-gray-900 py-2.5 px-5 border-2 border-gray-500 bg-gray-200">
-                    <!-- This section is for overview text -->
-                   <p>{expeditionOverviewText}</p> 
+                    <p>{expeditionOverviewText}</p> 
                 </div>
             </div>
         </div>
-        <button class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" onclick={launchExpedition}>
-            Launch Expedition
-        </button>
+        {#if chosenServant}
+            <button form="startExpedition" type="submit" class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" >
+                Launch Expedition
+            </button>
+        {/if}
     </div>
 </div>
