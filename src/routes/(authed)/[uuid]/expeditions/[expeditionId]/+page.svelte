@@ -12,7 +12,6 @@
 
     onMount(()=>{
         if (data.servants && data.servants.length > 0) {
-            console.log(data.servants)
             setServants(data.servants);
         }
         if (data.expedition) {
@@ -59,7 +58,7 @@
                 <div class="flex flex-col md:flex-row space-x-20 w-full">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
                         {servant.name}
-                        <CharSlot {servant} status={data.expedition.status}/>
+                        <CharSlot {servant} />
                     </div>
                     <div class="flex flex-col justify-around ">
                         <span class="flex flex-row text-xl space-x-2">
