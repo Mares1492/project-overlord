@@ -2,6 +2,7 @@ import { db } from "$lib/server/db/db.js";
 import {expeditions} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
+import { eq } from "drizzle-orm";
 
 const overviewTextMaxLen = 1000
 
@@ -46,4 +47,8 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
         .returning();
 
     return newExpedition;
+}
+
+export const getExpeditionByUUID = (expeditionUUID) => {
+    return db.select().from(expeditions).where(eq(expeditions.uuid,expeditionUUID))
 }
