@@ -1,12 +1,12 @@
 <script>
-    import {getOngoingExpeditions,completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
+    import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
     import {onMount} from 'svelte';
     import {getServantByUUID} from '$lib/state/servants.svelte.js';
    	import { slide,scale } from 'svelte/transition';
     import {ExpeditionStatus} from '$lib/enums/enums.js';
     import { goto } from '$app/navigation';
 
-    const {pathUUID} = $props()
+    const {pathUUID,ongoingExpeditions} = $props()
 
     let expeditions = $state([]);
     let pageState = $state({
@@ -18,7 +18,7 @@
     onMount(() => {
         const interval = setInterval( () => {
             pageState.loading = false;
-            expeditions = getOngoingExpeditions().map( exp => {
+            expeditions = ongoingExpeditions.map( exp => {
                 if (exp.status === ExpeditionStatus.COMPLETED) {
                     return {
                         id: exp.id,
