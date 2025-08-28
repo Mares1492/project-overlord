@@ -11,7 +11,7 @@
 
     onMount(()=>{
         setServants(data.servants)
-        if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
+        if (data.expedition.status.id === ExpeditionStatus.IN_PROGRESS) {
             const inverval = setInterval(()=>{
                 let msLeft = data.expedition.endTime - Date.now();
                 console.log(msLeft)
@@ -76,37 +76,50 @@
                             </span>
                         </span>
                     </div>
-                    <div class="self-center w-1/2">
-                        <div class="flex flex-row justify-end w-full space-x-0.5">
-
-                        {#if data.expedition.status === ExpeditionStatus.IN_PROGRESS}
-                            {#if timeData}
-                                {#if timeData.msLeft > 0}
-                                    {@render timeContainer(timeData.hours)}
-                                    {@render timeContainer(timeData.minutes)}
-                                    {@render timeContainer(timeData.seconds)}
+                    <div class="flex self-center w-1/2">
+                        <div class="flex flex-col w-full space-y-2.5 items-center">
+                            <div class="flex flex-row space-x-2"><span class="font-bold">Status:</span><i>{data.expedition.status.name.toUpperCase()}</i></div>
+                            {#if data.expedition.status.id === ExpeditionStatus.IN_PROGRESS}
+                                {#if timeData}
+                                    {#if timeData.msLeft > 0}
+                                        <div class="flex flex-row space-x-0.5">
+                                            {@render timeContainer(timeData.hours)}
+                                            {@render timeContainer(timeData.minutes)}
+                                            {@render timeContainer(timeData.seconds)}
+                                        </div>
+                                    {:else}
+                                        <form
+                                            id='completeExpedition'  
+                                            method="POST" 
+                                            action="?/completeExpedition" 
+                                            use:enhance
+                                        >
+                                            <button
+                                                type="submit" 
+                                                class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
+                                                Complete
+                                            </button>
+                                        </form>
+                                    {/if}
                                 {:else}
-                                    <form
-                                        id='completeExpedition'  
-                                        method="POST" 
-                                        action="?/completeExpedition" 
-                                        use:enhance
-                                    >
-                                        <button
-                                            type="submit" 
-                                            class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
-                                            Complete
-                                        </button>
-                                    </form>
-                                {/if}
-                            {:else}
-                                <span class="h-20 w-46 content-center border-dotted border-4">Loading...</span>
-                            {/if}     
-                        {:else if data.expedition.status === ExpeditionStatus.COMPLETED}
-                            <span class="bg-gray-300 h-20 w-46 content-center justify-end rounded">Completed</span>
-                        {:else if data.expedition.status === ExpeditionStatus.ARCHIVED}
-                            <span class="bg-gray-500 h-20 w-46 text-slate-50 content-center justify-end rounded">Archived</span>
-                        {/if}
+                                    <span class="h-20 w-46 content-center border-dotted border-4">Loading...</span>
+                                {/if}     
+                            {:else if data.expedition.status.id === ExpeditionStatus.COMPLETED}
+                                <form
+                                    id='archiveExpedition'  
+                                    method="POST" 
+                                    action="?/archiveExpedition" 
+                                    use:enhance
+                                >
+                                    <button
+                                        type="submit" 
+                                        class=" bg-orange-600 hover:bg-amber-500 active:bg-yellow-600 h-20 w-46 content-center justify-endrounded cursor-pointer text-slate-200 font-semibold">
+                                        Archive
+                                    </button>
+                                </form>
+                            {:else if data.expedition.status.id === ExpeditionStatus.ARCHIVED}
+                                <span class="bg-gray-500 h-20 w-46 text-slate-50 content-center justify-end rounded">Archived</span>
+                            {/if}
                         </div>
                     </div>
                     
@@ -119,7 +132,7 @@
                     </span>
                 </span>
                     <span class="w-full h-1 bg-black"></span>
-                    {#if data.expedition.status > ExpeditionStatus.IN_PROGRESS}
+                    {#if data.expedition.status.id > ExpeditionStatus.IN_PROGRESS}
                         <div class="flex flex-col text-xl space-y-3 self-start items-start">
                             <span class="font-semibold">Report</span>
                                 {#each data.expedition.events as event} 
