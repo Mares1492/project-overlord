@@ -1,7 +1,6 @@
 <script>
     import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
     import {onMount} from 'svelte';
-    import {getServantByUUID} from '$lib/state/servants.svelte.js';
    	import { slide,scale } from 'svelte/transition';
     import {ExpeditionStatus} from '$lib/enums/enums.js';
     import { goto } from '$app/navigation';
@@ -9,6 +8,7 @@
     const {pathUUID,ongoingExpeditions} = $props()
 
     let expeditions = $state([]);
+    $inspect(expeditions)
     let pageState = $state({
         loading: true,
         isBlocking: false,
@@ -18,12 +18,15 @@
     onMount(() => {
         const interval = setInterval( () => {
             pageState.loading = false;
+            if (!ongoingExpeditions) {
+                return clearInterval(interval)
+            }
             expeditions = ongoingExpeditions.map( exp => {
                 if (exp.status === ExpeditionStatus.COMPLETED) {
                     return {
-                        id: exp.id,
+                        uuid: exp.uuid,
                         name: exp.location.name,
-                        servant: getServantByUUID(exp.servantUUID).name,
+                        servant: exp.servant,
                         status: exp.status,
                         task: exp.task,
                         approach: exp.approach,
@@ -36,9 +39,9 @@
                         completeExpedition(exp.id);
                     }
                     return {
-                        id: exp.id,
+                        uuid: exp.uuid,
                         name: exp.location.name,
-                        servant: getServantByUUID(exp.servantUUID).name,
+                        servant: exp.servant,
                         status: ExpeditionStatus.COMPLETED,
                         task: exp.task,
                         approach: exp.approach,
@@ -53,9 +56,9 @@
                 
             
                 return {
-                    id: exp.id,
+                    uuid: exp.uuid,
                     name: exp.location.name,
-                    servant: getServantByUUID(exp.servantUUID).name,
+                    servant: exp.servant,
                     status: exp.status,
                     hours,
                     minutes,
@@ -88,7 +91,7 @@
     <div transition:slide|global={{delay:100}} class="relative flex flex-col text-sm w-full text-gray-800 space-y-1 hover:text-black items-center justify-center">
         <button 
             class="absolute -top-1.5 right-1 text-gray-800 cursor-pointer text-shadow-2xs hover:text-shadow-md text-shadow-yellow-600 text-xl hover:text-2xl transition-all hover:translate-x-0.5 hover:-translate-y-0.5"
-            onclick={()=>handleExpeditionExpandBtnClick(expedition.id)}
+            onclick={()=>handleExpeditionExpandBtnClick(expedition.uuid)}
             in:scale|global={{delay:500}}
             out:scale|global={{duration:100}}
         > 
@@ -96,7 +99,7 @@
         </button>
         <span class="font-bold">{expedition.name}</span>
         <div class="border-t-2 border-gray-800 h-1 w-full"></div>
-        <span class="text-gray-800">{expedition.servant}</span>
+        <span class="text-gray-800">{expedition.servant.name}</span>
         <span class="text-gray-600">Task: <i>{expedition.task}</i></span>
         <span class="text-gray-600">Approach: <i>{expedition.approach}</i></span>
         <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
