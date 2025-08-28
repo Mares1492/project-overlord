@@ -207,7 +207,7 @@ const scaleToSteps = {
 };
 
 
-export const getEventsByExpeditionId = (expeditionId) => {
+export const getEventsByExpeditionUUID = (expeditionUUID) => {
     //TODO: get expedition from db and define events based on expeditions
     //const expedition = getExpedition
 
