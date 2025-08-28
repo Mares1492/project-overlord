@@ -1,27 +1,21 @@
 <script>
     import CharSlot from "$lib/components/servants/CharSlot.svelte";
-    import { getServantByUUID } from "$lib/state/servants.svelte";
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
     import Inventory from "$lib/components/inventory/Inventory.svelte";
     import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
-    import { setServants } from '$lib/state/servants.svelte.js';
+    import { setServants,getServants,getServantByUUID } from '$lib/state/servants.svelte.js';
+    
     const {data} = $props()
-    let servant = $state()
     let timeData = $state()
 
     onMount(()=>{
-        if (data.servants && data.servants.length > 0) {
-            setServants(data.servants);
-        }
-        if (data.expedition) {
-            servant = getServantByUUID(data.expedition.servantUUID);
-        }
+        setServants(data.servants)
         const inverval = setInterval(()=>{
             let msLeft = data.expedition.endTime - Date.now();
             if (msLeft <= 0) {
                 if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
-                    completeExpedition(data.expedition.id);
+                    completeExpedition(data.expedition.uuid);
                 }
                 return undefined
             }
@@ -40,7 +34,7 @@
         return () => clearTimeout(inverval)
     })
 
-    const handleCompleteClick = (expId) => archiveExpedition(expId);
+    const handleCompleteClick = (expUUID) => archiveExpedition(expUUID);
 </script>
 
 {#snippet timeContainer(time)}
@@ -52,13 +46,13 @@
 
 <div class="flex flex-col w-full h-screen">
     {#if data.expedition}
-        {#if servant}
+        {#if data.expedition.servant && getServants().length}
             <span class="text-3xl py-2 px-10 text-amber-100 w-full bg-gray-900">{data.expedition.location.name}</span>
             <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
                 <div class="flex flex-col md:flex-row space-x-20 w-full">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
-                        {servant.name}
-                        <CharSlot {servant} />
+                        {data.expedition.servant.name}
+                        <CharSlot servant={getServantByUUID(data.expedition.servant.uuid)} />
                     </div>
                     <div class="flex flex-col justify-around ">
                         <span class="flex flex-row text-xl space-x-2">
