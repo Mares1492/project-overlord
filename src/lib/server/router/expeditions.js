@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import {expeditions,users,locations,servants,expeditionApproaches,expeditionStatuses,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
+import {expeditions,users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
 import { eq } from "drizzle-orm";
