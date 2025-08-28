@@ -1,8 +1,8 @@
 import { db } from "$lib/server/db/db.js";
-import {expeditions,users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
+import {expeditions,expeditionStatuses,users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
-import { eq } from "drizzle-orm";
+import { eq, and, not } from "drizzle-orm";
 
 const overviewTextMaxLen = 1000
 
@@ -45,6 +45,22 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
         .returning();
 
     return newExpedition;
+}
+
+export const completeExpedition = async (expeditionUUID) => {
+    // TODO: add check for expedition of user
+    await db
+    .update(expeditions)
+    .set({ statusId: 3 })   // completed
+    .where(eq(expeditions.uuid, expeditionUUID));  
+}
+
+export const archiveExpedition = async (expeditionUUID) => {
+    // TODO: add check for expedition of user
+    await db
+    .update(expeditions)
+    .set({ statusId: 4 })   // completed
+    .where(eq(expeditions.uuid, expeditionUUID));  
 }
 
 export const getExpeditionByUUID = async (expeditionUUID) => {
