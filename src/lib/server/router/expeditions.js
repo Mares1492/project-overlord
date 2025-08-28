@@ -57,7 +57,7 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
                 endTime: expeditions.endTime,
                 overviewText: expeditions.overviewText,
                 servant: {name:servants.name,uuid:servants.uuid},
-                status: expeditions.statusId,
+                status: {id: expeditions.statusId, name:expeditionStatuses.name},
                 task: expeditionTasks.name,
                 approach: expeditionApproaches.name,
                 scale: expeditionScales.name
@@ -66,6 +66,7 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
         .from(expeditions)
         .innerJoin(locations,eq(expeditions.locationId,locations.id))
         .innerJoin(servants,eq(servants.id,expeditions.servantId))
+        .innerJoin(expeditionStatuses,eq(expeditionStatuses.id,expeditions.statusId))
         .innerJoin(expeditionApproaches,eq(expeditionApproaches.id,expeditions.approachId))
         .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
         .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
@@ -95,4 +96,44 @@ export const getExpeditionsByUserUUID = (userUUID) => {
         .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
         .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
         .where(eq(expeditions.userId,users.id))
+}
+
+/**
+ * 
+ * @param {string} userUUID 
+ * @returns 
+ */
+export const getOngoingExpeditionsByUserUUID = (userUUID) => {
+    return db
+        .select({
+            uuid:expeditions.uuid,
+            location: {name:locations.name},
+            startTime:expeditions.startTime,
+            endTime: expeditions.endTime,
+            overviewText: expeditions.overviewText,
+            servant: {name:servants.name},
+            status: expeditions.statusId,
+            task: expeditionTasks.name,
+            approach: expeditionApproaches.name,
+            scale: expeditionScales.name
+        })
+        .from(expeditions)
+        .innerJoin(users,eq(users.uuid,userUUID))
+        .innerJoin(locations,eq(expeditions.locationId,locations.id))
+        .innerJoin(servants,eq(servants.id,expeditions.servantId))
+        .innerJoin(expeditionApproaches,eq(expeditionApproaches.id,expeditions.approachId))
+        .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
+        .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
+        .innerJoin(expeditionStatuses,
+            and(
+                not(eq(expeditionStatuses.id,1)), // not idle
+                not(eq(expeditionStatuses.id,4)) // not archived
+            )
+        )
+        .where(
+            and(
+                eq(expeditions.userId,users.id),
+                eq(expeditions.statusId,expeditionStatuses.id)
+            )
+        ) 
 }
