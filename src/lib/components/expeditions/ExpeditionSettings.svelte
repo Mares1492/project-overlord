@@ -26,10 +26,11 @@
         method="POST" 
         action="?/startExpedition" 
         use:enhance={()=> {
-            return async ({ result }) => {
+            return async ({ result, update }) => {
                 if (result.type === "success") {
                     handleExpeditionStartSuccess()
                     closeLocation()
+                    update()
                 }
 		    };
         }}>
