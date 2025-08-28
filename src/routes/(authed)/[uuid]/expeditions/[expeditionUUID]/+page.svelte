@@ -15,7 +15,7 @@
             let msLeft = data.expedition.endTime - Date.now();
             if (msLeft <= 0) {
                 if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
-                    completeExpedition(data.expedition.uuid);
+                    clearTimeout(inverval)
                 }
                 return undefined
             }
@@ -30,7 +30,7 @@
                 minutes,
                 seconds
             };
-        })
+        },1000)
         return () => clearTimeout(inverval)
     })
 
@@ -77,15 +77,19 @@
                     <div class="self-center w-1/2">
                         <div class="flex flex-row justify-end w-full space-x-0.5">
 
-                        {#if data.expedition.status == ExpeditionStatus.IN_PROGRESS}
+                        {#if data.expedition.status === ExpeditionStatus.IN_PROGRESS}
                             {#if timeData}
                                     {@render timeContainer(timeData.hours)}
                                     {@render timeContainer(timeData.minutes)}
                                     {@render timeContainer(timeData.seconds)}
                             {/if}
-                        {:else if data.expedition.status == ExpeditionStatus.COMPLETED}
-                                <button onclick={()=>handleCompleteClick(data.expedition.id)} class="bg-green-500 h-20 w-46 content-center justify-end  hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">Complete</button>          
-                        {:else if data.expedition.status == ExpeditionStatus.ARCHIVED}
+                        {:else if data.expedition.status === ExpeditionStatus.COMPLETED}
+                                <button 
+                                    onclick={()=>handleCompleteClick(data.expedition.uuid)} 
+                                    class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
+                                    Complete
+                                </button>          
+                        {:else if data.expedition.status === ExpeditionStatus.ARCHIVED}
                                 <span class="bg-gray-300 h-20 w-46 content-center justify-end rounded">Completed</span>
                         {/if}
                         </div>
