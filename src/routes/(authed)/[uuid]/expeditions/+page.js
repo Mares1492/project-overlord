@@ -3,5 +3,5 @@ export const ssr = false;
 /** @type {import('./$types').PageLoad} */
 export async function load({parent,data}) {
     const { servants } = await parent();
-    return {servants,locations:data.locations}
+    return {servants,locations:data.locations,expeditions:data.expeditions}
 }
