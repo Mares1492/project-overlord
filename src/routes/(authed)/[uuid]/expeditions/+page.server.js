@@ -1,10 +1,10 @@
 import {getAllLocations} from '$lib/server/router/locations'
-import {createExpedition,getExpeditionsByUserUUID} from '$lib/server/router/expeditions'
+import {createExpedition,getOngoingExpeditionsByUserUUID,completeExpedition,archiveExpedition} from '$lib/server/router/expeditions'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
     const locations = await getAllLocations()
-    const expeditions = await getExpeditionsByUserUUID(params.uuid)
+    const expeditions = await getOngoingExpeditionsByUserUUID(params.uuid)
     if (!expeditions) {
         return {error: true, message: "expeditions are missing"}
     }
@@ -37,6 +37,10 @@ export const actions = {
     },
     completeExpedition: async ({ request }) => {
         const data = await request.formData();
-        // TODO: call action to update DB
+        completeExpedition(data.get('expeditionUUID'))
+    },
+    archiveExpedition: async ({ request }) => {
+        const data = await request.formData();
+        archiveExpedition(data.get('expeditionUUID'))
     }
 }
