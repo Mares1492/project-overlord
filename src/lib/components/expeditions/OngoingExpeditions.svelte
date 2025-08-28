@@ -10,10 +10,10 @@
     
     /**
         * @typedef {Object.<string, TimeObject>} expeditionsTimeCounts
-         * @typedef {Object} TimeObject
-         * @property {number} seconds
-         * @property {number} minutes
-         * @property {number} hours
+        * @typedef {Object} TimeObject
+        * @property {number} seconds
+        * @property {number} minutes
+        * @property {number} hours
      */
     let expeditionsTimeCounts = $state({});
     let chosenExpeditionUUID = $state("");

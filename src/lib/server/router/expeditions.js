@@ -19,6 +19,18 @@ const getDuration = (expScaleValue) => {
     }
 }
 
+/**
+ * @typedef {Object} settings
+ * @property {number} scaleId
+ * @property {number} taskId
+ * @property {number} approachId
+ * 
+ * @param {string} userUUID 
+ * @param {string} servantUUID
+ * @param {string} overviewText 
+ * @param {number} locationId
+ * @param {settings} settings
+ */
 export const createExpedition = async (userUUID,locationId,servantUUID,settings,overviewText) => {
     const user = await getUserByUUID(userUUID)
     const servant = await getServantByUUID(servantUUID)
@@ -47,6 +59,9 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
     return newExpedition;
 }
 
+/**
+ * @param {string} expeditionUUID 
+ */
 export const completeExpedition = async (expeditionUUID) => {
     // TODO: add check for expedition of user
     await db
@@ -55,6 +70,9 @@ export const completeExpedition = async (expeditionUUID) => {
     .where(eq(expeditions.uuid, expeditionUUID));  
 }
 
+/**
+ * @param {string} expeditionUUID 
+ */
 export const archiveExpedition = async (expeditionUUID) => {
     // TODO: add check for expedition of user
     await db
@@ -63,6 +81,9 @@ export const archiveExpedition = async (expeditionUUID) => {
     .where(eq(expeditions.uuid, expeditionUUID));  
 }
 
+/**
+ * @param {string} expeditionUUID 
+ */
 export const getExpeditionByUUID = async (expeditionUUID) => {
     const [expedition] = await db
         .select(
@@ -90,6 +111,9 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
     return expedition;
 }
 
+/**
+ * @param {string} userUUID 
+ */
 export const getExpeditionsByUserUUID = (userUUID) => {
     return db
         .select({
@@ -115,9 +139,7 @@ export const getExpeditionsByUserUUID = (userUUID) => {
 }
 
 /**
- * 
  * @param {string} userUUID 
- * @returns 
  */
 export const getOngoingExpeditionsByUserUUID = (userUUID) => {
     return db
