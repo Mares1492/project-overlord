@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import {expeditions} from "$lib/server/db/schema";
+import {expeditions,users,locations,servants,expeditionApproaches,expeditionStatuses,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
 import { eq } from "drizzle-orm";
@@ -20,8 +20,6 @@ const getDuration = (expScaleValue) => {
 }
 
 export const createExpedition = async (userUUID,locationId,servantUUID,settings,overviewText) => {
-    // TODO: get user and servant by uuid
-    // TODO: check if servant belongs to user
     const user = await getUserByUUID(userUUID)
     const servant = await getServantByUUID(servantUUID)
     if (servant.userId !== user.id) {
@@ -51,4 +49,28 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
 
 export const getExpeditionByUUID = (expeditionUUID) => {
     return db.select().from(expeditions).where(eq(expeditions.uuid,expeditionUUID))
+}
+
+export const getExpeditionsByUserUUID = (userUUID) => {
+    return db
+        .select({
+            uuid:expeditions.uuid,
+            location: {name:locations.name},
+            startTime:expeditions.startTime,
+            endTime: expeditions.endTime,
+            overviewText: expeditions.overviewText,
+            servantUUID: servants.uuid,
+            status: expeditions.statusId,
+            task: expeditionTasks.name,
+            approach: expeditionApproaches.name,
+            scale: expeditionScales.name
+        })
+        .from(expeditions)
+        .innerJoin(users,eq(users.uuid,userUUID))
+        .innerJoin(locations,eq(expeditions.locationId,locations.id))
+        .innerJoin(servants,eq(servants.id,expeditions.servantId))
+        .innerJoin(expeditionApproaches,eq(expeditionApproaches.id,expeditions.approachId))
+        .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
+        .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
+        .where(eq(expeditions.userId,users.id))
 }
