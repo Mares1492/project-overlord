@@ -3,38 +3,40 @@
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
     import Inventory from "$lib/components/inventory/Inventory.svelte";
-    import {completeExpedition,archiveExpedition } from '$lib/state/expeditionState.svelte.js';
     import { setServants,getServants,getServantByUUID } from '$lib/state/servants.svelte.js';
+    import { enhance } from '$app/forms';
     
     const {data} = $props()
     let timeData = $state()
 
     onMount(()=>{
         setServants(data.servants)
-        const inverval = setInterval(()=>{
-            let msLeft = data.expedition.endTime - Date.now();
-            if (msLeft <= 0) {
-                if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
+        if (data.expedition.status === ExpeditionStatus.IN_PROGRESS) {
+            const inverval = setInterval(()=>{
+                let msLeft = data.expedition.endTime - Date.now();
+                console.log(msLeft)
+                if (msLeft <= 0) {
                     clearTimeout(inverval)
+                    timeData = {msLeft:0}
+                    return
                 }
-                return undefined
-            }
-            let totalSeconds = Math.floor(msLeft / 1000);
+                let totalSeconds = Math.floor(msLeft / 1000);
 
-            let hours = Math.floor(totalSeconds / 3600);
-            let minutes = Math.floor((totalSeconds % 3600) / 60);
-            let seconds = totalSeconds % 60;
-            
-            timeData = { 
-                hours,
-                minutes,
-                seconds
-            };
-        },1000)
-        return () => clearTimeout(inverval)
+                let hours = Math.floor(totalSeconds / 3600);
+                let minutes = Math.floor((totalSeconds % 3600) / 60);
+                let seconds = totalSeconds % 60;
+                
+                timeData = { 
+                    hours,
+                    minutes,
+                    seconds,
+                    msLeft
+                };
+            },1000)
+            return () => clearTimeout(inverval)
+        }
     })
 
-    const handleCompleteClick = (expUUID) => archiveExpedition(expUUID);
 </script>
 
 {#snippet timeContainer(time)}
@@ -79,18 +81,31 @@
 
                         {#if data.expedition.status === ExpeditionStatus.IN_PROGRESS}
                             {#if timeData}
+                                {#if timeData.msLeft > 0}
                                     {@render timeContainer(timeData.hours)}
                                     {@render timeContainer(timeData.minutes)}
                                     {@render timeContainer(timeData.seconds)}
-                            {/if}
+                                {:else}
+                                    <form
+                                        id='completeExpedition'  
+                                        method="POST" 
+                                        action="?/completeExpedition" 
+                                        use:enhance
+                                    >
+                                        <button
+                                            type="submit" 
+                                            class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
+                                            Complete
+                                        </button>
+                                    </form>
+                                {/if}
+                            {:else}
+                                <span class="h-20 w-46 content-center border-dotted border-4">Loading...</span>
+                            {/if}     
                         {:else if data.expedition.status === ExpeditionStatus.COMPLETED}
-                                <button 
-                                    onclick={()=>handleCompleteClick(data.expedition.uuid)} 
-                                    class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
-                                    Complete
-                                </button>          
+                            <span class="bg-gray-300 h-20 w-46 content-center justify-end rounded">Completed</span>
                         {:else if data.expedition.status === ExpeditionStatus.ARCHIVED}
-                                <span class="bg-gray-300 h-20 w-46 content-center justify-end rounded">Completed</span>
+                            <span class="bg-gray-500 h-20 w-46 text-slate-50 content-center justify-end rounded">Archived</span>
                         {/if}
                         </div>
                     </div>
