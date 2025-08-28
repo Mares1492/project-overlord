@@ -47,8 +47,30 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
     return newExpedition;
 }
 
-export const getExpeditionByUUID = (expeditionUUID) => {
-    return db.select().from(expeditions).where(eq(expeditions.uuid,expeditionUUID))
+export const getExpeditionByUUID = async (expeditionUUID) => {
+    const [expedition] = await db
+        .select(
+            {
+                uuid:expeditions.uuid,
+                location: {name:locations.name},
+                startTime:expeditions.startTime,
+                endTime: expeditions.endTime,
+                overviewText: expeditions.overviewText,
+                servant: {name:servants.name,uuid:servants.uuid},
+                status: expeditions.statusId,
+                task: expeditionTasks.name,
+                approach: expeditionApproaches.name,
+                scale: expeditionScales.name
+            }
+        )
+        .from(expeditions)
+        .innerJoin(locations,eq(expeditions.locationId,locations.id))
+        .innerJoin(servants,eq(servants.id,expeditions.servantId))
+        .innerJoin(expeditionApproaches,eq(expeditionApproaches.id,expeditions.approachId))
+        .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
+        .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
+        .where(eq(expeditions.uuid,expeditionUUID))
+    return expedition;
 }
 
 export const getExpeditionsByUserUUID = (userUUID) => {
@@ -59,7 +81,7 @@ export const getExpeditionsByUserUUID = (userUUID) => {
             startTime:expeditions.startTime,
             endTime: expeditions.endTime,
             overviewText: expeditions.overviewText,
-            servantUUID: servants.uuid,
+            servant: {name:servants.name},
             status: expeditions.statusId,
             task: expeditionTasks.name,
             approach: expeditionApproaches.name,
