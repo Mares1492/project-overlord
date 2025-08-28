@@ -1,5 +1,5 @@
 import {getEventsByExpeditionUUID} from "$lib/server/handlers/events.js";
-import { getExpeditionByUUID, completeExpedition } from '$lib/server/router/expeditions';
+import { getExpeditionByUUID, completeExpedition, archiveExpedition } from '$lib/server/router/expeditions';
 import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */
@@ -19,5 +19,8 @@ export async function load({params}) {
 export const actions = {
     completeExpedition: async ({ params }) => {
         completeExpedition(params.expeditionUUID)
+    },
+    archiveExpedition: async ({ params }) => {
+        archiveExpedition(params.expeditionUUID)
     }
 }
