@@ -3,11 +3,17 @@
     import {goto} from '$app/navigation';
     import { enhance } from '$app/forms';
     import castle from "$lib/assets/bg/keep/castle.png";
-    import {getAvailableExpeditionsNumber} from '$lib/state/expeditionState.svelte.js';
+    import { onMount } from 'svelte';
+    import { loadRaceAssets } from '$lib/state/race.svelte';
 
     /** @type {import('./$types').LayoutProps} */
     let { children, data} = $props();
     
+    onMount(async ()=>{
+        if (data.servants) {
+            await loadRaceAssets(data.servants)   
+        }
+    })
 </script>
 
 {#snippet btn(icon,path='/',hasNotifications = false,notificationCount = 0)}
@@ -28,7 +34,7 @@
         </div>
         <div class="flex flex-col h-full pt-1 justify-around">
             {@render btn(`🏰`,`/${data.pathUUID}/keep`)}
-            {@render btn(`⚔️`,`/${data.pathUUID}/expeditions`,true,getAvailableExpeditionsNumber())}
+            {@render btn(`⚔️`,`/${data.pathUUID}/expeditions`,true,data.availableServants)}
             {@render btn(`🧍‍♂️`,`/${data.pathUUID}/servants`)}
             {@render btn(`💰`,`/${data.pathUUID}/treasury`)}
             {@render btn(`📖`,`/${data.pathUUID}/academy`)}
