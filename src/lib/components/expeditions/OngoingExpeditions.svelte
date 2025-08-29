@@ -7,7 +7,6 @@
 
     const {pathUUID,ongoingExpeditions} = $props()
 
-    
     /**
         * @typedef {Object.<string, TimeObject>} expeditionsTimeCounts
         * @typedef {Object} TimeObject
@@ -89,7 +88,7 @@
 
 
 {#snippet expeditionSlot(expedition)}
-    <div in:slide={{delay:300}} out:slide class="relative flex flex-col text-sm w-full h-40 text-gray-800 space-y-1 items-center justify-center">
+    <div in:slide={{delay:300}} out:slide class="relative flex flex-col text-sm w-full h-42 text-gray-800 space-y-1 items-center justify-center">
         <div class="flex flex-row items-center justify-center relative w-full">
             <span class="font-bold self-center">{expedition.location.name}</span>
             <button 
