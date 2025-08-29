@@ -13,8 +13,7 @@
         setServants(data.servants)
         if (data.expedition.status.id === ExpeditionStatus.IN_PROGRESS) {
             const inverval = setInterval(()=>{
-                let msLeft = data.expedition.endTime - Date.now();
-                console.log(msLeft)
+                let msLeft = data.expedition.endTime.getTime() - Date.now();
                 if (msLeft <= 0) {
                     clearTimeout(inverval)
                     timeData = {msLeft:0}
