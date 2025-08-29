@@ -1,8 +1,10 @@
+// THIS STATE FILE WAS USED FOR FRONTEND TESTING PURPOSES
+
 import { setServantAsNotAvailable, setServantAsAvailable } from '$lib/state/servants.svelte.js';
 import {ExpeditionStatus} from '$lib/enums/enums.js'
 
 export const expeditionsList = $state([]);
-let avalableExpeditionsNumber = $state(3);
+let avalableExpeditionsNumber = $state(0);
 
 //exp -> expedition
 const expeditionTemplate = {
@@ -30,6 +32,7 @@ const getDuration = (expScaleValue) => {
             return 60;
     }
 }
+export const setAvailableExpeditionsNumber = (numberToSet) => avalableExpeditionsNumber = numberToSet
 
 export const getAvailableExpeditionsNumber = () => avalableExpeditionsNumber;
 

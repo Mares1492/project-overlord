@@ -1,3 +1,5 @@
+// THIS STATE FILE WAS USED FOR FRONTEND TESTING PURPOSES
+
 import {getRaceAssets} from '$lib/state/race.svelte.js';
 
 let servants = $state([]);
