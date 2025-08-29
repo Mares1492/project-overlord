@@ -209,7 +209,7 @@ export const servants = pgTable('servants', {
 		.references(()=>races.id),
 	name: text('name').notNull(),
 	uuid: uuid('uuid').notNull().defaultRandom(),
-	status: integer('status')
+	statusId: integer('status_id')
 		.notNull()
 		.references(() => servantStatuses.id).default(1),
 	vampire: boolean('vampire').notNull().default(false),
