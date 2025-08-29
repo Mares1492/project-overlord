@@ -11,16 +11,16 @@ const getEndTime = (expScaleValue) => {
     let time = Date.now()
     switch (expScaleValue) {
         case 1:
-            time += 15000;
-            break;
-        case 2:
             time += 30000;
             break;
+        case 2:
+            time += 60000;
+            break;
         case 3:
-            time += 45000;
+            time += 300000;
             break;
         default:
-            time += 60000;
+            time += 600000;
             break;
     }
     return new Date(time)
