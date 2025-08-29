@@ -1,5 +1,6 @@
 import {getAllLocations} from '$lib/server/router/locations'
 import {createExpedition,getOngoingExpeditionsByUserUUID,completeExpedition,archiveExpedition} from '$lib/server/router/expeditions'
+import { redirect } from '@sveltejs/kit'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
@@ -44,7 +45,7 @@ export const actions = {
         const expeditionUUID = data.get('expeditionUUID') ?? ""
         await completeExpedition(expeditionUUID)
     },
-    archiveExpedition: async ({ request }) => {
+    archiveExpedition: async ({params, request }) => {
         const data = await request.formData();
         /** @type {string} */
         const expeditionUUID = data.get('expeditionUUID') ?? ""
