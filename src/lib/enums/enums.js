@@ -80,3 +80,13 @@ export const ServantStatus = {
   RETIRED:5,
   MISSING:6
 }
+
+const RaceTypes = {
+  HUMAN: 1,
+  ELF: 2,
+  DARK_ELF: 3,
+  ORC: 4,
+  GOBLIN: 5
+}
+
+export const invertedRaceTypes = invertObject(RaceTypes)
