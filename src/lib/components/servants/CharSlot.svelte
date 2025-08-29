@@ -16,8 +16,8 @@
             {#if isExpeditionSettings}
                 <span class:ring-2={chosenServant.uuid === servant.uuid} class="absolute text-xs w-full -top-5 font-semibold border ring-black bg-gray-700  text-slate-200">{servant.name}</span>
             {/if}
-            {#if chosenServant.status !== "idle"}
-                <span class="absolute text-xs border-y-2 w-full z-10 top-9 font-semibold  selection:none bg-white">{chosenServant.status}</span>
+            {#if chosenServant.status.name !== "idle"}
+                <span class="absolute text-xs border-y-2 w-full z-10 top-9 font-semibold  selection:none bg-white">{chosenServant.status.name}</span>
                 <img class={`absolute brightness-30 top-0 grayscale-200 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
             {:else}
                 <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>

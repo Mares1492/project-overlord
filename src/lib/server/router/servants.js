@@ -117,11 +117,11 @@ export const getServantsByUserUUID = async (userUUID) => {
             uuid: servants.uuid,
             name: servants.name,
             race: races.name,
-            status: servantStatuses.name
+            status: {id:servantStatuses.id, name:servantStatuses.name}
         })
         .from(servants)
         .innerJoin(races, eq(servants.raceId,races.id))
-        .innerJoin(servantStatuses, eq(servantStatuses.id, servants.status))
+        .innerJoin(servantStatuses, eq(servantStatuses.id, servants.statusId))
         .where(eq(servants.userId, user.id));
 
     const servantData = await Promise.all(servantList.map(async servant => {
