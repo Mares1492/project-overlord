@@ -2,16 +2,19 @@
     import {expeditionSettings} from '$lib/state/expeditionSettings.svelte';
     import {getExpeditionOverviewText} from '$lib/handlers/expeditions.js';
     import ServantsList from '../servants/ServantsList.svelte';
-    import { getServants } from '$lib/state/servants.svelte';
     import { onMount } from 'svelte';
     import { enhance } from '$app/forms';
 
-    const {closeLocation, chosenLocation, handleExpeditionStartSuccess} = $props();
+    const {closeLocation, chosenLocation, handleExpeditionStartSuccess, servants} = $props();
     let chosenServant = $state();
     let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
 
     onMount(()=>{
-        chosenServant = getServants()[0];
+        if (!servants) {
+            console.error("Servants are not found")
+            return
+        }
+        chosenServant = servants[0]
     })
 
 </script>
@@ -25,15 +28,16 @@
         id='startExpedition'  
         method="POST" 
         action="?/startExpedition" 
-        use:enhance={()=> {
-            return async ({ result, update }) => {
+        use:enhance={()=> 
+            async ({ result, update }) => {
                 if (result.type === "success") {
                     handleExpeditionStartSuccess()
                     closeLocation()
                     update()
                 }
-		    };
-        }}>
+            }
+        }
+    >
         <input type="hidden" name="locationId" value={chosenLocation.id}>
         <input type="hidden" name="taskId" value={expeditionSettings.task.value+1}>
         <input type="hidden" name="approachId" value={expeditionSettings.approach.value+1}>
@@ -85,7 +89,7 @@
                 <span class="text-xl mb-3.5 font-black">Servant</span>
                 {#if chosenServant}
                     <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
-                        <ServantsList bind:chosenServant={chosenServant} isExpeditionSettings={true}/>
+                        <ServantsList {servants} bind:chosenServant={chosenServant} isExpeditionSettings={true}/>
                     </div>
                 {/if}
             </div>
