@@ -3,14 +3,12 @@
     import { onMount } from "svelte";
     import {ExpeditionStatus} from '$lib/enums/enums.js'
     import Inventory from "$lib/components/inventory/Inventory.svelte";
-    import { setServants,getServants,getServantByUUID } from '$lib/state/servants.svelte.js';
     import { enhance } from '$app/forms';
     
     const {data} = $props()
     let timeData = $state()
 
     onMount(()=>{
-        setServants(data.servants)
         if (data.expedition.status.id === ExpeditionStatus.IN_PROGRESS) {
             const inverval = setInterval(()=>{
                 let msLeft = data.expedition.endTime.getTime() - Date.now();
@@ -40,20 +38,20 @@
 
 {#snippet timeContainer(time)}
     <span 
-        class="w-12 h-12 px-1 py-0.5 bg-gray-900 border border-gray-500 text-amber-100 content-center">
+        class="w-13 h-13 bg-gray-900 border border-gray-500 text-amber-100 content-center">
         {time}
     </span>
 {/snippet}
 
 <div class="flex flex-col w-full h-screen">
     {#if data.expedition}
-        {#if data.expedition.servant && getServants().length}
-            <span class="text-3xl py-2 px-10 text-amber-100 w-full bg-gray-900">{data.expedition.location.name}</span>
+        {#if data.expedition.servant && data?.servants?.length}
+            <span class="text-4xl py-3 px-10 flex text-amber-100 w-full bg-gray-900">{data.expedition.location.name}</span>
             <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
                 <div class="flex flex-col md:flex-row space-x-20 w-full">
                     <div class="flex flex-col text-2xl text-center justify-center space-x-5">
                         {data.expedition.servant.name}
-                        <CharSlot servant={getServantByUUID(data.expedition.servant.uuid)} />
+                        <CharSlot servant={data.servants.find(servant=>servant.uuid === data.expedition.servant.uuid)} />
                     </div>
                     <div class="flex flex-col justify-around ">
                         <span class="flex flex-row text-xl space-x-2">
@@ -81,10 +79,12 @@
                             {#if data.expedition.status.id === ExpeditionStatus.IN_PROGRESS}
                                 {#if timeData}
                                     {#if timeData.msLeft > 0}
-                                        <div class="flex flex-row space-x-0.5">
-                                            {@render timeContainer(timeData.hours)}
-                                            {@render timeContainer(timeData.minutes)}
-                                            {@render timeContainer(timeData.seconds)}
+                                        <div class="bg-gray-900 h-20 w-46">
+                                            <div class="flex flex-row px-1  w-full h-full items-center justify-around">
+                                                {@render timeContainer(timeData.hours)}
+                                                {@render timeContainer(timeData.minutes)}
+                                                {@render timeContainer(timeData.seconds)}
+                                            </div>
                                         </div>
                                     {:else}
                                         <form
@@ -146,7 +146,7 @@
                             <Inventory inventoryData={{maxSlots:5,items:[]}} showCounter={false}/>
                         </div>
                     {:else}
-                        <span>Results will be available after the expedition's end.</span>
+                        <span class="flex">Results will be available after the expedition's end.</span>
                     {/if}
             </div>
         {:else}
