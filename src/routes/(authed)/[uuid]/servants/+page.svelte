@@ -1,9 +1,9 @@
 <script>
-    import {getServants,setServants} from '$lib/state/servants.svelte.js';
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     import Inventory from '$lib/components/inventory/Inventory.svelte';
     import { enhance } from '$app/forms';
     import { onMount } from 'svelte';
+    import { getRaceAssets } from '$lib/state/race.svelte.js'
     
     const {data} = $props();
 
@@ -14,10 +14,9 @@
         message: data.message
     });
 
-    onMount(() => {
+    onMount(async () => {
         if (data.servants && data.servants.length > 0) {
-            setServants(data.servants);
-            chosenServant = getServants()[0];
+            chosenServant = data.servants[0];
         }
     });
 
@@ -60,9 +59,9 @@
             <div class="flex justify-center h-full items-center">
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
-                        {#if chosenServant}
+                        {#if data.servants && chosenServant}
                             <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                                <ServantsList bind:chosenServant={chosenServant}/>
+                                <ServantsList servants={data.servants} bind:chosenServant={chosenServant}/>
                                 {@render lockedSlot()}
                                 {@render lockedSlot()}
                                 {@render lockedSlot()}
@@ -109,11 +108,15 @@
                 {/each}
             </ul>
             <div class="flex flex-col w-full h-full relative space-y-2">
-                <img
+                {#await getRaceAssets(chosenServant.race)}
+                    <span>Loading...</span>
+                {:then src}
+                    <img
                         class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
-                        src={chosenServant.bodyPath}
+                        src={src.body}
                         alt={`${chosenServant.name}'s body`}
-                >
+                    >
+                {/await}
                 <div class="w-full h-9 px-1  flex justify-center">
                     <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
                         <i>
