@@ -49,19 +49,26 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
         ? overviewText.slice(0, overviewTextMaxLen) 
         : overviewText;
 
- 
-    const [newExpedition] = await db.insert(expeditions).values(
-        { 
-            userId: user.id, 
-            servantId: servant.id,
-            locationId: locationId,
-            endTime: getEndTime(Number(settings.scaleId)),
-            taskId: settings.taskId,
-            approachId: settings.approachId,
-            scaleId: settings.scaleId,
-            overviewText
-        })
-        .returning();
+    const newExpedition = await db.transaction(async (tx) => {
+        const [newExpedition] = await tx.insert(expeditions).values(
+            { 
+                userId: user.id, 
+                servantId: servant.id,
+                locationId: locationId,
+                endTime: getEndTime(Number(settings.scaleId)),
+                taskId: settings.taskId,
+                approachId: settings.approachId,
+                scaleId: settings.scaleId,
+                overviewText
+            })
+            .returning();
+        await tx
+            .update(servants)
+            .set({ statusId: 2 })
+            .where(eq(servants.id, newExpedition.servantId));
+
+        return newExpedition
+    });
     return newExpedition;
 }
 
@@ -70,10 +77,17 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
  */
 export const completeExpedition = async (expeditionUUID) => {
     // TODO: add check for expedition of user
-    await db
-    .update(expeditions)
-    .set({ statusId: 3 })   // completed
-    .where(eq(expeditions.uuid, expeditionUUID));  
+    await db.transaction(async (tx) => {
+        const [updatedExpedition] = await tx
+            .update(expeditions)
+            .set({ statusId: 3 })   // completed
+            .where(eq(expeditions.uuid, expeditionUUID))
+            .returning();
+        await tx
+            .update(servants)
+            .set({ statusId: 1 }) //idle
+            .where(eq(servants.id, updatedExpedition.servantId));
+    })
 }
 
 /**
@@ -81,10 +95,13 @@ export const completeExpedition = async (expeditionUUID) => {
  */
 export const archiveExpedition = async (expeditionUUID) => {
     // TODO: add check for expedition of user
-    await db
-    .update(expeditions)
-    .set({ statusId: 4 })   // completed
-    .where(eq(expeditions.uuid, expeditionUUID));  
+    await db.transaction(async (tx) => {
+        await tx
+            .update(expeditions)
+            .set({ statusId: 4 })   // completed
+            .where(eq(expeditions.uuid, expeditionUUID));
+    })
+    
 }
 
 /**
