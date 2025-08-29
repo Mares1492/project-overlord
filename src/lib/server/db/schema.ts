@@ -307,8 +307,8 @@ export const expeditionTasks = pgTable('expedition_tasks', {
 	id: serial('id').primaryKey(),
 	name: text('name').notNull(),
 	tooltip: text('tooltip').notNull()
-})
-	
+});
+
 export const expeditions = pgTable('expeditions', {
 	id: serial('id').primaryKey(),
 	uuid: uuid('uuid').notNull().defaultRandom(),
@@ -337,6 +337,26 @@ export const expeditions = pgTable('expeditions', {
 	approachId: integer('approach_id')
 		.notNull()
 		.references(() => expeditionApproaches.id)
+});
+
+export const expeditionLoots = pgTable('expedition_loots',{
+	id: serial('id').primaryKey(),
+	expeditionId: integer('expedition_id')
+		.notNull()
+		.references(() => expeditions.id)
+		.unique(),
+	gold: integer('gold').notNull().default(0),
+	gems: integer('gems').notNull().default(0),
+});
+
+export const expeditionLootItems = pgTable('expedition_loot_items',{
+	id: serial('id').primaryKey(),
+	itemId: integer('item_id')
+		.notNull()
+		.references(() => items.id),
+	expeditionLootId: integer('expedition_id')
+		.notNull()
+		.references(() => expeditionLoots.id)
 });
 
 // Events
