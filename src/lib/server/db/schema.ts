@@ -325,8 +325,8 @@ export const expeditions = pgTable('expeditions', {
 		.notNull()
 		.references(() => expeditionStatuses.id)
 		.default(2),
-	startTime: timestamp('start_Time', { withTimezone: false }).defaultNow(),
-	endTime: timestamp('end_Time', { withTimezone: false }),
+	startTime: timestamp('start_time', { withTimezone: false }).defaultNow(),
+	endTime: timestamp('end_time', { withTimezone: false }),
 	overviewText: text('overview_text').notNull(),
 	taskId: integer('task_id')
 		.notNull()
