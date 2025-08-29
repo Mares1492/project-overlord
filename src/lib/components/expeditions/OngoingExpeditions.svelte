@@ -88,7 +88,7 @@
 
 
 {#snippet expeditionSlot(expedition)}
-    <div in:slide={{delay:300}} out:slide class="relative flex flex-col text-sm w-full h-42 text-gray-800 space-y-1 items-center justify-center">
+    <div transition:slide={{delay:300}} class="relative flex flex-col text-sm w-full h-42 text-gray-800 space-y-1 items-center justify-center">
         <div class="flex flex-row items-center justify-center relative w-full">
             <span class="font-bold self-center">{expedition.location.name}</span>
             <button 
@@ -136,7 +136,7 @@
         </div>
     {/if}
 {:else}
-    <div transition:slide|global={{duration:300}} class="flex flex-col max-h-264 overflow-y-auto mini-scrollbar bg-amber-400/70 border-2 p-5 justify-start space-y-7 items-center">
+    <div in:slide|global={{duration:300}} out:fade={{duration:200}} class="flex flex-col max-h-264 overflow-y-auto mini-scrollbar bg-amber-400/70 border-2 p-5 justify-start space-y-7 items-center">
         {#each ongoingExpeditions as expedition(expedition.uuid)}
             {@render expeditionSlot(expedition)}
         {/each}
