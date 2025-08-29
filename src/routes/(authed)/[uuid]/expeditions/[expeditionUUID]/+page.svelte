@@ -76,7 +76,7 @@
                         </span>
                     </div>
                     <div class="flex self-center w-1/2">
-                        <div class="flex flex-col w-full space-y-2.5 items-center">
+                        <div class="flex flex-col w-full space-y-2.5 items-center h-32">
                             <div class="flex flex-row space-x-2"><span class="font-bold">Status:</span><i>{data.expedition.status.name.toUpperCase()}</i></div>
                             {#if data.expedition.status.id === ExpeditionStatus.IN_PROGRESS}
                                 {#if timeData}
