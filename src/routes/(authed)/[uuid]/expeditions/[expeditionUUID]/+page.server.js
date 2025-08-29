@@ -18,9 +18,10 @@ export async function load({params}) {
 /** @satisfies {import('./$types').Actions} */
 export const actions = {
     completeExpedition: async ({ params }) => {
-        completeExpedition(params.expeditionUUID)
+        await completeExpedition(params.expeditionUUID)
     },
     archiveExpedition: async ({ params }) => {
-        archiveExpedition(params.expeditionUUID)
+        await archiveExpedition(params.expeditionUUID)
+        redirect(308,`/${params.uuid}/expeditions`)
     }
 }
