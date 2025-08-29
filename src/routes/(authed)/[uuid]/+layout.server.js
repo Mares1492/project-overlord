@@ -8,6 +8,10 @@ export async function load({cookies,params}) {
     if (!user) {
         redirect(308, `/`);
     }
+    if (params.uuid !== user.uuid) {
+        console.log("path uuid is altered redirecting...");
+        redirect(308, `/${user.uuid}/keep`);
+    }
     const {servants,availableServants} = await getServantsByUserUUID(user.uuid)
     if (!servants) {
         return {pathUUID: user.uuid, error: true, message: "No servants found for this user"};
