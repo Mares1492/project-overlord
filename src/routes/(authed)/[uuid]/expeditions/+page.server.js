@@ -34,13 +34,20 @@ export const actions = {
             expeditionSettings,
             overviewText
         )
+        if (!newExpedition) {
+            return {error:true,message:"Could not create expedition"}
+        }
     },
     completeExpedition: async ({ request }) => {
         const data = await request.formData();
-        completeExpedition(data.get('expeditionUUID'))
+        /** @type {string} */
+        const expeditionUUID = data.get('expeditionUUID') ?? ""
+        await completeExpedition(expeditionUUID)
     },
     archiveExpedition: async ({ request }) => {
         const data = await request.formData();
-        archiveExpedition(data.get('expeditionUUID'))
+        /** @type {string} */
+        const expeditionUUID = data.get('expeditionUUID') ?? ""
+        await archiveExpedition(expeditionUUID)
     }
 }
