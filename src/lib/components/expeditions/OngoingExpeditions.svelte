@@ -152,6 +152,8 @@
 <style>
     .mini-scrollbar {
         overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #666 transparent;
     }
 
     /* scrollbar track (background) */
