@@ -1,6 +1,6 @@
 <script>
+    import { getRaceAssets } from '$lib/state/race.svelte.js'
     let {servant,chosenServant=$bindable(servant),isExpeditionSettings=false} = $props();
-
     const handleInfoClick = () => {
         // Placeholder for future functionality
         alert(`Servant ${servant.name} info btn is clicked, but panel is not implemented`);
@@ -16,11 +16,12 @@
             {#if isExpeditionSettings}
                 <span class:ring-2={chosenServant.uuid === servant.uuid} class="absolute text-xs w-full -top-5 font-semibold border ring-black bg-gray-700  text-slate-200">{servant.name}</span>
             {/if}
-            {#if chosenServant.status.name !== "idle"}
-                <span class="absolute text-xs border-y-2 w-full z-10 top-9 font-semibold  selection:none bg-white">{chosenServant.status.name}</span>
-                <img class={`absolute brightness-30 top-0 grayscale-200 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
+            
+            {#if servant.status.name !== "idle"}
+                <span class="absolute text-xs border-y-2 w-full z-10 top-9 font-semibold  selection:none bg-white">{servant.status.name}</span>
+                <img class={`absolute brightness-30 top-0 grayscale-200 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={getRaceAssets(servant.race).face} alt={`servant`}>
             {:else}
-                <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={servant.iconPath} alt={`servant`}>
+                <img class={`absolute top-0 left-0 w-full h-full object-contain ${servant.vampire?"-hue-rotate-210":""}`} src={getRaceAssets(servant.race).face} alt={`servant`}>
             {/if}
         </button>
     </div>
