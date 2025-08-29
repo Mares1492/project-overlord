@@ -3,7 +3,7 @@ import "dotenv/config";
 import { db } from "./db"; // your Drizzle instance
 import { itemTypes, slotTypes, races, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
 import {locationValues} from './seed_data/locations'
-import {LocationType,ExpeditionStatus} from '../../enums/enums'
+import {LocationType,ExpeditionStatus,ServantStatus} from '../../enums/enums'
 
 const itemTypeValues = [
   { id:1, name: "helmet" },
@@ -75,12 +75,12 @@ const raceValues = [
 ]
 
 const servantStatusValues = [
-  { id: 1, name: "idle"},
-  { id: 2, name: "expedition"},
-  { id: 3, name: "injured"},
-  { id: 4, name: "dead"},
-  { id: 5, name: "retired"},
-  { id:6, name: "missing"},
+  { id: ServantStatus.IDLE, name: "idle"},
+  { id: ServantStatus.EXPEDITION, name: "expedition"},
+  { id: ServantStatus.INJURED, name: "injured"},
+  { id: ServantStatus.DEAD, name: "dead"},
+  { id: ServantStatus.RETIRED, name: "retired"},
+  { id:ServantStatus.MISSING, name: "missing"},
 ];
 
 const attributeValues = [
