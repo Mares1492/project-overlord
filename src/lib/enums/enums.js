@@ -63,11 +63,20 @@ export const LocationType = {
 export const invertedLocationType = invertObject(LocationType)
 
 export const ExpeditionStatus = {
-    IDLE: 1,
-    IN_PROGRESS: 2,
-    COMPLETED: 3,
-    ARCHIVED: 4,
-    FAILED: 5,
+  IDLE: 1,
+  IN_PROGRESS: 2,
+  COMPLETED: 3,
+  ARCHIVED: 4,
+  FAILED: 5,
 }
 
 export const invertedExpeditionStatus = invertObject(ExpeditionStatus)
+
+export const ServantStatus = {
+  IDLE: 1,
+  EXPEDITION:2,
+  INJURED:3,
+  DEAD:4,
+  RETIRED:5,
+  MISSING:6
+}
