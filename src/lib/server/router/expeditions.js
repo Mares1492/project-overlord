@@ -2,21 +2,28 @@ import { db } from "$lib/server/db/db.js";
 import {expeditions,expeditionStatuses,users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
-import { eq, and, not } from "drizzle-orm";
+import { eq, and, not, desc } from "drizzle-orm";
 
 const overviewTextMaxLen = 1000
 
-const getDuration = (expScaleValue) => {
+/** @param {number} expScaleValue */
+const getEndTime = (expScaleValue) => {
+    let time = Date.now()
     switch (expScaleValue) {
-        case 0:
-            return 15;
         case 1:
-            return 30;
+            time += 15000;
+            break;
         case 2:
-            return 45;
+            time += 30000;
+            break;
+        case 3:
+            time += 45000;
+            break;
         default:
-            return 60;
+            time += 60000;
+            break;
     }
+    return new Date(time)
 }
 
 /**
@@ -42,20 +49,19 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
         ? overviewText.slice(0, overviewTextMaxLen) 
         : overviewText;
 
-    const duration = getDuration(settings.scaleId)
+ 
     const [newExpedition] = await db.insert(expeditions).values(
         { 
             userId: user.id, 
             servantId: servant.id,
             locationId: locationId,
-            endTime: new Date(Date.now() + (duration * 1000)),
+            endTime: getEndTime(Number(settings.scaleId)),
             taskId: settings.taskId,
             approachId: settings.approachId,
             scaleId: settings.scaleId,
             overviewText
         })
         .returning();
-
     return newExpedition;
 }
 
@@ -173,5 +179,6 @@ export const getOngoingExpeditionsByUserUUID = (userUUID) => {
                 eq(expeditions.userId,users.id),
                 eq(expeditions.statusId,expeditionStatuses.id)
             )
-        ) 
+        )
+        .orderBy(desc(expeditions.startTime));
 }
