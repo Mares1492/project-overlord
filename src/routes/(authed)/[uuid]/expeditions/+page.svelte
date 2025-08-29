@@ -3,7 +3,6 @@
     import OngoingExpeditions from "$lib/components/expeditions/OngoingExpeditions.svelte";
     import BaseMap from "$lib/components/map/BaseMap.svelte";
     import { onMount, setContext } from 'svelte';
-    import { setServants } from '$lib/state/servants.svelte.js';
 
     const {data} = $props(); 
 
@@ -45,9 +44,6 @@
 
     // check in case handleLocalStorageLoad returns null
     onMount(() => {
-        if (data.servants && data.servants.length > 0) {
-            setServants(data.servants);
-        }
         let savedMode = handleLocalStorageLoad("expedition_mode")
         if (savedMode) {
             mode = savedMode;
@@ -133,7 +129,7 @@
         </div>
     </div>
 {:else if mode === modes[1] && location}
-    <ExpeditionSettings closeLocation={closeLocation} {chosenLocation} handleExpeditionStartSuccess={handleExpeditionStartSuccess}/>
+    <ExpeditionSettings servants={data.servants} closeLocation={closeLocation} {chosenLocation} handleExpeditionStartSuccess={handleExpeditionStartSuccess}/>
 {/if}
 
 <style>
@@ -146,7 +142,7 @@
       box-shadow: 0 0 0px rgba(0, 255, 0, 0.8);
     }
     30% {
-      box-shadow: 0 0 500px rgba(0, 255, 0, 0.9);
+      box-shadow: 0 0 70px rgba(0, 255, 0, 0.9);
     }
     100% {
       box-shadow: 0 0 0px rgba(0, 255, 0, 0);
