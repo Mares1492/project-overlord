@@ -33,11 +33,11 @@ const itemSlotTypeValues = [
 
 const itemRarityTypeValues = [
   { id:ItemRarity.common, name: "common" },
-  { id:ItemRarity.uncommon, name: "uncommon" },
-  { id:ItemRarity.rare, name: "rare" },
-  { id:ItemRarity.epic, name: "epic" },
-  { id:ItemRarity.mythic, name: "mythic" },
-  { id:ItemRarity.legendary, name: "legendary" },
+  { id:ItemRarity.uncommon, name: "uncommon" ,color_hex:"#1eff00"},
+  { id:ItemRarity.rare, name: "rare",color_hex:"#0070dd" },
+  { id:ItemRarity.epic, name: "epic",color_hex:"#ffea00" },
+  { id:ItemRarity.mythic, name: "mythic",color_hex:"#a335ee" },
+  { id:ItemRarity.legendary, name: "legendary",color_hex:"#ff8000" },
 ]
 
 const buildingBuffTypeValues = [

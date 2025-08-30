@@ -165,6 +165,7 @@ export const items = pgTable('items', {
 export const itemRarityTypes = pgTable('item_rarity_types', {
 	id: integer('id').primaryKey(),
 	name: text('name').notNull(),
+	color_hex: varchar('color_hex', { length: 7 }).notNull().default('#FFFFFF'),
 })
 
 export const itemRarities = pgTable('item_rarities', {
