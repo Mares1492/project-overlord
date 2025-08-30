@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import {expeditions,expeditionStatuses,users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales} from "$lib/server/db/schema";
+import {expeditions, expeditionStatuses, expeditionLoots, expeditionLootItems, users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales, items} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/router/users"
 import {getServantByUUID} from "$lib/server/router/servants"
 import { eq, and, not, desc } from "drizzle-orm";
@@ -119,6 +119,7 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
     const [expedition] = await db
         .select(
             {
+                id: expeditions.id,
                 uuid:expeditions.uuid,
                 location: {name:locations.name},
                 startTime:expeditions.startTime,
@@ -128,17 +129,39 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
                 status: {id: expeditions.statusId, name:expeditionStatuses.name},
                 task: expeditionTasks.name,
                 approach: expeditionApproaches.name,
-                scale: expeditionScales.name
+                scale: expeditionScales.name,
+                loot:{gold:expeditionLoots.gold,gems:expeditionLoots.gems}
             }
         )
         .from(expeditions)
         .innerJoin(locations,eq(expeditions.locationId,locations.id))
         .innerJoin(servants,eq(servants.id,expeditions.servantId))
+        .innerJoin(expeditionLoots,eq(expeditionLoots.expeditionId,expeditions.id))
         .innerJoin(expeditionStatuses,eq(expeditionStatuses.id,expeditions.statusId))
         .innerJoin(expeditionApproaches,eq(expeditionApproaches.id,expeditions.approachId))
         .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
         .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
         .where(eq(expeditions.uuid,expeditionUUID))
+
+    const lootItems = await db
+        .select({
+            name: items.name,
+            uuid: items.uuid
+        })
+        .from(items)
+        .innerJoin(
+            expeditionLootItems,
+            eq(expeditionLootItems.itemId, items.id)
+        )
+        .innerJoin(
+            expeditionLoots,
+            eq(expeditionLoots.id, expeditionLootItems.expeditionLootId)
+        )
+        .where(eq(expeditionLoots.expeditionId, expedition.id));
+    
+    expedition.loot.items = lootItems
+    delete expedition.id; // expedition id is only used to get loot items
+
     return expedition;
 }
 
