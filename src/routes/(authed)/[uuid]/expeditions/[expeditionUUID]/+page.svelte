@@ -7,6 +7,7 @@
     
     const {data} = $props()
     let timeData = $state()
+    let isStateBtnActive = $state(true)
 
     onMount(()=>{
         if (data.expedition.status.id === ExpeditionStatus.IN_PROGRESS) {
@@ -34,7 +35,19 @@
         }
     })
 
+    const onEnhance = () => {
+        isStateBtnActive = false
+        return async ({ update }) => {
+            await update();
+            isStateBtnActive = true
+        }
+    }
+
 </script>
+
+{#snippet loadingIcon()}
+    <span class="inline-block saturate-30 animate-[spin_1.4s_ease-in-out_infinite] text-center text-2xl">⌛</span>
+{/snippet}
 
 {#snippet timeContainer(time)}
     <span 
@@ -42,7 +55,6 @@
         {time}
     </span>
 {/snippet}
-
 <div class="flex flex-col w-full h-screen">
     {#if data.expedition}
         {#if data.expedition.servant && data?.servants?.length}
@@ -91,29 +103,41 @@
                                             id='completeExpedition'  
                                             method="POST" 
                                             action="?/completeExpedition" 
-                                            use:enhance
+                                            use:enhance={onEnhance}
                                         >
                                             <button
-                                                type="submit" 
-                                                class="bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold">
-                                                Complete
+                                                type="submit"
+                                                disabled={!isStateBtnActive}
+                                                class="disabled:bg-gray-400 disabled:text-slate-200 bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold"
+                                            >
+                                                {#if isStateBtnActive}
+                                                    Complete
+                                                {:else}
+                                                    {@render loadingIcon()}
+                                                {/if}
                                             </button>
                                         </form>
                                     {/if}
                                 {:else}
-                                    <span class="h-20 w-46 content-center border-dotted border-4">Loading...</span>
+                                    <span class="h-20 w-46 content-center border-dotted border-4">{@render loadingIcon()}</span>
                                 {/if}     
                             {:else if data.expedition.status.id === ExpeditionStatus.COMPLETED}
                                 <form
                                     id='archiveExpedition'  
                                     method="POST" 
                                     action="?/archiveExpedition" 
-                                    use:enhance
+                                    use:enhance={onEnhance}
                                 >
                                     <button
                                         type="submit" 
-                                        class=" bg-orange-600 hover:bg-amber-500 active:bg-yellow-600 h-20 w-46 content-center justify-endrounded cursor-pointer text-slate-200 font-semibold">
-                                        Archive
+                                        disabled={!isStateBtnActive}
+                                        class="disabled:bg-gray-400 disabled:text-slate-200 bg-orange-600 hover:bg-amber-500 active:bg-yellow-600 h-20 w-46 content-center justify-endrounded cursor-pointer text-slate-200 font-semibold"
+                                    >
+                                        {#if isStateBtnActive}
+                                            Archive
+                                        {:else}
+                                            {@render loadingIcon()}
+                                        {/if}
                                     </button>
                                 </form>
                             {:else if data.expedition.status.id === ExpeditionStatus.ARCHIVED}

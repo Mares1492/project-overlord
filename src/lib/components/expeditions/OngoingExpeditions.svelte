@@ -16,12 +16,12 @@
      */
     let expeditionsTimeCounts = $state({});
     let chosenExpeditionUUID = $state("");
+    let clickState = $state({})
     let pageState = $state({
         loading: true,
         isBlocking: false,
         error: false
     });
-
 
     const updateTimeCounts = () => {
         if (!ongoingExpeditions) {
@@ -65,6 +65,9 @@
     onMount(() => {
         updateTimeCounts()
         setTimeCountsTimeout()
+        for(let expedition of ongoingExpeditions){
+            clickState[expedition.uuid] = true
+        }
     });
 
     const handleExpeditionExpandBtnClick = (expeditionId) => {
@@ -76,13 +79,21 @@
         chosenExpeditionUUID=expeditionUUID;
     }
 
+    const onEnhance = () => {
+        clickState[chosenExpeditionUUID] = false
+        return async ({ result,update }) => {
+            await update();
+            clickState[result.data.expeditionUUID] = true
+        }
+    }
+
 </script>
 
-<form id="completeExpedition" method="POST" action="?/completeExpedition" use:enhance>
+<form id="completeExpedition" method="POST" action="?/completeExpedition" use:enhance={onEnhance}>
     <input type="hidden" name="expeditionUUID" value={chosenExpeditionUUID}>
 </form>
 
-<form id="archiveExpedition" method="POST" action="?/archiveExpedition" use:enhance>
+<form id="archiveExpedition" method="POST" action="?/archiveExpedition" use:enhance={onEnhance}>
     <input type="hidden" name="expeditionUUID" value={chosenExpeditionUUID}>
 </form>
 
@@ -109,9 +120,9 @@
         <div class="mt-2 h-14">
             {#if expeditionsTimeCounts[expedition.uuid]}
                 {#if expedition.status === ExpeditionStatus.IN_PROGRESS && expeditionsTimeCounts[expedition.uuid].msLeft < 1 }
-                    <button form="completeExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class=" bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Complete</button>
+                    <button disabled={!clickState[expedition.uuid]} form="completeExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class="disabled:bg-gray-400 disabled:text-slate-200 bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Complete</button>
                 {:else if expedition.status === ExpeditionStatus.COMPLETED}
-                    <button form="archiveExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class=" bg-orange-600 hover:bg-amber-600 active:bg-yellow-600 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Archive</button>
+                    <button disabled={!clickState[expedition.uuid]} form="archiveExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class="disabled:bg-gray-400 disabled:text-slate-200 bg-orange-600 hover:bg-amber-600 active:bg-yellow-600 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Archive</button>
                 {:else}
                     <div class="flex flex-row items-center justify-center font-semibold ">
                         <span class="border w-12 px-2">{expeditionsTimeCounts[expedition.uuid].hours}h</span>:
@@ -136,7 +147,7 @@
         </div>
     {/if}
 {:else}
-    <div in:slide|global={{duration:300}} out:fade={{duration:200}} class="flex flex-col max-h-264 overflow-y-auto mini-scrollbar bg-amber-400/70 border-2 p-5 justify-start space-y-7 items-center">
+    <div transition:slide|global={{duration:300}}  class="flex flex-col max-h-264 overflow-y-auto mini-scrollbar bg-amber-400/70 border-2 p-5 justify-start space-y-7 items-center">
         {#each ongoingExpeditions as expedition(expedition.uuid)}
             {@render expeditionSlot(expedition)}
         {/each}
