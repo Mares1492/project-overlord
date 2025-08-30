@@ -16,10 +16,11 @@
 		>
 			X
 		</button>
-		<div class="flex flex-col mb-3.5">
+		<div class="flex flex-col space-y-1 mb-3.5">
 			<h3 class="font-bold text-lg mb-1">{location.name}<br><span>{location.is_base?" (your base)":""}</span></h3>
-			<p class="text-gray-600 mb-2">{location.description}</p>
-			<p class="text-xs text-gray-400">Difficulty: {location.importance}</p>
+			<span class="text-gray-600 mb-2">{location.description}</span>
+			<span class="text-xs text-gray-400">Type: {location.type.name}</span>
+			<span class="text-xs text-gray-400">Difficulty: {location.importance}</span>
 		</div>
 		<button onclick={()=>chooseLocation(location)} class="text-base border-gray-400 font-semibold cursor-pointer bg-gray-100 hover:bg-gray-200 active:bg-gray-50 border px-1 py-0.5">Choose</button>
 	</div>
