@@ -44,11 +44,13 @@ export const actions = {
         /** @type {string} */
         const expeditionUUID = data.get('expeditionUUID') ?? ""
         await completeExpedition(expeditionUUID)
+        return {expeditionUUID}
     },
-    archiveExpedition: async ({params, request }) => {
+    archiveExpedition: async ({ request }) => {
         const data = await request.formData();
         /** @type {string} */
         const expeditionUUID = data.get('expeditionUUID') ?? ""
         await archiveExpedition(expeditionUUID)
+        return {expeditionUUID}
     }
 }
