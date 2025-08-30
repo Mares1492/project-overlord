@@ -62,10 +62,18 @@ export const createExpedition = async (userUUID,locationId,servantUUID,settings,
                 overviewText
             })
             .returning();
+
         await tx
             .update(servants)
             .set({ statusId: 2 })
             .where(eq(servants.id, newExpedition.servantId));
+
+        await tx
+            .insert(expeditionLoots)
+            .values(
+                { 
+                    expeditionId: newExpedition.id
+                })
 
         return newExpedition
     });
