@@ -141,9 +141,13 @@
                                 {/each}
                         </div>
                         <span class="w-full h-1 bg-black"></span>
-                        <div class="flex flex-col self-start items-start h-64">
-                            <div class="flex flex-row space-x-5"><span class="font-semibold ">Loot</span><span>💰{Math.round(Math.random()*1000 + 10)}</span></div>
-                            <Inventory inventoryData={{maxSlots:5,items:[]}} showCounter={false}/>
+                        <div class="flex flex-col self-start space-y-5 items-start h-64">
+                            <div class="flex flex-row space-x-5"><span class="font-semibold ">Loot</span><span>💰{data.expedition.loot.gold}</span></div>
+                            {#if data.expedition.loot.items && data.expedition.loot.items.length}
+                                <Inventory inventoryData={{maxSlots:5,items:data.expedition.loot.items}} showCounter={false}/>    
+                            {:else}
+                                <i class="text-xl">No items looted</i>
+                            {/if}
                         </div>
                     {:else}
                         <span class="flex">Results will be available after the expedition's end.</span>
