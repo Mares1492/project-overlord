@@ -349,27 +349,27 @@
 
         <circle class="-hue-rotate-20" cx="17.5" cy="13" r="10" stroke="black" fill={color}></circle>
 
-        {#if location.type === LocationType.keep}
+        {#if location.type.id === LocationType.keep}
                 {@render fortressIcon()}
-        {:else if location.type === LocationType.minor_settlement}
+        {:else if location.type.id === LocationType.minor_settlement}
                 {@render village()}
-        {:else if location.type === LocationType.major_settlement}
+        {:else if location.type.id === LocationType.major_settlement}
                 {@render town()}
-        {:else if location.type === LocationType.ruins}
+        {:else if location.type.id === LocationType.ruins}
                 {@render ruins()}
-        {:else if location.type === LocationType.wilds}
+        {:else if location.type.id === LocationType.wilds}
                 {@render wilds()}
-        {:else if location.type === LocationType.merc_camp}
+        {:else if location.type.id === LocationType.merc_camp}
                 {@render mercCamp()}
-        {:else if location.type === LocationType.river}
+        {:else if location.type.id === LocationType.river}
                 {@render river()}
-        {:else if location.type === LocationType.neg_energy}
+        {:else if location.type.id === LocationType.neg_energy}
                 {@render negativeEnergy()}
-        {:else if location.type === LocationType.pos_energy}
+        {:else if location.type.id === LocationType.pos_energy}
                 {@render positiveEnergy()}
-        {:else if location.type === LocationType.meadows}
+        {:else if location.type.id === LocationType.meadows}
                 {@render meadows()}
-        {:else if location.type === LocationType.swamp}
+        {:else if location.type.id === LocationType.swamp}
                 {@render swamp()}
         {/if}
 </g>
