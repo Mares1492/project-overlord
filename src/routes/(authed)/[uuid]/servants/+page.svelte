@@ -4,11 +4,16 @@
     import { enhance } from '$app/forms';
     import { onMount } from 'svelte';
     import { getRaceAssets } from '$lib/state/race.svelte.js'
+    import ItemInfoWindow from '$lib/components/servants/ItemInfoWindow.svelte';
     
     const {data} = $props();
 
     let chosenServant = $state();
     let isChars = $state(true);
+    let mousePosition = $state({x:0,y:0})
+    let chosenItem = $state()
+    let showItemInfoWindow = $state(false)
+    let itemWindowTimeout;
     let errorState = $state({
         error: data.error,
         message: data.message
@@ -19,6 +24,22 @@
             chosenServant = data.servants[0];
         }
     });
+
+    const setItemWindowShowTimeout = (e) => {
+        cancelItemWindowShowTimeout()
+        mousePosition.x = e.clientX - 50
+        mousePosition.y = e.clientY -50
+        itemWindowTimeout = setTimeout(()=>showItemInfoWindow=true,500)
+    }
+
+    const cancelItemWindowShowTimeout = () => {
+        if (itemWindowTimeout) {
+            clearTimeout(itemWindowTimeout)
+        }
+        showItemInfoWindow = false
+    }
+
+    const handleItemPick = (item) => {chosenItem = item}
 
 </script>
 
@@ -90,10 +111,20 @@
                         </div>
                     </div>
                 {:else}
-                    <form use:enhance method="POST" action="?/equipItem">
-                        <input type="hidden" name="servantId" value={chosenServant.uuid}>
-                        <Inventory inventoryData={data.inventory}/>
-                    </form>
+                    <div class="flex flex-col space-y-2">
+                        <span class="bg-black/70 p-3 text-white font-bold text-4xl">
+                            {data.inventory.items.length}/{data.inventory.unlockedSlots}
+                        </span>
+                        <form onmouseleave={cancelItemWindowShowTimeout} use:enhance method="POST" action="?/equipItem">
+                            <input type="hidden" name="servantId" value={chosenServant.uuid}>           
+                            {#if showItemInfoWindow && chosenItem}
+                                <ItemInfoWindow position={mousePosition} item={chosenItem}/>
+                            {/if}
+                            <span onmousemove={setItemWindowShowTimeout}>
+                                <Inventory inventoryData={data.inventory} {chosenItem} {handleItemPick}/>
+                            </span>
+                        </form>
+                    </div>
                 {/if}
             </div>
         </div>
