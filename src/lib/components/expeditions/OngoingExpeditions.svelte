@@ -4,18 +4,44 @@
     import {ExpeditionStatus} from '$lib/enums/enums.js';
     import { goto } from '$app/navigation';
     import { enhance } from '$app/forms';
-
-    const {pathUUID,ongoingExpeditions} = $props()
-
+    
+    //On expand consider creating ts classes
     /**
-        * @typedef {Object.<string, TimeObject>} expeditionsTimeCounts
+        * @typedef {Object.<string, TimeObject>} ExpeditionsTimeCounts
         * @typedef {Object} TimeObject
         * @property {number} seconds
         * @property {number} minutes
         * @property {number} hours
+        * @property {number} msLeft
+        * 
+        * @typedef {Object} Location
+        * @property {number} id
+        * @property {string} name
+        * 
+        * @typedef {Object} Servant
+        * @property {string} uuid
+        * @property {string} name
+        * 
+        * @typedef {Object} Expedition
+        * @property {string} uuid
+        * @property {Date} endTime
+        * @property {Location} location
+        * @property {Servant} servant
+        * @property {string} task
+        * @property {string} approach
+        * @property {string} scale
+        * @property {number} status
+        * 
+        * @typedef {Object.<string, boolean>} ClickState
      */
+
+    /** @type {{ pathUUID:string, ongoingExpeditions: Array<Expedition> }} */
+    const {pathUUID,ongoingExpeditions} = $props()
+
+    /**@type {ExpeditionsTimeCounts}*/
     let expeditionsTimeCounts = $state({});
     let chosenExpeditionUUID = $state("");
+    /**@type {ClickState}*/
     let clickState = $state({})
     let pageState = $state({
         loading: true,
@@ -27,7 +53,7 @@
         if (!ongoingExpeditions) {
             return 
         }
-        ongoingExpeditions.forEach( exp => {
+        ongoingExpeditions.forEach(/**@param {Expedition} exp*/ exp => {
             let msLeft = exp.endTime.getTime() - Date.now();
             if (msLeft <= 0) {
                 expeditionsTimeCounts[exp.uuid] = {
@@ -65,23 +91,26 @@
     onMount(() => {
         updateTimeCounts()
         setTimeCountsTimeout()
+        
         for(let expedition of ongoingExpeditions){
             clickState[expedition.uuid] = true
         }
     });
 
-    const handleExpeditionExpandBtnClick = (expeditionId) => {
+    /**@param {string} expeditionUUID*/
+    const handleExpeditionExpandBtnClick = (expeditionUUID) => {
         //TODO: use action with server check instead
-        goto(`/${pathUUID}/expeditions/${expeditionId}`)
+        goto(`/${pathUUID}/expeditions/${expeditionUUID}`)
     }
 
+    /**@param {string} expeditionUUID*/
     const setFocusedExpeditionUUID = (expeditionUUID) => {
         chosenExpeditionUUID=expeditionUUID;
     }
 
     const onEnhance = () => {
         clickState[chosenExpeditionUUID] = false
-        return async ({ result,update }) => {
+        return async (/**@type {{result:any,update:any}}*/{ result,update }) => {
             await update();
             clickState[result.data.expeditionUUID] = true
         }
@@ -98,7 +127,7 @@
 </form>
 
 
-{#snippet expeditionSlot(expedition)}
+{#snippet expeditionSlot(/**@type {Expedition}*/expedition)}
     <div transition:slide={{delay:300}} class="relative flex flex-col text-sm w-full h-42 text-gray-800 space-y-1 items-center justify-center">
         <div class="flex flex-row items-center justify-center relative w-full">
             <span class="font-bold self-center">{expedition.location.name}</span>
@@ -119,9 +148,9 @@
         <span class="text-gray-600">Scale: <i>{expedition.scale}</i></span>
         <div class="mt-2 h-14">
             {#if expeditionsTimeCounts[expedition.uuid]}
-                {#if expedition.status === ExpeditionStatus.IN_PROGRESS && expeditionsTimeCounts[expedition.uuid].msLeft < 1 }
+                {#if expedition.status === ExpeditionStatus.in_progress && expeditionsTimeCounts[expedition.uuid].msLeft < 1 }
                     <button disabled={!clickState[expedition.uuid]} form="completeExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class="disabled:bg-gray-400 disabled:text-slate-200 bg-green-500 hover:bg-green-400 active:bg-green-300 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Complete</button>
-                {:else if expedition.status === ExpeditionStatus.COMPLETED}
+                {:else if expedition.status === ExpeditionStatus.completed}
                     <button disabled={!clickState[expedition.uuid]} form="archiveExpedition" onfocusin={()=>setFocusedExpeditionUUID(expedition.uuid)} onmouseenter={()=>setFocusedExpeditionUUID(expedition.uuid)} type="submit" class="disabled:bg-gray-400 disabled:text-slate-200 bg-orange-600 hover:bg-amber-600 active:bg-yellow-600 px-2 py-1 rounded cursor-pointer text-slate-100 font-semibold">Archive</button>
                 {:else}
                     <div class="flex flex-row items-center justify-center font-semibold ">
