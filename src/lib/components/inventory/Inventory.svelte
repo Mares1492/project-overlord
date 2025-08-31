@@ -10,7 +10,7 @@
         hands:"-top-12"
     }
 
-    const {inventoryData,chosenItem,handleItemPick=()=>{}} = $props();
+    const {inventoryData,chosenItem=undefined,handleItemPick=()=>{}} = $props();
     //TODO: move from equip type to weapon types
 
     const itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/feet/*.png","$lib/assets/items/hands/*.png","$lib/assets/items/head/*.png","$lib/assets/items/legs/*.png","$lib/assets/items/magic_off_hand/*.png","$lib/assets/items/neck/*.png","$lib/assets/items/off_hand/*.png","$lib/assets/items/two_handed_weapon/*.png","$lib/assets/items/weapon/*.png"], {query: '?url' });
