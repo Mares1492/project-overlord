@@ -29,7 +29,7 @@
         cancelItemWindowShowTimeout()
         mousePosition.x = e.clientX - 50
         mousePosition.y = e.clientY -50
-        itemWindowTimeout = setTimeout(()=>showItemInfoWindow=true,500)
+        itemWindowTimeout = setTimeout(()=>showItemInfoWindow=true,700)
     }
 
     const cancelItemWindowShowTimeout = () => {
@@ -116,7 +116,8 @@
                             {data.inventory.items.length}/{data.inventory.unlockedSlots}
                         </span>
                         <form onmouseleave={cancelItemWindowShowTimeout} use:enhance method="POST" action="?/equipItem">
-                            <input type="hidden" name="servantId" value={chosenServant.uuid}>           
+                            <input type="hidden" name="servantId" value={chosenServant.uuid}>
+                            <input type="hidden" name="itemId" value={chosenItem?.id}>
                             {#if showItemInfoWindow && chosenItem}
                                 <ItemInfoWindow position={mousePosition} item={chosenItem}/>
                             {/if}
