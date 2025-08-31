@@ -4,9 +4,9 @@
     const itemTypeDisplayClasses = {
         helmet: "top-5",
         armor: "-top-5",
-        offHand: "-left-8 -top-14",
+        off_hand: "-left-8 -top-14",
         weapon: "-top-15 left-4",
-        magicOffHand: "-top-18 -left-9",
+        magic_off_hand: "-top-18 -left-9",
         hands:"-top-12"
     }
 
