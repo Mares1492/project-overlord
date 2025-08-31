@@ -16,7 +16,7 @@
             <span class=" text-slate-300 text-xs mb-2">Item type: {invertedItemType[item.type]}</span>
             <span class=" text-slate-100 text-sm mb-2">{item.description}</span>
 			{#if invertedItemRarity[item.rarity]}
-                <span class="text-xs text-slate-300">Rarity: <b>{invertedItemRarity[item.rarity].toUpperCase()}</b></span>
+                <span class="text-xs text-slate-300">Rarity: <span class="tracking-widest font-bold">{invertedItemRarity[item.rarity].toUpperCase()}</span></span>
             {/if}
         </div>
     </div>
