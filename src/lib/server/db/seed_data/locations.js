@@ -1,10 +1,10 @@
-import {LocationType} from '../../../enums/enums'
+import {LocationType,LocationImportanceType} from '../../../enums/enums'
 
 export const locationValues = [
   {
     id: 1,
     name: "Silverpine Grove",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "A quiet forest retreat near the old ruins.",
     coordsX: 1950,
     coordsY: 1680,
@@ -15,7 +15,7 @@ export const locationValues = [
   {
     id: 2,
     name: "Cragstone Outpost",
-    importanceTypeId: 4,
+    importanceTypeId: LocationImportanceType.major,
     description: "A fortified checkpoint along the trade route.",
     coordsX: 2375,
     coordsY: 2360,
@@ -26,7 +26,7 @@ export const locationValues = [
   {
     id: 3,
     name: "Whitemoor Basin",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Floodplain with rare flora and deep marshes.",
     coordsX: 4400,
     coordsY: 2700,
@@ -37,7 +37,7 @@ export const locationValues = [
   {
     id: 4,
     name: "Duskford Crossing",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Historic river crossing with old stone bridge and a keep guarding it.",
     coordsX: 3760,
     coordsY: 3380,
@@ -48,7 +48,7 @@ export const locationValues = [
   {
     id: 5,
     name: "Emberfall Crater",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Volcanic site now dormant but still majestic.",
     coordsX: 4460,
     coordsY: 1120,
@@ -59,7 +59,7 @@ export const locationValues = [
   {
     id: 6,
     name: "Thornwatch Keep",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Ancient fortress hidden among high cliffs.",
     coordsX: 815,
     coordsY: 1620,
@@ -70,7 +70,7 @@ export const locationValues = [
   {
     id: 7,
     name: "Frostwillow Meadow",
-    importanceTypeId: 1,
+    importanceTypeId: LocationImportanceType.minor,
     description: "Chilly meadow that glows in winter dusk.",
     coordsX: 3030,
     coordsY: 550,
@@ -81,7 +81,7 @@ export const locationValues = [
   {
     id: 8,
     name: "Stonebarrow Hollow",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Ancient burial ground with eerie carvings.",
     coordsX: 3250,
     coordsY: 2665,
@@ -92,7 +92,7 @@ export const locationValues = [
   {
     id: 9,
     name: "Glimmereach Summit",
-    importanceTypeId: 3,
+    importanceTypeId: LocationImportanceType.uncommon,
     description: "The highest peak with stunning sunrises.",
     coordsX: 1330,
     coordsY: 3630,
@@ -103,7 +103,7 @@ export const locationValues = [
   {
     id: 10,
     name: "Mirefen Deltas",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Swamplands rich with life and mystery.",
     coordsX: 4130,
     coordsY: 2010,
@@ -114,7 +114,7 @@ export const locationValues = [
   {
     id: 11,
     name: "Hollowfen Marsh",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "A misty swamp teeming with hidden dangers.",
     coordsX: 1030,
     coordsY: 3530,
@@ -125,7 +125,7 @@ export const locationValues = [
   {
     id: 12,
     name: "Hollowfen",
-    importanceTypeId: 4,
+    importanceTypeId: LocationImportanceType.major,
     description: "A major town in southwest and the only one to survive 'The Great Scourge'",
     coordsX: 790,
     coordsY: 3470,
@@ -136,7 +136,7 @@ export const locationValues = [
   {
     id: 13,
     name: "Stoneheart Bastion",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Ancient fortress guarding the northern cliffs.",
     coordsX: 1250,
     coordsY: 655,
@@ -147,7 +147,7 @@ export const locationValues = [
   {
     id: 14,
     name: "Elarin`s Hollow",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Small village surrounded by enchanted woods.",
     coordsX: 1580,
     coordsY: 2450,
@@ -158,7 +158,7 @@ export const locationValues = [
   {
     id: 15,
     name: "Redwatch Keep",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Crimson-walled stronghold with storied past.",
     coordsX: 3020,
     coordsY: 950,
@@ -169,7 +169,7 @@ export const locationValues = [
   {
     id: 16,
     name: "Moonspire",
-    importanceTypeId: 3,
+    importanceTypeId: LocationImportanceType.uncommon,
     description: "Shimmering city with towering moonlit spires.",
     coordsX: 2130,
     coordsY: 1820,
@@ -180,7 +180,7 @@ export const locationValues = [
   {
     id: 17,
     name: "Ashworn Cradle",
-    importanceTypeId: 1,
+    importanceTypeId: LocationImportanceType.minor,
     description: "A ruined crater village lost to flame.",
     coordsX: 4345,
     coordsY: 1260,
@@ -191,7 +191,7 @@ export const locationValues = [
   {
     id: 18,
     name: "Thornreach",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Dense woodland, rumored to be haunted.",
     coordsX: 4000,
     coordsY: 1450,
@@ -202,7 +202,7 @@ export const locationValues = [
   {
     id: 19,
     name: "Plains of old",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "Territories completely destroyed in ancient war are now taken by wildlife.",
     coordsX: 2900,
     coordsY: 1500,
@@ -213,7 +213,7 @@ export const locationValues = [
   {
     id: 20,
     name: "Blood Gold Camp",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "An old fortress and its surroundings now occupied by the mercenary lord",
     coordsX: 2110,
     coordsY: 2370,
@@ -224,7 +224,7 @@ export const locationValues = [
   {
     id: 21,
     name: "Gem of the South",
-    importanceTypeId: 2,
+    importanceTypeId: LocationImportanceType.common,
     description: "A city of light. The cities sacred army and holy people have stopped the spread of 'The Great Scourge'",
     coordsX: 2680,
     coordsY: 3200,
