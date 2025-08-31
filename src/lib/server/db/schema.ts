@@ -16,7 +16,7 @@ export const users = pgTable('users', {
 	email: text('email').notNull().unique(),
 	passwordHash: text('password_hash').notNull(),
 	nickname: text('nickname').notNull(),
-	uuid: uuid('uuid').notNull()
+	uuid: uuid('uuid').notNull().defaultRandom()
 });
 
 export const sessions = pgTable('sessions', {
@@ -142,24 +142,25 @@ export const arsenals = pgTable('arsenals', {
 
 export const itemTypes = pgTable('item_types', {
 	id: integer('id').primaryKey(),
-	name: text('email').notNull() 
+	name: text('name').notNull() 
 })
 
 export const slotTypes = pgTable('slot_types', {
 	id: integer('id').primaryKey(),
-	name: text('email').notNull() 
+	name: text('name').notNull() 
 })
 
 export const items = pgTable('items', {
-	id: serial('id').primaryKey(),
-	name: text("name").notNull(),
+	id: integer('id').primaryKey(),
+	name: text('name').notNull(),
 	itemTypeId: integer('item_type_id')
 		.notNull()
 		.references(() => itemTypes.id),
 	slotTypeId: integer('slot_type_id')
 	.notNull()
 	.references(() => slotTypes.id),
-	uuid: uuid('uuid').notNull()
+	uuid: uuid('uuid').notNull().defaultRandom(),
+	iconPath: text("icon_path").notNull()
 })
 
 export const itemRarityTypes = pgTable('item_rarity_types', {
@@ -176,14 +177,16 @@ export const itemRarities = pgTable('item_rarities', {
 	itemRarityTypeId: integer('item_rarity_type_id')
 		.notNull()
 		.references(() => itemRarityTypes.id),
+	name: text("name").notNull(),
+	description: text('description').notNull().default("")
 });
 
 export const itemAttributes = pgTable('item_attributes',{
 	id: serial('id').primaryKey(),
-	attributeId: integer('attribute_id')
+	attributeId: integer('attribute_id') 
 		.notNull()
 		.references(() => attributes.id),
-	itemRarityId: integer('item_rarity_id')
+	itemWithRarityId: integer('item_with_rarity_id')
 		.notNull()
 		.references(() => itemRarities.id),
 })
@@ -192,7 +195,7 @@ export const itemAttributes = pgTable('item_attributes',{
 
 export const races = pgTable('races',{
 	id: serial('id').primaryKey(),
-	name: text('race').notNull()
+	name: text('name').notNull()
 })
 
 export const servantStatuses = pgTable('servant_statuses', {
