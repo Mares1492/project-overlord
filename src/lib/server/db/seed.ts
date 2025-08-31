@@ -1,44 +1,11 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, races, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
+import { itemTypes, slotTypes, items, races, itemRarities, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
 import {locationValues} from './seed_data/locations'
-import {LocationType,ExpeditionStatus,ServantStatus,ItemRarity} from '../../enums/enums'
-
-const itemTypeValues = [
-  { id:1, name: "helmet" },
-  { id:2, name: "hat" },
-  { id:3, name: "armor" },
-  { id:4, name: "legs" },
-  { id:5, name: "feet" },
-  { id:6, name: "hands" },
-  { id:7, name: "weapon" },
-  { id:8, name: "two handed weapon" },
-  { id:9, name: "off-hand" },
-  { id:10, name: "magic off-hand" },
-  { id:11, name: "medalion" },
-  { id:12, name: "trinket" }
-]
-
-const itemSlotTypeValues = [
-  { id:1, name: "head" },
-  { id:2, name: "neck" },
-  { id:3, name: "chest" },
-  { id:4, name: "legs" },
-  { id:5, name: "feet" },
-  { id:6, name: "hands" },
-  { id:7, name: "main hand" },
-  { id:8, name: "off hand" },
-]
-
-const itemRarityTypeValues = [
-  { id:ItemRarity.common, name: "common" },
-  { id:ItemRarity.uncommon, name: "uncommon" ,color_hex:"#1eff00"},
-  { id:ItemRarity.rare, name: "rare",color_hex:"#0070dd" },
-  { id:ItemRarity.epic, name: "epic",color_hex:"#ffea00" },
-  { id:ItemRarity.mythic, name: "mythic",color_hex:"#a335ee" },
-  { id:ItemRarity.legendary, name: "legendary",color_hex:"#ff8000" },
-]
+import {itemValues,itemTypeValues,itemSlotTypeValues,itemRarityTypeValues,itemRarityValues} from './seed_data/items'
+import {LocationType,RaceTypes,AttributeTypes,ExpeditionStatus,ServantStatus,LocationImportanceType} from '../../enums/enums'
+import { sql } from "drizzle-orm";
 
 const buildingBuffTypeValues = [
   { id:1, name: "barracks capacity", description: "Increases the maximum number of servants you can have." },
@@ -68,41 +35,42 @@ const extentionBuildingBuffValues = [
 ];
 
 const raceValues = [
-  { id: 1, name: "human" },
-  { id: 2, name: "elf" },
-  { id: 3, name: "dark elf" }, 
-  { id: 4, name: "orc" },
-  { id: 5, name: "goblin" },
+  { id: RaceTypes.human, name: "human" },
+  { id:  RaceTypes.elf, name: "elf" },
+  { id:  RaceTypes.dark_elf, name: "dark elf" }, 
+  { id:  RaceTypes.orc, name: "orc" },
+  { id:  RaceTypes.goblin, name: "goblin" }
 ]
 
 const servantStatusValues = [
-  { id: ServantStatus.IDLE, name: "idle"},
-  { id: ServantStatus.EXPEDITION, name: "expedition"},
-  { id: ServantStatus.INJURED, name: "injured"},
-  { id: ServantStatus.DEAD, name: "dead"},
-  { id: ServantStatus.RETIRED, name: "retired"},
-  { id:ServantStatus.MISSING, name: "missing"},
+  { id: ServantStatus.idle, name: "idle"},
+  { id: ServantStatus.expedition, name: "expedition"},
+  { id: ServantStatus.injured, name: "injured"},
+  { id: ServantStatus.dead, name: "dead"},
+  { id: ServantStatus.retired, name: "retired"},
+  { id:ServantStatus.missing, name: "missing"},
 ];
 
 const attributeValues = [
-  { id: 1, name: "strength", shortName: "str"},
-  { id: 2, name: "dexterity", shortName: "dex"},
-  { id: 3, name: "intelligence", shortName: "int"},
-  { id: 4, name: "agility", shortName: "agi"},
-  { id: 5, name: "endurance", shortName: "end"},
-  { id: 6, name: "healing rate", shortName: "hr"},
-  { id: 7, name: "tactics", shortName: "tactics"},
-  { id: 8, name: "stealth", shortName: "stealth"},
-  { id: 9, name: "focus", shortName: "focus"},
-  { id: 10, name: "morale", shortName: "morale"},
+  { id: AttributeTypes.strength, name: "strength", shortName: "str"},
+  { id: AttributeTypes.dexterity, name: "dexterity", shortName: "dex"},
+  { id: AttributeTypes.intelligence, name: "intelligence", shortName: "int"},
+  { id: AttributeTypes.agility, name: "agility", shortName: "agi"},
+  { id: AttributeTypes.endurance, name: "endurance", shortName: "end"},
+  { id: AttributeTypes.healing_rate, name: "healing rate", shortName: "heal"},
+  { id: AttributeTypes.tactics, name: "tactics", shortName: "tactics"},
+  { id: AttributeTypes.stealth, name: "stealth", shortName: "stealth"},
+  { id: AttributeTypes.focus, name: "focus", shortName: "focus"},
+  { id: AttributeTypes.morale, name: "morale", shortName: "morale"},
+  { id: AttributeTypes.armor, name: "armor", shortName: "armor"}
 ];
 
 const expeditionStatusValues = [
-  { id:ExpeditionStatus.IDLE, name: "idle"},
-  { id:ExpeditionStatus.IN_PROGRESS, name: "in_progress"},
-  { id:ExpeditionStatus.COMPLETED, name: "completed"},
-  { id:ExpeditionStatus.ARCHIVED, name: "archived"},
-  { id:ExpeditionStatus.FAILED, name: "failed"},
+  { id:ExpeditionStatus.idle, name: "idle"},
+  { id:ExpeditionStatus.in_progress, name: "in_progress"},
+  { id:ExpeditionStatus.completed, name: "completed"},
+  { id:ExpeditionStatus.archived, name: "archived"},
+  { id:ExpeditionStatus.failed, name: "failed"},
 ]
 
 const expeditionApproachValues = [
@@ -139,92 +107,238 @@ const locationTypeValues = [
 ];
 
 const locationImportanceTypeValues = [
-  { id: 1, value: 4, name: "minor" },
-  { id: 2, value: 5, name: "common" },
-  { id: 3, value: 6, name: "uncommon" },
-  { id: 4, value: 7, name: "major" }
+  { id: LocationImportanceType.minor, value: 4, name: "minor" },
+  { id: LocationImportanceType.common, value: 5, name: "common" },
+  { id: LocationImportanceType.uncommon, value: 6, name: "uncommon" },
+  { id: LocationImportanceType.major, value: 7, name: "major" }
 ]
 
 async function seed() {
-  await db
-    .insert(itemTypes)
-    .values(itemTypeValues)
-    .onConflictDoNothing();
+  await db.transaction(async (tx) => {
 
-  await db
-    .insert(slotTypes)
-    .values(itemSlotTypeValues)
-    .onConflictDoNothing();
-  
-  await db
-    .insert(itemRarityTypes)
-    .values(itemRarityTypeValues)
-    .onConflictDoNothing();
-
-  await db
-    .insert(buildingBuffTypes)
-    .values(buildingBuffTypeValues)
-    .onConflictDoNothing();
-  
-  await db
-    .insert(extensionBuildings)
-    .values(extensionBuildingValues)
-    .onConflictDoNothing();
- 
-  await db
-    .insert(extensionBuildingBuffs)
-    .values(extentionBuildingBuffValues)
-    .onConflictDoNothing();
-
-  await db
-    .insert(servantStatuses)
-    .values(servantStatusValues)
-    .onConflictDoNothing();
+    console.log("Inserting itemTypes")
+    await tx
+      .insert(itemTypes)
+      .values(itemTypeValues)
+      .onConflictDoUpdate({
+        target: itemTypes.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
     
-  await db
-    .insert(races)
-    .values(raceValues)
-    .onConflictDoNothing();
+    console.log("Inserting slotTypes")
+    await tx
+      .insert(slotTypes)
+      .values(itemSlotTypeValues)
+      .onConflictDoUpdate({
+        target: slotTypes.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
+    
+    console.log("Inserting itemRarityTypes")
+    await tx
+      .insert(itemRarityTypes)
+      .values(itemRarityTypeValues)
+      .onConflictDoUpdate({
+        target: itemRarityTypes.id,
+        set: {
+          name: sql`excluded.name`,
+          color_hex: sql`excluded.color_hex`
+        }
+      });
 
-  await db
-    .insert(attributes)
-    .values(attributeValues)
-    .onConflictDoNothing();
-  
-  await db
-    .insert(expeditionStatuses)
-    .values(expeditionStatusValues)
-    .onConflictDoNothing();
-  
-  await db
-    .insert(expeditionTasks)
-    .values(expeditionTaskValues)
-    .onConflictDoNothing();
+    console.log("Inserting items")
+    await tx
+      .insert(items)
+      .values(itemValues)
+      .onConflictDoUpdate({
+        target: items.id,
+        set: {
+          name: sql`excluded.name`,
+          itemTypeId: sql`excluded.item_type_id`,
+          slotTypeId: sql`excluded.slot_type_id`,
+          uuid: sql`excluded.uuid`,
+          iconPath: sql`excluded.icon_path`
+        }
+      });
 
-  await db
-    .insert(expeditionApproaches)
-    .values(expeditionApproachValues)
-    .onConflictDoNothing();
+    console.log("Inserting itemRarities")
+    await tx
+      .insert(itemRarities)
+      .values(itemRarityValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          name: sql`excluded.name`,
+          itemId: sql`excluded.item_id`,
+          itemRarityTypeId: sql`excluded.item_rarity_type_id`,
+          description: sql`excluded.description`,
+        }
+      });
+    
+    console.log("Inserting buildingBuffTypes")
+    await tx
+      .insert(buildingBuffTypes)
+      .values(buildingBuffTypeValues)
+      .onConflictDoUpdate({
+        target: buildingBuffTypes.id,
+        set: {
+          name: sql`excluded.name`,
+          description: sql`excluded.description`
+        }
+      });
+    
+    console.log("Inserting extensionBuildings")
+    await tx
+      .insert(extensionBuildings)
+      .values(extensionBuildingValues)
+      .onConflictDoUpdate({
+        target: extensionBuildings.id,
+        set: {
+          name: sql`excluded.name`,
+          description: sql`excluded.description`
+        }
+      });
+    
+    console.log("Inserting extensionBuildingBuffs")
+    await tx
+      .insert(extensionBuildingBuffs)
+      .values(extentionBuildingBuffValues)
+      .onConflictDoUpdate({
+        target: extensionBuildingBuffs.id,
+        set: {
+          extensionBuildingId: sql`excluded.extension_building_id`,
+          buffTypeId: sql`excluded.buff_type_id`,
+          value: sql`excluded.value`,
+          requiredLvl: sql`excluded.required_lvl`,
+        }
+      });
 
-  await db
-    .insert(expeditionScales)
-    .values(expeditionScaleValues)
-    .onConflictDoNothing();
+    console.log("Inserting servantStatuses")
+    await tx
+      .insert(servantStatuses)
+      .values(servantStatusValues)
+      .onConflictDoUpdate({
+        target: servantStatuses.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
+    
+    console.log("Inserting races")
+    await tx
+      .insert(races)
+      .values(raceValues)
+      .onConflictDoUpdate({
+        target: races.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
 
-  await db
-    .insert(locationTypes)
-    .values(locationTypeValues)
-    .onConflictDoNothing();
+    console.log("Inserting attributes")
+    await tx
+      .insert(attributes)
+      .values(attributeValues)
+      .onConflictDoUpdate({
+        target: attributes.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
+    
+    console.log("Inserting expeditionStatuses")
+    await tx
+      .insert(expeditionStatuses)
+      .values(expeditionStatusValues)
+      .onConflictDoUpdate({
+        target: expeditionStatuses.id,
+        set: {
+          name: sql`excluded.name`,
+        }
+      });
+      
+    console.log("Inserting expeditionTasks")
+    await tx
+      .insert(expeditionTasks)
+      .values(expeditionTaskValues)
+      .onConflictDoUpdate({
+        target: expeditionTasks.id,
+        set: {
+          name: sql`excluded.name`,
+          tooltip: sql`excluded.tooltip`
+        }
+      });
+    
+    console.log("Inserting expeditionApproaches")
+    await tx
+      .insert(expeditionApproaches)
+      .values(expeditionApproachValues)
+      .onConflictDoUpdate({
+        target: expeditionApproaches.id,
+        set: {
+          name: sql`excluded.name`,
+          tooltip: sql`excluded.tooltip`
+        }
+      });
 
-  await db
+    console.log("Inserting expeditionScales")
+    await tx
+      .insert(expeditionScales)
+      .values(expeditionScaleValues)
+      .onConflictDoUpdate({
+        target: expeditionScales.id,
+        set: {
+          name: sql`excluded.name`,
+          tooltip: sql`excluded.tooltip`
+        }
+      });
+
+    console.log("Inserting locationTypes")
+    await tx
+      .insert(locationTypes)
+      .values(locationTypeValues)
+      .onConflictDoUpdate({
+        target: locationTypes.id,
+        set: {
+          name: sql`excluded.name`,
+          description: sql`excluded.description`
+        }
+      });
+
+    console.log("Inserting locationImportanceTypes")
+    await tx
       .insert(locationImportanceTypes)
       .values(locationImportanceTypeValues)
-      .onConflictDoNothing();
+      .onConflictDoUpdate({
+        target: locationImportanceTypes.id,
+        set: {
+          name: sql`excluded.name`,
+          value: sql`excluded.value`
+        }
+      });
 
-  await db
+    console.log("Inserting locations")
+    await tx
       .insert(locations)
       .values(locationValues)
-      .onConflictDoNothing();
+      .onConflictDoUpdate({
+        target: locations.id,
+        set: {
+          name: sql`excluded.name`,
+          description: sql`excluded.description`,
+          color_hex: sql`excluded.color_hex`,
+          coordsX: sql`excluded.coords_x`,
+          coordsY: sql`excluded.coords_y`,
+          isBase: sql`excluded.is_base`,
+          locationTypeId: sql`excluded.location_type_id`,
+          importanceTypeId: sql`excluded.importance_type_id`
+        }
+      });
+  })
 
   console.log("✅ Constants seeded successfully.");
 }
