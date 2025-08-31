@@ -121,7 +121,7 @@
                                 {:else}
                                     <span class="h-20 w-46 content-center border-dotted border-4">{@render loadingIcon()}</span>
                                 {/if}     
-                            {:else if data.expedition.status.id === ExpeditionStatus.COMPLETED}
+                            {:else if data.expedition.status.id === ExpeditionStatus.completed}
                                 <form
                                     id='archiveExpedition'  
                                     method="POST" 
@@ -140,7 +140,7 @@
                                         {/if}
                                     </button>
                                 </form>
-                            {:else if data.expedition.status.id === ExpeditionStatus.ARCHIVED}
+                            {:else if data.expedition.status.id === ExpeditionStatus.archived}
                                 <span class="bg-gray-500 h-20 w-46 text-slate-50 content-center justify-end rounded">Archived</span>
                             {/if}
                         </div>
@@ -155,7 +155,7 @@
                     </span>
                 </span>
                     <span class="w-full h-1 bg-black"></span>
-                    {#if data.expedition.status.id > ExpeditionStatus.IN_PROGRESS}
+                    {#if data.expedition.status.id > ExpeditionStatus.in_progress}
                         <div class="flex flex-col text-xl space-y-3 self-start items-start">
                             <span class="font-semibold">Report</span>
                                 {#each data.expedition.events as event} 
@@ -168,7 +168,7 @@
                         <div class="flex flex-col self-start space-y-5 items-start h-64">
                             <div class="flex flex-row space-x-5"><span class="font-semibold ">Loot</span><span>💰{data.expedition.loot.gold}</span></div>
                             {#if data.expedition.loot.items && data.expedition.loot.items.length}
-                                <Inventory inventoryData={{maxSlots:5,items:data.expedition.loot.items}} showCounter={false}/>    
+                                <Inventory inventoryData={{maxSlots:5,items:data.expedition.loot.items}}/>    
                             {:else}
                                 <i class="text-xl">No items looted</i>
                             {/if}
