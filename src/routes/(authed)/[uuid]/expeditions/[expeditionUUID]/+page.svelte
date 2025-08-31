@@ -10,7 +10,7 @@
     let isStateBtnActive = $state(true)
 
     onMount(()=>{
-        if (data.expedition.status.id === ExpeditionStatus.IN_PROGRESS) {
+        if (data.expedition.status.id === ExpeditionStatus.in_progress) {
             const inverval = setInterval(()=>{
                 let msLeft = data.expedition.endTime.getTime() - Date.now();
                 if (msLeft <= 0) {
@@ -88,7 +88,7 @@
                     <div class="flex self-center w-1/2">
                         <div class="flex flex-col w-full space-y-2.5 items-center h-32">
                             <div class="flex flex-row space-x-2"><span class="font-bold">Status:</span><i>{data.expedition.status.name.toUpperCase()}</i></div>
-                            {#if data.expedition.status.id === ExpeditionStatus.IN_PROGRESS}
+                            {#if data.expedition.status.id === ExpeditionStatus.in_progress}
                                 {#if timeData}
                                     {#if timeData.msLeft > 0}
                                         <div class="bg-gray-900 h-20 w-46">
@@ -108,7 +108,7 @@
                                             <button
                                                 type="submit"
                                                 disabled={!isStateBtnActive}
-                                                class="disabled:bg-gray-400 disabled:text-slate-200 bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold"
+                                                class="disabled:bg-gray-400 disabled:cursor-wait disabled:text-slate-200 bg-green-500 h-20 w-46 content-center justify-end hover:bg-green-400 active:bg-green-300 rounded cursor-pointer text-white font-semibold"
                                             >
                                                 {#if isStateBtnActive}
                                                     Complete
@@ -131,7 +131,7 @@
                                     <button
                                         type="submit" 
                                         disabled={!isStateBtnActive}
-                                        class="disabled:bg-gray-400 disabled:text-slate-200 bg-orange-600 hover:bg-amber-500 active:bg-yellow-600 h-20 w-46 content-center justify-endrounded cursor-pointer text-slate-200 font-semibold"
+                                        class="disabled:bg-gray-400 disabled:cursor-wait disabled:text-slate-200 bg-orange-600 hover:bg-amber-500 active:bg-yellow-600 h-20 w-46 content-center justify-endrounded cursor-pointer text-slate-200 font-semibold"
                                     >
                                         {#if isStateBtnActive}
                                             Archive
