@@ -27,7 +27,7 @@
 {/snippet}
 
 {#snippet itemSlot(item)}
-    <button onmouseenter={()=>handleItemPick(item)} class="relative flex flex-col  bg-gray-800  cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
+    <button type="submit" onfocusin={()=>handleItemPick(item)} onmouseenter={()=>handleItemPick(item)} class="relative flex flex-col  bg-gray-800 active:bg-gray-500 cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
         {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
             {@render itemImage(module.default,item.name,getItemDisplayClass(item.type))}
         {:catch _error}
@@ -37,7 +37,7 @@
 {/snippet}
 
 {#snippet emptySlot(i)}
-    <div class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center`}>
+    <button onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center`}>
         <span class="flex flex-col text-xl">
             {#if i===10}
                 <span class="text-lg">🔓</span>
@@ -46,7 +46,7 @@
                 <span class="text-xl text-gray-500 grayscale-90 contrast-10">🔒</span>
             {/if}
         </span>
-    </div>
+    </button>
 {/snippet}
 
 {#snippet inventorySlot(i,item=null)}
@@ -58,9 +58,6 @@
 {/snippet}
 
 <div class="flex flex-col h-full w-full items-center justify-center space-y-5">
-    {#if chosenItem}
-        <input type="hidden" name="itemId" value={chosenItem.Id}>
-    {/if}
     <div class="relative grid grid-cols-3 xl:grid-cols-5 max-h-4/5 place-items-center border-r-2 border-b-2 overflow-y-auto overflow-x-hidden ">
         {#each inventoryData.items as item,i}
             {@render inventorySlot(i,item)}
