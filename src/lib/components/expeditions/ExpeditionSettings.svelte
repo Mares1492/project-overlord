@@ -7,7 +7,7 @@
 
     const {closeLocation, chosenLocation, handleExpeditionStartSuccess, servants} = $props();
     let chosenServant = $state();
-    let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type))
+    let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type.id))
 
     onMount(()=>{
         if (!servants) {

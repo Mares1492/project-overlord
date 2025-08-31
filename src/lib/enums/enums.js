@@ -1,6 +1,10 @@
+// INFO: Enums are not ALL_CAPS to use them as keys for non constant objects
+
+/**@param {Object<string,number>} obj*/
 const invertObject = (obj) => {
+  /**@type {Object<number,string>} */
   const inverted = {};
-  for (const [key, value] of Object.entries(obj)) {
+  for (const [/**@type {string}*/ key, /**@type {number}*/ value] of Object.entries(obj)) {
     inverted[value] = key;
   }
   return inverted;
@@ -97,7 +101,7 @@ export const RaceTypes = {
   orc: 4,
   goblin: 5
 }
-
+/**@type {Object<number,string>} */
 export const invertedRaceTypes = invertObject(RaceTypes)
 
 export const AttributeTypes = {

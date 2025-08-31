@@ -1,6 +1,7 @@
 import expeditionTexts from "$lib/data/expedition_overview.json";
 import {invertedLocationType} from "$lib/enums/enums.js"
 
+/**@param {string} targetValue */
 const getLocationType = (targetValue) => invertedLocationType[targetValue]
 
 /** * Returns a random item from an array.
