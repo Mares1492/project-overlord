@@ -7,14 +7,14 @@ const invertObject = (obj) => {
 }
 
 export const EquipmentSlot = {
-  head: 0,
-  armor: 1,
-  legs: 2,
-  feet: 3,
-  hands: 4,
-  firstHand: 5,
-  offHand: 6,
-  neck: 7
+  head: 1,
+  body: 2,
+  legs: 3,
+  feet: 4,
+  hands: 5,
+  first_hand: 6,
+  off_hand: 7,
+  neck: 8
 };
 
 export const invertedEquipmentSlot = invertObject(EquipmentSlot)
@@ -27,11 +27,12 @@ export const ItemType = {
   feet: 5,
   hands: 6,
   weapon: 7,
-  twoHandedWeapon: 8,
-  offHand: 9,
-  magicOffHand:10,
+  two_handed_weapon: 8,
+  off_hand: 9,
+  magic_off_hand:10,
   medalion: 11,
-  trinket: 12
+  trinket: 12,
+  hood: 13
 };
 
 export const invertedItemType = invertObject(ItemType)
@@ -63,31 +64,52 @@ export const LocationType = {
 
 export const invertedLocationType = invertObject(LocationType)
 
+export const LocationImportanceType = {
+  minor: 1,
+  common: 2,
+  uncommon: 3,
+  major: 4
+}
+
 export const ExpeditionStatus = {
-  IDLE: 1,
-  IN_PROGRESS: 2,
-  COMPLETED: 3,
-  ARCHIVED: 4,
-  FAILED: 5,
+  idle: 1,
+  in_progress: 2,
+  completed: 3,
+  archived: 4,
+  failed: 5,
 }
 
 export const invertedExpeditionStatus = invertObject(ExpeditionStatus)
 
 export const ServantStatus = {
-  IDLE: 1,
-  EXPEDITION:2,
-  INJURED:3,
-  DEAD:4,
-  RETIRED:5,
-  MISSING:6
+  idle: 1,
+  expedition: 2,
+  injured: 3,
+  dead: 4,
+  retired: 5,
+  missing: 6
 }
 
-const RaceTypes = {
-  HUMAN: 1,
-  ELF: 2,
-  DARK_ELF: 3,
-  ORC: 4,
-  GOBLIN: 5
+export const RaceTypes = {
+  human: 1,
+  elf: 2,
+  dark_elf: 3,
+  orc: 4,
+  goblin: 5
 }
 
 export const invertedRaceTypes = invertObject(RaceTypes)
+
+export const AttributeTypes = {
+  strength: 1,
+  dexterity: 2,
+  intelligence: 3,
+  agility: 4,
+  endurance: 5,
+  healing_rate: 6,
+  tactics: 7,
+  stealth: 8,
+  focus: 9,
+  morale: 10,
+  armor: 11
+}
