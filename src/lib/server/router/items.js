@@ -12,6 +12,12 @@ const itemDropChances = {
     [ItemRarity.mythic]: 0.03,
     [ItemRarity.legendary]: 0.01,
 }
+
+export const getItemByUUID = async (itemUUID) => {
+    const [item] = await db.select().from(items).where(eq(items.uuid,itemUUID))
+    return item
+}
+
 export const getRandomItemOfGivenRarity = async (rarityTypeId) => {
     // random item of given rarity, in any category
     const [randomItem] = await db
