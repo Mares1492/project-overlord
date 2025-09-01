@@ -1,3 +1,9 @@
+import { db } from "$lib/server/db/db.js";
+import {getUserByUUID} from "$lib/server/router/users"
+import {items,inventoryItems,itemRarities} from "$lib/server/db/schema";
+import { eq, sql} from "drizzle-orm";
+import { ItemRarity } from '$lib/enums/enums';
+
 const itemDropChances = {
     [ItemRarity.common]: 0.5,
     [ItemRarity.uncommon]: 0.3,
