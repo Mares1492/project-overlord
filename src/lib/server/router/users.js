@@ -13,6 +13,18 @@ import { eq } from 'drizzle-orm';
 import { createKeep, deleteKeep } from '$lib/server/router/keeps.js';
 import { createServant, deleteServantsByUserId } from '$lib/server/router/servants.js';
 
+const MAX_INVENTORY_SLOTS = 15
+const DEFAULT_AVAILABLE_SLOTS = 8 
+
+export const createInventory = async (userId, tx = db) => {
+	const [inventory] = await tx.insert(userInventories).values({
+		userId: userId,
+		availableSlots: DEFAULT_AVAILABLE_SLOTS,
+		maxSlots: MAX_INVENTORY_SLOTS
+	}).returning();
+	return inventory
+}
+
 /**
  * @param email {string}
  * @param password {string}
@@ -46,6 +58,9 @@ export const createUser = async (email, password) => {
 		await createServant(createdUser.id, {}, tx);
 		await createServant(createdUser.id, {}, tx);
 		await createServant(createdUser.id, {vampire:true}, tx);
+
+		const newInventory = await createInventory(createdUser.id, tx);
+		
 		return createdUser;
 	});
 	return newUser;
@@ -129,5 +144,9 @@ export const getUserByUUID = async (userUUID) => {
 		.select()
 		.from(users)
 		.where(eq(users.uuid,userUUID))
+	if (!user) {
+		console.log(`User with uuid: ${userUUID} is not found`)
+	}
 	return user;
 }
+
