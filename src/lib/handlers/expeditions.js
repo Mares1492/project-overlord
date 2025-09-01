@@ -1,7 +1,7 @@
 import expeditionTexts from "$lib/data/expedition_overview.json";
 import {invertedLocationType} from "$lib/enums/enums.js"
 
-/**@param {string} targetValue */
+/**@param {number} targetValue */
 const getLocationType = (targetValue) => invertedLocationType[targetValue]
 
 /** * Returns a random item from an array.
@@ -14,7 +14,7 @@ const randomItem = arr => arr?arr[Math.floor(Math.random() * arr.length)]:"";
  * @param {number} taskIndex - Index of the task.
  * @param {number} approachIndex - Index of the approach.
  * @param {number} scaleIndex - Index of the scale.
- * @param {string} locationType - Type of the location (e.g., "forest", "desert").  
+ * @param {number} locationType - Type of the location (e.g., "forest", "desert").  
  */
 export const getExpeditionOverviewText = (taskIndex,approachIndex,scaleIndex,locationType) => {
     let overviewText = "";
