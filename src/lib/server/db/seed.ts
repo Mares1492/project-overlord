@@ -176,6 +176,7 @@ async function seed() {
           itemId: sql`excluded.item_id`,
           itemRarityTypeId: sql`excluded.item_rarity_type_id`,
           description: sql`excluded.description`,
+          useOnlyPredefinedAttributes:  sql`excluded.use_only_predefined_attributes`
         }
       });
     
