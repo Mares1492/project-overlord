@@ -42,14 +42,14 @@ export const itemRarityValues = [
         itemId: 1,
         name: "Shadowfang Aegis",
         itemRarityTypeId: ItemRarity.rare,
-        description: "Forged in the black fires beneath Hollowreach, this shield deflects not just blades, but hope itself."
+        description: "Forged in the black fires beneath Hollowreach, this shield deflects not just blades, but hope itself"
     },
     {
         id:2,
         itemId: 2,
         name: "Whisperblade of the Pale Queen",
         itemRarityTypeId: ItemRarity.epic,
-        description: "A blade so thin it hums in silence, said to have slain kings in their sleep."
+        description: "A blade so thin it hums in silence, said to have slain kings in their sleep"
     },
     {
         id:3,
@@ -63,7 +63,7 @@ export const itemRarityValues = [
         itemId: 3,
         name: "Cowl of Eternal Dread",
         itemRarityTypeId: ItemRarity.rare,
-        description: "Common iron dagger"
+        description: "Cowl made of rare materials, used by experienced assassins and thieves"
     },
     {
         id:5,
@@ -75,65 +75,65 @@ export const itemRarityValues = [
     {
         id:6,
         itemId: 4,
-        name: "Skull of the Withered God",
-        itemRarityTypeId: ItemRarity.mythic,
-        description: "This artifact grants forbidden knowledge but draws the gaze of unspeakable horrors."
+        name: "Skull of the beastman",
+        itemRarityTypeId: ItemRarity.epic,
+        description: "This artifact was made from the skull of the fallen beastman"
     },
     {
         id:7,
         itemId: 4,
         name: "Skull of the Withered God",
         itemRarityTypeId: ItemRarity.mythic,
-        description: "This artifact grants forbidden knowledge but draws the gaze of unspeakable horrors."
+        description: "This artifact grants forbidden knowledge but draws the gaze of unspeakable horrors"
     },
     {
         id: 8,
         itemId: 5,
         name: "Graveforged Gauntlets",
         itemRarityTypeId: ItemRarity.uncommon,
-        description: "Heavy iron gauntlets etched with runes from the Dead Tongue, worn by gravediggers and warriors alike."
+        description: "Heavy iron gauntlets etched with runes from the Dead Tongue, worn by gravediggers and warriors alike"
     },
     {
         id: 9,
         itemId: 5,
-        name: "Graveforged Gauntlets",
+        name: "Iron Gauntlets",
         itemRarityTypeId: ItemRarity.common,
-        description: "Heavy iron gauntlets, worn by gravediggers and warriors alike."
+        description: "Heavy iron gauntlets, worn by gravediggers and warriors alike"
     },
     {
         id: 10,
         itemId: 6,
         name: "Chromium Light Cuirass",
-        itemRarityTypeId: ItemRarity.rare,
-        description: "Assault cuirass made from chromium alloy, light yet durable. It shines with a faint blue hue."
+        itemRarityTypeId: ItemRarity.epic,
+        description: "Assault cuirass made from chromium alloy, light yet durable. It shines with a faint blue hue"
     },
     {
         id: 11,
         itemId: 6,
         name: "Steel Cuirass",
         itemRarityTypeId: ItemRarity.uncommon,
-        description: "Assault cuirass. Simple but perfect."
+        description: "Assault cuirass. Simple but perfect"
     },
     {
         id: 12,
         itemId: 7,
         name: "Mystic scroll",
         itemRarityTypeId: ItemRarity.mythic,
-        description: "Mystic scroll carved with banshee runes, pulsing with necrotic energy."
+        description: "Mystic scroll carved with banshee runes, pulsing with necrotic energy"
     },
     {
         id: 13,
         itemId: 7,
         name: "Magic scroll",
         itemRarityTypeId: ItemRarity.rare,
-        description: "Magic scroll, helps to cast fast battle spells."
+        description: "Magic scroll, helps to cast fast battle spells"
     },
     {
         id: 14,
         itemId: 8,
         name: "Ashborne Skullplate",
         itemRarityTypeId: ItemRarity.mythic,
-        description: "Helm of a fallen ash knight, eternally warm to the touch and whispering vengeance."
+        description: "Helm of a fallen ash knight, eternally warm to the touch and whispering vengeance"
     },
     {
         id: 15,
@@ -147,7 +147,7 @@ export const itemRarityValues = [
         itemId: 9,
         name: "Bloodbane Scimitar",
         itemRarityTypeId: ItemRarity.uncommon,
-        description: "Reaps both soul and sinew. The blade rusts unless fed monthly."
+        description: "Reaps both soul and sinew. The blade rusts unless fed monthly"
     },
     {
         id: 17,
@@ -162,7 +162,7 @@ export const itemRarityValues = [
         name: "Hearth of the Dragon",
         iconPath: "neck/Ruby necklace(uncommon).png",
         itemRarityTypeId: ItemRarity.rare,
-        description: "A necklace with a ruby that glows faintly, said to contain the heart of a dragon. It grants warmth and protection against cold."
+        description: "A necklace with a ruby that glows faintly, said to contain the heart of a dragon. It grants warmth and protection against cold"
     },
     {
         id: 19,
@@ -172,7 +172,6 @@ export const itemRarityValues = [
         itemRarityTypeId: ItemRarity.uncommon,
         description: "A ruby necklace that holds magic and grants power"
     }
-
 
 ]
 
