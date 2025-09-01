@@ -1,4 +1,5 @@
 // INFO: Enums are not ALL_CAPS to use them as keys for non constant objects
+// CURRENT ENUM CONVENSION FOR THIS PROJECT: lowercase, underscores as 'spaces'
 
 /**@param {Object<string,number>} obj*/
 const invertObject = (obj) => {
