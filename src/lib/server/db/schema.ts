@@ -178,15 +178,35 @@ export const itemRarities = pgTable('item_rarities', {
 		.notNull()
 		.references(() => itemRarityTypes.id),
 	name: text("name").notNull(),
-	description: text('description').notNull().default("")
+	description: text('description').notNull().default(""),
+	useOnlyPredefinedAttributes: boolean('use_only_predefined_attributes').notNull().default(false)
 });
 
+// For default attributes of item rarity
+export const itemRarityAttributes = pgTable('item_attributes',{
+	id: serial('id').primaryKey(),
+	attributeId: integer('attribute_id') 
+		.notNull()
+		.references(() => attributes.id),
+	itemRarityId: integer('item_rarity_id') 
+		.notNull()
+		.references(() => itemRarities.id),
+})
+
+// For attributes unique to usable item
 export const itemAttributes = pgTable('item_attributes',{
 	id: serial('id').primaryKey(),
 	attributeId: integer('attribute_id') 
 		.notNull()
 		.references(() => attributes.id),
-	itemWithRarityId: integer('item_with_rarity_id')
+	usableItemId: integer('usable_item_id') 
+		.notNull()
+		.references(() => usableItems.id),
+})
+
+export const usableItems = pgTable('usable_items', {
+	id: serial('id').primaryKey(),
+	itemRarityId: integer('item_rarity_id')
 		.notNull()
 		.references(() => itemRarities.id),
 })
@@ -241,12 +261,9 @@ export const servantItems = pgTable('servant_items', {
 	servantId: integer('servant_id')
 		.notNull()
 		.references(() => servants.id),
-	itemId: integer('item_id')
+	inventoryItemId: integer('inventory_item_id') 
 		.notNull()
-		.references(() => items.id),
-	itemAttributeId: integer('item_attribute_id')
-		.notNull()
-		.references(() => itemAttributes.id)
+		.references(() => inventoryItems.id),
 });
 
 // Locations
@@ -355,12 +372,33 @@ export const expeditionLoots = pgTable('expedition_loots',{
 
 export const expeditionLootItems = pgTable('expedition_loot_items',{
 	id: serial('id').primaryKey(),
-	itemId: integer('item_id')
+	usableItemId: integer('usable_item_id')
 		.notNull()
-		.references(() => items.id),
+		.references(() => usableItems.id),
 	expeditionLootId: integer('expedition_id')
 		.notNull()
 		.references(() => expeditionLoots.id)
 });
+
+// User Inventory
+
+export const userInventories = pgTable('user_inventories', {
+	id: serial('id').primaryKey(),
+	userId: integer('user_id')
+		.notNull()
+		.references(() => users.id),
+	availableSlots: integer('available_slots').default(8),
+	maxSlots :integer('max_slots').default(15)
+})
+
+export const inventoryItems = pgTable('inventory_items', {
+	id: serial('id').primaryKey(),
+	userInventoryId: integer('user_inventory_id')
+		.notNull()
+		.references(() => userInventories.id),
+	usableItemId: integer('user_inventory_id')
+		.notNull()
+		.references(() => usableItems.id),
+})
 
 // Events
