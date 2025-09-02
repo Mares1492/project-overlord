@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db/db.js";
 import {getUserByUUID} from "$lib/server/router/users"
-import {items,inventoryItems,itemRarities} from "$lib/server/db/schema";
+import {items,inventoryItems,itemRarities, usableItems} from "$lib/server/db/schema";
 import { eq, sql} from "drizzle-orm";
 import { ItemRarity } from '$lib/enums/enums';
 
@@ -18,7 +18,24 @@ export const getItemByUUID = async (itemUUID) => {
     return item
 }
 
-export const getRandomItemOfGivenRarity = async (rarityTypeId) => {
+export const addItemToInventory = async (itemUUID,userUUID) => {
+    // This is for blind call from client. Only item and user uuids are known
+    // TODO: Add permission checks
+    const user = await getUserByUUID(userUUID)
+    if (!user) {
+        return {error:true,message:"Corrupt input data, user is not found"}
+    }
+    const item = await getItemByUUID(itemUUID)
+    if (!item) {
+        return {error:true,message:"Corrupt input data, item is not found"}
+    }
+    
+    // create 
+    //const [inventory] = 
+
+}
+
+export const getRandomItemRarityByRarityTypeId = async (rarityTypeId) => {
     // random item of given rarity, in any category
     const [randomItem] = await db
         .select()
