@@ -58,4 +58,16 @@ export const createUsableItem = async (itemRarityId,tx=db) => {
     return newUsableItems
 }
 
+/**
+ * @param {number} userInventoryId
+ * @param {number} usableItemId
+ */
+export const createInventoryItem = async (userInventoryId,usableItemId,tx=db) => {
+    // this is the call itself (can be moved to repo section if created)
+    await tx.insert(inventoryItems).values({
+            usableItemId,
+            userInventoryId
+    }).returning();
+}
+
 }
