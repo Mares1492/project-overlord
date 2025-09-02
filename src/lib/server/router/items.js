@@ -70,4 +70,17 @@ export const createInventoryItem = async (userInventoryId,usableItemId,tx=db) =>
     }).returning();
 }
 
+/** @param {number} userInventoryId @param {number} itemRarityId @param {number} usableItemId*/
+export const handleInventoryItemCreation = async (userInventoryId,itemRarityId=-1,usableItemId=-1,tx=db) => {
+    if (!usableItemId) {
+        let newUsableItem
+            if (itemRarityId) {
+                newUsableItem = await createUsableItem(itemRarityId)
+            }
+            else{
+                newUsableItem = await createRandomUsableItem()
+            }
+        usableItemId = newUsableItem.id    
+    }
+    await createInventoryItem(userInventoryId,usableItemId)
 }
