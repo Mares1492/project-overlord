@@ -43,4 +43,13 @@ export const getRandomItemRarityByRarityTypeId = async (rarityTypeId) => {
         .where(eq(itemRarities.itemRarityTypeId,rarityTypeId))
         .orderBy(sql`random()`)
         .limit(1);
+    return randomItem
+}
+
+export const createRandomUsableItem = async () => {
+    const randomItemRarity = getRandomItemRarityByRarityTypeId(ItemRarity.common)
+    createUsableItem
+}
+
+
 }
