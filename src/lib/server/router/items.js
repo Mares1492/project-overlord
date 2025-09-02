@@ -52,4 +52,10 @@ export const createRandomUsableItem = async () => {
 }
 
 
+/**@param {number} itemRarityId */
+export const createUsableItem = async (itemRarityId,tx=db) => {
+    const [newUsableItems] = await tx.insert(usableItems).values({itemRarityId}).returning();
+    return newUsableItems
+}
+
 }
