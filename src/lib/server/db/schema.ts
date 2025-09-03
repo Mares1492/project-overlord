@@ -396,7 +396,7 @@ export const inventoryItems = pgTable('inventory_items', {
 	userInventoryId: integer('user_inventory_id')
 		.notNull()
 		.references(() => userInventories.id),
-	usableItemId: integer('user_inventory_id')
+	usableItemId: integer('usable_item_id')
 		.notNull()
 		.references(() => usableItems.id),
 })
