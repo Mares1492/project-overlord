@@ -1,7 +1,8 @@
 import { db } from "$lib/server/db/db.js";
+import {ServantStatus} from '$lib/enums/enums'
 import { getRandomServantName } from '$lib/server/handlers/generators.js';
 import {servants,servantAttributes, races, attributes,users,servantStatuses} from "$lib/server/db/schema";
-import { eq,count } from "drizzle-orm";
+import { eq,count,and } from "drizzle-orm";
 
 const getRandomAttributeValue = () => {
     return Math.floor(Math.random() * 5) + 1;
@@ -142,6 +143,6 @@ export const getServantsByUserUUID = async (userUUID) => {
     const [availableServants] = await db
         .select({ count: count() })
         .from(servants)
-        .where(eq(servants.statusId,1))
+        .where(and(eq(servants.statusId,ServantStatus.idle),eq(servants.userId,user.id)))
     return {servants:servantData,availableServants:availableServants.count};
 }
