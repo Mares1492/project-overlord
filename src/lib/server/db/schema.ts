@@ -183,7 +183,7 @@ export const itemRarities = pgTable('item_rarities', {
 });
 
 // For default attributes of item rarity
-export const itemRarityAttributes = pgTable('item_attributes',{
+export const itemRarityAttributes = pgTable('item_rarity_attributes',{
 	id: serial('id').primaryKey(),
 	attributeId: integer('attribute_id') 
 		.notNull()
@@ -191,6 +191,7 @@ export const itemRarityAttributes = pgTable('item_attributes',{
 	itemRarityId: integer('item_rarity_id') 
 		.notNull()
 		.references(() => itemRarities.id),
+	value: integer('value').notNull().default(1)
 })
 
 // For attributes unique to usable item
@@ -202,6 +203,7 @@ export const itemAttributes = pgTable('item_attributes',{
 	usableItemId: integer('usable_item_id') 
 		.notNull()
 		.references(() => usableItems.id),
+	value: integer('value').notNull().default(1),
 })
 
 export const usableItems = pgTable('usable_items', {
