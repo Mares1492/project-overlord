@@ -2,7 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import { env } from '$env/dynamic/private';
 import cookie, { serialize } from 'cookie';
-import {getUserSessionByToken,getUserFromSession} from '$lib/server/router/users';
+import {getUserSessionByToken,getUserFromSession} from '$lib/server/services/users';
 
 const cookieOptions = {
     httpOnly: true,
