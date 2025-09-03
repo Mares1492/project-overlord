@@ -30,7 +30,6 @@ export const addItemToInventory = async (itemUUID,userUUID) => {
         return {error:true,message:"Corrupt input data, item is not found"}
     }
     
-    // create 
     //const [inventory] = 
 
 }
@@ -74,6 +73,9 @@ export const createInventoryItem = async (userInventoryId,usableItemId,tx=db) =>
 /** @param {number} userInventoryId @param {number} itemRarityId */
 export const handleInventoryItemCreation = async (userInventoryId,itemRarityId,tx=db) => {
     const usableItem = await createUsableItem(itemRarityId,tx)
+    if (!usableItem) {
+        console.log("Failed creating usable item",usableItem)
+    }
     await createInventoryItem(userInventoryId,usableItem.id,tx)
 }
 
