@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db/db';
-import { sessions, users } from '$lib/server/db/schema';
+import { sessions, users, userInventories } from '$lib/server/db/schema';
 import {
 	hashPassword,
 	signAccessToken,
@@ -12,6 +12,7 @@ import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
 import { eq } from 'drizzle-orm';
 import { createKeep, deleteKeep } from '$lib/server/router/keeps.js';
 import { createServant, deleteServantsByUserId } from '$lib/server/router/servants.js';
+import { handleInventoryItemCreation } from '$lib/server/router/items';
 
 const MAX_INVENTORY_SLOTS = 15
 const DEFAULT_AVAILABLE_SLOTS = 8 
@@ -61,6 +62,12 @@ export const createUser = async (email, password) => {
 
 		const newInventory = await createInventory(createdUser.id, tx);
 		
+		// IDEA: create enums for popular item rarities
+		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+		await handleInventoryItemCreation(newInventory.id,5,tx) // Common hood | common
+		await handleInventoryItemCreation(newInventory.id,9,tx) // Iron Gauntlets | common
 		return createdUser;
 	});
 	return newUser;
