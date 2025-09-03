@@ -1,5 +1,5 @@
 import { db } from '$lib/server/db/db';
-import { sessions, users, userInventories } from '$lib/server/db/schema';
+import { sessions, users, userInventories} from '$lib/server/db/schema';
 import {
 	hashPassword,
 	signAccessToken,
@@ -163,5 +163,3 @@ export const getUserByUUID = async (userUUID) => {
 	}
 	return user;
 }
-
-export const getUserInventoryData
