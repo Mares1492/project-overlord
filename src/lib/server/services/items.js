@@ -1,6 +1,6 @@
 import { db } from "$lib/server/db/db.js";
 import {getUserByUUID} from "$lib/server/services/users"
-import {items,inventoryItems,itemRarities, usableItems} from "$lib/server/db/schema";
+import {items,inventoryItems,itemRarities, usableItems, attributes, userInventories, itemRarityTypes, slotTypes, itemAttributes} from "$lib/server/db/schema";
 import { eq, sql} from "drizzle-orm";
 import { ItemRarity } from '$lib/enums/enums';
 
@@ -85,6 +85,47 @@ export const handleRandomInventoryItemCreation = async (userInventoryId,tx=db) =
     await createInventoryItem(userInventoryId,usableItem.id,tx)
 }
 
-export const getItemsByUserUUID = () => {
-    
+export const getInventoryDataByUserUUID = async (userUUID) => {
+	const user = await getUserByUUID(userUUID)
+	const [userInventory] = await db.select().from(userInventories).where(eq(userInventories.userId,user.id))
+	
+	const inventoryItemsList = await db
+		.select({
+			name:items.name,
+            usableItemId: usableItems.id,
+			itemType: {id:items.itemTypeId},
+			slotType: {id:items.slotTypeId,name:slotTypes.name},
+			rarity: {id:itemRarityTypes.id,name:itemRarityTypes.name},
+			description: itemRarities.description,
+			iconPath: items.iconPath
+		})
+		.from(inventoryItems)
+		.innerJoin(usableItems,eq(inventoryItems.usableItemId,usableItems.id))
+		.innerJoin(itemRarities,eq(itemRarities.id,usableItems.itemRarityId))
+		.innerJoin(items,eq(items.id,itemRarities.itemId))
+		.innerJoin(slotTypes,eq(slotTypes.id,items.itemTypeId))
+		.innerJoin(itemRarityTypes,eq(itemRarities.itemRarityTypeId,itemRarityTypes.id))
+		.where(eq(inventoryItems.userInventoryId,userInventory.id))
+
+    const inventoryItemsData = await Promise.all(inventoryItemsList.map(async item => {
+            const itemAttributesList = await db
+                .select({
+                    name: attributes.name,
+                    shortName: attributes.shortName,
+                    value: itemAttributes.value
+                })
+                .from(itemAttributes)
+                .innerJoin(attributes, eq(itemAttributes.attributeId, attributes.id))
+                .where(eq(itemAttributes.usableItemId, item.usableItemId));
+            return {
+                ...item,
+                attributes: itemAttributesList,
+            }
+        }))
+	const inventory = {
+		maxSlots: userInventory.maxSlots,
+		availableSlots: userInventory.availableSlots,
+		items: inventoryItemsData
+	}
+	return inventory
 }
