@@ -51,29 +51,33 @@ export const createUser = async (email, password) => {
 		passwordHash,
 		nickname: generateDarkFantasyName()
 	};
-	const newUser = await db.transaction(async (tx) => {
-
-		const [createdUser] = await tx.insert(users).values(newUserData).returning();
-		console.log(createdUser);
-
-		await createKeep(tx,createdUser.id);
-		// Create initial servants for the user
-		// TODO: create one predefined servant and 2 random servants
-		await createServant(createdUser.id, {}, tx);
-		await createServant(createdUser.id, {}, tx);
-		await createServant(createdUser.id, {vampire:true}, tx);
-
-		const newInventory = await createInventory(createdUser.id, tx);
-		
-		// IDEA: create enums for popular item rarities
-		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
-		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
-		await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
-		await handleInventoryItemCreation(newInventory.id,5,tx) // Common hood | common
-		await handleInventoryItemCreation(newInventory.id,9,tx) // Iron Gauntlets | common
-		return createdUser;
-	});
-	return newUser;
+	try {
+		const newUser = await db.transaction(async (tx) => {
+			const [createdUser] = await tx.insert(users).values(newUserData).returning();
+			console.log(createdUser);
+			console.log("Creating Keep...")
+			await createKeep(tx,createdUser.id);
+			// Create initial servants for the user
+			// TODO: create one predefined servant and 2 random servants
+			console.log("Creating servants")
+			await createServant(createdUser.id, {}, tx);
+			await createServant(createdUser.id, {}, tx);
+			await createServant(createdUser.id, {vampire:true}, tx);
+			console.log("Creating inventory...")
+			const newInventory = await createInventory(createdUser.id, tx);
+			console.log("Creating items...")
+			// IDEA: create enums for popular item rarities to use in such scenarios
+			await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+			await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+			await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
+			await handleInventoryItemCreation(newInventory.id,5,tx) // Common hood | common
+			await handleInventoryItemCreation(newInventory.id,9,tx) // Iron Gauntlets | common
+			return createdUser;
+		});
+		return {data:newUser, error:false, message: ""};
+	} catch (error) {
+		return {data:undefined, error:true, message: "Failed to create new user"}
+	}
 };
 
 export const deleteUser = async (email, password) => {
