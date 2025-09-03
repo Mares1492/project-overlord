@@ -18,12 +18,15 @@ const MAX_INVENTORY_SLOTS = 15
 const DEFAULT_AVAILABLE_SLOTS = 8 
 
 export const createInventory = async (userId, tx = db) => {
-	const [inventory] = await tx.insert(userInventories).values({
+	const [newInventory] = await tx.insert(userInventories).values({
 		userId: userId,
 		availableSlots: DEFAULT_AVAILABLE_SLOTS,
 		maxSlots: MAX_INVENTORY_SLOTS
 	}).returning();
-	return inventory
+	if (newInventory) {
+		console.log("New user inventory is created:",newInventory)
+	}
+	return newInventory
 }
 
 /**
