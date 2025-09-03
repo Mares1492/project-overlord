@@ -1,6 +1,6 @@
 import {redirect} from '@sveltejs/kit';
 import {authUserSession} from "$lib/server/auth.js";
-import {getServantsByUserUUID} from '$lib/server/router/servants.js';    
+import {getServantsByUserUUID} from '$lib/server/services/servants.js';    
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({cookies,params}) {

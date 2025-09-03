@@ -1,6 +1,6 @@
 import {userCreateSchema} from '$lib/utils/validation';
 import { json } from '@sveltejs/kit';
-import {createUser} from "$lib/server/router/users";
+import {createUser} from "$lib/server/services/users";
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {

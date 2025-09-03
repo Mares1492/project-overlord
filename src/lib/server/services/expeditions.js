@@ -1,7 +1,7 @@
 import { db } from "$lib/server/db/db.js";
 import {expeditions, expeditionStatuses, expeditionLoots, expeditionLootItems, users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales, items} from "$lib/server/db/schema";
-import {getUserByUUID} from "$lib/server/router/users"
-import {getServantByUUID} from "$lib/server/router/servants"
+import {getUserByUUID} from "$lib/server/services/users"
+import {getServantByUUID} from "$lib/server/services/servants"
 import { eq, and, not, desc } from "drizzle-orm";
 
 const overviewTextMaxLen = 1000
@@ -142,7 +142,6 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
         .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
         .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
         .where(eq(expeditions.uuid,expeditionUUID))
-
     const lootItems = await db
         .select({
             name: items.name,
@@ -161,6 +160,7 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
     
     expedition.loot.items = lootItems
     delete expedition.id; // expedition id is only used to get loot items
+
 
     return expedition;
 }

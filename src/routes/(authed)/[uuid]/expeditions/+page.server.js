@@ -1,6 +1,5 @@
-import {getAllLocations} from '$lib/server/router/locations'
-import {createExpedition,getOngoingExpeditionsByUserUUID,completeExpedition,archiveExpedition} from '$lib/server/router/expeditions'
-import { redirect } from '@sveltejs/kit'
+import {getAllLocations} from '$lib/server/services/locations'
+import {createExpedition,getOngoingExpeditionsByUserUUID,completeExpedition,archiveExpedition} from '$lib/server/services/expeditions'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {

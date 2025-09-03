@@ -1,5 +1,5 @@
 import {error, fail, redirect} from '@sveltejs/kit';
-import {createUser, createUserSession, login, logout} from "$lib/server/router/users.js";
+import {createUser, createUserSession, login, logout} from "$lib/server/services/users.js";
 import {userCreateSchema,userLoginSchema} from "$lib/utils/validation.js";
 import {authUserSession, clearAuthCookies, createAuthCookies} from "$lib/server/auth.js";
 

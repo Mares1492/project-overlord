@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import {getUserByUUID} from "$lib/server/router/users"
+import {getUserByUUID} from "$lib/server/services/users"
 import {items,inventoryItems,itemRarities, usableItems} from "$lib/server/db/schema";
 import { eq, sql} from "drizzle-orm";
 import { ItemRarity } from '$lib/enums/enums';
@@ -83,4 +83,8 @@ export const handleInventoryItemCreation = async (userInventoryId,itemRarityId,t
 export const handleRandomInventoryItemCreation = async (userInventoryId,tx=db) => {
     const usableItem = await createRandomUsableItem(tx)
     await createInventoryItem(userInventoryId,usableItem.id,tx)
+}
+
+export const getItemsByUserUUID = () => {
+    
 }

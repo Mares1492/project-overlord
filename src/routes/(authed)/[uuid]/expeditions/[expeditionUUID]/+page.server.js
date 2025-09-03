@@ -1,5 +1,5 @@
 import {getEventsByExpeditionUUID} from "$lib/server/handlers/events.js";
-import { getExpeditionByUUID, completeExpedition, archiveExpedition } from '$lib/server/router/expeditions';
+import { getExpeditionByUUID, completeExpedition, archiveExpedition } from '$lib/server/services/expeditions';
 import { redirect } from '@sveltejs/kit';
 
 /** @type {import('./$types').PageServerLoad} */

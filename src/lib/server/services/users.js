@@ -10,9 +10,9 @@ import { error } from '@sveltejs/kit';
 import { randomUUID } from 'crypto';
 import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
 import { eq } from 'drizzle-orm';
-import { createKeep, deleteKeep } from '$lib/server/router/keeps.js';
-import { createServant, deleteServantsByUserId } from '$lib/server/router/servants.js';
-import { handleInventoryItemCreation } from '$lib/server/router/items';
+import { createKeep, deleteKeep } from '$lib/server/services/keeps.js';
+import { createServant, deleteServantsByUserId } from '$lib/server/services/servants.js';
+import { handleInventoryItemCreation } from '$lib/server/services/items';
 
 const MAX_INVENTORY_SLOTS = 15
 const DEFAULT_AVAILABLE_SLOTS = 8 
@@ -164,3 +164,4 @@ export const getUserByUUID = async (userUUID) => {
 	return user;
 }
 
+export const getUserInventoryData
