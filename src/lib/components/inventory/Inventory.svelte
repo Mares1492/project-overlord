@@ -37,12 +37,12 @@
 {/snippet}
 
 {#snippet emptySlot(i)}
-    <button onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} class={`${i>9?i===10?'bg-gray-900':'bg-gray-800/70':'bg-gray-800'} flex flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center`}>
+    <button onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} class:bg-gray-900={i===inventoryData.unlockedSlots} class:opacity-90={i>inventoryData.unlockedSlots} class:opacity-80={i>inventoryData.unlockedSlots+1} class="flex bg-gray-800 flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center">
         <span class="flex flex-col text-xl">
-            {#if i===10}
+            {#if i === inventoryData.unlockedSlots}
                 <span class="text-lg">🔓</span>
                 <span class="text-yellow-500">250</span>
-            {:else if  i>10}
+            {:else if  i>inventoryData.unlockedSlots}
                 <span class="text-xl text-gray-500 grayscale-90 contrast-10">🔒</span>
             {/if}
         </span>
