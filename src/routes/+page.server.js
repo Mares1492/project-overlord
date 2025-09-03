@@ -27,6 +27,9 @@ export const actions = {
         const { email:validEmail, password:validPassword } = result.data;
 
         const newUser = await createUser(validEmail, validPassword);
+        if (newUser.error) {
+            return {error: true, message: newUser.message};
+        }
         const loggedUser = await login(newUser.email, validPassword)
         const [accessToken,refreshToken] = await createUserSession(loggedUser);
         for (const c of createAuthCookies(accessToken, refreshToken,false)) cookies.set(c.name,c.token,c.params);
