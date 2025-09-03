@@ -46,16 +46,16 @@ export const getRandomItemRarityByRarityTypeId = async (rarityTypeId) => {
     return randomItem
 }
 
-export const createRandomUsableItem = async () => {
-    const randomItemRarity = getRandomItemRarityByRarityTypeId(ItemRarity.common)
-    createUsableItem
-}
-
-
 /**@param {number} itemRarityId */
 export const createUsableItem = async (itemRarityId,tx=db) => {
     const [newUsableItems] = await tx.insert(usableItems).values({itemRarityId}).returning();
     return newUsableItems
+}
+
+export const createRandomUsableItem = async (tx=db) => {
+    const randomItemRarity = await getRandomItemRarityByRarityTypeId(ItemRarity.common)
+    const usableItem = await createUsableItem(randomItemRarity.id,tx)
+    return usableItem
 }
 
 /**
