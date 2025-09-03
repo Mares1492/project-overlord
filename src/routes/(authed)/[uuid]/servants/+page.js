@@ -1,21 +1,17 @@
-/*
-    TODO: 
-    This is a temporary solution to load inventory data from a JSON file. 
-    In the future, this should be replaced with a proper API
-*/
-import inventoryData  from '$lib/test_data/inventory.json';
-
 /** @type {import('./$types').PageLoad} */
-export async function load({parent}) {
-    const data = await parent();
+export async function load({parent,data}) {
+    const parentData = await parent();
+    if (!data.inventory) {
+        console.error("user inventory is missing")
+    }
     return {
-        error: data.error ?? false,
-        message: data.message ?? null,
-        servants: data.servants ?? [],
-        inventory: {
-            maxSlots: 30,
-            unlockedSlots: 25,
-            items: inventoryData,
+        error: parentData.error ?? false,
+        message: parentData.message ?? null,
+        servants: parentData.servants ?? [],
+        inventory: data.inventory ?? {
+            maxSlots: 15,
+            unlockedSlots: 5,
+            items:[],
         }
     };
 }
