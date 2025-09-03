@@ -108,20 +108,20 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 		.where(eq(inventoryItems.userInventoryId,userInventory.id))
 
     const inventoryItemsData = await Promise.all(inventoryItemsList.map(async item => {
-            const itemAttributesList = await db
-                .select({
-                    name: attributes.name,
-                    shortName: attributes.shortName,
-                    value: itemAttributes.value
-                })
-                .from(itemAttributes)
-                .innerJoin(attributes, eq(itemAttributes.attributeId, attributes.id))
-                .where(eq(itemAttributes.usableItemId, item.usableItemId));
-            return {
-                ...item,
-                attributes: itemAttributesList,
-            }
-        }))
+        const itemAttributesList = await db
+            .select({
+                name: attributes.name,
+                shortName: attributes.shortName,
+                value: itemAttributes.value
+            })
+            .from(itemAttributes)
+            .innerJoin(attributes, eq(itemAttributes.attributeId, attributes.id))
+            .where(eq(itemAttributes.usableItemId, item.usableItemId));
+        return {
+            ...item,
+            attributes: itemAttributesList,
+        }
+    }))
 	const inventory = {
 		maxSlots: userInventory.maxSlots,
 		availableSlots: userInventory.availableSlots,
