@@ -121,6 +121,7 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 	const [userInventory] = await db.select().from(userInventories).where(eq(userInventories.userId,user.id))
 	const inventoryItemsList = await db
 		.select({
+            uuid: items.uuid,
 			name:items.name,
             usableItemId: usableItems.id,
 			itemType: {id:items.itemTypeId},
@@ -148,7 +149,13 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
             .innerJoin(attributes, eq(itemAttributes.attributeId, attributes.id))
             .where(eq(itemAttributes.usableItemId, item.usableItemId));
         return {
-            ...item,
+            uuid: item.uuid,
+            name: item.name,
+            itemType: item.itemType,
+            slotType: item.slotType,
+            rarity: item.rarity,
+            description: item.description,
+            iconPath: item.iconPath,
             attributes: itemAttributesList,
         }
     }))
