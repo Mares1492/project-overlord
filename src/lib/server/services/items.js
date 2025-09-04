@@ -2,7 +2,8 @@ import { db } from "$lib/server/db/db.js";
 import {getUserByUUID} from "$lib/server/services/users"
 import {items,inventoryItems,itemRarities, usableItems, attributes, userInventories, itemRarityTypes, slotTypes, itemAttributes} from "$lib/server/db/schema";
 import { eq, sql} from "drizzle-orm";
-import { ItemRarity } from '$lib/enums/enums';
+import { ItemRarity, AttributeTypes } from '$lib/enums/enums';
+import {getItemRandomAttributeValues} from '$lib/server/handlers/attributes'
 
 const itemDropChances = {
     [ItemRarity.common]: 0.5,
@@ -44,6 +45,19 @@ export const getRandomItemRarityByRarityTypeId = async (rarityTypeId) => {
         .limit(1);
     return randomItem
 }
+
+const createItemAttributes = async (usableItemId,itemTypeId,rarityTypeId,tx=db) => {
+    const attributes = getItemRandomAttributeValues(itemTypeId,rarityTypeId)
+    for(const attribute in attributes){
+        await tx
+        .insert(itemAttributes)
+        .values({
+            usableItemId,
+            attributeId: Number(attribute),
+            value: attributes[attribute]
+    })
+    }
+}   
 
 /**@param {number} itemRarityId */
 export const createUsableItem = async (itemRarityId,tx=db) => {
