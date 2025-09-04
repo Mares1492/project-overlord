@@ -3,9 +3,10 @@
 
     const itemTypeDisplayClasses = {
         [ItemType.helmet]: "top-5",
+        [ItemType.hood]: "top-3",
         [ItemType.armor]: "-top-5",
         [ItemType.off_hand]: "-left-8 -top-14",
-        [ItemType.weapon]: "-top-15 left-4",
+        [ItemType.weapon]: "-top-15 left-3",
         [ItemType.magic_off_hand]: "-top-18 -left-9",
         [ItemType.hands]:"-top-12"
     }
