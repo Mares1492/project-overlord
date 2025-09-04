@@ -113,7 +113,7 @@
                 {:else}
                     <div class="flex flex-col space-y-2">
                         <span class="bg-black/70 p-3 text-white font-bold text-4xl">
-                            {data.inventory.items.length}/{data.inventory.unlockedSlots}
+                            {data.inventory.items.length}/{data.inventory.availableSlots}
                         </span>
                         <form onmouseleave={cancelItemWindowShowTimeout} use:enhance method="POST" action="?/equipItem">
                             <input type="hidden" name="servantId" value={chosenServant.uuid}>
