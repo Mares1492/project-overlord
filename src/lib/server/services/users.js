@@ -12,7 +12,7 @@ import { generateDarkFantasyName } from '$lib/utils/nameGenerator.js';
 import { eq } from 'drizzle-orm';
 import { createKeep, deleteKeep } from '$lib/server/services/keeps.js';
 import { createServant, deleteServantsByUserId } from '$lib/server/services/servants.js';
-import { handleInventoryItemCreation } from '$lib/server/services/items';
+import { handleInventoryItemCreation,deleteUserInventory } from '$lib/server/services/items';
 
 const MAX_INVENTORY_SLOTS = 15
 const DEFAULT_AVAILABLE_SLOTS = 8 
@@ -74,7 +74,7 @@ export const createUser = async (email, password) => {
 			await handleInventoryItemCreation(newInventory.id,9,tx) // Iron Gauntlets | common
 			return createdUser;
 		});
-		return {data:newUser, error:false, message: ""};
+		return {data:newUser, error:false, message: "User is successfully created"};
 	} catch (error) {
 		return {data:undefined, error:true, message: "Failed to create new user"}
 	}
@@ -93,9 +93,7 @@ export const deleteUser = async (email, password) => {
 	await logout(user);
 
 	await db.transaction(async (tx) => {
-		await deleteKeep(tx,user.id);
-		await deleteServantsByUserId(tx, user.id);
-		const deleted = await tx.delete(users).where(eq(users.email, email)).returning();
+		const deleted = await tx.delete(users).where(eq(users.id, user.id)).returning();
 		if (!deleted.length) {
 			throw error(401, 'Could not delete user');
 		}
