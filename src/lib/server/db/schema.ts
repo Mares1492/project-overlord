@@ -34,7 +34,7 @@ export const keeps = pgTable('keeps', {
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
 		.notNull()
-		.references(() => users.id),
+		.references(() => users.id, {onDelete: 'cascade'}),
 	lvl: integer('lvl').notNull().default(1)
 });
 
@@ -43,7 +43,7 @@ export const barracks = pgTable('barracks', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
-		.references(() => keeps.id),
+		.references(() => keeps.id, {onDelete: 'cascade'}),
 	lvl: integer('lvl').notNull().default(1),
 	name: text('name').notNull()
 });
@@ -85,7 +85,7 @@ export const barracksExtensionBuildings = pgTable('barracks_extension_buildings'
 	id: serial('id').primaryKey(),
 	barracksId: integer('barracks_id')
 		.notNull()
-		.references(() => barracks.id),
+		.references(() => barracks.id, {onDelete: 'cascade'}),
 	extensionBuildingId: integer('extension_building_id')
 		.notNull()
 		.references(() => extensionBuildings.id),
@@ -98,7 +98,7 @@ export const treasuries = pgTable('treasuries', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
-		.references(() => keeps.id),
+		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	gold: integer('gold').notNull().default(0),
 	gems: integer('gems').notNull().default(0),
@@ -111,7 +111,7 @@ export const academies = pgTable('academies', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
-		.references(() => keeps.id),
+		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().default(1)
 });
@@ -122,7 +122,7 @@ export const tombs = pgTable('tombs', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
-		.references(() => keeps.id),
+		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().default(1)
 });
@@ -133,7 +133,7 @@ export const arsenals = pgTable('arsenals', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
-		.references(() => keeps.id),
+		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().default(1)
 });
@@ -190,7 +190,7 @@ export const itemRarityAttributes = pgTable('item_rarity_attributes',{
 		.references(() => attributes.id),
 	itemRarityId: integer('item_rarity_id') 
 		.notNull()
-		.references(() => itemRarities.id),
+		.references(() => itemRarities.id, {onDelete: 'cascade'}),
 	value: integer('value').notNull().default(1)
 })
 
@@ -202,7 +202,7 @@ export const itemAttributes = pgTable('item_attributes',{
 		.references(() => attributes.id),
 	usableItemId: integer('usable_item_id') 
 		.notNull()
-		.references(() => usableItems.id),
+		.references(() => usableItems.id, {onDelete: 'cascade'}),
 	value: integer('value').notNull().default(1),
 })
 
@@ -229,7 +229,7 @@ export const servants = pgTable('servants', {
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
 		.notNull()
-		.references(() => users.id),
+		.references(() => users.id, {onDelete: 'cascade'}),
 	raceId: integer('race_id')
 		.notNull()
 		.references(()=>races.id),
@@ -251,7 +251,7 @@ export const servantAttributes = pgTable('servant_attributes', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
 		.notNull()
-		.references(() => servants.id),
+		.references(() => servants.id, {onDelete: 'cascade'}),
 	attributeId: integer('attribute_id')
 		.notNull()
 		.references(() => attributes.id),
@@ -262,10 +262,10 @@ export const servantItems = pgTable('servant_items', {
 	id: serial('id').primaryKey(),
 	servantId: integer('servant_id')
 		.notNull()
-		.references(() => servants.id),
+		.references(() => servants.id, {onDelete: 'cascade'}),
 	inventoryItemId: integer('inventory_item_id') 
 		.notNull()
-		.references(() => inventoryItems.id),
+		.references(() => inventoryItems.id, {onDelete: 'cascade'}),
 });
 
 // Locations
@@ -304,7 +304,7 @@ export const availableLocations = pgTable('available_locations', {
 		.references(() => locations.id),
 	userId: integer('user_id')
 		.notNull()
-		.references(() => users.id)
+		.references(() => users.id, {onDelete: 'cascade'})
 });
 
 //Expeditions
@@ -337,13 +337,13 @@ export const expeditions = pgTable('expeditions', {
 	uuid: uuid('uuid').notNull().defaultRandom(),
 	userId: integer('user_id')
 		.notNull()
-		.references(() => users.id),
+		.references(() => users.id, {onDelete: 'cascade'}),
 	locationId: integer('location_id')
 		.notNull()
 		.references(()=> locations.id),
 	servantId: integer('servant_id')
 		.notNull()
-		.references(() => servants.id),
+		.references(() => servants.id, {onDelete: 'cascade'}),
 	statusId: integer('status_id')
 		.notNull()
 		.references(() => expeditionStatuses.id)
@@ -366,7 +366,7 @@ export const expeditionLoots = pgTable('expedition_loots',{
 	id: serial('id').primaryKey(),
 	expeditionId: integer('expedition_id')
 		.notNull()
-		.references(() => expeditions.id)
+		.references(() => expeditions.id, {onDelete: 'cascade'})
 		.unique(),
 	gold: integer('gold').notNull().default(0),
 	gems: integer('gems').notNull().default(0),
@@ -379,7 +379,7 @@ export const expeditionLootItems = pgTable('expedition_loot_items',{
 		.references(() => usableItems.id),
 	expeditionLootId: integer('expedition_id')
 		.notNull()
-		.references(() => expeditionLoots.id)
+		.references(() => expeditionLoots.id, {onDelete: 'cascade'})
 });
 
 // User Inventory
@@ -388,7 +388,7 @@ export const userInventories = pgTable('user_inventories', {
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
 		.notNull()
-		.references(() => users.id),
+		.references(() => users.id, {onDelete: 'cascade'}),
 	availableSlots: integer('available_slots').default(8),
 	maxSlots :integer('max_slots').default(15)
 })
@@ -397,10 +397,10 @@ export const inventoryItems = pgTable('inventory_items', {
 	id: serial('id').primaryKey(),
 	userInventoryId: integer('user_inventory_id')
 		.notNull()
-		.references(() => userInventories.id),
+		.references(() => userInventories.id, {onDelete: 'cascade'}),
 	usableItemId: integer('usable_item_id')
 		.notNull()
-		.references(() => usableItems.id),
+		.references(() => usableItems.id, {onDelete: 'cascade'}),
 })
 
 // Events
