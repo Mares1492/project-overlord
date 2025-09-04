@@ -80,7 +80,7 @@ export const deleteServant = async (tx, servantId) => {
     return tx.delete(servants).where(eq(servants.id, servantId)).returning();
 }
 
-export const deleteServantsByUserId = async (tx, userId) => {
+export const deleteServantsByUserId = async (userId,tx=db) => {
     const servantsToDelete = await tx
         .select()
         .from(servants)

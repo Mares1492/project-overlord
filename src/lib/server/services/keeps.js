@@ -57,7 +57,7 @@ export const createKeep = async (tx,userId) => {
 	await createBuildings(tx, newKeep.id);
 };
 
-export const deleteKeep = async (tx,userId) => {
+export const deleteKeep = async (userId,tx=db) => {
 	const [keepToDelete] = await db.select().from(keeps).where(eq(keeps.userId, userId));
 	const [barracksToDelete] = await db.select().from(barracks).where(eq(barracks.keepId, keepToDelete.id));
 	await tx.delete(barracksExtensionBuildings).where(eq(barracksExtensionBuildings.barracksId, barracksToDelete.id));
