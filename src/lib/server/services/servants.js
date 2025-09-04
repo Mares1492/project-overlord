@@ -1,5 +1,5 @@
 import { db } from "$lib/server/db/db.js";
-import {ServantStatus} from '$lib/enums/enums'
+import {RaceTypes, ServantStatus} from '$lib/enums/enums'
 import { getRandomServantName } from '$lib/server/handlers/generators.js';
 import {servants,servantAttributes, races, attributes,users,servantStatuses} from "$lib/server/db/schema";
 import { eq,count,and } from "drizzle-orm";
@@ -62,7 +62,7 @@ export const createServant = async (userId, servantData, tx=db) => {
     const templateServant = {
         userId: userId,
         name: getRandomServantName(),
-        raceId: servantData.raceId ?? 1, // Default
+        raceId: servantData.raceId ?? RaceTypes.human,
         vampire: servantData.vampire ?? false,
     };
     const [newServant] = await tx
