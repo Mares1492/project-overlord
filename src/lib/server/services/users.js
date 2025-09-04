@@ -72,6 +72,7 @@ export const createUser = async (email, password) => {
 			await handleInventoryItemCreation(newInventory.id,3,tx) // Iron dagger | common
 			await handleInventoryItemCreation(newInventory.id,5,tx) // Common hood | common
 			await handleInventoryItemCreation(newInventory.id,9,tx) // Iron Gauntlets | common
+			await handleInventoryItemCreation(newInventory.id,11,tx) // Steel Cuirass | uncommon
 			return createdUser;
 		});
 		return {data:newUser, error:false, message: "User is successfully created"};
