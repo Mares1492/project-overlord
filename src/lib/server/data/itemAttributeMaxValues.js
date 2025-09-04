@@ -1,6 +1,6 @@
 import {ItemType,ItemRarity,AttributeTypes} from '$lib/enums/enums'
 
-export const MaxAttributeValues = {
+export const maxAttributeValues = {
     [ItemType.helmet]: {
         [ItemRarity.common]: {
             [AttributeTypes.armor]: 2,

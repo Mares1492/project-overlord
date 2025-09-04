@@ -1,4 +1,4 @@
-import {ItemType} from '$lib/enums/enums'
+import {maxAttributeValues} from '$lib/server/data/itemAttributeMaxValues'
 
 /**@param {number} poolValue @param {number} maxAttributeValue */
 const getRandomAttributeValue = (poolValue,maxAttributeValue = 5) => {
