@@ -3,46 +3,52 @@ import {ServantStatus} from '$lib/enums/enums'
 import { getRandomServantName } from '$lib/server/handlers/generators.js';
 import {servants,servantAttributes, races, attributes,users,servantStatuses} from "$lib/server/db/schema";
 import { eq,count,and } from "drizzle-orm";
-
-const getRandomAttributeValue = () => {
-    return Math.floor(Math.random() * 5) + 1;
-}
+import {getRandomServantAttributeValues} from '$lib/server/handlers/attributes'
+import {AttributeTypes} from '$lib/enums/enums'
 
 const createServantAttributes = async (tx, servantId) => {
+    const attributeValues = getRandomServantAttributeValues({
+        [AttributeTypes.strength]: true,
+        [AttributeTypes.dexterity]: true,
+        [AttributeTypes.intelligence]: true,
+        [AttributeTypes.agility]: true,
+        [AttributeTypes.endurance]: true,
+    },10)
+
     await tx
     .insert(servantAttributes)
     .values({
         servantId: servantId,
-        attributeId: 1, // strength
-        value: getRandomAttributeValue()
+        attributeId: AttributeTypes.strength,
+        value: attributeValues[AttributeTypes.strength]
     })
     await tx
     .insert(servantAttributes)
     .values({
         servantId: servantId,
-        attributeId: 2, // dexterity
-        value: getRandomAttributeValue()
+        attributeId: AttributeTypes.dexterity, 
+        value: attributeValues[AttributeTypes.dexterity]
     })
     await tx
     .insert(servantAttributes)
     .values({
         servantId: servantId,
-        attributeId: 3, // intelligence
-        value: getRandomAttributeValue()
+        attributeId: AttributeTypes.intelligence,
+        value: attributeValues[AttributeTypes.intelligence]
     })
     await tx
     .insert(servantAttributes)
     .values({
         servantId: servantId,
-        attributeId: 4, // agility
-        value: getRandomAttributeValue()
+        attributeId: AttributeTypes.agility,
+        value: attributeValues[AttributeTypes.agility]
     })
     await tx
     .insert(servantAttributes)
     .values({
         servantId: servantId,
-        attributeId: 5, // endurance
-        value: getRandomAttributeValue()
+        attributeId: AttributeTypes.endurance, 
+        value: attributeValues[AttributeTypes.endurance]
     })
 }
 
