@@ -19,3 +19,13 @@ export const getRandomServantAttributeValues = (attributesToGenerate,maxTotalVal
     return result
 }
 
+export const getItemRandomAttributeValues = (itemTypeId, rarityTypeId) => {
+    const attributeMaxValues = maxAttributeValues[itemTypeId][rarityTypeId]
+    /**@type {Object<string,number>} */
+    const result = {}
+    for (const key in attributeMaxValues){
+        const newValue = getRandomAttributeValue(attributeMaxValues[key])
+        result[key] = newValue
+    }
+    return result
+}
