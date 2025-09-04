@@ -17,39 +17,33 @@ const createServantAttributes = async (tx, servantId) => {
 
     await tx
     .insert(servantAttributes)
-    .values({
-        servantId: servantId,
-        attributeId: AttributeTypes.strength,
-        value: attributeValues[AttributeTypes.strength]
-    })
-    await tx
-    .insert(servantAttributes)
-    .values({
-        servantId: servantId,
-        attributeId: AttributeTypes.dexterity, 
-        value: attributeValues[AttributeTypes.dexterity]
-    })
-    await tx
-    .insert(servantAttributes)
-    .values({
-        servantId: servantId,
-        attributeId: AttributeTypes.intelligence,
-        value: attributeValues[AttributeTypes.intelligence]
-    })
-    await tx
-    .insert(servantAttributes)
-    .values({
-        servantId: servantId,
-        attributeId: AttributeTypes.agility,
-        value: attributeValues[AttributeTypes.agility]
-    })
-    await tx
-    .insert(servantAttributes)
-    .values({
-        servantId: servantId,
-        attributeId: AttributeTypes.endurance, 
-        value: attributeValues[AttributeTypes.endurance]
-    })
+    .values([
+        {
+            servantId: servantId,
+            attributeId: AttributeTypes.strength,
+            value: attributeValues[AttributeTypes.strength]
+        },
+        {
+            servantId: servantId,
+            attributeId: AttributeTypes.dexterity, 
+            value: attributeValues[AttributeTypes.dexterity]
+        },
+        {
+            servantId: servantId,
+            attributeId: AttributeTypes.intelligence,
+            value: attributeValues[AttributeTypes.intelligence]
+        },
+        {
+            servantId: servantId,
+            attributeId: AttributeTypes.agility,
+            value: attributeValues[AttributeTypes.agility]
+        },
+        {
+            servantId: servantId,
+            attributeId: AttributeTypes.endurance, 
+            value: attributeValues[AttributeTypes.endurance]
+        }
+    ])
 }
 
 // can be called as user creation transaction to create initial servant
