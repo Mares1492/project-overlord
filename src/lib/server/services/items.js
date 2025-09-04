@@ -125,7 +125,7 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
             usableItemId: usableItems.id,
 			itemType: {id:items.itemTypeId},
 			slotType: {id:items.slotTypeId,name:slotTypes.name},
-			rarity: {id:itemRarityTypes.id,name:itemRarityTypes.name},
+			rarity: {id:itemRarityTypes.id,name:itemRarityTypes.name, color:itemRarityTypes.color_hex},
 			description: itemRarities.description,
 			iconPath: items.iconPath
 		})
