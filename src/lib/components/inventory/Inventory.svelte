@@ -1,13 +1,13 @@
 <script>
-    import {invertedItemType} from "$lib/enums/enums.js"
+    import {ItemType} from "$lib/enums/enums.js"
 
     const itemTypeDisplayClasses = {
-        helmet: "top-5",
-        armor: "-top-5",
-        off_hand: "-left-8 -top-14",
-        weapon: "-top-15 left-4",
-        magic_off_hand: "-top-18 -left-9",
-        hands:"-top-12"
+        [ItemType.helmet]: "top-5",
+        [ItemType.armor]: "-top-5",
+        [ItemType.off_hand]: "-left-8 -top-14",
+        [ItemType.weapon]: "-top-15 left-4",
+        [ItemType.magic_off_hand]: "-top-18 -left-9",
+        [ItemType.hands]:"-top-12"
     }
 
     const {inventoryData,chosenItem=undefined,handleItemPick=()=>{}} = $props();
