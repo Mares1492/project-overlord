@@ -46,22 +46,38 @@ export const getRandomItemRarityByRarityTypeId = async (rarityTypeId) => {
     return randomItem
 }
 
-const createItemAttributes = async (usableItemId,itemTypeId,rarityTypeId,tx=db) => {
-    const attributes = getItemRandomAttributeValues(itemTypeId,rarityTypeId)
+const createItemAttributes = async (usableItemId,itemRarityId,tx=db) => {
+    console.log("Creating item attributes")
+    const [itemData] = await tx
+        .select(
+            {
+                itemTypeId: items.itemTypeId,
+                rarityTypeId: itemRarities.itemRarityTypeId
+            }
+        )
+        .from(items)
+        .innerJoin(itemRarities,eq(itemRarities.id,itemRarityId))
+        .where(eq(items.id,itemRarities.itemId))
+    
+    const attributes = getItemRandomAttributeValues(itemData.itemTypeId,itemData.rarityTypeId)
+
+    const attributeValues = []
     for(const attribute in attributes){
-        await tx
-        .insert(itemAttributes)
-        .values({
+        attributeValues.push({
             usableItemId,
             attributeId: Number(attribute),
             value: attributes[attribute]
-    })
+        })
     }
+    await tx
+        .insert(itemAttributes)
+        .values(attributeValues)
 }   
 
 /**@param {number} itemRarityId */
 export const createUsableItem = async (itemRarityId,tx=db) => {
     const [newUsableItems] = await tx.insert(usableItems).values({itemRarityId}).returning();
+    // create attributes
     return newUsableItems
 }
 
@@ -90,6 +106,7 @@ export const handleInventoryItemCreation = async (userInventoryId,itemRarityId,t
     if (!usableItem) {
         console.log("Failed creating usable item",usableItem)
     }
+    await createItemAttributes(usableItem.id,itemRarityId,tx)
     await createInventoryItem(userInventoryId,usableItem.id,tx)
 }
 
@@ -102,7 +119,6 @@ export const handleRandomInventoryItemCreation = async (userInventoryId,tx=db) =
 export const getInventoryDataByUserUUID = async (userUUID) => {
 	const user = await getUserByUUID(userUUID)
 	const [userInventory] = await db.select().from(userInventories).where(eq(userInventories.userId,user.id))
-	
 	const inventoryItemsList = await db
 		.select({
 			name:items.name,
@@ -117,10 +133,10 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 		.innerJoin(usableItems,eq(inventoryItems.usableItemId,usableItems.id))
 		.innerJoin(itemRarities,eq(itemRarities.id,usableItems.itemRarityId))
 		.innerJoin(items,eq(items.id,itemRarities.itemId))
-		.innerJoin(slotTypes,eq(slotTypes.id,items.itemTypeId))
+		.innerJoin(slotTypes,eq(slotTypes.id,items.slotTypeId))
 		.innerJoin(itemRarityTypes,eq(itemRarities.itemRarityTypeId,itemRarityTypes.id))
 		.where(eq(inventoryItems.userInventoryId,userInventory.id))
-
+    
     const inventoryItemsData = await Promise.all(inventoryItemsList.map(async item => {
         const itemAttributesList = await db
             .select({
@@ -142,4 +158,8 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 		items: inventoryItemsData
 	}
 	return inventory
+}
+
+export const deleteUserInventory = async (userId,tx=db) => {
+    await tx.delete(userInventories).where(eq(userInventories.userId, userId));
 }
