@@ -37,7 +37,8 @@ export const ItemType = {
   magic_off_hand:10,
   medalion: 11,
   trinket: 12,
-  hood: 13
+  hood: 13,
+  magic_sword:14
 };
 
 export const invertedItemType = invertObject(ItemType)
