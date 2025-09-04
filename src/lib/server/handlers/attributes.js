@@ -1,4 +1,4 @@
-import {maxAttributeValues} from '$lib/server/data/itemAttributeMaxValues'
+import {maxAttributeValues} from '$lib/server/handlers/data/itemAttributeMaxValues'
 
 /**@param {number} poolValue @param {number} maxAttributeValue */
 const getRandomAttributeValue = (poolValue,maxAttributeValue = 5) => {
