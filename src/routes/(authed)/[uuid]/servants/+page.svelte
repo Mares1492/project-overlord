@@ -116,13 +116,13 @@
                             {data.inventory.items.length}/{data.inventory.availableSlots}
                         </span>
                         <form onmouseleave={cancelItemWindowShowTimeout} use:enhance method="POST" action="?/equipItem">
-                            <input type="hidden" name="servantId" value={chosenServant.uuid}>
-                            <input type="hidden" name="itemId" value={chosenItem?.id}>
+                            <input type="hidden" name="servantUUID" value={chosenServant?.uuid}>
+                            <input type="hidden" name="itemUUID" value={chosenItem?.uuid}>
                             {#if showItemInfoWindow && chosenItem}
                                 <ItemInfoWindow position={mousePosition} item={chosenItem}/>
                             {/if}
                             <span onmousemove={setItemWindowShowTimeout}>
-                                <Inventory inventoryData={data.inventory} {chosenItem} {handleItemPick}/>
+                                <Inventory inventoryData={data.inventory} {handleItemPick}/>
                             </span>
                         </form>
                     </div>

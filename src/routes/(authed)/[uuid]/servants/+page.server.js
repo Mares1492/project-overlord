@@ -10,7 +10,9 @@ export async function load({params}) {
 export const actions = {
     equipItem: async ({ request }) => {
         const data = await request.formData();
-        const itemId = data.get('itemId');
-        const servantId = data.get('servantId');
+        const itemUUID = data.get('itemUUID');
+        const servantUUID = data.get('servantUUID');
+        //equipItem(itemId,servantId)
+        console.log("itemID:",itemUUID,"servantID:",servantUUID)
     }
 }
