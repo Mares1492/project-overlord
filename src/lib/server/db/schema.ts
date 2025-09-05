@@ -159,7 +159,6 @@ export const items = pgTable('items', {
 	slotTypeId: integer('slot_type_id')
 	.notNull()
 	.references(() => slotTypes.id),
-	uuid: uuid('uuid').notNull().defaultRandom(),
 	iconPath: text("icon_path").notNull()
 })
 
@@ -211,6 +210,7 @@ export const usableItems = pgTable('usable_items', {
 	itemRarityId: integer('item_rarity_id')
 		.notNull()
 		.references(() => itemRarities.id),
+	uuid: uuid('uuid').notNull().defaultRandom()
 })
 
 // Servants
