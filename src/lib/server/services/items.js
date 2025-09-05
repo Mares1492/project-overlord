@@ -1,9 +1,10 @@
 import { db } from "$lib/server/db/db.js";
 import {getUserByUUID} from "$lib/server/services/users"
-import {items,inventoryItems,itemRarities, usableItems, attributes, userInventories, itemRarityTypes, slotTypes, itemAttributes} from "$lib/server/db/schema";
+import {items,inventoryItems,itemRarities, usableItems, attributes, userInventories, itemRarityTypes, slotTypes, itemAttributes, servantItems} from "$lib/server/db/schema";
 import { eq, sql} from "drizzle-orm";
 import { ItemRarity, AttributeTypes } from '$lib/enums/enums';
 import {getItemRandomAttributeValues} from '$lib/server/handlers/attributes'
+import { getServantByUUID } from "./servants";
 
 const itemDropChances = {
     [ItemRarity.common]: 0.5,
@@ -169,4 +170,17 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 
 export const deleteUserInventory = async (userId,tx=db) => {
     await tx.delete(userInventories).where(eq(userInventories.userId, userId));
+}
+
+export const equipItem = async (itemUUID,servantUUID) => {
+    const servant = await getServantByUUID(servantUUID)
+    const [inventoryItem] = await db 
+        .select({
+            id:inventoryItems.id
+        })
+        .from(inventoryItems)
+        .innerJoin(usableItems,eq(usableItems.uuid,itemUUID))
+        .where(eq(inventoryItems.usableItemId,usableItems.id))
+
+    await db.insert(servantItems).values({inventoryItemId:inventoryItem.id,servantId:servant.id})
 }

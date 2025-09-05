@@ -1,4 +1,4 @@
-import {getInventoryDataByUserUUID} from '$lib/server/services/items'
+import {getInventoryDataByUserUUID,equipItem} from '$lib/server/services/items'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
@@ -12,7 +12,6 @@ export const actions = {
         const data = await request.formData();
         const itemUUID = data.get('itemUUID');
         const servantUUID = data.get('servantUUID');
-        //equipItem(itemId,servantId)
-        console.log("itemID:",itemUUID,"servantID:",servantUUID)
+        equipItem(itemUUID,servantUUID)
     }
 }
