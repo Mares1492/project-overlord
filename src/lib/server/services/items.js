@@ -121,7 +121,7 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 	const [userInventory] = await db.select().from(userInventories).where(eq(userInventories.userId,user.id))
 	const inventoryItemsList = await db
 		.select({
-            uuid: items.uuid,
+            uuid: usableItems.uuid,
 			name:items.name,
             usableItemId: usableItems.id,
 			itemType: {id:items.itemTypeId},
