@@ -40,15 +40,26 @@
 
     /**@type {ExpeditionsTimeCounts}*/
     let expeditionsTimeCounts = $state({});
-    let chosenExpeditionUUID = $state("");
     /**@type {ClickState}*/
-    let clickState = $state({})
+    let clickState = $state({});
+
+    $effect(()=>{
+        // Temporary solution to "new expedition state not defined if this code is put in onMount"
+        /**@type {ClickState}*/
+        const result = {}
+        for(let expedition of ongoingExpeditions){
+            result[expedition.uuid] = true
+        }
+        clickState = result
+        }
+    )
+
+    let chosenExpeditionUUID = $state("");
     let pageState = $state({
         loading: true,
         isBlocking: false,
         error: false
     });
-
     const updateTimeCounts = () => {
         if (!ongoingExpeditions) {
             return 
@@ -76,9 +87,9 @@
                 seconds,
                 msLeft
             }
-            
-            });
+        });
     }
+    
     
     const setTimeCountsTimeout = () => {
         const interval = setInterval( () => {
@@ -91,10 +102,6 @@
     onMount(() => {
         updateTimeCounts()
         setTimeCountsTimeout()
-        
-        for(let expedition of ongoingExpeditions){
-            clickState[expedition.uuid] = true
-        }
     });
 
     /**@param {string} expeditionUUID*/

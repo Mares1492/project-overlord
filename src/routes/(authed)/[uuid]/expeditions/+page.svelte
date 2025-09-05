@@ -24,7 +24,7 @@
 
     let zoom = $state(0.25);
     let allowInfoWindow = $state(true)
-    let expeditionsListToggle = $state(true);
+    let expeditionsListToggle = $state(false);
 
     /**@type {HTMLElement}*/
     // svelte-ignore non_reactive_update
@@ -38,8 +38,7 @@
 
     const handleExpeditionStartSuccess = () => {
         successGlow = true
-        expeditionsListToggle = true
-        setTimeout(() => (successGlow = false), 1500);
+        setTimeout(() => ()=>{successGlow = false;expeditionsListToggle = true}, 1500);
     }
 
     // check in case handleLocalStorageLoad returns null
@@ -51,7 +50,8 @@
         let savedChosenLocation = handleLocalStorageLoad("chosen_location",true);
         if (savedChosenLocation && mode !== modes[0]) {
             chosenLocation = savedChosenLocation;
-        }  
+        }
+        expeditionsListToggle = true
     });
     
     /**
