@@ -20,7 +20,7 @@
 
 {#snippet lockedSlot(i)}
     {#if i===0}
-        <button onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} class="flex active:bg-gray-500 bg-gray-900 opacity-90 flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center">
+        <button type="button" onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} class="flex active:bg-gray-500 bg-gray-900 opacity-90 flex-col border-black cursor-pointer w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center">
         <span class="flex flex-col text-xl">
             {#if i === 0}
                 <span class="text-lg">🔓</span>
@@ -29,7 +29,7 @@
         </span>
         </button>
     {:else}
-        <button onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} disabled class="flex opacity-80 cursor-not-allowed bg-gray-800 flex-col border-black w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center">
+        <button type="button" onfocusin={()=>handleItemPick(null)} onmouseenter={()=>handleItemPick(null)} disabled class="flex opacity-80 cursor-not-allowed bg-gray-800 flex-col border-black w-32 h-24 hover:text-black  hover:bg-gray-700  items-center border-l-2 border-t-2  justify-center">
             <span class="flex flex-col text-xl">
                 <span class="text-xl text-gray-500 grayscale-90 contrast-10">🔒</span>
             </span>
