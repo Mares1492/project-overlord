@@ -2,7 +2,6 @@
     import ServantsList from '$lib/components/servants/ServantsList.svelte';
     import Inventory from '$lib/components/inventory/Inventory.svelte';
     import { enhance } from '$app/forms';
-    import { onMount } from 'svelte';
     import { getRaceAssets } from '$lib/state/race.svelte.js'
     import ItemInfoWindow from '$lib/components/servants/ItemInfoWindow.svelte';
     import {EquipmentSlot} from "$lib/enums/enums";
@@ -10,21 +9,25 @@
 
     const {data} = $props();
 
-    let chosenServant = $state();
+    let chosenServantUUID = $state("");
+    $inspect(chosenServantUUID)
+    let chosenServant = $derived.by(()=>{
+        if (data.servants && data.servants.length > 0) {
+            if (!chosenServantUUID.length) {
+                return data.servants[0]
+            }
+            return data.servants.find((servant)=>servant.uuid === chosenServantUUID);
+        }
+
+    });
     let isChars = $state(true);
     let mousePosition = $state({x:0,y:0})
     let chosenItem = $state()
     let showItemInfoWindow = $state(false)
     let itemWindowTimeout;
-    let errorState = $state({
+    let pageState = $state({
         error: data.error,
-        message: data.message
-    });
-
-    onMount(async () => {
-        if (data.servants && data.servants.length > 0) {
-            chosenServant = data.servants[0];
-        }
+        message: data.message,
     });
 
     const setItemWindowShowTimeout = (e) => {
@@ -43,6 +46,14 @@
 
     const handleItemPick = (item) => {chosenItem = item}
 
+    const onEnchance = () => {
+        return async ({ result, update }) => {
+            console.log(result)
+            pageState.error = result.data.error
+            pageState.message = result.data.message
+            await update()
+        }
+    }
 </script>
 
 {#snippet lockedSlot()}
@@ -51,9 +62,9 @@
     </div>
 {/snippet}
 
-{#snippet itemSlot(itemIcon, slotTypeId, slotSizes="w-28 h-16")}
+{#snippet itemSlot(itemIcon, slotTypeId, slotSizes="w-28 h-20")}
     {#if Object.hasOwn(chosenServant.equippedItems,slotTypeId)}
-        <button type="button" class={`relative flex flex-col items-center  bg-gray-900 active:bg-gray-500 cursor-pointer hover:text-black hover:bg-gray-600 hover:contrast-120 border-2 border-black ${slotSizes}`}>    
+        <button type="button" class={`relative flex flex-col items-center  bg-gray-900 active:bg-gray-500 cursor-pointer hover:text-black hover:bg-gray-600 hover:contrast-120 border-2 border-black ${slotSizes}`}>  
             <ItemImg path={chosenServant.equippedItems[slotTypeId].iconPath} name={chosenServant.equippedItems[slotTypeId].name} itemTypeId={chosenServant.equippedItems[slotTypeId].itemType.id} />
         </button>
     {:else}
@@ -79,18 +90,13 @@
                 Items
             </button>
         </div>
-        {#if errorState.error}
-            <div class="w-full p-2 bg-red-600 text-white text-center font-bold border-2 border-black">
-                {errorState.message}
-            </div>
-        {/if}
         <div class="flex w-full flex-col space-y-5 justify-center h-full">
             <div class="flex justify-center h-full items-center">
                 {#if isChars}
                     <div class="flex flex-col space-y-5 w-full items-center">
                         {#if data.servants && chosenServant}
                             <div class="relative grid grid-cols-3 gap-x-3 rounded xl:mx-5 gap-y-3 place-items-center">
-                                <ServantsList servants={data.servants} bind:chosenServant={chosenServant}/>
+                                <ServantsList servants={data.servants} {chosenServant} bind:chosenServantUUID={chosenServantUUID} />
                                 {@render lockedSlot()}
                                 {@render lockedSlot()}
                                 {@render lockedSlot()}
@@ -101,6 +107,7 @@
                         {/if}
                         <div class="flex flex-row justify-center font-bold space-x-5">
                             <button
+                                    type="button"
                                     class="border py-1.5 px-5 w-32 2xl:w-42 flex flex-col justify-around text-yellow-500 hover:bg-amber-200 active:bg-amber-100 bg-gray-600 cursor-pointer"
                                     onclick={()=>{}}
                             >
@@ -109,6 +116,7 @@
                                 <span class="text-xl 2xl:text-2xl ">💰1000</span>
                             </button>
                             <button
+                                    type="button"
                                     class="border py-1.5 px-2 w-32 2xl:w-42 flex flex-col text-purple-300 justify-around hover:bg-amber-200 active:bg-amber-100 bg-gray-600 cursor-pointer"
                                     onclick={()=>{}}
                             >
@@ -120,10 +128,15 @@
                     </div>
                 {:else}
                     <div class="flex flex-col space-y-2">
+                        {#if pageState.error}
+                            <div class="w-full p-2 bg-black/70 text-red-200 text-center font-bold border-2 border-black">
+                                {pageState.message}
+                            </div>
+                        {/if}
                         <span class="bg-black/70 p-3 text-white font-bold text-4xl">
                             {data.inventory.items.length}/{data.inventory.availableSlots}
                         </span>
-                        <form onmouseleave={cancelItemWindowShowTimeout} use:enhance method="POST" action="?/equipItem">
+                        <form onmouseleave={cancelItemWindowShowTimeout} use:enhance={onEnchance} method="POST" action="?/equipItem">
                             <input type="hidden" name="servantUUID" value={chosenServant?.uuid}>
                             <input type="hidden" name="itemUUID" value={chosenItem?.uuid}>
                             {#if showItemInfoWindow && chosenItem}
@@ -182,8 +195,8 @@
                     </div>
                     <div class="flex justify-center space-y-8 h-full flex-col ">
                         {@render itemSlot(`👤`,EquipmentSlot.head)}
-                        {@render itemSlot(`👘`,EquipmentSlot.body,"w-28 h-20")}
-                        {@render itemSlot(`🖐`,EquipmentSlot.hands,"w-28 h-18")}
+                        {@render itemSlot(`👘`,EquipmentSlot.body)}
+                        {@render itemSlot(`🖐`,EquipmentSlot.hands)}
                         {@render itemSlot(`🦵`,EquipmentSlot.legs)}
                         {@render itemSlot(`🦶`,EquipmentSlot.feet)}
                     </div>

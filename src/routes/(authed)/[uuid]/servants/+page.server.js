@@ -13,8 +13,10 @@ export const actions = {
         const itemUUID = data.get('itemUUID');
         const servantUUID = data.get('servantUUID');
         if (await equipItem(itemUUID,servantUUID)) {
-            return {error:false, message:`Item [${itemUUID}] is equipped`}
+            console.log("succ")
+            return {error:false, message:`Item is equipped`}
         }
-        return {error:true, message:`Failed to equip Item [${itemUUID}]`}
+        console.log("fail")
+        return {error:true, message:`Failed to equip item...`}
     }
 }

@@ -2,7 +2,7 @@
     import CharSlot from "$lib/components/servants/CharSlot.svelte";
     import {ServantStatus} from '$lib/enums/enums'
 
-    let {servants, chosenServant=$bindable(),isExpeditionSettings=false} = $props();
+    let {servants, chosenServant,chosenServantUUID=$bindable(),isExpeditionSettings=false} = $props();
 </script>
 
 {#if servants}
@@ -11,7 +11,7 @@
     {:else}
         {#each servants as servant(servant.uuid)}
             {#if !isExpeditionSettings || servant.status.id === ServantStatus.idle}
-                <CharSlot {servant} bind:chosenServant={chosenServant} isExpeditionSettings={isExpeditionSettings}/>  
+                <CharSlot {servant} bind:chosenServantUUID={chosenServantUUID} {chosenServant} isExpeditionSettings={isExpeditionSettings}/>  
             {/if}
         {/each}   
     {/if}
