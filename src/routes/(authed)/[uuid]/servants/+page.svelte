@@ -5,7 +5,9 @@
     import { onMount } from 'svelte';
     import { getRaceAssets } from '$lib/state/race.svelte.js'
     import ItemInfoWindow from '$lib/components/servants/ItemInfoWindow.svelte';
-    
+    import {EquipmentSlot} from "$lib/enums/enums";
+    import ItemImg from '$lib/components/inventory/ItemImg.svelte';
+
     const {data} = $props();
 
     let chosenServant = $state();
@@ -49,10 +51,16 @@
     </div>
 {/snippet}
 
-{#snippet itemSlot(item)}
-    <div class="flex flex-col w-28 h-16 xl:w-42 xl:h-28 cursor-pointer hover:text-black hover:bg-amber-100 items-center border-2 justify-center bg-gray-800">
-        <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{item}</span>
-    </div>
+{#snippet itemSlot(itemIcon, slotTypeId, slotSizes="w-28 h-16")}
+    {#if Object.hasOwn(chosenServant.equippedItems,slotTypeId)}
+        <button type="button" class={`relative flex flex-col items-center  bg-gray-900 active:bg-gray-500 cursor-pointer hover:text-black hover:bg-gray-600 hover:contrast-120 border-2 border-black ${slotSizes}`}>    
+            <ItemImg path={chosenServant.equippedItems[slotTypeId].iconPath} name={chosenServant.equippedItems[slotTypeId].name} itemTypeId={chosenServant.equippedItems[slotTypeId].itemType.id} />
+        </button>
+    {:else}
+        <div class={`flex flex-col  cursor-pointer hover:text-black hover:bg-gray-900 items-center border-2 justify-center bg-gray-800 ${slotSizes}`}>
+            <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{itemIcon}</span>
+        </div>
+    {/if}
 {/snippet}
 
 <div class="w-full h-full flex flex-row justify-center bg-amber-900/50 p-5">
@@ -165,19 +173,19 @@
                 <div class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
                     <div class="h-full flex flex-col justify-center">
                         <div class="h-1/2 self-start">
-                            {@render itemSlot(`📿`)}
+                            {@render itemSlot(`📿`,EquipmentSlot.neck)}
                         </div>
                         <div class="self-end space-y-5">
-                            {@render itemSlot(`🗡️`)}
-                            {@render itemSlot(`🛡️`)}
+                            {@render itemSlot(`🗡️`,EquipmentSlot.first_hand)}
+                            {@render itemSlot(`🛡️`,EquipmentSlot.off_hand)}
                         </div>
                     </div>
                     <div class="flex justify-center space-y-8 h-full flex-col ">
-                        {@render itemSlot(`👤`)}
-                        {@render itemSlot(`👘`)}
-                        {@render itemSlot(`🖐`)}
-                        {@render itemSlot(`🦵`)}
-                        {@render itemSlot(`🦶`)}
+                        {@render itemSlot(`👤`,EquipmentSlot.head)}
+                        {@render itemSlot(`👘`,EquipmentSlot.body,"w-28 h-20")}
+                        {@render itemSlot(`🖐`,EquipmentSlot.hands,"w-28 h-18")}
+                        {@render itemSlot(`🦵`,EquipmentSlot.legs)}
+                        {@render itemSlot(`🦶`,EquipmentSlot.feet)}
                     </div>
                 </div>
             </div>
