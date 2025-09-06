@@ -1,10 +1,11 @@
 import { db } from "$lib/server/db/db.js";
 import {RaceTypes, ServantStatus} from '$lib/enums/enums'
 import { getRandomServantName } from '$lib/server/handlers/generators.js';
-import {servants,servantAttributes, races, attributes,users,servantStatuses} from "$lib/server/db/schema";
+import {servants,servantAttributes, races, attributes,users,servantStatuses, servantItems} from "$lib/server/db/schema";
 import { eq,count,and } from "drizzle-orm";
 import {getRandomServantAttributeValues} from '$lib/server/handlers/attributes'
 import {AttributeTypes} from '$lib/enums/enums'
+import { getEquippedItemsByServantId } from "./items";
 
 const createServantAttributes = async (tx, servantId) => {
     const attributeValues = getRandomServantAttributeValues({
@@ -135,14 +136,19 @@ export const getServantsByUserUUID = async (userUUID) => {
             .from(servantAttributes)
             .innerJoin(attributes, eq(servantAttributes.attributeId, attributes.id))
             .where(eq(servantAttributes.servantId, servant.id));
+        
+        const equippedItems = await getEquippedItemsByServantId(servant.id)
         return {
             ...servant,
             attributes: servantAttributesList,
+            equippedItems
         }
     }))
+
     const [availableServants] = await db
         .select({ count: count() })
         .from(servants)
         .where(and(eq(servants.statusId,ServantStatus.idle),eq(servants.userId,user.id)))
+
     return {servants:servantData,availableServants:availableServants.count};
 }
