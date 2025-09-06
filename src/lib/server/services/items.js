@@ -1,8 +1,8 @@
 import { db } from "$lib/server/db/db.js";
 import {getUserByUUID} from "$lib/server/services/users"
 import {items,inventoryItems,itemRarities, usableItems, attributes, userInventories, itemRarityTypes, slotTypes, itemAttributes, servantItems} from "$lib/server/db/schema";
-import { eq, sql} from "drizzle-orm";
-import { ItemRarity, AttributeTypes } from '$lib/enums/enums';
+import { eq, sql, and, notExists,exists} from "drizzle-orm";
+import { ItemRarity } from '$lib/enums/enums';
 import {getItemRandomAttributeValues} from '$lib/server/handlers/attributes'
 import { getServantByUUID } from "./servants";
 
@@ -170,6 +170,45 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 
 export const deleteUserInventory = async (userId,tx=db) => {
     await tx.delete(userInventories).where(eq(userInventories.userId, userId));
+}
+
+/**@param {number} servantId @param {number} slotTypeId */
+export const isItemSlotUsed = async (servantId,slotTypeId) => {
+    const result = await db.select({id:servantItems.id}).from(servantItems)
+        .where(and(
+            eq(servantItems.servantId,servantId),
+            exists(db
+                .select({ one: sql`1` })
+                .from(inventoryItems)
+                .where(and(
+                    eq(inventoryItems.id,servantItems.inventoryItemId),
+                    exists(db
+                        .select({ one: sql`1` })
+                        .from(usableItems)
+                        .where(and(
+                            eq(usableItems.id,inventoryItems.usableItemId),
+                            exists(db
+                                .select({ one: sql`1` })
+                                .from(itemRarities)
+                                .where(and(
+                                    eq(itemRarities.id,usableItems.itemRarityId),
+                                    exists(db
+                                        .select({ one: sql`1` })
+                                        .from(items)
+                                        .where(and(
+                                            eq(items.id,itemRarities.itemId),
+                                            eq(items.slotTypeId,slotTypeId)
+                                        ))
+                                    )
+                                ))
+                            )
+                        ))
+                    )
+                ))
+            )
+        )
+    ).limit(1)
+    return result.length 
 }
 
 export const equipItem = async (itemUUID,servantUUID) => {
