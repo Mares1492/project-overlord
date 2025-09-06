@@ -12,6 +12,9 @@ export const actions = {
         const data = await request.formData();
         const itemUUID = data.get('itemUUID');
         const servantUUID = data.get('servantUUID');
-        equipItem(itemUUID,servantUUID)
+        if (await equipItem(itemUUID,servantUUID)) {
+            return {error:false, message:`Item [${itemUUID}] is equipped`}
+        }
+        return {error:true, message:`Failed to equip Item [${itemUUID}]`}
     }
 }
