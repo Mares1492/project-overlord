@@ -1,38 +1,14 @@
 <script>
-    import {ItemType} from "$lib/enums/enums.js"
-
-    const itemTypeDisplayClasses = {
-        [ItemType.helmet]: "top-5",
-        [ItemType.hood]: "top-3",
-        [ItemType.armor]: "-top-5",
-        [ItemType.off_hand]: "-left-8 -top-14",
-        [ItemType.weapon]: "-top-15 left-3",
-        [ItemType.magic_off_hand]: "-top-18 -left-9",
-        [ItemType.hands]:"-top-12"
-    }
+    import ItemImg from '$lib/components/inventory/ItemImg.svelte';
 
     const {inventoryData,handleItemPick=()=>{}} = $props();
     //TODO: move from equip type to weapon types
-    const itemsIcons = import.meta.glob(["$lib/assets/items/armor/*.png","$lib/assets/items/feet/*.png","$lib/assets/items/hands/*.png","$lib/assets/items/head/*.png","$lib/assets/items/legs/*.png","$lib/assets/items/magic_off_hand/*.png","$lib/assets/items/neck/*.png","$lib/assets/items/off_hand/*.png","$lib/assets/items/two_handed_weapon/*.png","$lib/assets/items/weapon/*.png"], {query: '?url' });
-
-    /**@param {number} itemType*/
-    const getItemDisplayClass = (itemType) => itemTypeDisplayClasses[itemType] ?? "";
 
 </script>
 
-{#snippet itemImage(src,name,className)}
-    <span class="pointer-events-none">
-        <img class={`absolute select-none inset-0 ${className}`} {src} alt={name} />
-    </span>
-{/snippet}
-
 {#snippet itemSlot(item)}
     <button type="submit" onfocusin={()=>handleItemPick(item)} onmouseenter={()=>handleItemPick(item)} class="relative flex flex-col  bg-gray-800 active:bg-gray-500 cursor-pointer  hover:text-black hover:bg-gray-600 hover:contrast-120  border-black w-32 h-24 items-center border-l-2 border-t-2  justify-center">
-        {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then module}
-            {@render itemImage(module.default,item.name,getItemDisplayClass(item.itemType.id))}
-        {:catch _error}
-            <p>Error loading image</p>
-        {/await}
+        <ItemImg path={item.iconPath} name={item.name} itemTypeId={item.itemType.id}/>
     </button>
 {/snippet}
 
