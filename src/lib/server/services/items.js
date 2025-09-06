@@ -239,3 +239,32 @@ export const equipItem = async (itemUUID,servantUUID) => {
     await db.insert(servantItems).values({inventoryItemId:inventoryItem.id,servantId:servant.id})
     return true
 }
+
+export const getEquippedItemsByServantId = async (servantId) => {
+    const servantItemsList = await db
+		.select({
+            uuid: usableItems.uuid,
+			name: itemRarities.name,
+            usableItemId: usableItems.id,
+			itemType: {id:items.itemTypeId},
+			slotType: {id:items.slotTypeId,name:slotTypes.name},
+			rarity: {id:itemRarityTypes.id,name:itemRarityTypes.name, color:itemRarityTypes.color_hex},
+			description: itemRarities.description,
+			iconPath: items.iconPath
+		})
+		.from(servantItems)
+        .innerJoin(inventoryItems,eq(inventoryItems.id,servantItems.inventoryItemId))
+		.innerJoin(usableItems,eq(usableItems.id,inventoryItems.usableItemId))
+		.innerJoin(itemRarities,eq(itemRarities.id,usableItems.itemRarityId))
+		.innerJoin(items,eq(items.id,itemRarities.itemId))
+		.innerJoin(slotTypes,eq(slotTypes.id,items.slotTypeId))
+		.innerJoin(itemRarityTypes,eq(itemRarities.itemRarityTypeId,itemRarityTypes.id))
+        .where(eq(servantItems.servantId,servantId))
+    
+    /**@type {Object<number,Object>} */
+    const equippedItems = {}
+    for (const item of servantItemsList) {
+        equippedItems[item.slotType.id] = item
+    }
+    return equippedItems
+}
