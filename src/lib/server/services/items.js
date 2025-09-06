@@ -123,7 +123,7 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 	const inventoryItemsList = await db
 		.select({
             uuid: usableItems.uuid,
-			name:items.name,
+			name:itemRarities.name,
             usableItemId: usableItems.id,
 			itemType: {id:items.itemTypeId},
 			slotType: {id:items.slotTypeId,name:slotTypes.name},
@@ -137,7 +137,15 @@ export const getInventoryDataByUserUUID = async (userUUID) => {
 		.innerJoin(items,eq(items.id,itemRarities.itemId))
 		.innerJoin(slotTypes,eq(slotTypes.id,items.slotTypeId))
 		.innerJoin(itemRarityTypes,eq(itemRarities.itemRarityTypeId,itemRarityTypes.id))
-		.where(eq(inventoryItems.userInventoryId,userInventory.id))
+		.where(
+            and(
+                eq(inventoryItems.userInventoryId,userInventory.id),
+                notExists(
+                    db.select({ one: sql`1` })
+                    .from(servantItems)
+                    .where(eq(servantItems.inventoryItemId, inventoryItems.id))
+                )
+            ))
     
     const inventoryItemsData = await Promise.all(inventoryItemsList.map(async item => {
         const itemAttributesList = await db
