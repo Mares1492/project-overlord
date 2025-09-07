@@ -43,8 +43,8 @@
     </div>
     <div class="flex flex-col w-full">
         <div class="flex h-18 items-center bg-black/50 py-5 justify-center space-x-10">
-            <div><span class="select-none">💰</span><span class="bg-gray-200 cursor-cell inset-ring-2 inset-ring-gray-700/70 py-1 px-2">29175</span></div>
-            <div><span class="select-none hue-rotate-50">💎</span><span class="bg-gray-200 cursor-cell inset-ring-2 inset-ring-gray-700/70 py-1 px-2">256</span></div>
+            <div><span class="select-none">💰</span><span class="bg-gray-200 cursor-cell inset-ring-2 inset-ring-gray-700/70 py-1 px-2">{data.treasuryData.gold}</span></div>
+            <div><span class="select-none hue-rotate-50">💎</span><span class="bg-gray-200 cursor-cell inset-ring-2 inset-ring-gray-700/70 py-1 px-2">{data.treasuryData.gems}</span></div>
         </div>
         <div class="w-full flex flex-row h-full justify-between">
             <div class="min-w-64 w-full flex flex-col">

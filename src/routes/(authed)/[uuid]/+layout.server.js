@@ -1,6 +1,7 @@
 import {redirect} from '@sveltejs/kit';
 import {authUserSession} from "$lib/server/auth.js";
-import {getServantsByUserUUID} from '$lib/server/services/servants.js';    
+import {getServantsByUserUUID} from '$lib/server/services/servants.js';
+import {getTreasuryData} from '$lib/server/services/treasuries'
 
 /** @type {import('./$types').LayoutServerLoad} */
 export async function load({cookies,params}) {
@@ -13,9 +14,11 @@ export async function load({cookies,params}) {
         redirect(308, `/${user.uuid}/keep`);
     }
     const {servants,availableServants} = await getServantsByUserUUID(user.uuid)
+    const treasuryData = await getTreasuryData(user.id)
+    console.log(treasuryData)
     if (!servants) {
-        return {pathUUID: user.uuid, error: true, message: "No servants found for this user"};
+        return {pathUUID: user.uuid, error: true, message: "No servants found for this user", availableServants, treasuryData};
     }
     console.log("loading authed session...");
-    return {pathUUID: user.uuid, servants, availableServants}
+    return {pathUUID: user.uuid, servants, availableServants, treasuryData}
 }

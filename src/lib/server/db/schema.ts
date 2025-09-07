@@ -100,7 +100,7 @@ export const treasuries = pgTable('treasuries', {
 		.notNull()
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
-	gold: integer('gold').notNull().default(0),
+	gold: integer('gold').notNull().default(2500),
 	gems: integer('gems').notNull().default(0),
 	lvl: integer('lvl').notNull().default(1)
 });
