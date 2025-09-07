@@ -6,6 +6,7 @@
     import ItemInfoWindow from '$lib/components/servants/ItemInfoWindow.svelte';
     import {EquipmentSlot} from "$lib/enums/enums";
     import ItemImg from '$lib/components/inventory/ItemImg.svelte';
+    import {itemsIcons} from '$lib/state/items'
 
     const {data} = $props();
 
@@ -72,6 +73,14 @@
             <span class="text-3xl xl:text-4xl grayscale-90 contrast-10">{itemIcon}</span>
         </div>
     {/if}
+{/snippet}
+
+{#snippet servantDisplay(src)}
+    <img
+        class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
+        {src}
+        alt={`${chosenServant.name}'s body`}
+    >
 {/snippet}
 
 <div class="w-full h-full flex flex-row justify-center bg-amber-900/50 p-5">
@@ -164,11 +173,12 @@
                 {#await getRaceAssets(chosenServant.race)}
                     <span>Loading...</span>
                 {:then src}
-                    <img
-                        class={`absolute top-1/2 left-1/2 w-full h-full object-contain transform -translate-x-1/2 -translate-y-1/2 ${chosenServant.vampire?"-hue-rotate-210":""}`}
-                        src={src.body}
-                        alt={`${chosenServant.name}'s body`}
-                    >
+                    {@render servantDisplay(src.body)}
+                    {#each Object.values(chosenServant.equippedItems) as item(item.name)}
+                        {#await itemsIcons[`/src/lib/assets/items/${item.iconPath}`]() then src}
+                            {@render servantDisplay(src.default)}
+                        {/await}
+                    {/each}
                 {/await}
                 <div class="w-full h-9 px-1  flex justify-center">
                     <span class="text-base xl:text-xl border-2 border-black bg-gray-800 text-white px-1.5 py-0.5 flex justify-center items-center text-bolt space-x-2">
