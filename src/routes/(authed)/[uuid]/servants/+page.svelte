@@ -11,7 +11,6 @@
     const {data} = $props();
 
     let chosenServantUUID = $state("");
-    $inspect(chosenServantUUID)
     let chosenServant = $derived.by(()=>{
         if (data.servants && data.servants.length > 0) {
             if (!chosenServantUUID.length) {

@@ -170,7 +170,6 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
     expedition.loot.items = lootItems
     delete expedition.id; // expedition id is only used to get loot items
 
-
     return expedition;
 }
 

@@ -6,15 +6,25 @@
     import { enhance } from '$app/forms';
 
     const {closeLocation, chosenLocation, handleExpeditionStartSuccess, servants} = $props();
-    let chosenServant = $state();
     let expeditionOverviewText = $derived(getExpeditionOverviewText(expeditionSettings.task.value,expeditionSettings.approach.value,expeditionSettings.scale.value,chosenLocation.type.id))
+
+    let chosenServantUUID = $state("");
+    let chosenServant = $derived.by(()=>{
+        if (servants && servants.length > 0) {
+            if (!chosenServantUUID.length) {
+                return servants[0]
+            }
+            return servants.find((servant)=>servant.uuid === chosenServantUUID);
+        }
+
+    });
 
     onMount(()=>{
         if (!servants) {
             console.error("Servants are not found")
             return
         }
-        chosenServant = servants[0]
+        chosenServantUUID = servants[0].uuid
     })
 
 </script>
@@ -89,7 +99,7 @@
                 <span class="text-xl mb-3.5 font-black">Servant</span>
                 {#if chosenServant}
                     <div class="flex flex-row justify-around h-36 font-semibold items-center text-start w-5/6 self-center rounded">
-                        <ServantsList {servants} bind:chosenServant={chosenServant} isExpeditionSettings={true}/>
+                        <ServantsList {servants}  bind:chosenServantUUID={chosenServantUUID} {chosenServant} isExpeditionSettings={true}/>
                     </div>
                 {/if}
             </div>

@@ -16,3 +16,4 @@ export const getExpeditionLoot = (settings) => {
     }
     // todo: base return on settings and loot object
     return Math.round(Math.random() * 600+25)
+}
