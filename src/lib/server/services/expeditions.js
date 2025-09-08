@@ -2,6 +2,7 @@ import { db } from "$lib/server/db/db.js";
 import {expeditions, expeditionStatuses, expeditionLoots, expeditionLootItems, users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales, items, usableItems, itemRarities} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/services/users"
 import {getServantByUUID} from "$lib/server/services/servants"
+import {getExpeditionLoot} from '$lib/server/handlers/generators'
 import { eq, and, not, desc } from "drizzle-orm";
 
 const overviewTextMaxLen = 1000
@@ -95,6 +96,13 @@ export const completeExpedition = async (expeditionUUID) => {
             .update(servants)
             .set({ statusId: 1 }) //idle
             .where(eq(servants.id, updatedExpedition.servantId));
+        await tx
+            .update(expeditionLoots)
+            .set(
+                { 
+                    gold: getExpeditionLoot({})
+                })
+            .where(eq(expeditionLoots.expeditionId,updatedExpedition.id))
     })
 }
 
@@ -142,7 +150,6 @@ export const getExpeditionByUUID = async (expeditionUUID) => {
         .innerJoin(expeditionTasks,eq(expeditionTasks.id,expeditions.taskId))
         .innerJoin(expeditionScales,eq(expeditionScales.id,expeditions.scaleId))
         .where(eq(expeditions.uuid,expeditionUUID))
-    console.log(expedition)
     const lootItems = await db
         .select({
             name: itemRarities.name,
