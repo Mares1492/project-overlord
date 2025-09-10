@@ -1,6 +1,7 @@
 import { db } from "$lib/server/db/db.js";
-import {expeditions, expeditionStatuses, expeditionLoots, expeditionLootItems, users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales, items, usableItems, itemRarities} from "$lib/server/db/schema";
+import {expeditions , keeps,expeditionStatuses, expeditionLoots, expeditionLootItems, users,locations,servants,expeditionApproaches,expeditionTasks, expeditionScales, items, usableItems, itemRarities, treasuries} from "$lib/server/db/schema";
 import {getUserByUUID} from "$lib/server/services/users"
+import {addToTreasury} from "$lib/server/services/treasuries"
 import {getServantByUUID} from "$lib/server/services/servants"
 import {getExpeditionLoot} from '$lib/server/handlers/generators'
 import { eq, and, not, desc } from "drizzle-orm";
@@ -96,13 +97,20 @@ export const completeExpedition = async (expeditionUUID) => {
             .update(servants)
             .set({ statusId: 1 }) //idle
             .where(eq(servants.id, updatedExpedition.servantId));
-        await tx
+        const [newExpeditionLoot] = await tx
             .update(expeditionLoots)
             .set(
                 { 
                     gold: getExpeditionLoot({})
                 })
-            .where(eq(expeditionLoots.expeditionId,updatedExpedition.id))
+            .where(eq(expeditionLoots.expeditionId,updatedExpedition.id)).returning()
+        const [treasury] = await tx
+            .select({id:treasuries.id})
+            .from(treasuries)
+            .innerJoin(users,eq(users.id,updatedExpedition.userId))
+            .innerJoin(keeps,eq(keeps.userId,users.id))
+            .where(eq(treasuries.keepId,keeps.id))
+        await addToTreasury(treasury.id, newExpeditionLoot.gold)
     })
 }
 
