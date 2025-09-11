@@ -1,10 +1,11 @@
 // scripts/seedConstants.ts
 import "dotenv/config"; 
 import { db } from "./db"; // your Drizzle instance
-import { itemTypes, slotTypes, items, races, itemRarities, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
+import { itemTypes, slotTypes, items, keepLevels,barracksLevels,arsenalsLevels,academyLevels,treasuryLevels,tombLevels ,races, itemRarities, itemRarityTypes, locations, expeditionStatuses,expeditionTasks,expeditionApproaches,expeditionScales, buildingBuffTypes, extensionBuildings, extensionBuildingBuffs, servantStatuses, attributes, locationTypes, locationImportanceTypes } from './schema';
 import {locationValues} from './seed_data/locations'
 import {itemValues,itemTypeValues,itemSlotTypeValues,itemRarityTypeValues,itemRarityValues} from './seed_data/items'
 import {LocationType,RaceTypes,AttributeTypes,ExpeditionStatus,ServantStatus,LocationImportanceType} from '../../enums/enums'
+import { keepLvlValues,barracksLvlValues,arsenalLvlValues,academyLvlValues,treasuryLvlValues,tombLvlValues} from "./seed_data/keepBuildings";
 import { sql } from "drizzle-orm";
 
 const buildingBuffTypeValues = [
@@ -160,7 +161,6 @@ async function seed() {
           name: sql`excluded.name`,
           itemTypeId: sql`excluded.item_type_id`,
           slotTypeId: sql`excluded.slot_type_id`,
-          uuid: sql`excluded.uuid`,
           iconPath: sql`excluded.icon_path`
         }
       });
@@ -180,6 +180,67 @@ async function seed() {
         }
       });
     
+    console.log("Inserting Building lvl's")
+    await tx
+      .insert(keepLevels)
+      .values(keepLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+
+    await tx
+      .insert(barracksLevels)
+      .values(barracksLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+
+    await tx
+      .insert(academyLevels)
+      .values(academyLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+
+    await tx
+      .insert(arsenalsLevels)
+      .values(arsenalLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+
+    await tx
+      .insert(tombLevels)
+      .values(tombLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+    
+    await tx
+      .insert(treasuryLevels)
+      .values(treasuryLvlValues)
+      .onConflictDoUpdate({
+        target: itemRarities.id,
+        set: {
+          upgradePrice: sql`excluded.upgrade_price`,
+        }
+      });
+
     console.log("Inserting buildingBuffTypes")
     await tx
       .insert(buildingBuffTypes)
