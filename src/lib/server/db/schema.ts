@@ -37,11 +37,11 @@ export const keepLevels = pgTable('keep_levels', {
 
 export const keeps = pgTable('keeps', {
 	id: serial('id').primaryKey(),
+	name: varchar('name',{length:50}).default('keep'),
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id, {onDelete: 'cascade'}),
 	lvl: integer('lvl').notNull().references(()=> keepLevels.id).default(1),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 export const barracksLevels = pgTable('barracks_levels', {
@@ -57,7 +57,6 @@ export const barracks = pgTable('barracks', {
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	lvl: integer('lvl').notNull().references(()=> barracksLevels.id).default(1),
 	name: text('name').notNull(),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 export const extensionBuildings = pgTable('extension_buildings', {
@@ -120,7 +119,6 @@ export const treasuries = pgTable('treasuries', {
 	gold: integer('gold').notNull().default(2500),
 	gems: integer('gems').notNull().default(0),
 	lvl: integer('lvl').notNull().references(()=> treasuryLevels.id).default(1),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - academy
@@ -137,7 +135,6 @@ export const academies = pgTable('academies', {
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().references(()=> academyLevels.id).default(1),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - tomb
@@ -154,7 +151,6 @@ export const tombs = pgTable('tombs', {
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().references(()=> tombLevels.id).default(1),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - arsenal
@@ -171,7 +167,6 @@ export const arsenals = pgTable('arsenals', {
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
 	lvl: integer('lvl').notNull().references(()=> arsenalsLevels.id).default(1),
-	iconPath: text('icon_path').notNull().default("")
 });
 
 // Items
