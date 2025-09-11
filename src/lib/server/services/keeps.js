@@ -1,7 +1,10 @@
 import { db } from "$lib/server/db/db.js";
 import { count} from 'drizzle-orm';
-import { keeps,barracks, extensionBuildings, barracksExtensionBuildings, treasuries, arsenals,academies,tombs } from "$lib/server/db/schema";
-import { eq } from "drizzle-orm";
+import { 
+	keeps, users, barracks, extensionBuildings, barracksExtensionBuildings, 
+	keepLevels,barracksLevels,academyLevels,arsenalsLevels,treasuryLevels,tombLevels,
+	treasuries, arsenals,academies,tombs } from "$lib/server/db/schema";
+import { eq, sql } from "drizzle-orm";
 
 export const createTreasury = async (tx,keepId) => {
 	return tx.insert(treasuries).values({ keepId, name:"treasury" }).returning();
@@ -74,3 +77,57 @@ export const getKeep = async (userId) => {
 		where: eq(keeps.userId, userId)
 	});
 };
+
+export const getKeepData = async (userUUID) => {
+	console.log("get keep data")
+	const [keepData] = await db
+		.select({
+			keep:{
+				name: sql`initcap(${keeps.name})`,
+				lvl: keeps.lvl,
+				upgradePrice: keepLevels.upgradePrice,
+			},
+			barracks:{
+				name: sql`initcap(${barracks.name})`,
+				lvl: barracks.lvl,
+				upgradePrice: barracksLevels.upgradePrice,
+			},
+			treasury:{
+				name: sql`initcap(${treasuries.name})`,
+				lvl: treasuries.lvl,
+				upgradePrice: treasuryLevels.upgradePrice,
+			},
+			arsenal:{
+				name: sql`initcap(${arsenals.name})`,
+				lvl: arsenals.lvl,
+				upgradePrice: arsenalsLevels.upgradePrice,
+			},
+			academy:{
+				name: sql`initcap(${academies.name})`,
+				lvl: academies.lvl,
+				upgradePrice: academyLevels.upgradePrice,
+			},
+			tomb:{
+				name: sql`initcap(${tombs.name})`,
+				lvl: tombs.lvl,
+				upgradePrice: tombLevels.upgradePrice,
+			},
+
+		})
+		.from(keeps)
+		.innerJoin(users,eq(users.uuid,userUUID))
+		.innerJoin(barracks,eq(barracks.keepId,keeps.id))
+		.innerJoin(barracksLevels,eq(barracks.lvl,barracksLevels.id))
+		.innerJoin(treasuries,eq(treasuries.keepId,keeps.id))
+		.innerJoin(treasuryLevels,eq(treasuries.lvl,treasuryLevels.id))
+		.innerJoin(arsenals,eq(arsenals.keepId,keeps.id))
+		.innerJoin(arsenalsLevels,eq(arsenals.lvl,arsenalsLevels.id))
+		.innerJoin(tombs,eq(tombs.keepId,keeps.id))
+		.innerJoin(tombLevels,eq(tombs.lvl,tombLevels.id))
+		.innerJoin(academies,eq(academies.keepId,keeps.id))
+		.innerJoin(academyLevels,eq(academies.lvl,academyLevels.id))
+		.innerJoin(keepLevels,eq(keeps.lvl,keepLevels.id))
+		.where(eq(keeps.userId,users.id))
+
+	return keepData
+}
