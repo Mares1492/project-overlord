@@ -30,12 +30,23 @@ export const sessions = pgTable('sessions', {
 // Keep
 // TODO: Add tables from model
 
+export const keepLevels = pgTable('keep_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
+});
+
 export const keeps = pgTable('keeps', {
 	id: serial('id').primaryKey(),
 	userId: integer('user_id')
 		.notNull()
 		.references(() => users.id, {onDelete: 'cascade'}),
-	lvl: integer('lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().references(()=> keepLevels.id).default(1),
+	iconPath: text('icon_path').notNull().default("")
+});
+
+export const barracksLevels = pgTable('barracks_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
 });
 
 // Keep - barracks
@@ -44,8 +55,9 @@ export const barracks = pgTable('barracks', {
 	keepId: integer('keep_id')
 		.notNull()
 		.references(() => keeps.id, {onDelete: 'cascade'}),
-	lvl: integer('lvl').notNull().default(1),
-	name: text('name').notNull()
+	lvl: integer('lvl').notNull().references(()=> barracksLevels.id).default(1),
+	name: text('name').notNull(),
+	iconPath: text('icon_path').notNull().default("")
 });
 
 export const extensionBuildings = pgTable('extension_buildings', {
@@ -94,6 +106,11 @@ export const barracksExtensionBuildings = pgTable('barracks_extension_buildings'
 
 // Keep - treasury
 
+export const treasuryLevels = pgTable('treasury_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
+});
+
 export const treasuries = pgTable('treasuries', {
 	id: serial('id').primaryKey(),
 	keepId: integer('keep_id')
@@ -102,10 +119,16 @@ export const treasuries = pgTable('treasuries', {
 	name: text('name').notNull(),
 	gold: integer('gold').notNull().default(2500),
 	gems: integer('gems').notNull().default(0),
-	lvl: integer('lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().references(()=> treasuryLevels.id).default(1),
+	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - academy
+
+export const academyLevels = pgTable('academies_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
+});
 
 export const academies = pgTable('academies', {
 	id: serial('id').primaryKey(),
@@ -113,10 +136,16 @@ export const academies = pgTable('academies', {
 		.notNull()
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
-	lvl: integer('lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().references(()=> academyLevels.id).default(1),
+	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - tomb
+
+export const tombLevels = pgTable('tomb_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
+});
 
 export const tombs = pgTable('tombs', {
 	id: serial('id').primaryKey(),
@@ -124,18 +153,25 @@ export const tombs = pgTable('tombs', {
 		.notNull()
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
-	lvl: integer('lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().references(()=> tombLevels.id).default(1),
+	iconPath: text('icon_path').notNull().default("")
 });
 
 // Keep - arsenal
 
+export const arsenalsLevels = pgTable('arsenals_levels', {
+	id: integer('id').primaryKey(),
+	upgradePrice: integer('upgrade_price').default(1200)
+});
+
 export const arsenals = pgTable('arsenals', {
-	id: serial('id').primaryKey(),
+	id: integer('id').primaryKey(),
 	keepId: integer('keep_id')
 		.notNull()
 		.references(() => keeps.id, {onDelete: 'cascade'}),
 	name: text('name').notNull(),
-	lvl: integer('lvl').notNull().default(1)
+	lvl: integer('lvl').notNull().references(()=> arsenalsLevels.id).default(1),
+	iconPath: text('icon_path').notNull().default("")
 });
 
 // Items
