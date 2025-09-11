@@ -190,6 +190,7 @@ export const items = pgTable('items', {
 	slotTypeId: integer('slot_type_id')
 	.notNull()
 	.references(() => slotTypes.id),
+	iconPath: text("icon_path").notNull()
 })
 
 export const itemRarityTypes = pgTable('item_rarity_types', {
