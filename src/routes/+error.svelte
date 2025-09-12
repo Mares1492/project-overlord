@@ -6,8 +6,8 @@
 </script>
 
 <div class="w-full h-screen flex justify-center items-center bg-[url($lib/assets/bg/pages/not_found.png)] text-white text-4xl">
-    <div class="flex justify-center items-center w-62 py-5 px-5 text-center bg-gray-500/50 flex-col h-38 space-y-3.5">
-        <span>Not found</span>
+    <div class="flex items-center w-62 py-5 px-5 text-center bg-gray-500/50 flex-col h-38 space-y-3.5">
+        <span >Not found</span>
         {#if isLoading}
             <LoadingIcon/>
         {:else}
