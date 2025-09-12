@@ -5,6 +5,8 @@ import {
 	keepLevels,barracksLevels,academyLevels,arsenalsLevels,treasuryLevels,tombLevels,
 	treasuries, arsenals,academies,tombs } from "$lib/server/db/schema";
 import { eq, sql } from "drizzle-orm";
+import { BuildingTypes,invertedBuildingTypes } from "$lib/enums/enums";
+import { removeFromTreasury } from "./treasuries";
 
 export const createTreasury = async (tx,keepId) => {
 	return tx.insert(treasuries).values({ keepId, name:"treasury" }).returning();
