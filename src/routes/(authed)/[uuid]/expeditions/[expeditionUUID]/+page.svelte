@@ -61,7 +61,7 @@
             <span class="text-4xl py-3 px-10 flex text-amber-100 w-full bg-gray-900">{data.expedition.location.name}</span>
             <div class=" h-full pt-5 px-10 flex flex-col space-y-8 bg-amber-100">
                 <div class="flex flex-col md:flex-row space-x-20 w-full">
-                    <div class="flex flex-col text-2xl text-center justify-center space-x-5">
+                    <div class="flex flex-col text-2xl text-start space-x-5">
                         {data.expedition.servant.name}
                         <CharSlot servant={data.servants.find(servant=>servant.uuid === data.expedition.servant.uuid)} />
                     </div>
