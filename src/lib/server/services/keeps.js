@@ -82,32 +82,38 @@ export const getKeepData = async (userUUID) => {
 	console.log("get keep data")
 	const [keepData] = await db
 		.select({
-			keep:{
+			[invertedBuildingTypes[BuildingTypes.keep]]:{ // using string key of building type
+				id: keeps.id,
 				name: sql`initcap(${keeps.name})`,
 				lvl: keeps.lvl,
 				upgradePrice: keepLevels.upgradePrice,
 			},
-			barracks:{
+			[invertedBuildingTypes[BuildingTypes.barracks]]:{ // making sure building type is added to BuildingTypes enum
+				id: barracks.id,
 				name: sql`initcap(${barracks.name})`,
 				lvl: barracks.lvl,
 				upgradePrice: barracksLevels.upgradePrice,
 			},
-			treasury:{
+			[invertedBuildingTypes[BuildingTypes.treasury]]:{
+				id: treasuries.id,
 				name: sql`initcap(${treasuries.name})`,
 				lvl: treasuries.lvl,
 				upgradePrice: treasuryLevels.upgradePrice,
 			},
-			arsenal:{
+			[invertedBuildingTypes[BuildingTypes.arsenal]]:{
+				id: arsenals.id,
 				name: sql`initcap(${arsenals.name})`,
 				lvl: arsenals.lvl,
 				upgradePrice: arsenalsLevels.upgradePrice,
 			},
-			academy:{
+			[invertedBuildingTypes[BuildingTypes.academy]]:{
+				id: academies.id,
 				name: sql`initcap(${academies.name})`,
 				lvl: academies.lvl,
 				upgradePrice: academyLevels.upgradePrice,
 			},
-			tomb:{
+			[invertedBuildingTypes[BuildingTypes.tomb]]:{
+				id: tombs.id,
 				name: sql`initcap(${tombs.name})`,
 				lvl: tombs.lvl,
 				upgradePrice: tombLevels.upgradePrice,
