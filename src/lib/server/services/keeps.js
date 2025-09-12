@@ -81,7 +81,6 @@ export const getKeep = async (userId) => {
 };
 
 export const getKeepData = async (userUUID) => {
-	console.log("get keep data")
 	const [keepData] = await db
 		.select({
 			[invertedBuildingTypes[BuildingTypes.keep]]:{ // using string key of building type

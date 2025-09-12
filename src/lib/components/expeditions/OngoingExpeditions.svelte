@@ -48,7 +48,7 @@
         /**@type {ClickState}*/
         const result = {}
         for(let expedition of ongoingExpeditions){
-            result[expedition.uuid] = true
+                result[expedition.uuid] = true
         }
         clickState = result
         }

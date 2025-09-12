@@ -15,7 +15,6 @@ export async function load({cookies,params}) {
     }
     const {servants,availableServants} = await getServantsByUserUUID(user.uuid)
     const treasuryData = await getTreasuryData(user.id)
-    console.log(treasuryData)
     if (!servants) {
         return {pathUUID: user.uuid, error: true, message: "No servants found for this user", availableServants, treasuryData};
     }
