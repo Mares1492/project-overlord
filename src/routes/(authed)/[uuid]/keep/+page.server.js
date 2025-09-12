@@ -16,8 +16,9 @@ export const actions = {
         const buildingType = data.get('buildingType')
         if (!buildingId || !buildingType) {
             console.log("could not read input data")
-            return {error:true,message:"could not read input data"}
+            return {error:true,message:"could not read input data",buildingType}
         }
         await handleBuildingUpgrade(buildingType, buildingId)
+        return {buildingType}
     }
 }
