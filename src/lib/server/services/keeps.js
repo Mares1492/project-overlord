@@ -210,3 +210,23 @@ const upgradeBuilding = async (building,buildingId,treasuryId,price) => {
 	return true
 }
 
+/** @param {string} buildingType @param {number} buildingId */
+export const handleBuildingUpgrade = async (buildingType,buildingId) => {
+	switch (buildingType) {
+		case invertedBuildingTypes[BuildingTypes.keep]:
+			return await upgradeKeep(buildingId);
+		case invertedBuildingTypes[BuildingTypes.barracks]:
+			return await upgradeBarracks(buildingId);
+		case invertedBuildingTypes[BuildingTypes.treasury]:
+			return await upgradeTreasury(buildingId)
+		case invertedBuildingTypes[BuildingTypes.academy]:
+			// Yet to be implemented
+		case invertedBuildingTypes[BuildingTypes.arsenal]:
+			// Yet to be implemented
+		case invertedBuildingTypes[BuildingTypes.tomb]:
+			// Yet to be implemented
+		default:
+			console.log("Failded to upgrade building",buildingType,"with id:",buildingId)
+			return false;
+	}
+}
