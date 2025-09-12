@@ -3,13 +3,17 @@
     import SignIn from "$lib/components/user/SignIn.svelte";
     import SignUp from "$lib/components/user/SignUp.svelte";
 
-    const states = ["landing","sign_in","sign_out"]
-    let currState = $state(states[0])
+    const states = {
+        IDLE: 0,
+        SIGN_IN: 1,
+        SIGN_UP: 2,
+    }
+    let currState = $state(states.IDLE)
 
     /** @type {import('./$types').PageProps} */
     let { data,form } = $props();
 
-    const handleCloseSignWindow = () => currState = states[0]
+    const handleCloseSignWindow = () => currState = states.IDLE
 
 </script>
 
@@ -18,25 +22,27 @@
         <div class="md:text-3xl text-lg">
             <span>Welcome to </span><h1>⚔️Idle Mercenary Lords</h1>
         </div>
-        <div class="w-full flex justify-center">
-            <div class="flex flex-col space-y-5 justify-center">
-                <button
-                        onclick={()=>currState = states[1]}
-                        class="border-2 px-3 py-2 w-28 h-12 text-2xl cursor-pointer bg-yellow-100 hover:bg-blue-300 active:bg-blue-100"
-                >
-                    Sign in
-                </button>
-                <button
-                        onclick={()=>currState = states[2]}
-                        class="border-2 px-3 py-2 w-28 h-12 text-2xl cursor-pointer bg-gray-200 hover:bg-blue-300 active:bg-blue-100"
-                >
-                    Sign up
-                </button>
-            </div>
-            {#if currState === states[1]}
-                <SignIn bind:data handleClose={handleCloseSignWindow} form={form}/>
-            {:else if currState === states[2]}
-                <SignUp bind:data handleClose={handleCloseSignWindow} form={form}/>
+        <div class="w-full flex justify-center h-40">
+        {#if currState !== states.LOADING}
+                <div class="flex flex-col space-y-5 justify-center">
+                    <button
+                            onclick={()=>currState = states.SIGN_IN}
+                            class="border-2 px-3 py-2 w-28 h-12 text-2xl cursor-pointer bg-yellow-100 hover:bg-blue-300 active:bg-blue-100"
+                    >
+                        Sign in
+                    </button>
+                    <button
+                            onclick={()=>currState = states.SIGN_UP}
+                            class="border-2 px-3 py-2 w-28 h-12 text-2xl cursor-pointer bg-gray-200 hover:bg-blue-300 active:bg-blue-100"
+                    >
+                        Sign up
+                    </button>
+                </div>
+                {#if currState === states.SIGN_IN}
+                    <SignIn bind:data handleClose={handleCloseSignWindow} form={form}/>
+                {:else if currState === states.SIGN_UP}
+                    <SignUp bind:data handleClose={handleCloseSignWindow} form={form}/>
+                {/if}
             {/if}
         </div>
         <p class="md:text-xl xl:leading-8 text-sm leading-5">
