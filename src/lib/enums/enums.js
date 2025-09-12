@@ -119,3 +119,14 @@ export const AttributeTypes = {
   morale: 10,
   armor: 11
 }
+
+export const BuildingTypes = {
+  keep:1,
+  barracks:2,
+  treasury:3,
+  arsenal:4,
+  academy:5,
+  tomb:6
+}
+
+export const invertedBuildingTypes = invertObject(BuildingTypes)
