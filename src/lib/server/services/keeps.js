@@ -195,3 +195,18 @@ const upgradeTreasury = async (buildingId) => {
 	return false
 }
 
+const upgradeBuilding = async (building,buildingId,treasuryId,price) => {
+	if (!building || !buildingId || !treasuryId || !price) {
+		return false
+	}
+	await db.transaction(async (tx) => {
+		await removeFromTreasury(treasuryId,price,0,tx)
+		// TODO: check if exists lvl+1
+		await tx
+			.update(building)
+			.set({ lvl: sql`${building.lvl} + 1` })
+			.where(eq(building.id, buildingId))
+	})
+	return true
+}
+
