@@ -12,10 +12,10 @@
                 {#await buildingIcons[`/src/lib/assets/icons/keep/${key}.webp`]() then src}
                     <img class="absolute rounded-xl top-0 left-0 w-full h-full object-cover -z-1" src={src.default} alt={key}>
                 {/await}
-                <button onclick={()=>goto(`/${data.pathUUID}/${key}`)} class="h-1/2 rounded-t-xl cursor-pointer hover:bg-amber-100 hover:text-gray-800 hover:font-extrabold flex items-center justify-center flex-col space-y-1.5">
+                <button onclick={()=>goto(`/${data.pathUUID}/${key}`)} class="h-1/2 rounded-t-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 hover:text-gray-800 hover:font-extrabold flex items-center justify-center flex-col space-y-1.5">
                     {building.name}
                 </button>
-                <button onclick={()=>console.log(building.name)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black items-center justify-center">
+                <button onclick={()=>console.log(building.name)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black items-center justify-center">
                     <span>lvl: {building.lvl}</span>
                     Upgrade: {building.upgradePrice}
                 </button>
