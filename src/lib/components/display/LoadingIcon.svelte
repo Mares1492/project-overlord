@@ -1,0 +1,1 @@
+<span class="inline-block saturate-30 animate-[spin_1.4s_ease-in-out_infinite] text-center text-2xl">⌛</span>
