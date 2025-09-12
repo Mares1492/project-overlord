@@ -21,7 +21,7 @@ export const keepLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 100000
+        upgradePrice: null
     }
 ]
 
@@ -48,7 +48,7 @@ export const barracksLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 25000
+        upgradePrice: null
     }
 ]
 
@@ -75,7 +75,7 @@ export const treasuryLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 25000
+        upgradePrice: null
     }
 ]
 
@@ -102,7 +102,7 @@ export const academyLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 25000
+        upgradePrice: null
     }
 ]
 
@@ -129,7 +129,7 @@ export const arsenalLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 25000
+        upgradePrice: null
     }
 ]
 
@@ -156,6 +156,6 @@ export const tombLvlValues = [
     },
     {
         id:6,
-        upgradePrice: 25000
+        upgradePrice: null
     }
 ]
