@@ -2,9 +2,19 @@
     import { buildingIcons } from "$lib/state/items";
     import {goto} from "$app/navigation";
     import { enhance } from "$app/forms";
+    import { BuildingTypes,invertedBuildingTypes } from "$lib/enums/enums";
+    import LoadingIcon from "$lib/components/display/LoadingIcon.svelte";
 
     let {data} = $props();
-
+    let buildingStates = $state({
+        upgradeAvailable:{
+            [invertedBuildingTypes[BuildingTypes.keep]]:true,
+            [invertedBuildingTypes[BuildingTypes.barracks]]:true,
+            [invertedBuildingTypes[BuildingTypes.treasury]]:true,
+            [invertedBuildingTypes[BuildingTypes.arsenal]]:true,
+            [invertedBuildingTypes[BuildingTypes.academy]]:true,
+            [invertedBuildingTypes[BuildingTypes.tomb]]:true
+        }
     })
     let chosenBuilding = $state()
 
@@ -15,6 +25,14 @@
         }
     }
 
+    const onEnhance = () => {
+        buildingStates.upgradeAvailable[chosenBuilding.buildingType] = false
+        return async ({result,update}) => {
+            await update()
+            buildingStates.upgradeAvailable[result.data.buildingType] = true
+        }
+    }
+
 </script>
 <div class="h-full w-full flex justify-center align-middle">
     <form 
@@ -22,7 +40,7 @@
         id='upgradeBuilding'  
         method="POST" 
         action="?/upgradeBuilding" 
-        use:enhance>
+        use:enhance={onEnhance}>
         {#if chosenBuilding}
             <input type="hidden" name="buildingId" value={chosenBuilding.buildingId}>
             <input type="hidden" name="buildingType" value={chosenBuilding.buildingType}>
@@ -33,13 +51,17 @@
                     {#await buildingIcons[`/src/lib/assets/icons/keep/${key}.webp`]() then src}
                         <img class="absolute rounded-xl top-0 left-0 w-full h-full object-cover -z-1" src={src.default} alt={key}>
                     {/await}
-                    <button type="button" onclick={()=>goto(`/${data.pathUUID}/${key}`)} class="h-1/2 rounded-t-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 hover:text-gray-800 hover:font-extrabold flex items-center justify-center flex-col space-y-1.5">
-                        {building.name}
-                    </button>
-                    <button type="submit" onclick={()=>handleBuildingClick(key,building.id)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black items-center justify-center">
-                        <span>lvl: {building.lvl}</span>
-                        Upgrade: {building.upgradePrice}
-                    </button>
+                    {#if buildingStates.upgradeAvailable[key]}
+                        <button type="button" onclick={()=>goto(`/${data.pathUUID}/${key}`)} class="h-1/2 rounded-t-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 hover:text-gray-800 hover:font-extrabold flex items-center justify-center flex-col space-y-1.5">
+                            {building.name}
+                        </button>
+                        <button type="submit" onclick={()=>handleBuildingClick(key,building.id)} class="h-1/2 flex flex-col max-sm:text-sm rounded-b-xl cursor-pointer hover:bg-amber-100 active:bg-amber-200 bg-amber-50 text-gray-800 font-extrabold border-t-2 border-black items-center justify-center">
+                            <span>lvl: {building.lvl}</span>
+                            Upgrade: {building.upgradePrice}
+                        </button>
+                    {:else}
+                        <LoadingIcon/>
+                    {/if}
                 </div>
             {/each}
         </div>
