@@ -139,7 +139,7 @@ export const getKeepData = async (userUUID) => {
 }
 
 const upgradeKeep = async (buildingId) => {
-	const [keepData] = await db
+	const [data] = await db
 		.select({
 			treasuryId: treasuries.id,
 			gold: treasuries.gold,
@@ -150,8 +150,11 @@ const upgradeKeep = async (buildingId) => {
 		.innerJoin(treasuries,eq(treasuries.keepId,keeps.id))
 		.innerJoin(keepLevels,eq(keepLevels.id,keeps.lvl))
 		.where(eq(keeps.id,buildingId)).limit(1)
-	if (keepData.gold > (keepData.upgradePrice??Infinity)) {
-		return await upgradeBuilding(keeps,buildingId,keepData.treasuryId,keepData.upgradePrice)
+	if (data.gold > (data.upgradePrice??Infinity)) {
+		return await upgradeBuilding(keeps,buildingId,data.treasuryId,data.upgradePrice)
+	}
+	return false
+}
 	}
 	return false
 }
