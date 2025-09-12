@@ -168,9 +168,8 @@ const upgradeBarracks = async (buildingId) => {
 		.from(barracks)
 		.innerJoin(keeps,eq(keeps.id,barracks.keepId))
 		.innerJoin(treasuries,eq(treasuries.keepId,keeps.id))
-		.innerJoin(barracksLevels,eq(barracksLevels.id,keeps.lvl))
+		.innerJoin(barracksLevels,eq(barracksLevels.id,barracks.lvl))
 		.where(eq(barracks.id,buildingId)).limit(1)
-
 	if (data.gold > (data.upgradePrice??Infinity)) {
 		return await upgradeBuilding(barracks,buildingId,data.treasuryId,data.upgradePrice)
 	}
