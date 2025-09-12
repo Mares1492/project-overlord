@@ -155,6 +155,27 @@ const upgradeKeep = async (buildingId) => {
 	}
 	return false
 }
+
+const upgradeBarracks = async (buildingId) => {
+	const [data] = await db
+		.select({
+			treasuryId: treasuries.id,
+			gold: treasuries.gold,
+			lvl: barracks.lvl,
+			upgradePrice: barracksLevels.upgradePrice
+		})
+		.from(barracks)
+		.innerJoin(keeps,eq(keeps.id,barracks.keepId))
+		.innerJoin(treasuries,eq(treasuries.keepId,keeps.id))
+		.innerJoin(barracksLevels,eq(barracksLevels.id,keeps.lvl))
+		.where(eq(barracks.id,buildingId)).limit(1)
+
+	if (data.gold > (data.upgradePrice??Infinity)) {
+		return await upgradeBuilding(barracks,buildingId,data.treasuryId,data.upgradePrice)
+	}
+	return false
+}
+
 	}
 	return false
 }
