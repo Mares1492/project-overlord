@@ -1,4 +1,4 @@
-import {getInventoryDataByUserUUID,equipItem} from '$lib/server/services/items'
+import {getInventoryDataByUserUUID,handleItemEquipping,handleItemUnequipping} from '$lib/server/services/items'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({params}) {
@@ -12,11 +12,18 @@ export const actions = {
         const data = await request.formData();
         const itemUUID = data.get('itemUUID');
         const servantUUID = data.get('servantUUID');
-        if (await equipItem(itemUUID,servantUUID)) {
-            console.log("succ")
+        if (await handleItemEquipping(itemUUID,servantUUID)) {
             return {error:false, message:`Item is equipped`}
         }
-        console.log("fail")
+        return {error:true, message:`Failed to equip item...`}
+    },
+    unequipItem: async ({ request }) => {
+        const data = await request.formData();
+        const itemUUID = data.get('itemUUID');
+        const servantUUID = data.get('servantUUID');
+        if (await handleItemUnequipping(itemUUID,servantUUID)) {
+            return {error:false, message:`Item is equipped`}
+        }
         return {error:true, message:`Failed to equip item...`}
     }
 }
