@@ -257,10 +257,15 @@ export const handleItemEquipping = async (itemUUID,servantUUID) => {
     }
 }
 
+export const handleItemUnequipping = async (itemUUID,servantUUID) => {
+    const servant = await getServantByUUID(servantUUID)
+    const inventoryItem = await getInventoryItemDataByUUID(itemUUID)
+    try {
+        await unequipItem(inventoryItem,servant)
+        return true 
+    } catch (error) {
         return false
     }
-    await db.insert(servantItems).values({inventoryItemId:inventoryItem.id,servantId:servant.id})
-    return true
 }
 
 export const getEquippedItemsByServantId = async (servantId) => {
