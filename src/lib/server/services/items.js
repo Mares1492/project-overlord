@@ -221,6 +221,10 @@ export const isItemSlotUsed = async (servantId,slotTypeId) => {
 
 export const equipItem = async (itemUUID,servantUUID) => {
     const servant = await getServantByUUID(servantUUID)
+const unequipItem = async (inventoryItem,servant) => {
+    await db.delete(servantItems).where(and(eq(servantItems.servantId,servant.id),eq(servantItems.inventoryItemId,inventoryItem.id)))
+}
+
 const getInventoryItemDataByUUID = async (itemUUID) => {
     const [inventoryItem] = await db 
         .select({
