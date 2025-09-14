@@ -27,7 +27,7 @@ export const removeFromTreasury = async (treasuryId,goldToRemove=0,gemsToRemove=
     await tx.update(treasuries)
     .set({
         gold: sql`GREATEST(${treasuries.gold} - ${goldToRemove}, 0)`,
-        gems: sql`GREATEST(${treasuries.gold} - ${gemsToRemove}, 0)`,
+        gems: sql`GREATEST(${treasuries.gems} - ${gemsToRemove}, 0)`,
     })
     .where(eq(treasuries.id, treasuryId));
 }
