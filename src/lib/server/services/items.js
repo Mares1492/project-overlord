@@ -242,8 +242,21 @@ const getInventoryItemDataByUUID = async (itemUUID) => {
     return inventoryItem
 }
 
+export const handleItemEquipping = async (itemUUID,servantUUID) => {
+    const servant = await getServantByUUID(servantUUID)
+    const inventoryItem = await getInventoryItemDataByUUID(itemUUID)
 
     if (await isItemSlotUsed(servant.id,inventoryItem.slotId)) {
+        unequipItem(inventoryItem,servant)
+    }
+    try {
+        await equipItem(inventoryItem,servant)  
+        return true 
+    } catch (error) {
+        return false
+    }
+}
+
         return false
     }
     await db.insert(servantItems).values({inventoryItemId:inventoryItem.id,servantId:servant.id})
