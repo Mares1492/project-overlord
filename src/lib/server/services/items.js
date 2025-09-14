@@ -219,8 +219,10 @@ export const isItemSlotUsed = async (servantId,slotTypeId) => {
     return result.length 
 }
 
-export const equipItem = async (itemUUID,servantUUID) => {
-    const servant = await getServantByUUID(servantUUID)
+const equipItem = async (inventoryItem,servant) => {
+    await db.insert(servantItems).values({inventoryItemId:inventoryItem.id,servantId:servant.id})
+}
+
 const unequipItem = async (inventoryItem,servant) => {
     await db.delete(servantItems).where(and(eq(servantItems.servantId,servant.id),eq(servantItems.inventoryItemId,inventoryItem.id)))
 }
