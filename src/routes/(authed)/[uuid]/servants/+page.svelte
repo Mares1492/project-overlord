@@ -64,7 +64,7 @@
 
 {#snippet itemSlot(itemIcon, slotTypeId, slotSizes="w-28 h-20")}
     {#if Object.hasOwn(chosenServant.equippedItems,slotTypeId)}
-        <button type="button" class={`relative flex flex-col items-center  bg-gray-900 active:bg-gray-500 cursor-pointer hover:text-black hover:bg-gray-600 hover:contrast-120 border-2 border-black ${slotSizes}`}>  
+        <button type="submit" onclick={()=>handleItemPick(chosenServant.equippedItems[slotTypeId])} class={`relative flex flex-col items-center  bg-gray-900 active:bg-gray-500 cursor-pointer hover:text-black hover:bg-gray-600 hover:contrast-120 border-2 border-black ${slotSizes}`}>  
             <ItemImg path={chosenServant.equippedItems[slotTypeId].iconPath} name={chosenServant.equippedItems[slotTypeId].name} itemTypeId={chosenServant.equippedItems[slotTypeId].itemType.id} />
         </button>
     {:else}
@@ -192,7 +192,9 @@
 
                     </span>
                 </div>
-                <div class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
+                <form use:enhance method="POST" action="?/unequipItem" class="w-full h-4/5 flex z-5 justify-around space-x-8  flex-row">
+                    <input type="hidden" name="servantUUID" value={chosenServant?.uuid}>
+                    <input type="hidden" name="itemUUID" value={chosenItem?.uuid}>
                     <div class="h-full flex flex-col justify-center">
                         <div class="h-1/2 self-start">
                             {@render itemSlot(`📿`,EquipmentSlot.neck)}
@@ -209,7 +211,7 @@
                         {@render itemSlot(`🦵`,EquipmentSlot.legs)}
                         {@render itemSlot(`🦶`,EquipmentSlot.feet)}
                     </div>
-                </div>
+                </form>
             </div>
         {/if}
     </div>
