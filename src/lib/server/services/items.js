@@ -221,6 +221,7 @@ export const isItemSlotUsed = async (servantId,slotTypeId) => {
 
 export const equipItem = async (itemUUID,servantUUID) => {
     const servant = await getServantByUUID(servantUUID)
+const getInventoryItemDataByUUID = async (itemUUID) => {
     const [inventoryItem] = await db 
         .select({
             id:inventoryItems.id,
@@ -232,6 +233,9 @@ export const equipItem = async (itemUUID,servantUUID) => {
         .innerJoin(items,eq(items.id,itemRarities.itemId))
         .innerJoin(slotTypes,eq(slotTypes.id,items.slotTypeId))
         .where(eq(inventoryItems.usableItemId,usableItems.id))
+    return inventoryItem
+}
+
 
     if (await isItemSlotUsed(servant.id,inventoryItem.slotId)) {
         return false
