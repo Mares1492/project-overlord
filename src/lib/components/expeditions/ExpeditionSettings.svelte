@@ -19,6 +19,8 @@
 
     });
 
+    let isExpeditionLaunchAllowed = $state(true)
+
     onMount(()=>{
         if (!servants) {
             console.error("Servants are not found")
@@ -38,14 +40,16 @@
         id='startExpedition'  
         method="POST" 
         action="?/startExpedition" 
-        use:enhance={()=> 
-            async ({ result, update }) => {
+        use:enhance={()=> {
+        isExpeditionLaunchAllowed = false
+        return async ({ result, update }) => {
+                await update()
                 if (result.type === "success") {
                     handleExpeditionStartSuccess()
                     closeLocation()
-                    update()
                 }
             }
+        }
         }
     >
         <input type="hidden" name="locationId" value={chosenLocation.id}>
@@ -111,7 +115,7 @@
             </div>
         </div>
         {#if chosenServant}
-            <button form="startExpedition" type="submit" class="w-5/6 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" >
+            <button disabled={!isExpeditionLaunchAllowed} form="startExpedition" type="submit" class="w-5/6 disabled:cursor-progress disabled:bg-gray-200 self-center cursor-pointer text-gray-700 hover:text-gray-900 bg-yellow-400 hover:bg-yellow-300 active:bg-yellow-200 font-bold py-2 px-4 rounded mt-5" >
                 Launch Expedition
             </button>
         {/if}
