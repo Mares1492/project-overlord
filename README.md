@@ -1,1 +1,1 @@
-This is a template for a game page
+Web based mercenary lord sim. Work in progress
