@@ -1,0 +1,18 @@
+<svg width="44" height="40" viewBox="0 0 44 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M22 35C30.2843 35 37 28.2843 37 20C37 11.7157 30.2843 5 22 5C13.7157 5 7 11.7157 7 20C7 28.2843 13.7157 35 22 35Z" stroke="#E9D5FF" stroke-width="2"/>
+<path d="M24 0H20V10H24V0Z" fill="#E9D5FF"/>
+<path d="M44 24V20H34V24H44Z" fill="#E9D5FF"/>
+<path d="M20 40H24V30H20V40Z" fill="#E9D5FF"/>
+<path d="M0 20L0 24L10 24V20H0Z" fill="#E9D5FF"/>
+<path d="M22 20V5Z" fill="black"/>
+<path d="M22 20V5" stroke="#F0ABFC"/>
+<path d="M22 20H37Z" fill="black"/>
+<path d="M22 20H37" stroke="#F0ABFC"/>
+<path d="M22 20V35Z" fill="black"/>
+<path d="M22 20V35" stroke="#F0ABFC"/>
+<path d="M22 20H7Z" fill="black"/>
+<path d="M22 20H7" stroke="#F0ABFC"/>
+<path d="M17 20L22 15L27 20L22 25L17 20Z" fill="#F0ABFC"/>
+<path d="M22 30C27.5228 30 32 25.5228 32 20C32 14.4772 27.5228 10 22 10C16.4772 10 12 14.4772 12 20C12 25.5228 16.4772 30 22 30Z" fill="#D8B4FE" fill-opacity="0.3"/>
+<path d="M22 25C24.7614 25 27 22.7614 27 20C27 17.2386 24.7614 15 22 15C19.2386 15 17 17.2386 17 20C17 22.7614 19.2386 25 22 25Z" fill="#D8B4FE" fill-opacity="0.5"/>
+</svg>
